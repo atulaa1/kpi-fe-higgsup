@@ -1,6 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
-import { takeWhile } from 'rxjs/operators/takeWhile';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 
 interface Title {
   id: String;
@@ -9,9 +7,10 @@ interface Title {
 
 @Component({
   selector: 'ngx-dashboard',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './dashboard.component.html',
 })
-export class DashboardComponent implements OnDestroy {
+export class DashboardComponent implements OnDestroy, OnInit {
 
   private alive = true;
   private title: Title[];
@@ -19,17 +18,17 @@ export class DashboardComponent implements OnDestroy {
 
   ngOnInit() {
     this.title = [
-      { id: "recent", description: "Hoạt động gần đây" },
-      { id: "notify", description: "Thông báo" },
-      { id: "rank", description: "Danh sách thứ hạng" }
+      {id: 'recent', description: 'Hoạt động gần đây'},
+      {id: 'notify', description: 'Thông báo'},
+      {id: 'rank', description: 'Danh sách thứ hạng'},
     ];
 
     this.recentActivity = [
-      "Seminar Angular",
-      "Seminar Spring",
-      "Seminar NodeJS",
-      "Seminar Karma",
-      "Seminar Thread In Java",
+      'Seminar Angular',
+      'Seminar Spring',
+      'Seminar NodeJS',
+      'Seminar Karma',
+      'Seminar Thread In Java',
     ]
   }
 
