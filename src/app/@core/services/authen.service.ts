@@ -3,7 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {HttpService} from './http.service';
 import {Observable} from 'rxjs/Observable';
 import {User} from '../models/user.model';
-import {BaseConfig} from '../glossary/BaseConfig';
+import {BaseConstant} from '../glossary/base.constant';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class AuthenService {
@@ -15,23 +16,15 @@ export class AuthenService {
 
     const userJson = JSON.stringify({'username': user.username, 'password': user.password});
     return this.http.post(
-      BaseConfig.protocol.toString() + BaseConfig.server.toString()
-      + BaseConfig.standardServicePort.toString() + '/api/login', userJson, {
+      BaseConstant.protocol.toString() + BaseConstant.server.toString()
+      + BaseConstant.standardServicePort.toString() + '/api/login', userJson, {
         headers: new HttpHeaders({}),
         observe: 'response',
-      });
+      }).pipe(map((data) => {
+      user.password = null;
+      user.token = data.headers.get('Authorization');
+      window.localStorage['user'] = JSON.stringify(user);
+    }));
 
-  }
-
-  login(user: User) {
-    this.attemptAuth(user).subscribe(
-      (res) => {
-        window.localStorage['Authorization'] = res.headers.get('Authorization');
-        return true;
-      },
-      (error) => {
-        return false;
-      },
-    )
   }
 }
