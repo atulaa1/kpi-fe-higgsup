@@ -7,6 +7,7 @@ import {of as observableOf} from 'rxjs';
 import {throwIfAlreadyLoaded} from './module-import-guard';
 import {HttpService} from './services/http.service';
 import {AuthenService} from './services/authen.service';
+import {CookieService} from 'ngx-cookie-service';
 
 const socialLinks = [
   {
@@ -78,7 +79,7 @@ export const NB_CORE_PROVIDERS = [
   exports: [
     NbAuthModule,
   ],
-  providers: [HttpService, AuthenService],
+  providers: [HttpService, AuthenService, CookieService],
   declarations: [],
 })
 export class CoreModule {

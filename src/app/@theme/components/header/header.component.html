@@ -9,7 +9,8 @@
   <nb-action class="higgigup-nb-action"><a href="#">Giới thiệu - Hướng dẫn</a></nb-action>
   <nb-action class="higgigup-nb-action"><a href="#">Cách tính điểm</a></nb-action>
   <nb-action class="higgigup-nb-action"><a href="#">Cơ cấu thưởng</a></nb-action>
-  <nb-action class="higgigup-nb-action" (click)="openLoginModal()"><a href="#">Đăng nhập</a></nb-action>
+  <nb-action *ngIf="!user.token" class="higgigup-nb-action" (click)="openLoginModal()"><a href="#">Đăng nhập</a></nb-action>
+  <nb-action *ngIf="user.token" class="higgigup-nb-action" (click)="logout()" ><a href="#">Đăng Xuất</a></nb-action>
 </nb-actions>
 
 <!--<div class="header-container"-->
