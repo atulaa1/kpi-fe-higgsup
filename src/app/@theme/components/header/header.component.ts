@@ -3,6 +3,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {NbMenuService, NbSidebarService} from '@nebular/theme';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {LoginComponent} from '../../../modals/login/login.component';
+import {User} from '../../../@core/models/user.model';
+import {CookieService} from 'ngx-cookie-service';
+import {AuthenService} from '../../../@core/services/authen.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-header',
@@ -15,17 +19,21 @@ export class HeaderComponent implements OnInit {
 
   @Input() position = 'normal';
 
-  user: any;
+  user: User;
 
   userMenu = [{title: 'Profile'}, {title: 'Log out'}];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
-              private bsModal: BsModalService) {
+              private bsModal: BsModalService,
+              private cookieService: CookieService,
+              private router: Router,
+              private authenService: AuthenService) {
   }
 
   ngOnInit() {
-    this.user = {name: 'sdafaf'};
+    this.user = new User();
+    this.user.token = this.cookieService.get('Authorization');
   }
 
 
@@ -40,6 +48,12 @@ export class HeaderComponent implements OnInit {
 
   openLoginModal() {
     this.loginModal = this.bsModal.show(LoginComponent);
+  }
+
+  logout() {
+    this.authenService.logOut();
+    this.router.navigateByUrl('/');
+    window.location.reload();
   }
 
   startSearch() {
