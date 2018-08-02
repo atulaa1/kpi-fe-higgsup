@@ -6,6 +6,7 @@ import {of as observableOf} from 'rxjs';
 
 import {throwIfAlreadyLoaded} from './module-import-guard';
 import {HttpService} from './services/http.service';
+import {AuthenService} from './services/authen.service';
 
 const socialLinks = [
   {
@@ -77,7 +78,7 @@ export const NB_CORE_PROVIDERS = [
   exports: [
     NbAuthModule,
   ],
-  providers: [HttpService],
+  providers: [HttpService, AuthenService],
   declarations: [],
 })
 export class CoreModule {
