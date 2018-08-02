@@ -1,85 +1,37 @@
-import {Component, OnDestroy} from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
-import { takeWhile } from 'rxjs/operators/takeWhile' ;
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 
-interface CardSettings {
-  title: string;
-  iconClass: string;
-  type: string;
+interface Title {
+  id: String;
+  description: String;
 }
 
 @Component({
   selector: 'ngx-dashboard',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './dashboard.component.html',
 })
-export class DashboardComponent implements OnDestroy {
+export class DashboardComponent implements OnDestroy, OnInit {
 
   private alive = true;
+  private title: Title[];
+  private recentActivity: String[];
 
-  lightCard: CardSettings = {
-    title: 'Light',
-    iconClass: 'nb-lightbulb',
-    type: 'primary',
-  };
-  rollerShadesCard: CardSettings = {
-    title: 'Roller Shades',
-    iconClass: 'nb-roller-shades',
-    type: 'success',
-  };
-  wirelessAudioCard: CardSettings = {
-    title: 'Wireless Audio',
-    iconClass: 'nb-audio',
-    type: 'info',
-  };
-  coffeeMakerCard: CardSettings = {
-    title: 'Coffee Maker',
-    iconClass: 'nb-coffee-maker',
-    type: 'warning',
-  };
+  ngOnInit() {
+    this.title = [
+      {id: 'recent', description: 'Hoạt động gần đây'},
+      {id: 'notify', description: 'Thông báo'},
+      {id: 'rank', description: 'Danh sách thứ hạng'},
+    ];
 
-  statusCards: string;
-
-  commonStatusCardsSet: CardSettings[] = [
-    this.lightCard,
-    this.rollerShadesCard,
-    this.wirelessAudioCard,
-    this.coffeeMakerCard,
-  ];
-
-  statusCardsByThemes: {
-    default: CardSettings[];
-    cosmic: CardSettings[];
-    corporate: CardSettings[];
-  } = {
-    default: this.commonStatusCardsSet,
-    cosmic: this.commonStatusCardsSet,
-    corporate: [
-      {
-        ...this.lightCard,
-        type: 'warning',
-      },
-      {
-        ...this.rollerShadesCard,
-        type: 'primary',
-      },
-      {
-        ...this.wirelessAudioCard,
-        type: 'danger',
-      },
-      {
-        ...this.coffeeMakerCard,
-        type: 'secondary',
-      },
-    ],
-  };
-
-  constructor(private themeService: NbThemeService) {
-    this.themeService.getJsTheme()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(theme => {
-        this.statusCards = this.statusCardsByThemes[theme.name];
-    });
+    this.recentActivity = [
+      'Seminar Angular',
+      'Seminar Spring',
+      'Seminar NodeJS',
+      'Seminar Karma',
+      'Seminar Thread In Java',
+    ]
   }
+
 
   ngOnDestroy() {
     this.alive = false;
