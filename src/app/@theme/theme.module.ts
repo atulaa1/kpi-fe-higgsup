@@ -17,6 +17,7 @@ import {
   NbCheckboxModule,
   NbPopoverModule,
   NbContextMenuModule,
+  NbBadgeModule,
 } from '@nebular/theme';
 
 import { NbSecurityModule } from '@nebular/security';
@@ -40,6 +41,7 @@ import { CORPORATE_THEME } from './styles/theme.corporate';
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
 const NB_MODULES = [
+  NbBadgeModule,
   NbCardModule,
   NbLayoutModule,
   NbTabsetModule,
