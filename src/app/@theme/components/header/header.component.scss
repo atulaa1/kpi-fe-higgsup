@@ -211,3 +211,22 @@
     }
   }
 }
+
+
+
+@media (min-width: 1400px) {
+  .higgigup-nb-action {
+    padding: 2em 8rem;
+  }
+}
+
+.higgigup-nb-action {
+  &:hover{
+    left: .1em;
+    cursor: pointer;
+    a {
+      color: #bdc4cd;
+      text-decoration-line: none;
+    }
+  }
+}

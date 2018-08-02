@@ -1,0 +1,31 @@
+.inputWithIcon input[type=text] {
+  padding-left: 20px;
+}
+
+.inputWithIcon {
+  position: relative;
+  text-align: center;
+}
+
+.inputWithIcon i{
+  position: absolute;
+  left: 8px;
+  top: 15px;
+}
+
+.inputWithIcon input[type=password] {
+  padding-left: 25px;
+}
+
+.inputWithIcon input:focus + i {
+  color: green;
+}
+
+.img-width {
+  width: 20%;
+}
+
+.loginContent {
+  text-align: center;
+}
+

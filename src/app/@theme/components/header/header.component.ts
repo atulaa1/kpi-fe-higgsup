@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 import {NbMenuService, NbSidebarService} from '@nebular/theme';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {LoginComponent} from '../../../modals/login/login.component';
 
 @Component({
   selector: 'ngx-header',
@@ -9,6 +11,7 @@ import {NbMenuService, NbSidebarService} from '@nebular/theme';
 })
 export class HeaderComponent implements OnInit {
 
+  loginModal: BsModalRef;
 
   @Input() position = 'normal';
 
@@ -17,7 +20,8 @@ export class HeaderComponent implements OnInit {
   userMenu = [{title: 'Profile'}, {title: 'Log out'}];
 
   constructor(private sidebarService: NbSidebarService,
-              private menuService: NbMenuService) {
+              private menuService: NbMenuService,
+              private bsModal: BsModalService) {
   }
 
   ngOnInit() {
@@ -32,6 +36,10 @@ export class HeaderComponent implements OnInit {
 
   goToHome() {
     this.menuService.navigateHome();
+  }
+
+  openLoginModal() {
+    this.loginModal = this.bsModal.show(LoginComponent);
   }
 
   startSearch() {
