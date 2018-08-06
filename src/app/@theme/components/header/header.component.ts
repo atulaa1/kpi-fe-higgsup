@@ -23,6 +23,25 @@ export class HeaderComponent implements OnInit {
 
   userMenu = [{title: 'Profile'}, {title: 'Log out'}];
 
+  items = [
+    {
+      title: 'Profile',
+      link: [],
+    },
+    {
+      title: 'Change Password',
+      link: [],
+    },
+    {
+      title: 'Privacy Policy',
+      link: [],
+    },
+    {
+      title: 'Logout',
+      link: [],
+    },
+  ];
+
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private bsModal: BsModalService,
