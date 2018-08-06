@@ -212,21 +212,24 @@
   }
 }
 
-
-
 @media (min-width: 1400px) {
   .higgigup-nb-action {
     padding: 2em 8rem;
+    color: #bdc4cd;
   }
 }
 
 .higgigup-nb-action {
-  &:hover{
+  &:hover {
     left: .1em;
     cursor: pointer;
+    font-weight: 700;
     a {
-      color: #bdc4cd;
       text-decoration-line: none;
     }
   }
+}
+
+.font-weight-600 {
+  font-weight: 600;
 }
