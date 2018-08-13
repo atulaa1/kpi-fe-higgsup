@@ -1,0 +1,39 @@
+<nb-card class="mt-5">
+  <!--Create Activities Mangagement-->
+  <div class="row mt-5 mb-2">
+    <div class="col-md-3 ml-5">
+      <nav>
+        <h5>
+          Chọn hoạt động:
+        </h5>
+      </nav>
+    </div>
+    <div class="col-md-4">
+      <div class="dropdown ghost-dropdown" ngbDropdown>
+        <button id="btnDropdown" class="btn btn-primary" type="button" ngbDropdownToggle>
+           - - Chọn - -
+        </button>
+        <ul id="listDrop" class="dropdown-menu" ngbDropdownMenu>
+          <li class="dropdown-item" (click)="openSeminarModal()">Seminar</li>
+          <li class="dropdown-item" (click)="openClubModal()">Câu lạc bộ</li>
+          <li class="dropdown-item">Team Building</li>
+          <li class="dropdown-item">Support chung</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 mt-5 ml-5">
+      <nav>
+        <h5>
+          Hoạt động đã tạo:
+        </h5>
+      </nav>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 ml-5 mt-5">
+
+    </div>
+  </div>
+</nb-card>
