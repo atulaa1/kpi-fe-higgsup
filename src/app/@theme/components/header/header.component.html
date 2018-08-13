@@ -10,8 +10,7 @@
   <nb-action class="higgigup-nb-action "><a href="#">Giới thiệu - Hướng dẫn</a></nb-action>
   <nb-action class="higgigup-nb-action "><a href="#">Cách tính điểm</a></nb-action>
   <nb-action class="higgigup-nb-action "><a href="#">Cơ cấu thưởng</a></nb-action>
-  <nb-action *ngIf="!user.token" class="higgigup-nb-action " (click)="openLoginModal()"><a href="#">Đăng nhập</a>
-  </nb-action>
+  <nb-action *ngIf="!user.token" class="higgigup-nb-action " (click)="openLoginModal()"><a href="#">Đăng nhập</a></nb-action>
   <nb-action *ngIf="user.token">
     <a href="#">
       <nb-badge text="99+" status="danger" position="top left"></nb-badge>
@@ -108,6 +107,7 @@
               <span class="menu-title">Đăng xuất</span>
             </a>
           </li>
+
         </ul>
 
       </div>

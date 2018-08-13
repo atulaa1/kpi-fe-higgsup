@@ -7,6 +7,7 @@ import {User} from '../../../@core/models/user.model';
 import {CookieService} from 'ngx-cookie-service';
 import {AuthenService} from '../../../@core/services/authen.service';
 import {Router} from '@angular/router';
+import {LogoutComponent} from '../../../modals/logout/logout.component';
 
 @Component({
   selector: 'ngx-header',
@@ -16,7 +17,7 @@ import {Router} from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   loginModal: BsModalRef;
-
+  logoutModal: BsModalRef;
   @Input() position = 'normal';
 
   user: User;
@@ -68,6 +69,9 @@ export class HeaderComponent implements OnInit {
   openLoginModal() {
     this.loginModal = this.bsModal.show(LoginComponent);
   }
+  // openLogoutModal() {
+  //   this.logoutModal = this.bsModal.show(LogoutComponent);
+  // }
 
   logout() {
     this.authenService.logOut();
