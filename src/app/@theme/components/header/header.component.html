@@ -13,7 +13,7 @@
   <nb-action *ngIf="!user.token" class="higgigup-nb-action " (click)="openLoginModal()"><a href="#">Đăng nhập</a>
   </nb-action>
   <nb-action *ngIf="user.token">
-    <a href="#">
+    <a href="#/pages/notification">
       <nb-badge text="99+" status="danger" position="top left"></nb-badge>
       <i style="font-size: 25px;" class="far fa-bell"></i>
     </a>
