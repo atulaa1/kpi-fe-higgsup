@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {SeminarComponent} from './seminar/seminar.component';
 import {ClubComponent} from './club/club.component';
 import {TeamBuildingComponent} from './team-building/team-building.component';
+import {SupportComponent} from './support/support.component';
 
 @Component({
   selector: 'ngx-create-acti',
@@ -25,5 +26,8 @@ export class CreateActiComponent implements OnInit {
   }
   openTeamModal() {
     this.modalService.open(TeamBuildingComponent);
+  }
+  openSupportModal() {
+    this.modalService.open(SupportComponent);
   }
 }
