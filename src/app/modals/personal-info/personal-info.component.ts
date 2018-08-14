@@ -2,17 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'support',
-  templateUrl: './support.component.html',
-  styleUrls: ['./support.component.scss']
+  selector: 'ngx-personal-info',
+  templateUrl: './personal-info.component.html',
+  styleUrls: ['./personal-info.component.scss'],
 })
-export class SupportComponent implements OnInit {
+export class PersonalInfoComponent implements OnInit {
 
   constructor(private activeModal: NgbActiveModal) { }
 
   ngOnInit() {
   }
-  closeSupportModal() {
+closePersonalInfo() {
     this.activeModal.close();
-  }
+}
 }
