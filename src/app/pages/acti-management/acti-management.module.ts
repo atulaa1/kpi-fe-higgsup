@@ -5,6 +5,9 @@ import { CreateActiComponent } from './create-acti/create-acti.component';
 import { ConfirmActiComponent } from './confirm-acti/confirm-acti.component';
 import {ActiManagementRoutingModule} from './acti-management-routing.module';
 import {ThemeModule} from '../../@theme/theme.module';
+import {SeminarComponent} from './create-acti/seminar/seminar.component';
+import {ClubComponent} from './create-acti/club/club.component';
+import {TeamBuildingComponent} from './create-acti/team-building/team-building.component';
 
 @NgModule({
   imports: [
@@ -12,6 +15,8 @@ import {ThemeModule} from '../../@theme/theme.module';
     ActiManagementRoutingModule,
     ThemeModule,
   ],
-  declarations: [ActiManagementComponent, CreateActiComponent, ConfirmActiComponent],
+  declarations: [ActiManagementComponent, CreateActiComponent, ConfirmActiComponent, SeminarComponent, ClubComponent,
+    TeamBuildingComponent],
+  entryComponents: [SeminarComponent, ClubComponent, TeamBuildingComponent],
 })
 export class ActiManagementModule { }

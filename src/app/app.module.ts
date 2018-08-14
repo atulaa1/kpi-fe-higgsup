@@ -13,14 +13,11 @@ import {CoreModule} from './@core/core.module';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {ThemeModule} from './@theme/theme.module';
-import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BsModalRef, BsModalService, ModalModule} from 'ngx-bootstrap';
 import { LoginComponent } from './modals/login/login.component';
-import {SeminarComponent} from './pages/acti-management/create-acti/seminar/seminar.component';
-import {ClubComponent} from './pages/acti-management/create-acti/club/club.component';
-
 @NgModule({
-  declarations: [AppComponent, LoginComponent, SeminarComponent, ClubComponent],
+  declarations: [AppComponent, LoginComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -32,10 +29,10 @@ import {ClubComponent} from './pages/acti-management/create-acti/club/club.compo
     ModalModule.forRoot(),
   ],
   bootstrap: [AppComponent],
-  providers: [BsModalService, BsModalRef, NgbActiveModal,
+  providers: [BsModalService, BsModalRef,
     {provide: APP_BASE_HREF, useValue: '/'},
   ],
-  entryComponents: [LoginComponent, SeminarComponent, ClubComponent],
+  entryComponents: [LoginComponent],
 })
 export class AppModule {
 }
