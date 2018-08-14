@@ -12,7 +12,7 @@ export class PersonalInfoComponent implements OnInit {
 
   ngOnInit() {
   }
-closePersonalInfo() {
+closeInfoModal() {
     this.activeModal.close();
 }
 }

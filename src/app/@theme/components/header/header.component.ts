@@ -7,6 +7,8 @@ import {User} from '../../../@core/models/user.model';
 import {CookieService} from 'ngx-cookie-service';
 import {AuthenService} from '../../../@core/services/authen.service';
 import {Router} from '@angular/router';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {PersonalInfoComponent} from '../../../modals/personal-info/personal-info.component';
 
 @Component({
   selector: 'ngx-header',
@@ -47,7 +49,8 @@ export class HeaderComponent implements OnInit {
               private bsModal: BsModalService,
               private cookieService: CookieService,
               private router: Router,
-              private authenService: AuthenService) {
+              private authenService: AuthenService,
+              private modalService: NgbModal) {
   }
 
   ngOnInit() {
@@ -74,7 +77,9 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/');
     window.location.reload();
   }
-
+  openPersonalInfo() {
+    this.modalService.open(PersonalInfoComponent);
+  }
   startSearch() {
   }
 }
