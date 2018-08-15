@@ -5,6 +5,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
+import {ActiManagementModule} from './acti-management/acti-management.module';
 import { NotificationComponent } from './notification/notification.component';
 
 
@@ -18,6 +19,7 @@ const PAGES_COMPONENTS = [
     ThemeModule,
     DashboardModule,
     MiscellaneousModule,
+    ActiManagementModule,
   ],
   declarations: [
     ...PAGES_COMPONENTS,
