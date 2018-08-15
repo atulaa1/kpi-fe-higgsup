@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+
     this.message = null;
     this.submitted = true;
     if (this.loginForm.invalid) {
@@ -42,14 +43,14 @@ export class LoginComponent implements OnInit {
       user.password = this.loginForm.controls.password.value;
       user.remember = this.loginForm.controls.remember.value;
       this.authenService.attemptAuth(user).subscribe(
-        (res) => {
+        res => {
           this.router.navigateByUrl('/');
           window.location.reload();
           return true;
         },
         (error) => {
           this.message = MessageConstant.loginFalse.toString();
-          return false;
+          return true;
         },
       )
 

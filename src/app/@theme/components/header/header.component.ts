@@ -8,7 +8,6 @@ import {CookieService} from 'ngx-cookie-service';
 import {AuthenService} from '../../../@core/services/authen.service';
 import {Router} from '@angular/router';
 import {LogoutComponent} from '../../../modals/logout/logout.component';
-
 @Component({
   selector: 'ngx-header',
   styleUrls: ['./header.component.scss'],
@@ -69,9 +68,9 @@ export class HeaderComponent implements OnInit {
   openLoginModal() {
     this.loginModal = this.bsModal.show(LoginComponent);
   }
-  // openLogoutModal() {
-  //   this.logoutModal = this.bsModal.show(LogoutComponent);
-  // }
+  openLogoutModal() {
+    this.logoutModal = this.bsModal.show(LogoutComponent);
+  }
 
   logout() {
     this.authenService.logOut();

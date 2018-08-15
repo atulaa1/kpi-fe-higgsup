@@ -17,11 +17,12 @@ export class AuthenService {
 
     const userJson = JSON.stringify({'username': user.username, 'password': user.password});
     return this.http.post(
-      BaseConstant.protocol.toString() + BaseConstant.server.toString()
-      + BaseConstant.standardServicePort.toString() + '/api/login', userJson, {
+       BaseConstant.protocol.toString() + BaseConstant.server.toString()
+        + BaseConstant.standardServicePort.toString() + '/kpi/api/login', userJson, {
         headers: new HttpHeaders({}),
         observe: 'response',
       }).pipe(map((data) => {
+      // set remember. if remember so will remember 100 day
       const expiredDate = new Date();
       if (user.remember) {
         this.cookieService.set('Authorization', data.headers.get('Authorization'), expiredDate.getDay() + 100)
@@ -32,7 +33,6 @@ export class AuthenService {
     }));
 
   }
-
   logOut() {
     this.cookieService.delete('Authorization');
   }

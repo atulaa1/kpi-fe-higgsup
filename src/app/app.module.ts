@@ -34,7 +34,7 @@ import { LogoutComponent } from './modals/logout/logout.component';
   providers: [BsModalService, BsModalRef,
     {provide: APP_BASE_HREF, useValue: '/'},
   ],
-  entryComponents: [LoginComponent],
+  entryComponents: [LoginComponent, LogoutComponent],
 })
 export class AppModule {
 }

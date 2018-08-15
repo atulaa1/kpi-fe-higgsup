@@ -4,13 +4,13 @@
                                               alt="Responsive image"></div>
 </div>
 <!--</div>-->
-
 <nb-actions size="medium">
   <nb-action class="higgigup-nb-action "><a href="#">Trang chủ</a></nb-action>
   <nb-action class="higgigup-nb-action "><a href="#">Giới thiệu - Hướng dẫn</a></nb-action>
   <nb-action class="higgigup-nb-action "><a href="#">Cách tính điểm</a></nb-action>
   <nb-action class="higgigup-nb-action "><a href="#">Cơ cấu thưởng</a></nb-action>
-  <nb-action *ngIf="!user.token" class="higgigup-nb-action " (click)="openLoginModal()"><a href="#">Đăng nhập</a></nb-action>
+  <nb-action *ngIf="!user.token" class="higgigup-nb-action " (click)="openLoginModal()"><a href="#">Đăng nhập</a>
+  </nb-action>
   <nb-action *ngIf="user.token">
     <a href="#">
       <nb-badge text="99+" status="danger" position="top left"></nb-badge>
@@ -103,20 +103,16 @@
           <li style="display: flex;border-top: 1px solid #ebeef2;padding: 15px;"
               class="text-center font-weight-600">
             <i style="  font-size: 23px;" class="fas fa-sign-out-alt"></i>
-            <a style="margin-left: 10px" ng-reflect-router-link="" title="Logout" (click)="logout()" href="#">
+            <a style="margin-left: 10px" ng-reflect-router-link="" title="Logout" (click)="openLogoutModal()" href="#">
               <span class="menu-title">Đăng xuất</span>
             </a>
           </li>
-
         </ul>
 
       </div>
     </div>
   </nb-action>
-
-
 </nb-actions>
-
 
 <!--<div class="header-container"-->
 <!--[class.left]="position === 'normal'"-->
