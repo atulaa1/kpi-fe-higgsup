@@ -1,0 +1,35 @@
+<nb-card>
+  <nb-card-body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mt-3 mb-5">
+          <div class="titleManagement">
+            <h4>
+              QUẢN LÝ DỰ ÁN
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <button class="btn btn-hero-success mb-5" *ngIf="add" (click)="addProject()">Thêm dự án</button>
+          <div class="row" *ngIf="!add">
+            <input type="text" class="form-control mb-5 col-md-10"(keypress)="confirmAdd($event)">
+            <i class="fas fa-times col-md-2"></i>
+          </div>
+        </div>
+      </div>
+      <div class="row ml-5">
+        <div class="col-md-6">
+          <p class="nameProject">Lorem ipsum dolor sit amet.</p>
+        </div>
+        <div class="col-md-3 listIcon">
+          <i class="far fa-check-circle" *ngIf="active" (click)="Deactive()"></i>
+          <i class="fas fa-ban" *ngIf="!active" (click)="Active()"></i>
+          <i class="fas fa-pencil-alt"></i>
+          <i class="fas fa-trash-alt"></i>
+        </div>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>
