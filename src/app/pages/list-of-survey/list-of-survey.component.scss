@@ -1,0 +1,28 @@
+.cus-modal-header{
+  position: relative;
+}
+.cus-close{
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+.cus-modal-header h2{
+  text-transform: uppercase;
+
+}
+
+.col-plus{
+  padding:0 5px;
+  width: 20%;
+}
+.modal-body .item span{
+  font-size: 12px;
+}
+@media (min-width: 992px){
+  .modal-dialog{
+    width: 800px;
+  }
+  .modal-content{
+
+  }
+}
