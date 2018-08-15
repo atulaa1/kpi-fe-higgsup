@@ -7,8 +7,17 @@ import {Component, OnInit} from '@angular/core';
 })
 export class NotificationComponent implements OnInit {
   boxx = false;
+  showIc = false;
 
   constructor() {
+  }
+
+  fcShowmodal() {
+    alert('test')
+  }
+
+  fcShowCheckbox() {
+    this.showIc = !this.showIc;
   }
 
   clickBoxEnd() {
