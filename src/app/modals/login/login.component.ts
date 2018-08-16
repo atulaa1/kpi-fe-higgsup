@@ -45,12 +45,17 @@ export class LoginComponent implements OnInit {
       this.authenService.attemptAuth(user).subscribe(
         res => {
           this.router.navigateByUrl('/');
-          window.location.reload();
+          // window.location.reload();
+          console.log('lol ' + res);
+          // get token and username in cookies
+
+          // call getUserInfo API
+          // binding data of user in menu
           return true;
         },
         (error) => {
           this.message = MessageConstant.loginFalse.toString();
-          return true;
+          return false;
         },
       )
 

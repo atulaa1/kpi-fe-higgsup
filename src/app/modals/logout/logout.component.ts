@@ -25,7 +25,7 @@ export class LogoutComponent implements OnInit {
   }
 
   cancelLogout() {
-    this.logoutModal = this.bsModal.hide(1);
+    this.bsModal.hide(1);
   }
 
 

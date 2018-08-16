@@ -29,7 +29,7 @@ export class AuthenService {
       } else {
         this.cookieService.set('Authorization', data.headers.get('Authorization'))
       }
-
+        return data;
     }));
 
   }
