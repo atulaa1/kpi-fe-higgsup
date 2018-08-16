@@ -22,7 +22,7 @@ export class AuthenService {
         headers: new HttpHeaders({}),
         observe: 'response',
       }).pipe(map((data) => {
-      // set remember. if remember so will remember 100 day
+      // set remember. if remember turn on => will remember 100 day
       const expiredDate = new Date();
       if (user.remember) {
         this.cookieService.set('Authorization', data.headers.get('Authorization'), expiredDate.getDay() + 100)
