@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {AskSaveComponent} from './ask-save/ask-save.component';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'acc-management',
@@ -10,10 +11,11 @@ import {AskSaveComponent} from './ask-save/ask-save.component';
 export class AccManagementComponent implements OnInit {
 
   constructor(
-    private bsModal: BsModalService,
+    private bsModal: NgbModal,
   ) { }
   show = true;
   select = 'Man';
+  logoutModal: NgbModalRef;
   ngOnInit() {
   }
   myFunction() {
@@ -38,6 +40,7 @@ export class AccManagementComponent implements OnInit {
     this.show = !this.show;
   }
   openAskSaveModal() {
-    this.bsModal.show(AskSaveComponent);
+    // this.bsModal.show(AskSaveComponent);
+    this.logoutModal = this.bsModal.open(AskSaveComponent);
   }
 }
