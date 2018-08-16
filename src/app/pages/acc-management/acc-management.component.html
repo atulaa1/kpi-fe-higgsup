@@ -12,28 +12,63 @@
   <div id="managementContent">
     <div class="details">
       <p class='name'>Le Duc Thang</p>
-      <p class='role'>Employee</p>
-      <p class='fix'><button class='btn btn-warning'>Sửa</button></p>
+      <p class='role' *ngIf='show'>{{select}}</p>
+      <p class="role" *ngIf='!show'>
+        <select [(ngModel)]='select'>
+          <option>Man</option>
+          <option>Employee</option>
+        </select>
+      </p>
+      <p class='fix' *ngIf='show'><button class='btn btn-warning' (click)='edit()'>Sửa</button></p>
+      <p class='fix' *ngIf='!show'><button class='btn btn-warning' (click)='openAskSaveModal()'>Lưu</button></p>
     </div>
     <div class="details">
       <p class='name'>Le Ngoc Nghiem Duong</p>
-      <p class='role'>Employee</p>
-      <p class='fix'><button class='btn btn-warning'>Sửa</button></p>
+      <p class='role' *ngIf='show'>{{select}}</p>
+      <p class="role" *ngIf='!show'>
+        <select [(ngModel)]='select'>
+          <option>Man</option>
+          <option>Employee</option>
+        </select>
+      </p>
+      <p class='fix' *ngIf='show'><button class='btn btn-warning' (click)='edit()'>Sửa</button></p>
+      <p class='fix' *ngIf='!show'><button class='btn btn-warning' (click)='save()'>Lưu</button></p>
     </div>
     <div class="details">
       <p class='name'>Pham Xuan Dung</p>
-      <p class='role'>Man</p>
-      <p class='fix'><button class='btn btn-warning'>Sửa</button></p>
+      <p class='role' *ngIf='show'>{{select}}</p>
+      <p class="role" *ngIf='!show'>
+        <select [(ngModel)]='select'>
+          <option>Man</option>
+          <option>Employee</option>
+        </select>
+      </p>
+      <p class='fix' *ngIf='show'><button class='btn btn-warning' (click)='edit()'>Sửa</button></p>
+      <p class='fix' *ngIf='!show'><button class='btn btn-warning' (click)='openAskSaveModal()'>Lưu</button></p>
     </div>
     <div class="details">
       <p class='name'>Le Anh Cuong</p>
-      <p class='role'>Man</p>
-      <p class='fix'><button class='btn btn-warning'>Sửa</button></p>
+      <p class='role' *ngIf='show'>{{select}}</p>
+      <p class="role" *ngIf='!show'>
+        <select [(ngModel)]='select'>
+          <option>Man</option>
+          <option>Employee</option>
+        </select>
+      </p>
+      <p class='fix' *ngIf='show'><button class='btn btn-warning' (click)='edit()'>Sửa</button></p>
+      <p class='fix' *ngIf='!show'><button class='btn btn-warning' (click)='openAskSaveModal()'>Lưu</button></p>
     </div>
     <div class="details">
       <p class='name'>Dao To Tung</p>
-      <p class='role'>Employee</p>
-      <p class='fix'><button class='btn btn-warning'>Sửa</button></p>
+      <p class='role' *ngIf='show'>{{select}}</p>
+      <p class="role" *ngIf='!show'>
+        <select [(ngModel)]='select'>
+          <option>Man</option>
+          <option>Employee</option>
+        </select>
+      </p>
+      <p class='fix' *ngIf='show'><button class='btn btn-warning' (click)='edit()'>Sửa</button></p>
+      <p class='fix' *ngIf='!show'><button class='btn btn-warning' (click)='openAskSaveModal()'>Lưu</button></p>
     </div>
     <div class="details">
       <p class='name'>Nguyen Huy Hung</p>
@@ -49,9 +84,15 @@
     </div>
     <div class="details">
       <p class='name'>Le Thi Tam</p>
-      <p class='role'>Employee</p>
-      <p class='fix'><button class='btn btn-warning'>Sửa</button></p>
-    </div>
+      <p class='role' *ngIf='show'>{{select}}</p>
+      <p class="role" *ngIf='!show'>
+        <select [(ngModel)]='select'>
+          <option>Man</option>
+          <option>Employee</option>
+        </select>
+      </p>
+      <p class='fix' *ngIf='show'><button class='btn btn-warning' (click)='edit()'>Sửa</button></p>
+      <p class='fix' *ngIf='!show'><button class='btn btn-warning' (click)='openAskSaveModal()'>Lưu</button></p>
   </div>
   <!--<div id="role">-->
     <!--<div><p href="#">Employee</p></div>-->

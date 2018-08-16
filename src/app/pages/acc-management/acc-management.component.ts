@@ -37,6 +37,9 @@ export class AccManagementComponent implements OnInit {
   edit() {
     this.show = !this.show;
   }
+  save(){
+    this.show = !this.show;
+  }
   openAskSaveModal() {
     // this.bsModal.show(AskSaveComponent);
     this.bsModal.open(AskSaveComponent);
