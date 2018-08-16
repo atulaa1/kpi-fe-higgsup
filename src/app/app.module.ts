@@ -18,7 +18,7 @@ import {BsModalRef, BsModalService, ModalModule} from 'ngx-bootstrap';
 import {LoginComponent} from './modals/login/login.component';
 import {PersonalInfoComponent} from './modals/personal-info/personal-info.component';
 import {PagesComponent} from './pages/pages.component';
-import {TablesComponent} from './pages/acc-management/tables/tables.component';
+import {AskSaveComponent} from './pages/acc-management/ask-save/ask-save.component';
 @NgModule({
   declarations: [AppComponent, LoginComponent, PersonalInfoComponent],
   imports: [
@@ -35,7 +35,7 @@ import {TablesComponent} from './pages/acc-management/tables/tables.component';
   providers: [BsModalService, BsModalRef,
     {provide: APP_BASE_HREF, useValue: '/'},
   ],
-  entryComponents: [LoginComponent, PersonalInfoComponent,],
+  entryComponents: [LoginComponent, PersonalInfoComponent,AskSaveComponent],
 })
 export class AppModule {
 }

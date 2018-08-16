@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {AskSaveComponent} from './ask-save/ask-save.component';
 
 @Component({
   selector: 'acc-management',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccManagementComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private bsModal: BsModalService,
+  ) { }
   show = true;
   select = 'Man';
   ngOnInit() {
@@ -32,5 +36,8 @@ export class AccManagementComponent implements OnInit {
   }
   save(){
     this.show = !this.show;
+  }
+  openAskSaveModal() {
+    this.bsModal.show(AskSaveComponent);
   }
 }
