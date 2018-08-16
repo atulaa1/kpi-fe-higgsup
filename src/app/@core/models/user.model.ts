@@ -7,6 +7,5 @@ export class User {
   remember: boolean;
   username: string;
   password: string;
-  image: string;
-  role: Array<string>;
+  userRole: Array<string>;
 }
