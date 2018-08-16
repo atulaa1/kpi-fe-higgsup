@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {AskSaveComponent} from './ask-save/ask-save.component';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {ManagementServiceService} from './management-service.service';
 
 @Component({
   selector: 'acc-management',
@@ -13,8 +14,8 @@ export class AccManagementComponent implements OnInit {
   constructor(
     private bsModal: NgbModal,
   ) { }
-  show = true;
   select = 'Man';
+  show = true;
   logoutModal: NgbModalRef;
   ngOnInit() {
   }
@@ -33,10 +34,7 @@ export class AccManagementComponent implements OnInit {
       }
     }
   }
-  edit(){
-    this.show = !this.show;
-  }
-  save(){
+  edit() {
     this.show = !this.show;
   }
   openAskSaveModal() {
