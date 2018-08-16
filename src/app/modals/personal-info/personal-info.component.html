@@ -7,57 +7,59 @@
         </button>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-5">
-        <img class="img-thumbnail avatarUser"
-             src="http://br-art.vn/wp-content/uploads/2017/11/bo-anh-chan-dung-cua-nag-thai-duy-1.jpg" alt="">
-      </div>
-      <div class="col-md-7">
-        <div class="userName">
-          <nav>
-            <h4>
-              LÊ VĂN THÀNH
-            </h4>
-          </nav>
-          <nav>
-            <h4>
-              ADMIN
-            </h4>
-          </nav>
+    <form action="" class="form-group" [formGroup]="userInfoForm" (submit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-5">
+          <input-file [fileLimit]="1" fileAccept="image/*" [sizeLimit]="50" [inputId]="avatarImg" (acceptedFile)="saveAvatarImg($event)"
+                      [placeholder]="picture">
+                      <!--class="col-md-8 form-control" formControlName="avatar" id="avatar">-->
+          </input-file>
+        </div>
+        <div class="col-md-7">
+          <div class="userName">
+            <nav>
+              <h4>
+                LÊ VĂN THÀNH
+              </h4>
+            </nav>
+            <nav>
+              <h4>
+                ADMIN
+              </h4>
+            </nav>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="mt-5 userInfo">
-      <form action="" class="form-group">
+      <div class="mt-5 userInfo">
         <div class="row">
           <h6 class="col-md-4 userInfo">Ngày sinh:</h6>
-          <input type="text" class="col-md-8 form-control">
+          <input type="text" class="col-md-8 form-control" formControlName="birthday" id="birthday">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-4 userInfo">Số điện thoại:</h6>
-          <input type="text" class="col-md-8 form-control">
+          <input type="text" class="col-md-8 form-control" formControlName="phoneNumber" id="phoneNumber">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-4 userInfo">Địa chỉ:</h6>
-          <input type="text" class="col-md-8 form-control">
+          <input type="text" class="col-md-8 form-control" formControlName="address" id="address">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-4 userInfo">Gmail:</h6>
-          <input type="text" class="col-md-8 form-control">
+          <input type="text" class="col-md-8 form-control" formControlName="gmail" id="gmail">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-4 userInfo">Skype:</h6>
-          <input type="text" class="col-md-8 form-control">
+          <input type="text" class="col-md-8 form-control" formControlName="skype" id="skype">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-4 userInfo">Số năm làm việc:</h6>
-          <input type="text" class="col-md-8 form-control">
+          <input type="text" class="col-md-8 form-control" formControlName="yearsOfWork" id="yearsOfWork">
         </div>
         <div class="row personButton mt-5">
           <button class="btn btn-hero-success submitButton" type="submit">Lưu thay đổi</button>
           <button class="btn btn-hero-warning cancelButton" (click)="closeInfoModal()">Hủy</button>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
 </div>

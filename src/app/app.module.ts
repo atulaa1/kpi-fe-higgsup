@@ -17,17 +17,25 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BsModalRef, BsModalService, ModalModule} from 'ngx-bootstrap';
 import { LoginComponent } from './modals/login/login.component';
 import {PersonalInfoComponent} from './modals/personal-info/personal-info.component';
+import {InputFileConfig} from 'ngx-input-file/src/lib/interfaces/input-file-config';
+import {InputFileModule} from 'ngx-input-file';
+import {NgxUploaderModule} from 'ngx-uploader';
+
+const config: InputFileConfig = {};
+
 @NgModule({
   declarations: [AppComponent, LoginComponent, PersonalInfoComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    NgxUploaderModule,
     AppRoutingModule,
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
     ModalModule.forRoot(),
+    InputFileModule.forRoot(config),
   ],
   bootstrap: [AppComponent],
   providers: [BsModalService, BsModalRef,
