@@ -13,14 +13,15 @@ import {CoreModule} from './@core/core.module';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {ThemeModule} from './@theme/theme.module';
-import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BsModalRef, BsModalService, ModalModule} from 'ngx-bootstrap';
 import { LoginComponent } from './modals/login/login.component';
 import { LogoutComponent } from './modals/logout/logout.component';
 import {UserService} from './@core/services/user.service';
 
+import {PersonalInfoComponent} from './modals/personal-info/personal-info.component';
 @NgModule({
-  declarations: [AppComponent, LoginComponent, LogoutComponent],
+  declarations: [AppComponent, LoginComponent, LogoutComponent, PersonalInfoComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -36,7 +37,7 @@ import {UserService} from './@core/services/user.service';
     {provide: APP_BASE_HREF, useValue: '/'},
     UserService,
   ],
-  entryComponents: [LoginComponent, LogoutComponent],
+  entryComponents: [LoginComponent, PersonalInfoComponent, LogoutComponent],
 })
 export class AppModule {
 }

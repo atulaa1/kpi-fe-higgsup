@@ -9,6 +9,7 @@ import {Router} from '@angular/router';
 import {LogoutComponent} from '../../../modals/logout/logout.component';
 import {UserService} from '../../../@core/services/user.service';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {PersonalInfoComponent} from '../../../modals/personal-info/personal-info.component';
 @Component({
   selector: 'ngx-header',
   styleUrls: ['./header.component.scss'],
@@ -80,7 +81,9 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/');
     window.location.reload();
   }
-
+  openPersonalInfo() {
+    this.bsModal.open(PersonalInfoComponent);
+  }
   startSearch() {
   }
 }
