@@ -7,7 +7,6 @@ import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import {ActiManagementModule} from './acti-management/acti-management.module';
 import { AccManagementComponent } from './acc-management/acc-management.component';
-import { AskSaveComponent } from './acc-management/ask-save/ask-save.component';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -25,7 +24,6 @@ const PAGES_COMPONENTS = [
   declarations: [
     ...PAGES_COMPONENTS,
     AccManagementComponent,
-    AskSaveComponent,
   ],
 })
 export class PagesModule {

@@ -41,6 +41,6 @@ export class AccManagementComponent implements OnInit {
   }
   openAskSaveModal() {
     // this.bsModal.show(AskSaveComponent);
-    this.logoutModal = this.bsModal.open(AskSaveComponent);
+    this.bsModal.open(AskSaveComponent);
   }
 }

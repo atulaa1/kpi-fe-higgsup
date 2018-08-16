@@ -7,6 +7,7 @@ import {ActiManagementComponent} from './acti-management/acti-management.compone
 import {CreateActiComponent} from './acti-management/create-acti/create-acti.component';
 import {ConfirmActiComponent} from './acti-management/confirm-acti/confirm-acti.component';
 import {AccManagementComponent} from './acc-management/acc-management.component';
+import {AskSaveComponent} from './acc-management/ask-save/ask-save.component';
 
 const routes: Routes = [{
   path: '',

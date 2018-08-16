@@ -17,10 +17,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BsModalRef, BsModalService, ModalModule} from 'ngx-bootstrap';
 import {LoginComponent} from './modals/login/login.component';
 import {PersonalInfoComponent} from './modals/personal-info/personal-info.component';
-import {PagesComponent} from './pages/pages.component';
 import {AskSaveComponent} from './pages/acc-management/ask-save/ask-save.component';
 @NgModule({
-  declarations: [AppComponent, LoginComponent, PersonalInfoComponent],
+  declarations: [AppComponent, LoginComponent, PersonalInfoComponent, AskSaveComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -35,7 +34,7 @@ import {AskSaveComponent} from './pages/acc-management/ask-save/ask-save.compone
   providers: [BsModalService, BsModalRef,
     {provide: APP_BASE_HREF, useValue: '/'},
   ],
-  entryComponents: [LoginComponent, PersonalInfoComponent,AskSaveComponent],
+  entryComponents: [LoginComponent, PersonalInfoComponent, AskSaveComponent],
 })
 export class AppModule {
 }
