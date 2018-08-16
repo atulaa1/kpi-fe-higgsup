@@ -13,11 +13,8 @@
         <button id="btnDropdown" class="btn btn-primary" type="button" ngbDropdownToggle>
            - - Chọn - -
         </button>
-        <ul id="listDrop" class="dropdown-menu" ngbDropdownMenu>
-          <li class="dropdown-item" (click)="openSeminarModal()">Seminar</li>
-          <li class="dropdown-item" (click)="openClubModal()">Câu lạc bộ</li>
-          <li class="dropdown-item" (click)="openTeamModal()">Team Building</li>
-          <li class="dropdown-item" (click)="openSupportModal()">Support chung</li>
+        <ul id="listDrop" class="dropdown-menu" ngbDropdownMenu >
+          <li *ngFor="let activity of listActivities" class="dropdown-item" (click)="openActivityModal(activity.id)">{{activity.name}}</li>
         </ul>
       </div>
     </div>
@@ -40,29 +37,16 @@
           <th>Hoạt động</th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-          <td>19xx</td>
-          <td>Something</td>
-        </tr>
-        <tr>
-          <td>19xx</td>
-          <td>Something</td>
-        </tr>
-        <tr>
-          <td>19xx</td>
-          <td>Something</td>
-        </tr>
-        <tr>
-          <td>19xx</td>
-          <td>Something</td>
-        </tr>
-        <tr>
-          <td>19xx</td>
-          <td>Something</td>
+        <tbody >
+        <tr *ngFor="let activity of listActivities">
+          <td>{{activity.id}}</td>
+          <td>{{activity.name}}</td>
         </tr>
         </tbody>
       </table>
     </div>
+  </div>
+  <div class="row">
+
   </div>
 </nb-card>
