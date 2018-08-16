@@ -15,8 +15,9 @@ import {AppRoutingModule} from './app-routing.module';
 import {ThemeModule} from './@theme/theme.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BsModalRef, BsModalService, ModalModule} from 'ngx-bootstrap';
-import { LoginComponent } from './modals/login/login.component';
+import {LoginComponent} from './modals/login/login.component';
 import {PersonalInfoComponent} from './modals/personal-info/personal-info.component';
+
 @NgModule({
   declarations: [AppComponent, LoginComponent, PersonalInfoComponent],
   imports: [
