@@ -15,8 +15,10 @@ import {AppRoutingModule} from './app-routing.module';
 import {ThemeModule} from './@theme/theme.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BsModalRef, BsModalService, ModalModule} from 'ngx-bootstrap';
-import { LoginComponent } from './modals/login/login.component';
+import {LoginComponent} from './modals/login/login.component';
 import {PersonalInfoComponent} from './modals/personal-info/personal-info.component';
+import {PagesComponent} from './pages/pages.component';
+import {TablesComponent} from './pages/acc-management/tables/tables.component';
 @NgModule({
   declarations: [AppComponent, LoginComponent, PersonalInfoComponent],
   imports: [
@@ -33,7 +35,7 @@ import {PersonalInfoComponent} from './modals/personal-info/personal-info.compon
   providers: [BsModalService, BsModalRef,
     {provide: APP_BASE_HREF, useValue: '/'},
   ],
-  entryComponents: [LoginComponent, PersonalInfoComponent],
+  entryComponents: [LoginComponent, PersonalInfoComponent,],
 })
 export class AppModule {
 }

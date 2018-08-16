@@ -1,0 +1,42 @@
+* {
+  color: #000
+}
+p {
+  width: 30%;
+  font-size: 35px;
+  margin: auto;
+  text-align: center;
+  padding: 20px;
+  border: 5px solid #000;
+}
+.search {
+  font-size: 25px;
+  width: 30%;
+  margin: auto;
+}
+.search-inp {
+  font-size: 20px;
+}
+.talbe-block {
+  width: 80%;
+  margin: auto;
+  font-size: 20px;
+}
+.details {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.name, .role, .fix {
+  width: 33.33%;
+  font-size: 35px;
+  margin: auto;
+  text-align: center;
+  padding: 20px;
+  border: 5px solid #000;
+}
+.fix button {
+  width: 40%;
+  margin: auto;
+  font-size: 20px;
+}

@@ -6,9 +6,11 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import {ActiManagementModule} from './acti-management/acti-management.module';
+import { AccManagementComponent } from './acc-management/acc-management.component';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
+
 ];
 
 @NgModule({
@@ -21,6 +23,7 @@ const PAGES_COMPONENTS = [
   ],
   declarations: [
     ...PAGES_COMPONENTS,
+    AccManagementComponent,
   ],
 })
 export class PagesModule {

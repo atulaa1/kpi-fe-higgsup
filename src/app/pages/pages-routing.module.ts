@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {ActiManagementComponent} from './acti-management/acti-management.component';
 import {CreateActiComponent} from './acti-management/create-acti/create-acti.component';
 import {ConfirmActiComponent} from './acti-management/confirm-acti/confirm-acti.component';
+import {AccManagementComponent} from './acc-management/acc-management.component';
 
 const routes: Routes = [{
   path: '',
@@ -19,6 +20,10 @@ const routes: Routes = [{
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',
+    },
+    {
+      path: 'acc-management',
+      component: AccManagementComponent,
     },
     {
       path: 'acti-management',
