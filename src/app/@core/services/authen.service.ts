@@ -17,22 +17,22 @@ export class AuthenService {
 
     const userJson = JSON.stringify({'username': user.username, 'password': user.password});
     return this.http.post(
-      BaseConstant.protocol.toString() + BaseConstant.server.toString()
-      + BaseConstant.standardServicePort.toString() + '/api/login', userJson, {
+       BaseConstant.protocol.toString() + BaseConstant.server.toString()
+        + BaseConstant.standardServicePort.toString() + '/api/login', userJson, {
         headers: new HttpHeaders({}),
         observe: 'response',
       }).pipe(map((data) => {
+      // set remember. if remember turn on => will remember 100 day
       const expiredDate = new Date();
       if (user.remember) {
         this.cookieService.set('Authorization', data.headers.get('Authorization'), expiredDate.getDay() + 100)
       } else {
         this.cookieService.set('Authorization', data.headers.get('Authorization'))
       }
-
+        return data;
     }));
 
   }
-
   logOut() {
     this.cookieService.delete('Authorization');
   }

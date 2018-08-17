@@ -16,9 +16,12 @@ import {ThemeModule} from './@theme/theme.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BsModalRef, BsModalService, ModalModule} from 'ngx-bootstrap';
 import { LoginComponent } from './modals/login/login.component';
+import { LogoutComponent } from './modals/logout/logout.component';
+import {UserService} from './@core/services/user.service';
+
 import {PersonalInfoComponent} from './modals/personal-info/personal-info.component';
 @NgModule({
-  declarations: [AppComponent, LoginComponent, PersonalInfoComponent],
+  declarations: [AppComponent, LoginComponent, LogoutComponent, PersonalInfoComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -32,8 +35,9 @@ import {PersonalInfoComponent} from './modals/personal-info/personal-info.compon
   bootstrap: [AppComponent],
   providers: [BsModalService, BsModalRef,
     {provide: APP_BASE_HREF, useValue: '/'},
+    UserService,
   ],
-  entryComponents: [LoginComponent, PersonalInfoComponent],
+  entryComponents: [LoginComponent, PersonalInfoComponent, LogoutComponent],
 })
 export class AppModule {
 }

@@ -4,22 +4,21 @@
                                               alt="Responsive image"></div>
 </div>
 <!--</div>-->
-
 <nb-actions size="medium">
   <nb-action class="higgigup-nb-action "><a href="#">Trang chủ</a></nb-action>
   <nb-action class="higgigup-nb-action "><a href="#">Giới thiệu - Hướng dẫn</a></nb-action>
   <nb-action class="higgigup-nb-action "><a href="#">Cách tính điểm</a></nb-action>
   <nb-action class="higgigup-nb-action "><a href="#">Cơ cấu thưởng</a></nb-action>
-  <nb-action *ngIf="!user.token" class="higgigup-nb-action " (click)="openLoginModal()"><a href="#">Đăng nhập</a>
+  <nb-action *ngIf="!user.token && !user.username" class="higgigup-nb-action " (click)="openLoginModal()"><a href="#">Đăng nhập</a>
   </nb-action>
-  <nb-action *ngIf="user.token">
+  <nb-action *ngIf="user.username">
     <a href="#">
       <nb-badge text="99+" status="danger" position="top left"></nb-badge>
       <i style="font-size: 25px;" class="far fa-bell"></i>
     </a>
     <div class="btn-group" dropdown>
       <nb-action dropdownToggle class="higgigup-nb-action" aria-controls="dropdown-basic">
-        <a>Lê Văn Thành</a>
+        <a>{{user.firstName}} {{user.lastName}}</a>
       </nb-action>
 
       <div style="width: 300px" id="dropdown-basic" *dropdownMenu class="dropdown-menu">
@@ -32,11 +31,13 @@
           <div style="margin-top: 50px" class="col-6 col-md-6 ">
             <div class="font-weight-600">
               <i class="fas fa-user"></i>
-              Lê Văn Thành
+              {{user.firstName}} {{user.lastName}}
             </div>
             <div class="font-weight-600">
               <i class="fas fa-users-cog"></i>
-              Admin
+              <span *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0">Admin</span>
+              <span *ngIf="user.userRole.indexOf('ROLE_MAN')>=0">Man</span>
+              <span *ngIf="user.userRole.indexOf('ROLE_EMPLOYEE')>=0 && user.userRole.length == 1">Employee</span>
             </div>
             <div class="font-weight-600 userInfo mt-5">
               <a href="#" (click)="openPersonalInfo()">Hồ sơ trên KPI</a>
@@ -46,7 +47,7 @@
         </div>
 
         <ul>
-          <li style="display: flex;border-top: 1px solid #ebeef2;padding: 15px;"
+          <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" style="display: flex;border-top: 1px solid #ebeef2;padding: 15px;"
               class="text-center font-weight-600">
             <i style="  font-size: 25px;" class="fas fa-user-circle"></i>
             <a style="margin-left: 10px" ng-reflect-router-link="" title="Quản lý tài khoản" href="#/pages/dashboard">
@@ -62,7 +63,7 @@
             </a>
           </li>
 
-          <li style="display: flex;border-top: 1px solid #ebeef2;padding: 15px;"
+          <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" style="display: flex;border-top: 1px solid #ebeef2;padding: 15px;"
               class="text-center font-weight-600">
             <i style="font-size: 23px;" class="fas fa-users"></i>
             <a style="margin-left: 10px" ng-reflect-router-link="" title="Quản lý hoạt động" href="#/pages/acti-management">
@@ -71,7 +72,7 @@
           </li>
 
 
-          <li style="display: flex;border-top: 1px solid #ebeef2;padding: 15px;"
+          <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" style="display: flex;border-top: 1px solid #ebeef2;padding: 15px;"
               class="text-center font-weight-600">
             <i style="  font-size: 23px;" class="fas fa-edit"></i>
             <a style="margin-left: 10px" ng-reflect-router-link="" title="Quản lý khảo sát" href="#/pages/dashboard">
@@ -96,7 +97,7 @@
           </li>
 
 
-          <li style="display: flex;border-top: 1px solid #ebeef2;padding: 15px;"
+          <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" style="display: flex;border-top: 1px solid #ebeef2;padding: 15px;"
               class="text-center font-weight-600">
             <i style="  font-size: 23px;" class="fas fa-plus-circle"></i>
             <a style="margin-left: 10px" ng-reflect-router-link="" title="Tạo hoạt động" href="#/pages/dashboard">
@@ -107,20 +108,16 @@
           <li style="display: flex;border-top: 1px solid #ebeef2;padding: 15px;"
               class="text-center font-weight-600">
             <i style="  font-size: 23px;" class="fas fa-sign-out-alt"></i>
-            <a style="margin-left: 10px" ng-reflect-router-link="" title="Đăng xuất" (click)="logout()" href="#">
+            <a style="margin-left: 10px" ng-reflect-router-link="" title="Đăng xuất" (click)="openLogoutModal()" href="#">
               <span class="menu-title">Đăng xuất</span>
             </a>
           </li>
-
         </ul>
 
       </div>
     </div>
   </nb-action>
-
-
 </nb-actions>
-
 
 <!--<div class="header-container"-->
 <!--[class.left]="position === 'normal'"-->
