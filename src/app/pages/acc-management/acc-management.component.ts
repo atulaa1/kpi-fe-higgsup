@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {AskSaveComponent} from './ask-save/ask-save.component';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {ManagementServiceService} from './management-service.service';
 
 @Component({
   selector: 'acc-management',

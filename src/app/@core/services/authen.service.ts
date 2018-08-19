@@ -18,7 +18,7 @@ export class AuthenService {
     const userJson = JSON.stringify({'username': user.username, 'password': user.password});
     return this.http.post(
       BaseConstant.protocol.toString() + BaseConstant.server.toString()
-      + BaseConstant.standardServicePort.toString() + '/api/login', userJson, {
+      + BaseConstant.standardServicePort.toString() + '/kpi/api/login', userJson, {
         headers: new HttpHeaders({}),
         observe: 'response',
       }).pipe(map((data) => {
@@ -28,9 +28,7 @@ export class AuthenService {
       } else {
         this.cookieService.set('Authorization', data.headers.get('Authorization'))
       }
-
     }));
-
   }
 
   logOut() {
