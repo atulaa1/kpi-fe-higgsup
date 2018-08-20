@@ -21,7 +21,11 @@ import {InputFileConfig} from 'ngx-input-file/src/lib/interfaces/input-file-conf
 import {InputFileModule} from 'ngx-input-file';
 import {NgxUploaderModule} from 'ngx-uploader';
 
-const config: InputFileConfig = {};
+const config: InputFileConfig = {
+  sizeLimit: 100,
+  fileLimit: 2,
+  fileAccept: 'image/*',
+};
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, PersonalInfoComponent],

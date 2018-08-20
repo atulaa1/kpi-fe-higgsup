@@ -10,9 +10,8 @@
     <form action="" class="form-group" [formGroup]="userInfoForm" (submit)="onSubmit()">
       <div class="row">
         <div class="col-md-5">
-          <input-file [fileLimit]="1" fileAccept="image/*" [sizeLimit]="50" [inputId]="avatarImg" (acceptedFile)="saveAvatarImg($event)"
+          <input-file [inputId]="avatarImg" (acceptedFile)="saveAvatarImg($event)"
                       [placeholder]="picture">
-                      <!--class="col-md-8 form-control" formControlName="avatar" id="avatar">-->
           </input-file>
         </div>
         <div class="col-md-7">

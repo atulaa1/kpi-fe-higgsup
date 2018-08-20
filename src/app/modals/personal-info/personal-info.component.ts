@@ -68,6 +68,7 @@ export class PersonalInfoComponent implements OnInit {
     this.currentUser.gmail = this.userInfoForm.controls.gmail.value;
     this.currentUser.skype = this.userInfoForm.controls.skype.value;
     this.currentUser.yearsOfWork = this.userInfoForm.controls.yearsOfWork.value;
-    this.personalInfoService.updatePersonalInfo(this.currentUser).subscribe((personInfo: User) => this.currentUser = personInfo);
+    console.log(this.currentUser);
+    // this.personalInfoService.updatePersonalInfo(this.currentUser).subscribe((personInfo: User) => this.currentUser = personInfo);
   }
 }
