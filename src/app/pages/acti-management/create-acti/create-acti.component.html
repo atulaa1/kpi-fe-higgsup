@@ -11,10 +11,12 @@
     <div class="col-md-4">
       <div class="dropdown ghost-dropdown" ngbDropdown>
         <button id="btnDropdown" class="btn btn-primary" type="button" ngbDropdownToggle>
-           - - Chọn - -
+          - - Chọn - -
         </button>
-        <ul id="listDrop" class="dropdown-menu" ngbDropdownMenu >
-          <li *ngFor="let activity of listActivities" class="dropdown-item" (click)="openActivityModal(activity.id)">{{activity.name}}</li>
+        <ul id="listDrop" class="dropdown-menu" ngbDropdownMenu>
+          <li *ngFor="let activity of listActivities" class="dropdown-item" (click)="openActivityModal(teambuilding)">
+            {{activity.name}}
+          </li>
         </ul>
       </div>
     </div>
@@ -37,7 +39,7 @@
           <th>Hoạt động</th>
         </tr>
         </thead>
-        <tbody >
+        <tbody>
         <tr *ngFor="let activity of listActivities">
           <td>{{activity.id}}</td>
           <td>{{activity.name}}</td>
@@ -47,6 +49,63 @@
     </div>
   </div>
   <div class="row">
-
+    <ng-template #teambuilding let-c="close" let-d="dismiss">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row mt-2">
+            <div class="col-md-6">
+              <h5>Hoạt động</h5>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control"/>
+            </div>
+          </div>
+          <div class="row">
+            <h5 class="ml-3">Cơ cấu tính điểm:</h5>
+          </div>
+          <div class="mt-2">
+              <div class="row mt-2">
+                <div class="col-md-8 ml-5">
+                  <h5>Đối tượng</h5>
+                </div>
+                <div class="col-md-2 formStruc">
+                  <h5>Điểm</h5>
+                </div>
+              </div>
+              <div class="row mt-2">
+                <h6 class="col-md-8 ml-5">Nhất</h6>
+                <input type="text" class="col-md-2  form-control formStruc">
+              </div>
+              <div class="row mt-2">
+                <h6 class="col-md-8 ml-5">Nhì</h6>
+                <input type="text" class=" col-md-2 form-control formStruc">
+              </div>
+              <div class="row mt-2">
+                <h6 class="col-md-8 ml-5">Ba</h6>
+                <input type="text" class=" col-md-2 form-control formStruc">
+              </div>
+              <div class="row mt-2">
+                <h6 class="col-md-8 ml-5">Ban tổ chức</h6>
+                <input type="text" class=" col-md-2 form-control formStruc">
+              </div>
+              <div class="row">
+                <div class="teamButton mt-5">
+                  <button class="btn btn-hero-warning cancelButton" (click)="closeTeamModal()">Huỷ</button>
+                  <button class="btn btn-hero-success submitButton">Lưu</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+    </ng-template>
   </div>
 </nb-card>

@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {ActiManagementComponent} from './acti-management.component';
-import { CreateActiComponent } from './create-acti/create-acti.component';
-import { ConfirmActiComponent } from './confirm-acti/confirm-acti.component';
+import {CreateActiComponent} from './create-acti/create-acti.component';
+import {ConfirmActiComponent} from './confirm-acti/confirm-acti.component';
 import {ActiManagementRoutingModule} from './acti-management-routing.module';
 import {ThemeModule} from '../../@theme/theme.module';
 import {SeminarComponent} from './create-acti/seminar/seminar.component';
@@ -20,4 +20,5 @@ import {SupportComponent} from './create-acti/support/support.component';
     TeamBuildingComponent, SupportComponent],
   entryComponents: [SeminarComponent, ClubComponent, TeamBuildingComponent, SupportComponent],
 })
-export class ActiManagementModule { }
+export class ActiManagementModule {
+}
