@@ -1,10 +1,12 @@
-export class  User {
+export class User {
   username: string;
   lastName: string;
   firstName: string;
   fullName: string;
   email: string;
-  userRole: string [];
+  password: string;
+  userRole: Array<string>;
+  remember: boolean;
   avatar: string;
   birthday: string;
   phoneNumber: string;
@@ -13,6 +15,4 @@ export class  User {
   skype: string;
   yearsOfWork: number;
   token: string;
-  remember: boolean;
-  password: string
 }

@@ -16,6 +16,9 @@ import {ThemeModule} from './@theme/theme.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BsModalRef, BsModalService, ModalModule} from 'ngx-bootstrap';
 import { LoginComponent } from './modals/login/login.component';
+import { LogoutComponent } from './modals/logout/logout.component';
+import {UserService} from './@core/services/user.service';
+
 import {PersonalInfoComponent} from './modals/personal-info/personal-info.component';
 import {InputFileConfig} from 'ngx-input-file/src/lib/interfaces/input-file-config';
 import {InputFileModule} from 'ngx-input-file';
@@ -28,7 +31,7 @@ const config: InputFileConfig = {
 };
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, PersonalInfoComponent],
+  declarations: [AppComponent, LoginComponent, LogoutComponent, PersonalInfoComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -44,8 +47,9 @@ const config: InputFileConfig = {
   bootstrap: [AppComponent],
   providers: [BsModalService, BsModalRef,
     {provide: APP_BASE_HREF, useValue: '/'},
+    UserService,
   ],
-  entryComponents: [LoginComponent, PersonalInfoComponent],
+  entryComponents: [LoginComponent, PersonalInfoComponent, LogoutComponent],
 })
 export class AppModule {
 }
