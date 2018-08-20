@@ -1,0 +1,151 @@
+[
+	{
+	    "name": "Lee sin",
+	    "id": 1,
+	    "type": [
+	    	"Warrior",
+	    	"Assassin"
+	    ],
+	    "isMale": true,
+	    "power": "Super Kick",
+	    "skill": {
+	    	"first-skill": "Super Fast",
+	    	"last-skill": "Thousand of Kick"
+	    },
+	    "ally": 2
+	},
+	{
+	    "name": "Yasuo",
+	    "id": 2,
+	    "type": [
+	    	"Warrior",
+	    	"Assassin"
+	    ],
+	    "isMale": true,
+	    "power": "Dead Wind",
+	    "skill": {
+	    	"first-skill": "Wind Storm",
+	    	"last-skill": "Sword Wind"
+	    },
+	    "ally": null
+	},
+	{
+	    "name": "Miss Fortune",
+	    "id": 3,
+	    "type": [
+	    	"Carry",
+	    	"Archer"
+	    ],
+	    "isMale": false,
+	    "power": "Thousand of Bullet",
+	    "skill": {
+	    	"first-skill": "Super Fast",
+	    	"last-skill": "Thousand of Big Bullet"
+	    },
+	    "ally": 3
+	},
+	{
+	    "name": "Zed",
+	    "id": 4,
+	    "type": [
+	    	"Assassin"
+	    ],
+	    "isMale": true,
+	    "power": "Darkness",
+	    "skill": {
+	    	"first-skill": "Darkness Smoke",
+	    	"last-skill": "Darkness King"
+	    },
+	    "ally": 1
+	},
+	{
+	    "name": "Ashe",
+	    "id": 5,
+	    "type": [
+	    	"Archer",
+	    	"Carry"
+	    ],
+	    "isMale": false,
+	    "power": "Ice Arrow",
+	    "skill": {
+	    	"first-skill": "Ice Land",
+	    	"last-skill": "Thousand of Ice Arrow"
+	    },
+	    "ally": 10
+	},
+	{
+	    "name": "Garen",
+	    "id": 6,
+	    "type": [
+	    	"Warrior",
+	    	"Tanker"
+	    ],
+	    "isMale": true,
+	    "power": "Big Sword",
+	    "skill": {
+	    	"first-skill": "Big guy",
+	    	"last-skill": "Thousand of Sword"
+	    },
+	    "ally": 8
+	},
+	{
+	    "name": "Taric",
+	    "id": 7,
+	    "type": [
+	    	"Support",
+	    	"Tanker"
+	    ],
+	    "isMale": false,
+	    "power": "Immortal",
+	    "skill": {
+	    	"first-skill": "Heal",
+	    	"last-skill": "Nerver Die"
+	    },
+	    "ally": 3
+	},
+	{
+	    "name": " ChoGath",
+	    "id": 8,
+	    "type": [
+	    	"Tanker",
+	    	"Magician"
+	    ],
+	    "isMale": true,
+	    "power": "Dead Bite",
+	    "skill": {
+	    	"first-skill": "Dead Hole",
+	    	"last-skill": "Eat Eat Eat"
+	    },
+	    "ally": 0
+	},
+	{
+	    "name": "Lux",
+	    "id": 9,
+	    "type": [
+	    	"Magician",
+	    	"Support"
+	    ],
+	    "isMale": false,
+	    "power": "Amazing Light",
+	    "skill": {
+	    	"first-skill": "Trap Light",
+	    	"last-skill": "Ultimate Light"
+	    },
+	    "ally": 10
+	},
+	{
+	    "name": "Brand",
+	    "id": 10,
+	    "type": [
+	    	"Magician"
+	    ],
+	    "isMale": true,
+	    "power": "Dead Fire",
+	    "skill": {
+	    	"first-skill": "Fire Rain",
+	    	"last-skill": "You are Fire !"
+	    },
+	    "ally": null
+	}
+
+]
