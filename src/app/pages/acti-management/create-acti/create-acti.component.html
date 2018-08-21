@@ -14,7 +14,7 @@
           - - Chọn - -
         </button>
         <ul id="listDrop" class="dropdown-menu" ngbDropdownMenu>
-          <li *ngFor="let activity of listActivities" class="dropdown-item" (click)="openActivityModal(teambuilding)">
+          <li *ngFor="let activity of listActivities" class="dropdown-item" (click)="openActivityModal(activity.id)">
             {{activity.name}}
           </li>
         </ul>
@@ -40,72 +40,45 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let activity of listActivities">
-          <td>{{activity.id}}</td>
-          <td>{{activity.name}}</td>
+        <tr *ngFor="let group of groupList">
+          <td>{{group.createdDate}}</td>
+
+          <!--Seminar-->
+
+          <td (click)="open(content)" *ngIf="group.groupTypeId.id==1">{{group.name}}
+            <ng-template let-c="close" let-d="dismiss" #content>
+              <ngx-seminar [dismiss]="d" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-seminar>
+            </ng-template>
+          </td>
+
+          <!--Club-->
+
+          <td (click)="open(content)" *ngIf="group.groupTypeId.id==2">{{group.name}}
+            <ng-template let-c="close" let-d="dismiss" #content>
+              <ngx-club [dismiss]="d" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-club>
+            </ng-template>
+          </td>
+
+          <!--Teambuilding-->
+
+          <td (click)="open(content)" *ngIf="group.groupTypeId.id==3">{{group.name}}
+            <ng-template let-c="close" let-d="dismiss" #content>
+              <ngx-team-building [dismiss]="d" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-team-building>
+            </ng-template>
+          </td>
+
+          <!--Support-->
+
+          <td (click)="open(content)" *ngIf="group.groupTypeId.id==4">{{group.name}}
+            <ng-template let-c="close" let-d="dismiss" #content>
+              <ngx-support [dismiss]="d" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-support>
+            </ng-template>
+          </td>
+
         </tr>
         </tbody>
       </table>
     </div>
   </div>
-  <div class="row">
-    <ng-template #teambuilding let-c="close" let-d="dismiss">
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-md-12">
-            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </div>
-        <div class="container">
-          <div class="row mt-2">
-            <div class="col-md-6">
-              <h5>Hoạt động</h5>
-            </div>
-            <div class="col-md-6">
-                <input type="text" class="form-control"/>
-            </div>
-          </div>
-          <div class="row">
-            <h5 class="ml-3">Cơ cấu tính điểm:</h5>
-          </div>
-          <div class="mt-2">
-              <div class="row mt-2">
-                <div class="col-md-8 ml-5">
-                  <h5>Đối tượng</h5>
-                </div>
-                <div class="col-md-2 formStruc">
-                  <h5>Điểm</h5>
-                </div>
-              </div>
-              <div class="row mt-2">
-                <h6 class="col-md-8 ml-5">Nhất</h6>
-                <input type="text" class="col-md-2  form-control formStruc">
-              </div>
-              <div class="row mt-2">
-                <h6 class="col-md-8 ml-5">Nhì</h6>
-                <input type="text" class=" col-md-2 form-control formStruc">
-              </div>
-              <div class="row mt-2">
-                <h6 class="col-md-8 ml-5">Ba</h6>
-                <input type="text" class=" col-md-2 form-control formStruc">
-              </div>
-              <div class="row mt-2">
-                <h6 class="col-md-8 ml-5">Ban tổ chức</h6>
-                <input type="text" class=" col-md-2 form-control formStruc">
-              </div>
-              <div class="row">
-                <div class="teamButton mt-5">
-                  <button class="btn btn-hero-warning cancelButton" (click)="closeTeamModal()">Huỷ</button>
-                  <button class="btn btn-hero-success submitButton">Lưu</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
-    </ng-template>
-  </div>
+
 </nb-card>

@@ -2,26 +2,29 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeTeamModal()">
+        <button *ngIf="activityName == ''" type="button" class="close" data-dismiss="modal" aria-label="Close"
+                (click)="onClose()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <button *ngIf="activityName != ''" type="button" class="close" data-dismiss="modal" aria-label="Close"
+                (click)="dismiss()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
     </div>
-    <div class="row mt-2">
-      <div class="col-md-6">
-        <h5>Hoạt động</h5>
+    <form action="" class="form-group">
+      <div class="row mt-2">
+        <div class="col-md-6">
+          <h5>Hoạt động</h5>
+        </div>
+        <div class="col-md-6">
+          <input type="text" class="form-control" [(value)]="activityName">
+        </div>
       </div>
-      <div class="col-md-6">
-        <form action="" class="form-group">
-          <input type="text" class="form-control"/>
-        </form>
+      <div class="row">
+        <h5 class="ml-3">Cơ cấu tính điểm:</h5>
       </div>
-    </div>
-    <div class="row">
-      <h5 class="ml-3">Cơ cấu tính điểm:</h5>
-    </div>
-    <div class="mt-2">
-      <form action="" class="form-group">
+      <div class="mt-2">
         <div class="row mt-2">
           <div class="col-md-8 ml-5">
             <h5>Đối tượng</h5>
@@ -32,27 +35,28 @@
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Nhất</h6>
-          <input type="text" class="col-md-2  form-control formStruc">
+          <input type="text" class="col-md-2  form-control formStruc" [(value)]="createdActivity.firstPrize">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Nhì</h6>
-          <input type="text" class=" col-md-2 form-control formStruc">
+          <input type="text" class=" col-md-2 form-control formStruc" [(value)]="createdActivity.secondPrize">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Ba</h6>
-          <input type="text" class=" col-md-2 form-control formStruc">
+          <input type="text" class=" col-md-2 form-control formStruc" [(value)]="createdActivity.thirdPrize">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Ban tổ chức</h6>
-          <input type="text" class=" col-md-2 form-control formStruc">
+          <input type="text" class=" col-md-2 form-control formStruc" [(value)]="createdActivity.organizers">
         </div>
         <div class="row">
           <div class="teamButton mt-5">
-            <button class="btn btn-hero-warning cancelButton" (click)="closeTeamModal()">Huỷ</button>
+            <button *ngIf="activityName ==''" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
+            <button *ngIf="activityName !=''" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
             <button class="btn btn-hero-success submitButton">Lưu</button>
           </div>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
 </div>

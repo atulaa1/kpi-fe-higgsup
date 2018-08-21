@@ -9,6 +9,7 @@ import {SeminarComponent} from './create-acti/seminar/seminar.component';
 import {ClubComponent} from './create-acti/club/club.component';
 import {TeamBuildingComponent} from './create-acti/team-building/team-building.component';
 import {SupportComponent} from './create-acti/support/support.component';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import {SupportComponent} from './create-acti/support/support.component';
   declarations: [ActiManagementComponent, CreateActiComponent, ConfirmActiComponent, SeminarComponent, ClubComponent,
     TeamBuildingComponent, SupportComponent],
   entryComponents: [SeminarComponent, ClubComponent, TeamBuildingComponent, SupportComponent],
+  providers: [NgbActiveModal],
 })
 export class ActiManagementModule {
 }

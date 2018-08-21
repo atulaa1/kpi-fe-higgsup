@@ -26,7 +26,6 @@ export class UserService {
     this.http.get(this.getUserUrl + username, httpOptions).subscribe(
       (response: ResponseDTO) => {
         this.user = response.data;
-        console.log(this.user.userRole[0]);
         this.userSource.next(this.user);
       }
     );
