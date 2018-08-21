@@ -6,11 +6,11 @@ import {Survey} from '../../../@core/models/survey.model';
 
 
 @Component({
-  selector: 'modal-kscn',
+  selector: 'personal-survey',
   templateUrl: './modal-kscn.component.html',
   styleUrls: ['./modal-kscn.component.scss'],
 })
-export class ModalKscnComponent implements OnInit {
+export class PersonalSurveyComponent implements OnInit {
   listSurvey: Array<Survey>;
   modalRef: BsModalRef;
   editText = false;
@@ -21,17 +21,12 @@ export class ModalKscnComponent implements OnInit {
   changeQuestion(surver) {
     surver.showInput = !surver.showInput;
   }
-
-  clickShowInput() {
-    this.editText = !this.editText;
-  }
-
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
 
   changeUpdateSurvey() {
-    this.surveyService.updateSurvey(this.listSurvey).subscribe(data => this.data = data);
+    this.surveyService.updateSurvey(this.listSurvey).subscribe();
   }
 
   saveChange() {
