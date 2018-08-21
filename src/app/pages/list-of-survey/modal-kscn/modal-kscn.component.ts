@@ -18,6 +18,10 @@ export class ModalKscnComponent implements OnInit {
               private surveyService: SurveyService) {
   }
 
+  changeQuestion(surver) {
+    surver.showInput = !surver.showInput;
+  }
+
   clickShowInput() {
     this.editText = !this.editText;
   }
@@ -26,8 +30,12 @@ export class ModalKscnComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  editKscn() {
-    alert('kaka')
+  changeUpdateSurvey() {
+    this.surveyService.updateSurvey(this.listSurvey).subscribe(data => this.data = data);
+  }
+
+  saveChange() {
+    alert('save')
   }
 
   ngOnInit() {
