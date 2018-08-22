@@ -26,7 +26,7 @@ import {NgxUploaderModule} from 'ngx-uploader';
 
 const config: InputFileConfig = {
   sizeLimit: 100,
-  fileLimit: 2,
+  fileLimit: 1,
   fileAccept: 'image/*',
 };
 

@@ -3,17 +3,17 @@ import {User} from '../models/user.model';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {BaseConstant} from '../glossary/base.constant';
+import {HttpService} from './http.service';
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-};
 
 @Injectable({
   providedIn: 'root',
 })
 export class PersonalInfoService {
 
-  constructor(private http: HttpClient) {
+  private httpOptions = this.httpService.setHeaderToken()
+
+  constructor(private http: HttpClient, private httpService: HttpService) {
   }
 
   getPersonalInfo(): Observable<User> {
@@ -27,6 +27,6 @@ export class PersonalInfoService {
     return this.http.put<User>(BaseConstant.protocol.toString()
       + BaseConstant.server.toString() +
       BaseConstant.standardServicePort.toString(),
-      updatedUser, httpOptions);
+      updatedUser, this.httpOptions);
   }
 }

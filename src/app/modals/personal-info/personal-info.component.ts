@@ -2,8 +2,9 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {InputFile, InputFileComponent} from 'ngx-input-file';
 import {User} from '../../@core/models/user.model';
-import {FormControl, FormGroup} from '@angular/forms';
-import {PersonalInfoService} from '../../@core/services/personal-info.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UserService} from '../../@core/services/user.service';
+import {MessageConstant} from '../../@core/glossary/message.constant';
 
 @Component({
   selector: 'ngx-personal-info',
@@ -19,36 +20,50 @@ export class PersonalInfoComponent implements OnInit {
   userInfoForm: FormGroup;
   picture: string;
   avatarImg: string;
+  clickCloseCount: number = 0;
+  inputFocused: boolean = false;
+  closeConfirm: boolean = false;
+  submitConfirm: boolean = false;
+  submitDoneMsg: string;
+  closeWarningMsg: string;
 
   constructor(private activeModal: NgbActiveModal,
-              private personalInfoService: PersonalInfoService) { }
+              private userService: UserService) { }
 
   ngOnInit() {
-    // this.getPersonalInfo(); //get personal info of current user in db
-    this.currentUser = new User();
-    this.currentUser.birthday = '30/02/1997';
-    this.currentUser.phoneNumber = '0966969696';
-    this.currentUser.address = 'abcxyz';
-    this.currentUser.gmail = 'thanhlv@gmail.com';
-    this.currentUser.skype = 'thanhlv';
-    this.currentUser.yearsOfWork = 3;
+    this.userService.currentUser.subscribe(user => this.currentUser = user);
     this.userInfoForm = new FormGroup({
-      avatar: new FormControl(this.currentUser.avatar),
       birthday: new FormControl(this.currentUser.birthday),
-      phoneNumber: new FormControl(this.currentUser.phoneNumber),
+      phoneNumber: new FormControl(this.currentUser.numberPhone),
       address: new FormControl(this.currentUser.address),
-      gmail: new FormControl(this.currentUser.gmail),
+      gmail: new FormControl(this.currentUser.gmail, Validators.pattern(/^[a-z0-9](\.?[a-z0-9])*@gmail.com$/)),
       skype: new FormControl(this.currentUser.skype),
-      yearsOfWork: new FormControl(this.currentUser.yearsOfWork),
+      yearsOfWork: new FormControl(this.currentUser.yearWork),
+      submitMessage: new FormControl(MessageConstant.MSG7.toString()),
     });
   }
 
-  getPersonalInfo() {
-    this.personalInfoService.getPersonalInfo().subscribe((personInfo: User) => this.currentUser = personInfo);
+  onFocus() {
+    this.inputFocused = true;
   }
 
   closeInfoModal() {
+    if (this.inputFocused === false) {
       this.activeModal.close();
+      this.submitConfirm = false;
+    } else {
+      this.clickCloseCount += 1;
+      if (this.clickCloseCount === 1) {
+        this.closeConfirm = true;
+        this.closeWarningMsg = MessageConstant.MSG6;
+      } else if (this.clickCloseCount === 2) {
+        this.activeModal.close();
+        this.clickCloseCount = 0;
+        this.closeConfirm = false;
+        this.inputFocused = false;
+        this.submitConfirm = false;
+      }
+    }
   }
 
   saveAvatarImg(inputFile: InputFile) {
@@ -63,12 +78,22 @@ export class PersonalInfoComponent implements OnInit {
   onSubmit() {
     this.currentUser.avatar = this.fileBase64;
     this.currentUser.birthday = this.userInfoForm.controls.birthday.value;
-    this.currentUser.phoneNumber = this.userInfoForm.controls.phoneNumber.value;
+    this.currentUser.numberPhone = this.userInfoForm.controls.phoneNumber.value;
     this.currentUser.address = this.userInfoForm.controls.address.value;
     this.currentUser.gmail = this.userInfoForm.controls.gmail.value;
     this.currentUser.skype = this.userInfoForm.controls.skype.value;
-    this.currentUser.yearsOfWork = this.userInfoForm.controls.yearsOfWork.value;
-    console.log(this.currentUser);
-    // this.personalInfoService.updatePersonalInfo(this.currentUser).subscribe((personInfo: User) => this.currentUser = personInfo);
+    this.currentUser.yearWork = this.userInfoForm.controls.yearsOfWork.value;
+    this.userService.updatePersonalInfo(this.currentUser).subscribe(
+      (personInfo: User) => {
+        this.currentUser = personInfo;
+      });
+    this.submitDoneMsg = MessageConstant.MSG7;
+    setTimeout(() => {
+      this.submitDoneMsg = '';
+    }, 2000);
+    this.inputFocused = false;
+    this.closeConfirm = false;
+    this.submitConfirm = true;
+    this.clickCloseCount = 0;
   }
 }

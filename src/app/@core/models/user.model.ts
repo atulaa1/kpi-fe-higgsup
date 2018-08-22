@@ -9,10 +9,10 @@ export class User {
   remember: boolean;
   avatar: string;
   birthday: string;
-  phoneNumber: string;
+  numberPhone: string;
   address: string;
   gmail: string;
   skype: string;
-  yearsOfWork: number;
+  yearWork: number;
   token: string;
 }
