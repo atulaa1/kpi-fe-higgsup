@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CreatedActivity} from '../../../../@core/models/CreatedActivity.model';
+import {CreatedActivity} from '../../../../@core/models/createdActivity.model';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

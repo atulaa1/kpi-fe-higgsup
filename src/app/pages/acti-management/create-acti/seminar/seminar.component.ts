@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {CreatedActivity} from '../../../../@core/models/CreatedActivity.model';
+import {CreatedActivity} from '../../../../@core/models/createdActivity.model';
 
 @Component({
   selector: 'ngx-seminar',

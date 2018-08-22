@@ -6,8 +6,8 @@ import {TeamBuildingComponent} from './team-building/team-building.component';
 import {SupportComponent} from './support/support.component';
 import {ActivitiesService} from '../../../@core/services/activities.service';
 import {Activity} from '../../../@core/models/activity.model';
-import {Group} from '../../../@core/models/Group.model';
-import {CreatedActivity} from '../../../@core/models/CreatedActivity.model';
+import {Group} from '../../../@core/models/group.model';
+import {CreatedActivity} from '../../../@core/models/createdActivity.model';
 
 
 @Component({
