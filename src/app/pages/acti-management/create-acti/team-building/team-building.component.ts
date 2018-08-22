@@ -51,6 +51,7 @@ export class TeamBuildingComponent implements OnInit {
     this.teambuilding.additionalConfig = this.point;
     return this.teambuildingService.updateTeambuilding(this.teambuilding).subscribe(response => {
       if (response.status_code === 200) {
+        this.teambuilding = response;
         swal('Đã sửa!', 'Bạn đã sửa hoạt động', 'success');
         window.location.reload();
       }
