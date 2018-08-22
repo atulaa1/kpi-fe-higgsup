@@ -2,11 +2,11 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <button *ngIf="activityName == ''" type="button" class="close" data-dismiss="modal" aria-label="Close"
+        <button *ngIf="groupType == null" type="button" class="close" data-dismiss="modal" aria-label="Close"
                 (click)="onClose()">
           <span aria-hidden="true">&times;</span>
         </button>
-        <button *ngIf="activityName != ''" type="button" class="close" data-dismiss="modal" aria-label="Close"
+        <button *ngIf="groupType != null" type="button" class="close" data-dismiss="modal" aria-label="Close"
                 (click)="dismiss()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -51,10 +51,10 @@
         </div>
         <div class="row">
           <div class="teamButton mt-5">
-            <button *ngIf="activityName ==''" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
-            <button *ngIf="activityName !=''" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
-            <button type="submit" *ngIf="activityName ==''" class="btn btn-hero-success submitButton" (click)="onAddTeambuilding()">Lưu</button>
-            <button *ngIf="activityName !==''" class="btn btn-hero-success submitButton" (click)="onUpdateTeambuilding()">Update</button>
+            <button *ngIf="groupType == null" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
+            <button *ngIf="groupType != null" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
+            <button type="submit" *ngIf="groupType == null" class="btn btn-hero-success submitButton" (click)="onAddTeambuilding()">Lưu</button>
+            <button *ngIf="groupType != null" class="btn btn-hero-success submitButton" (click)="onUpdateTeambuilding()">Update</button>
           </div>
         </div>
       </div>

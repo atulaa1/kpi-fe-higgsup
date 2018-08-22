@@ -13,47 +13,58 @@ declare let swal: any;
   styleUrls: ['./team-building.component.scss'],
 })
 export class TeamBuildingComponent implements OnInit {
-  @Input() activity: Group<CreatedActivity>;
+  @Input() groupType: number = null;
   @Input() createdActivity: CreatedActivity = new CreatedActivity();
   @Input() activityName: string = '';
   @Input() dismiss;
   teambuilding = new Group<CreatedActivity>();
-  point = new CreatedActivity();
-  groupType = new Activity();
 
   constructor(private activeModal: NgbActiveModal, private teambuildingService: TeambuildingService) {
   }
 
-  ngOnInit() {
-    if (this.activityName !== '') {
-      this.teambuilding = this.activity;
-      this.point = this.teambuilding.additionalConfig;
-    }
-  }
 
   onClose() {
     this.activeModal.close();
   }
 
   onAddTeambuilding() {
-    this.groupType.id = 3;
-    this.teambuilding.groupTypeId = this.groupType;
-    this.teambuilding.additionalConfig = this.point;
+    let point = new CreatedActivity();
+    const groupType = new Activity();
+    point  = this.createdActivity;
+    groupType.id = 3;
+    this.teambuilding.groupTypeId = groupType;
+    this.teambuilding.additionalConfig = point;
+    this.teambuilding.name = this.activityName;
     return this.teambuildingService.addTeambuilding(this.teambuilding).subscribe(response => {
       if (response.status_code === 200) {
-        swal('Đã tạo!', 'Bạn đã tạo thành công!', 'success');
         this.activeModal.close();
+        swal('Chúc Mừng!', 'Đã tạo thành công!', 'success');
+      }
+      else if (response.status_code === 906) {
+        swal('Thông báo!', 'Hoạt động này đã tồn tại!', 'error');
       }
     });
   }
 
   onUpdateTeambuilding() {
-    this.teambuilding.additionalConfig = this.point;
+    let point = new CreatedActivity();
+    const groupType = new Activity();
+    point  = this.createdActivity;
+    groupType.id = 4; // 4 is support
+    this.teambuilding.groupTypeId = groupType;
+    this.teambuilding.additionalConfig = point;
+    this.teambuilding.name = this.activityName;
     return this.teambuildingService.updateTeambuilding(this.teambuilding).subscribe(response => {
       if (response.status_code === 200) {
-        swal('Đã sửa!', 'Bạn đã sửa hoạt động', 'success');
-        window.location.reload();
+        this.dismiss();
+        swal('Chúc Mừng!', 'Đã sửa thành công!', 'success');
       }
-    });
+      else if (response.status_code === 906) {
+        swal('Thông báo!', 'Hoạt động này đã tồn tại!', 'error');
+      }
+    })
+  }
+
+  ngOnInit() {
   }
 }
