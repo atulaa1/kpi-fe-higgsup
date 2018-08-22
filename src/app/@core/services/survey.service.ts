@@ -10,7 +10,7 @@ import {Survey} from '../models/survey.model';
 })
 export class SurveyService {
 
-  private SurveyUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
+  private surveyUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
     + BaseConstant.standardServicePort.toString() + '/api/survey/questions-man';
   private httpOptions = this.httpService.setHeaderToken();
 
@@ -19,10 +19,10 @@ export class SurveyService {
 
   getListSurvey(): Observable<any> {
 
-    return this.http.get(this.SurveyUrl, this.httpOptions);
+    return this.http.get(this.surveyUrl, this.httpOptions);
   }
 
   updateSurvey(surveys: Array<Survey>): Observable<any> {
-    return this.http.put(this.SurveyUrl, surveys , this.httpOptions);
+    return this.http.put(this.surveyUrl, surveys , this.httpOptions);
   }
 }

@@ -3,17 +3,18 @@ import {BsModalService} from 'ngx-bootstrap/modal';
 import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {SurveyService} from '../../../@core/services/survey.service';
 import {Survey} from '../../../@core/models/survey.model';
+import swal from 'sweetalert';
 
 
 @Component({
-  selector: 'modal-kscn',
+  selector: 'personal-survey',
   templateUrl: './modal-kscn.component.html',
   styleUrls: ['./modal-kscn.component.scss'],
 })
-export class ModalKscnComponent implements OnInit {
+export class PersonalSurveyComponent implements OnInit {
   listSurvey: Array<Survey>;
   modalRef: BsModalRef;
-  editText = false;
+
   constructor(private modalService: BsModalService,
               private surveyService: SurveyService) {
   }
@@ -22,16 +23,17 @@ export class ModalKscnComponent implements OnInit {
     surver.showInput = !surver.showInput;
   }
 
-  clickShowInput() {
-    this.editText = !this.editText;
-  }
-
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
 
   changeUpdateSurvey() {
-    this.surveyService.updateSurvey(this.listSurvey).subscribe(data => this.data = data);
+    this.surveyService.updateSurvey(this.listSurvey).subscribe(response => {
+      if ( response.status_code === 200) {
+        swal('Chúc Mừng!', 'Đã update Thành công!', 'success');
+        this.modalRef.hide();
+      }
+    });
   }
 
   saveChange() {
