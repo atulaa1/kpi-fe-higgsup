@@ -14,10 +14,13 @@
 .personButton {
   display: flex;
   flex-direction: row;
-  width: 100%;
 }
 
 .submitButton {
-  margin-left: 30%;
-  margin-right: 20%;
+  margin: auto;
+}
+
+.alertMsg {
+  text-align: center;
+  color: red;
 }

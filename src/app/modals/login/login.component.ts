@@ -6,6 +6,7 @@ import {User} from '../../@core/models/user.model';
 import {MessageConstant} from '../../@core/glossary/message.constant';
 import {UserService} from '../../@core/services/user.service';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'ngx-login',
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit {
               private router: Router,
               private authenService: AuthenService,
               private userService: UserService,
+              private cookieService: CookieService,
               private activeModal: NgbActiveModal) {
   }
 
@@ -51,6 +53,7 @@ export class LoginComponent implements OnInit {
       this.authenService.attemptAuth(user).subscribe(
         res => {
           this.userService.getUserInfoHttp(res.body.username);
+          this.cookieService.set('username', res.body.username);
           this.activeModal.close();
         },
         (error) => {
