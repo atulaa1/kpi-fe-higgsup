@@ -85,7 +85,7 @@ export class HeaderComponent implements OnInit {
   openPersonalInfo() {
     const ngbModalOptions: NgbModalOptions = {
       backdrop: 'static',
-      keyboard: false
+      keyboard: false,
     };
     const modalRef = this.bsModal.open(PersonalInfoComponent, ngbModalOptions);
     modalRef.result.then((data) => {

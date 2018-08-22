@@ -22,7 +22,6 @@ import {UserService} from './@core/services/user.service';
 import {PersonalInfoComponent} from './modals/personal-info/personal-info.component';
 import {InputFileConfig} from 'ngx-input-file/src/lib/interfaces/input-file-config';
 import {InputFileModule} from 'ngx-input-file';
-import {NgxUploaderModule} from 'ngx-uploader';
 
 const config: InputFileConfig = {
   sizeLimit: 100,
@@ -36,7 +35,6 @@ const config: InputFileConfig = {
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    NgxUploaderModule,
     AppRoutingModule,
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
