@@ -12,7 +12,9 @@ export class SupportComponent implements OnInit {
   @Input() createdActivity: CreatedActivity = new CreatedActivity();
   @Input() activityName: string = '';
   @Input() dismiss;
-  constructor(private activeModal: NgbActiveModal) { }
+
+  constructor(private activeModal: NgbActiveModal) {
+  }
 
   ngOnInit() {
   }
