@@ -2,11 +2,11 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <button *ngIf="activityName ==''" type="button" class="close" data-dismiss="modal" aria-label="Close"
+        <button *ngIf="groupId == null" type="button" class="close" data-dismiss="modal" aria-label="Close"
                 (click)="onClose()">
           <span aria-hidden="true">&times;</span>
         </button>
-        <button *ngIf="activityName !=''" type="button" class="close" data-dismiss="modal" aria-label="Close"
+        <button *ngIf="groupId != null" type="button" class="close" data-dismiss="modal" aria-label="Close"
                 (click)="dismiss()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -17,7 +17,7 @@
         <h5>Hoạt động</h5>
       </div>
       <div class="col-md-6">
-        <input type="text" class="form-control" [(value)]="activityName"/>
+        <input type="text" class="form-control" [(value)]="activityName" [(ngModel)]="activityName">
       </div>
     </div>
     <div class="row">
@@ -35,29 +35,31 @@
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Dọn dẹp</h6>
-          <input type="text" class="col-md-2  form-control formStruc" [(value)]="createdActivity.cleanUpPoint">
+          <input type="text" class="col-md-2  form-control formStruc" name="cleanUp" [(value)]="createdActivity.cleanUpPoint" [(ngModel)]="createdActivity.cleanUpPoint">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Mua đồ</h6>
-          <input type="text" class=" col-md-2 form-control formStruc" [(value)]="createdActivity.buyingStuffPoint">
+          <input type="text" class=" col-md-2 form-control formStruc" name="buyingStuff" [(value)]="createdActivity.buyingStuffPoint"[(ngModel)]="createdActivity.buyingStuffPoint">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Support hội thảo</h6>
-          <input type="text" class=" col-md-2 form-control formStruc" [(value)]="createdActivity.supportConferencePoint">
+          <input type="text" class=" col-md-2 form-control formStruc" name="conference"
+                 [(value)]="createdActivity.supportConferencePoint" [(ngModel)]="createdActivity.supportConferencePoint">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Training</h6>
-          <input type="text" class=" col-md-2 form-control formStruc" [(value)]="createdActivity.trainingPoint">
+          <input type="text" class=" col-md-2 form-control formStruc" name="training" [(value)]="createdActivity.trainingPoint" [(ngModel)]="createdActivity.trainingPoint">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Vệ sinh hàng tuần</h6>
-          <input type="text" class="col-md-2  form-control formStruc" [(value)]="createdActivity.weeklyCleanUpPoint">
+          <input type="text" class="col-md-2  form-control formStruc" name="weekyClean" [(value)]="createdActivity.weeklyCleanUpPoint" [(ngModel)]="createdActivity.weeklyCleanUpPoint">
         </div>
         <div class="row">
           <div class="supportButton mt-5">
-            <button *ngIf="activityName ==''" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
-            <button *ngIf="activityName !=''" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
-            <button class="btn btn-hero-success submitButton">Lưu</button>
+            <button *ngIf="groupId == null" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
+            <button *ngIf="groupId != null" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
+            <button *ngIf="groupId == null" class="btn btn-hero-success submitButton" (click)="addSupport()" >Lưu</button>
+            <button *ngIf="groupId != null" class="btn btn-hero-success submitButton" (click)="changeSupport()">update</button>
           </div>
         </div>
       </form>

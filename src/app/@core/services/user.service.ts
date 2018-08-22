@@ -15,9 +15,9 @@ export class UserService {
 
   constructor(private http: HttpClient, private httpService: HttpService) { }
   getUserUrl = 'http://192.168.1.137:8080/kpi/api/users/';
-  private httpOptions = this.httpService.setHeaderToken();
   getUserInfoHttp(username: string) {
-    this.http.get(this.getUserUrl + username, this.httpOptions).subscribe(
+    const httpOptions = this.httpService.setHeaderToken();
+    this. http.get(this.getUserUrl + username, httpOptions).subscribe(
       (response: ResponseDTO) => {
         this.user = response.data;
         this.userSource.next(this.user);
