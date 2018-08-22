@@ -14,14 +14,14 @@
         <div class="col-md-3">
           <button class="btn btn-hero-success mb-5" *ngIf="add" (click)="addProject()">Thêm dự án</button>
           <div class="row" *ngIf="!add">
-            <input type="text" class="form-control mb-5 col-md-10"(keypress)="confirmAdd($event)">
+            <input type="text" class="form-control mb-5 col-md-10"(keypress)="confirmAdd($event)" #projectName [(ngModel)]="newProject.name">
             <i class="fas fa-times col-md-2"></i>
           </div>
         </div>
       </div>
-      <div class="row ml-5">
+      <div class="row ml-5" *ngFor="let project of projects">
         <div class="col-md-6">
-          <p class="nameProject">Lorem ipsum dolor sit amet.</p>
+          <p class="nameProject">{{project.name}}</p>
         </div>
         <div class="col-md-3 listIcon">
           <i class="far fa-check-circle" *ngIf="active" (click)="Deactive()"></i>
