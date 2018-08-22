@@ -20,6 +20,15 @@ import { LogoutComponent } from './modals/logout/logout.component';
 import {UserService} from './@core/services/user.service';
 
 import {PersonalInfoComponent} from './modals/personal-info/personal-info.component';
+import {InputFileConfig} from 'ngx-input-file/src/lib/interfaces/input-file-config';
+import {InputFileModule} from 'ngx-input-file';
+
+const config: InputFileConfig = {
+  sizeLimit: 100,
+  fileLimit: 1,
+  fileAccept: 'image/*',
+};
+
 @NgModule({
   declarations: [AppComponent, LoginComponent, LogoutComponent, PersonalInfoComponent],
   imports: [
@@ -31,6 +40,7 @@ import {PersonalInfoComponent} from './modals/personal-info/personal-info.compon
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
     ModalModule.forRoot(),
+    InputFileModule.forRoot(config),
   ],
   bootstrap: [AppComponent],
   providers: [BsModalService, BsModalRef,
