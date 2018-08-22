@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Component, Input, OnInit} from '@angular/core';
+import {NgbActiveModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {CreatedActivity} from '../../../../@core/models/createdActivity.model';
 
 @Component({
   selector: 'ngx-seminar',
@@ -8,12 +9,15 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class SeminarComponent implements OnInit {
 
+  @Input() createdActivity: CreatedActivity = new CreatedActivity();
+  @Input() activityName: string = '';
+  @Input() dismiss;
   constructor(private activeModal: NgbActiveModal) {
   }
 
   ngOnInit() {
   }
-  closeSeminarModal() {
+  onClose() {
     this.activeModal.close();
   }
 }

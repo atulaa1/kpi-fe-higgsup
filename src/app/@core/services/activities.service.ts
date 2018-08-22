@@ -16,10 +16,15 @@ export class ActivitiesService {
   private activitiesUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
     + BaseConstant.standardServicePort.toString() + '/api/group-types';
 
+  private createdActivitesUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
+    + BaseConstant.standardServicePort.toString() + '/api/groups';
   private httpOptions = this.httpService.setHeaderToken();
 
   getListActivities(): Observable<any> {
 
     return this.http.get(this.activitiesUrl, this.httpOptions);
+  }
+  getCreatedActivity(): Observable<any> {
+    return this.http.get(this.createdActivitesUrl, this.httpOptions);
   }
 }
