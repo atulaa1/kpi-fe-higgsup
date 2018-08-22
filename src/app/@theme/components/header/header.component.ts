@@ -1,15 +1,15 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 import {NbMenuService, NbSidebarService} from '@nebular/theme';
-import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {LoginComponent} from '../../../modals/login/login.component';
 import {User} from '../../../@core/models/user.model';
 import {CookieService} from 'ngx-cookie-service';
 import {AuthenService} from '../../../@core/services/authen.service';
 import {Router} from '@angular/router';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {LogoutComponent} from '../../../modals/logout/logout.component';
+import {UserService} from '../../../@core/services/user.service';
+import {NgbModal, NgbModalOptions, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {PersonalInfoComponent} from '../../../modals/personal-info/personal-info.component';
-
 @Component({
   selector: 'ngx-header',
   styleUrls: ['./header.component.scss'],
@@ -17,8 +17,8 @@ import {PersonalInfoComponent} from '../../../modals/personal-info/personal-info
 })
 export class HeaderComponent implements OnInit {
 
-  loginModal: BsModalRef;
-
+  loginModal: NgbModalRef;
+  logoutModal: NgbModalRef;
   @Input() position = 'normal';
 
   user: User;
@@ -46,16 +46,17 @@ export class HeaderComponent implements OnInit {
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
-              private bsModal: BsModalService,
+              private bsModal: NgbModal,
               private cookieService: CookieService,
               private router: Router,
               private authenService: AuthenService,
-              private modalService: NgbModal) {
+              private userService: UserService) {
   }
 
   ngOnInit() {
     this.user = new User();
     this.user.token = this.cookieService.get('Authorization');
+    this.userService.currentUser.subscribe(user => this.user = user);
   }
 
 
@@ -69,7 +70,10 @@ export class HeaderComponent implements OnInit {
   }
 
   openLoginModal() {
-    this.loginModal = this.bsModal.show(LoginComponent);
+    this.loginModal = this.bsModal.open(LoginComponent, {backdrop: 'static'});
+  }
+  openLogoutModal() {
+    this.logoutModal = this.bsModal.open(LogoutComponent);
   }
 
   logout() {
@@ -77,8 +81,16 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/');
     window.location.reload();
   }
+
   openPersonalInfo() {
-    this.modalService.open(PersonalInfoComponent);
+    const ngbModalOptions: NgbModalOptions = {
+      backdrop: 'static',
+      keyboard: false,
+    };
+    const modalRef = this.bsModal.open(PersonalInfoComponent, ngbModalOptions);
+    modalRef.result.then((data) => {
+      }, (reason) => {
+      })
   }
   startSearch() {
   }

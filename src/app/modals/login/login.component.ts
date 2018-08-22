@@ -1,9 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthenService} from '../../@core/services/authen.service';
 import {User} from '../../@core/models/user.model';
 import {MessageConstant} from '../../@core/glossary/message.constant';
+import {UserService} from '../../@core/services/user.service';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'ngx-login',
@@ -12,6 +15,7 @@ import {MessageConstant} from '../../@core/glossary/message.constant';
 })
 export class LoginComponent implements OnInit {
 
+  user: User;
   loginForm: FormGroup;
   submitted = false;
   invalidLogin: boolean = false;
@@ -19,7 +23,10 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
-              private authenService: AuthenService) {
+              private authenService: AuthenService,
+              private userService: UserService,
+              private cookieService: CookieService,
+              private activeModal: NgbActiveModal) {
   }
 
   ngOnInit() {
@@ -27,10 +34,12 @@ export class LoginComponent implements OnInit {
       userName: ['', Validators.required],
       password: ['', Validators.required],
       remember: [false],
-    })
+    });
+    this.userService.currentUser.subscribe(user => this.user = user);
   }
 
   onSubmit() {
+
     this.message = null;
     this.submitted = true;
     if (this.loginForm.invalid) {
@@ -42,10 +51,10 @@ export class LoginComponent implements OnInit {
       user.password = this.loginForm.controls.password.value;
       user.remember = this.loginForm.controls.remember.value;
       this.authenService.attemptAuth(user).subscribe(
-        (res) => {
-          this.router.navigateByUrl('/');
-          window.location.reload();
-          return true;
+        res => {
+          this.userService.getUserInfoHttp(res.body.username);
+          this.cookieService.set('username', res.body.username);
+          this.activeModal.close();
         },
         (error) => {
           this.message = MessageConstant.loginFalse.toString();
@@ -56,5 +65,8 @@ export class LoginComponent implements OnInit {
     } else {
       this.invalidLogin = true;
     }
+  }
+  closeModal() {
+    this.activeModal.close();
   }
 }

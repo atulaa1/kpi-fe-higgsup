@@ -11,13 +11,12 @@
     <div class="col-md-4">
       <div class="dropdown ghost-dropdown" ngbDropdown>
         <button id="btnDropdown" class="btn btn-primary" type="button" ngbDropdownToggle>
-           - - Chọn - -
+          - - Chọn - -
         </button>
         <ul id="listDrop" class="dropdown-menu" ngbDropdownMenu>
-          <li class="dropdown-item" (click)="openSeminarModal()">Seminar</li>
-          <li class="dropdown-item" (click)="openClubModal()">Câu lạc bộ</li>
-          <li class="dropdown-item" (click)="openTeamModal()">Team Building</li>
-          <li class="dropdown-item" (click)="openSupportModal()">Support chung</li>
+          <li *ngFor="let activity of listActivities" class="dropdown-item" (click)="openActivityModal(activity.id)">
+            {{activity.name}}
+          </li>
         </ul>
       </div>
     </div>
@@ -41,28 +40,45 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>19xx</td>
-          <td>Something</td>
-        </tr>
-        <tr>
-          <td>19xx</td>
-          <td>Something</td>
-        </tr>
-        <tr>
-          <td>19xx</td>
-          <td>Something</td>
-        </tr>
-        <tr>
-          <td>19xx</td>
-          <td>Something</td>
-        </tr>
-        <tr>
-          <td>19xx</td>
-          <td>Something</td>
+        <tr *ngFor="let group of groupList">
+          <td>{{group.createdDate}}</td>
+
+          <!--Seminar-->
+
+          <td (click)="open(content)" *ngIf="group.groupTypeId.id==1">{{group.name}}
+            <ng-template let-c="close" let-d="dismiss" #content>
+              <ngx-seminar [dismiss]="d" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-seminar>
+            </ng-template>
+          </td>
+
+          <!--Club-->
+
+          <td (click)="open(content)" *ngIf="group.groupTypeId.id==2">{{group.name}}
+            <ng-template let-c="close" let-d="dismiss" #content>
+              <ngx-club [dismiss]="d" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-club>
+            </ng-template>
+          </td>
+
+          <!--Teambuilding-->
+
+          <td (click)="open(content)" *ngIf="group.groupTypeId.id==3">{{group.name}}
+            <ng-template let-c="close" let-d="dismiss" #content>
+              <ngx-team-building [dismiss]="d" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-team-building>
+            </ng-template>
+          </td>
+
+          <!--Support-->
+
+          <td (click)="open(content)" *ngIf="group.groupTypeId.id==4">{{group.name}}
+            <ng-template let-c="close" let-d="dismiss" #content>
+              <ngx-support [dismiss]="d" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-support>
+            </ng-template>
+          </td>
+
         </tr>
         </tbody>
       </table>
     </div>
   </div>
+
 </nb-card>

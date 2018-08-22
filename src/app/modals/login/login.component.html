@@ -1,10 +1,13 @@
 <div class="modal-header">
   <h3 class="text-uppercase">đăng nhập</h3>
+  <button class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>
 <div class="modal-body">
   <form [formGroup]="loginForm" (submit)="onSubmit()">
     <div class="form-group loginContent">
-      <img src="../../../assets/images/login-img.jpg" class="img-width">
+      <img src="assets/images/login-img.jpg" class="img-width">
     </div>
     <div *ngIf="message" class="text-center" style="color: red">{{message}}</div>
     <div class="form-group inputWithIcon loginContent">

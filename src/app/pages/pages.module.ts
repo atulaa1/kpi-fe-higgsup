@@ -7,6 +7,7 @@ import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import {ActiManagementModule} from './acti-management/acti-management.module';
 import { ProjectmanagementComponent } from './projectmanagement/projectmanagement.component';
+import {ListOfSurveyModule} from './list-of-survey/list-of-survey.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -19,6 +20,7 @@ const PAGES_COMPONENTS = [
     DashboardModule,
     MiscellaneousModule,
     ActiManagementModule,
+    ListOfSurveyModule
   ],
   declarations: [
     ...PAGES_COMPONENTS,

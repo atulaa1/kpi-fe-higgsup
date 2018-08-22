@@ -7,6 +7,7 @@ import {ActiManagementComponent} from './acti-management/acti-management.compone
 import {CreateActiComponent} from './acti-management/create-acti/create-acti.component';
 import {ConfirmActiComponent} from './acti-management/confirm-acti/confirm-acti.component';
 import {ProjectmanagementComponent} from './projectmanagement/projectmanagement.component';
+import {ListOfSurveyComponent} from "./list-of-survey/list-of-survey.component";
 
 const routes: Routes = [{
   path: '',
@@ -43,6 +44,10 @@ const routes: Routes = [{
     {
       path: 'project-management',
       component: ProjectmanagementComponent,
+    },
+    {
+      path: 'listofsurvey',
+      component: ListOfSurveyComponent,
     },
   ],
 }];
