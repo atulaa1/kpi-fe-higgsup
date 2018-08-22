@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {CreatedActivity} from '../../../../@core/models/createdActivity.model';
 
 @Component({
   selector: 'ngx-club',
@@ -8,13 +9,15 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class ClubComponent implements OnInit {
 
-  constructor(public activeModal: NgbActiveModal) {
+  @Input() createdActivity: CreatedActivity = new CreatedActivity();
+  @Input() activityName: string = '';
+  @Input() dismiss;
+  constructor(private activeModal: NgbActiveModal) {
   }
 
   ngOnInit() {
   }
-
-  closeClubModal() {
+  onClose() {
     this.activeModal.close();
   }
 }
