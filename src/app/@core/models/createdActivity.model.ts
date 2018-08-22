@@ -18,4 +18,5 @@ export class CreatedActivity {
   // seminar
   member: number = null;
   listener: number = null;
+
 }
