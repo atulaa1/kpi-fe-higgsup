@@ -12,7 +12,6 @@ export class UserService {
   private userSource = new BehaviorSubject(new User());
   currentUser = this.userSource.asObservable();
   private user = new User();
-
   constructor(private http: HttpClient, private httpService: HttpService) { }
   getUserUrl = 'http://192.168.1.137:8080/kpi/api/users/';
   getUserInfoHttp(username: string) {

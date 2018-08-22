@@ -40,6 +40,7 @@ export class SupportComponent implements OnInit {
       }
     })
   }
+
   changeSupport(){
     let point = new CreatedActivity();
     const groupType = new Activity();
