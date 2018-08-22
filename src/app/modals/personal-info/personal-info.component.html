@@ -7,7 +7,7 @@
         </button>
       </div>
     </div>
-    <form action="" class="form-group" [formGroup]="userInfoForm" (submit)="onSubmit()">
+    <form action="" class="form-group" [formGroup]="userInfoForm" >
       <div class="row">
         <div class="col-md-5">
           <input-file [inputId]="avatarImg" (acceptedFile)="saveAvatarImg($event)" [placeholder]="picture" (focus)="onFocus()">
@@ -54,7 +54,7 @@
           <input type="number" class="col-md-8 form-control" formControlName="yearsOfWork" id="yearsOfWork" (focus)="onFocus()">
         </div>
         <div class="row personButton mt-3 align-middle">
-          <button class="btn btn-hero-success submitButton" type="submit">Lưu thay đổi</button>
+          <button class="btn btn-hero-success submitButton"  (click)="onSubmit()">Lưu thay đổi</button>
         </div>
         <div class="alertMsg">
           <p *ngIf="closeConfirm" class="alertMsg">{{closeWarningMsg}}</p>

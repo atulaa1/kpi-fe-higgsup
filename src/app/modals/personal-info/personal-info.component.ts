@@ -1,10 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {InputFile, InputFileComponent} from 'ngx-input-file';
+import {InputFile} from 'ngx-input-file';
 import {User} from '../../@core/models/user.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../@core/services/user.service';
 import {MessageConstant} from '../../@core/glossary/message.constant';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'ngx-personal-info',
@@ -28,6 +29,7 @@ export class PersonalInfoComponent implements OnInit {
   closeWarningMsg: string;
 
   constructor(private activeModal: NgbActiveModal,
+              private cookieService: CookieService,
               private userService: UserService) { }
 
   ngOnInit() {
@@ -76,21 +78,24 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   onSubmit() {
-    this.currentUser.avatar = this.fileBase64;
-    this.currentUser.birthday = this.userInfoForm.controls.birthday.value;
-    this.currentUser.numberPhone = this.userInfoForm.controls.phoneNumber.value;
-    this.currentUser.address = this.userInfoForm.controls.address.value;
-    this.currentUser.gmail = this.userInfoForm.controls.gmail.value;
-    this.currentUser.skype = this.userInfoForm.controls.skype.value;
-    this.currentUser.yearWork = this.userInfoForm.controls.yearsOfWork.value;
-    this.userService.updatePersonalInfo(this.currentUser).subscribe(
+    let userTemp = this.currentUser;
+    userTemp.avatar = this.fileBase64;
+    userTemp.birthday = this.userInfoForm.controls.birthday.value;
+    userTemp.numberPhone = this.userInfoForm.controls.phoneNumber.value;
+    userTemp.address = this.userInfoForm.controls.address.value;
+    userTemp.gmail = this.userInfoForm.controls.gmail.value;
+    userTemp.skype = this.userInfoForm.controls.skype.value;
+    userTemp.yearWork = this.userInfoForm.controls.yearsOfWork.value;
+    userTemp.username = this.cookieService.get('username');
+    this.userService.updatePersonalInfo(userTemp).subscribe(
       (personInfo: User) => {
         this.currentUser = personInfo;
+        this.currentUser.userRole = userTemp.userRole;
+        this.submitDoneMsg = MessageConstant.MSG7;
+        setTimeout(() => {
+          this.submitDoneMsg = '';
+        }, 2000);
       });
-    this.submitDoneMsg = MessageConstant.MSG7;
-    setTimeout(() => {
-      this.submitDoneMsg = '';
-    }, 2000);
     this.inputFocused = false;
     this.closeConfirm = false;
     this.submitConfirm = true;
