@@ -55,7 +55,6 @@
     "ngx-bootstrap": "^3.0.1",
     "ngx-cookie-service": "^1.0.10",
     "ngx-input-file": "^2.0.2",
-    "ngx-uploader": "^6.0.2",
     "normalize.css": "6.0.0",
     "pace-js": "1.0.2",
     "roboto-fontface": "0.8.0",

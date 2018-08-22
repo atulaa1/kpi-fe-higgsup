@@ -6,6 +6,7 @@ import {ResponseDTO} from '../models/responseDTO.model';
 import {Observable} from 'rxjs';
 import {BaseConstant} from '../glossary/base.constant';
 import {HttpService} from './http.service';
+import {CookieService} from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
