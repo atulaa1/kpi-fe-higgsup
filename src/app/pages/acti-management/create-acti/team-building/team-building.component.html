@@ -2,11 +2,11 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <button *ngIf="groupType == null" type="button" class="close" data-dismiss="modal" aria-label="Close"
+        <button *ngIf="groupId == null" type="button" class="close" data-dismiss="modal" aria-label="Close"
                 (click)="onClose()">
           <span aria-hidden="true">&times;</span>
         </button>
-        <button *ngIf="groupType != null" type="button" class="close" data-dismiss="modal" aria-label="Close"
+        <button *ngIf="groupId != null" type="button" class="close" data-dismiss="modal" aria-label="Close"
                 (click)="dismiss()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -18,7 +18,7 @@
           <h5>Hoạt động</h5>
         </div>
         <div class="col-md-6">
-          <input type="text" class="form-control" name="teambuilding" [(value)]="activityName" [(ngModel)]="teambuilding.name">
+          <input type="text" class="form-control" name="teambuilding" [(ngModel)]="activityName">
         </div>
       </div>
       <div class="row">
@@ -35,26 +35,26 @@
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Nhất</h6>
-          <input type="text" class="col-md-2  form-control formStruc" name="pointFirst" [(value)]="createdActivity.firstPrize" [(ngModel)]="point.firstPrize">
+          <input type="text" class="col-md-2  form-control formStruc" name="pointFirst" [(ngModel)]="createdActivity.firstPrize">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Nhì</h6>
-          <input type="text" class=" col-md-2 form-control formStruc" name="pointSecond" [(value)]="createdActivity.secondPrize"[(ngModel)]="point.secondPrize">
+          <input type="text" class=" col-md-2 form-control formStruc" name="pointSecond" [(ngModel)]="createdActivity.secondPrize">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Ba</h6>
-          <input type="text" class=" col-md-2 form-control formStruc" name="pointThird" [(value)]="createdActivity.thirdPrize"[(ngModel)]="point.thirdPrize">
+          <input type="text" class=" col-md-2 form-control formStruc" name="pointThird" [(ngModel)]="createdActivity.thirdPrize">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Ban tổ chức</h6>
-          <input type="text" class=" col-md-2 form-control formStruc" name="pointOrganize" [(value)]="createdActivity.organizers" [(ngModel)]="point.organizers">
+          <input type="text" class=" col-md-2 form-control formStruc" name="pointOrganize" [(ngModel)]="createdActivity.organizers">
         </div>
         <div class="row">
           <div class="teamButton mt-5">
-            <button *ngIf="groupType == null" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
-            <button *ngIf="groupType != null" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
-            <button type="submit" *ngIf="groupType == null" class="btn btn-hero-success submitButton" (click)="onAddTeambuilding()">Lưu</button>
-            <button *ngIf="groupType != null" class="btn btn-hero-success submitButton" (click)="onUpdateTeambuilding()">Update</button>
+            <button *ngIf="groupId == null" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
+            <button *ngIf="groupId != null" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
+            <button *ngIf="groupId == null" class="btn btn-hero-success submitButton" (click)="onAddTeambuilding()">Lưu</button>
+            <button *ngIf="groupId != null" class="btn btn-hero-success submitButton" (click)="onUpdateTeambuilding()">Lưu</button>
           </div>
         </div>
       </div>

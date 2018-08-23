@@ -13,7 +13,7 @@ declare let swal: any;
   styleUrls: ['./team-building.component.scss'],
 })
 export class TeamBuildingComponent implements OnInit {
-  @Input() groupType: number = null;
+  @Input() groupId: number;
   @Input() createdActivity: CreatedActivity = new CreatedActivity();
   @Input() activityName: string = '';
   @Input() dismiss;
@@ -50,10 +50,11 @@ export class TeamBuildingComponent implements OnInit {
     let point = new CreatedActivity();
     const groupType = new Activity();
     point  = this.createdActivity;
-    groupType.id = 4; // 4 is support
+    groupType.id = 3;
     this.teambuilding.groupTypeId = groupType;
     this.teambuilding.additionalConfig = point;
     this.teambuilding.name = this.activityName;
+    this.teambuilding.id = this.groupId;
     return this.teambuildingService.updateTeambuilding(this.teambuilding).subscribe(response => {
       if (response.status_code === 200) {
         this.dismiss();
