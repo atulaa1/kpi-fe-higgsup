@@ -55,7 +55,7 @@
 
           <td (click)="open(content)" *ngIf="group.groupTypeId.id==2">{{group.name}}
             <ng-template let-c="close" let-d="dismiss" #content>
-              <ngx-club [dismiss]="d" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-club>
+              <ngx-club [dismiss]="d"  [groupId]="group.id" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-club>
             </ng-template>
           </td>
 
