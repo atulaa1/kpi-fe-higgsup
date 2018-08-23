@@ -15,12 +15,11 @@ export class UserService {
   private userSource = new BehaviorSubject(new User());
   currentUser = this.userSource.asObservable();
   private user = new User();
-  private httpOptions = this.httpService.setHeaderToken();
-
   constructor(private http: HttpClient, private cookieService: CookieService, private httpService: HttpService) { }
   getUserUrl = 'http://192.168.1.137:8080/kpi/api/users/';
   getUserInfoHttp(username: string) {
-    this.http.get(this.getUserUrl + username, this.httpOptions).subscribe(
+    const httpOptions = this.httpService.setHeaderToken();
+    this. http.get(this.getUserUrl + username, httpOptions).subscribe(
       (response: ResponseDTO) => {
         this.user = response.data;
         this.userSource.next(this.user);
@@ -30,8 +29,9 @@ export class UserService {
 
 
   updatePersonalInfo(user: User): Observable<User> {
+    const httpOptions = this.httpService.setHeaderToken();
     const updatedUser = JSON.stringify(user);
     return this.http.put<User>(BaseConstant.protocol.toString() + BaseConstant.server.toString()
-      + BaseConstant.standardServicePort.toString() + '/api/users/' + user.username, updatedUser, this.httpOptions);
+      + BaseConstant.standardServicePort.toString() + '/api/users/' + user.username, updatedUser, httpOptions);
   }
 }
