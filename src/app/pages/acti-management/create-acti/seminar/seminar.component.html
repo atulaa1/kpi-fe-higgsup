@@ -2,10 +2,10 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <button *ngIf="activityName == ''" type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onClose()">
+        <button *ngIf="groupId == null" type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onClose()">
           <span aria-hidden="true">&times;</span>
         </button>
-        <button *ngIf="activityName != ''" type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="dismiss()">
+        <button *ngIf="groupId != null" type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="dismiss()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -16,7 +16,7 @@
       </div>
       <div class="col-md-6">
         <form action="" class="form-group">
-          <input type="text" class="form-control" [(value)]="activityName"/>
+          <input type="text" class="form-control" name="actiName" [(ngModel)]="activityName"/>
         </form>
       </div>
     </div>
@@ -35,21 +35,22 @@
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Host</h6>
-          <input type="text" class="col-md-2  form-control formStruc" [(value)]="createdActivity.host">
+          <input type="text" class="col-md-2  form-control formStruc" name="hostPoint" [(ngModel)]="createdActivity.host">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Thành viên</h6>
-          <input type="text" class=" col-md-2 form-control formStruc" [(value)]="createdActivity.member">
+          <input type="text" class=" col-md-2 form-control formStruc" name="memPoint" [(ngModel)]="createdActivity.member">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Dự thính</h6>
-          <input type="text" class=" col-md-2 form-control formStruc" [(value)]="createdActivity.listener">
+          <input type="text" class=" col-md-2 form-control formStruc" name="listenerPoint" [(ngModel)]="createdActivity.listener">
         </div>
         <div class="row">
           <div class="seminarButton mt-5">
-            <button *ngIf="activityName == ''" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
-            <button *ngIf="activityName !== ''" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
-            <button class="btn btn-hero-success submitButton">Lưu</button>
+            <button *ngIf="groupId == null" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
+            <button *ngIf="groupId != null" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
+            <button *ngIf="groupId == null" class="btn btn-hero-success submitButton" (click)="onAddSeminar()">Lưu</button>
+            <button *ngIf="groupId != null" class="btn btn-hero-success submitButton" (click)="onUpdateSeminar()">Lưu</button>
           </div>
         </div>
       </form>
