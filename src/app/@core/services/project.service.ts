@@ -26,4 +26,9 @@ export class ProjectService {
     let projectJson = JSON.stringify(project);
     return this.http.post<ResponseProjectDTO>(this.url + '/api/projects', projectJson, this.httpOptions);
   }
+
+  updateProject(project: Project): Observable<Project> {
+    let projectJson = JSON.stringify(project);
+    return this.http.put<Project>(this.url + '/api/projects/' + project.id.toString(), projectJson, this.httpOptions);
+  }
 }

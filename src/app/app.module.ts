@@ -22,6 +22,7 @@ import {UserService} from './@core/services/user.service';
 import {PersonalInfoComponent} from './modals/personal-info/personal-info.component';
 import {InputFileConfig} from 'ngx-input-file/src/lib/interfaces/input-file-config';
 import {InputFileModule} from 'ngx-input-file';
+import {FormsModule} from '@angular/forms';
 
 const config: InputFileConfig = {
   sizeLimit: 100,
@@ -35,6 +36,7 @@ const config: InputFileConfig = {
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FormsModule,
     AppRoutingModule,
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
