@@ -18,7 +18,7 @@
           <h5>Hoạt động</h5>
         </div>
         <div class="col-md-6">
-          <input type="text" class="form-control" [(value)]="activityName">
+          <input type="text" class="form-control" name="teambuilding" [(value)]="activityName" [(ngModel)]="teambuilding.name">
         </div>
       </div>
       <div class="row">
@@ -35,25 +35,26 @@
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Nhất</h6>
-          <input type="text" class="col-md-2  form-control formStruc" [(value)]="createdActivity.firstPrize">
+          <input type="text" class="col-md-2  form-control formStruc" name="pointFirst" [(value)]="createdActivity.firstPrize" [(ngModel)]="point.firstPrize">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Nhì</h6>
-          <input type="text" class=" col-md-2 form-control formStruc" [(value)]="createdActivity.secondPrize">
+          <input type="text" class=" col-md-2 form-control formStruc" name="pointSecond" [(value)]="createdActivity.secondPrize"[(ngModel)]="point.secondPrize">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Ba</h6>
-          <input type="text" class=" col-md-2 form-control formStruc" [(value)]="createdActivity.thirdPrize">
+          <input type="text" class=" col-md-2 form-control formStruc" name="pointThird" [(value)]="createdActivity.thirdPrize"[(ngModel)]="point.thirdPrize">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Ban tổ chức</h6>
-          <input type="text" class=" col-md-2 form-control formStruc" [(value)]="createdActivity.organizers">
+          <input type="text" class=" col-md-2 form-control formStruc" name="pointOrganize" [(value)]="createdActivity.organizers" [(ngModel)]="point.organizers">
         </div>
         <div class="row">
           <div class="teamButton mt-5">
             <button *ngIf="activityName ==''" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
             <button *ngIf="activityName !=''" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
-            <button class="btn btn-hero-success submitButton">Lưu</button>
+            <button type="submit" *ngIf="activityName ==''" class="btn btn-hero-success submitButton" (click)="onAddTeambuilding()">Lưu</button>
+            <button *ngIf="activityName !==''" class="btn btn-hero-success submitButton" (click)="onUpdateTeambuilding()">Update</button>
           </div>
         </div>
       </div>

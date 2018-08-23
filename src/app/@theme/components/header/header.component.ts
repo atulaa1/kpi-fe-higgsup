@@ -8,7 +8,7 @@ import {AuthenService} from '../../../@core/services/authen.service';
 import {Router} from '@angular/router';
 import {LogoutComponent} from '../../../modals/logout/logout.component';
 import {UserService} from '../../../@core/services/user.service';
-import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModalOptions, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {PersonalInfoComponent} from '../../../modals/personal-info/personal-info.component';
 @Component({
   selector: 'ngx-header',
@@ -81,8 +81,16 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/');
     window.location.reload();
   }
+
   openPersonalInfo() {
-    this.bsModal.open(PersonalInfoComponent);
+    const ngbModalOptions: NgbModalOptions = {
+      backdrop: 'static',
+      keyboard: false,
+    };
+    const modalRef = this.bsModal.open(PersonalInfoComponent, ngbModalOptions);
+    modalRef.result.then((data) => {
+      }, (reason) => {
+      })
   }
   startSearch() {
   }

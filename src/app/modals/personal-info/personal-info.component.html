@@ -7,57 +7,62 @@
         </button>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-5">
-        <img class="img-thumbnail avatarUser"
-             src="http://br-art.vn/wp-content/uploads/2017/11/bo-anh-chan-dung-cua-nag-thai-duy-1.jpg" alt="">
-      </div>
-      <div class="col-md-7">
-        <div class="userName">
-          <nav>
-            <h4>
-              LÊ VĂN THÀNH
-            </h4>
-          </nav>
-          <nav>
-            <h4>
-              ADMIN
-            </h4>
-          </nav>
+    <form action="" class="form-group" [formGroup]="userInfoForm" >
+      <div class="row">
+        <div class="col-md-5">
+          <input-file [inputId]="avatarImg" (acceptedFile)="saveAvatarImg($event)" [placeholder]="picture" (focus)="onFocus()">
+          </input-file>
+        </div>
+        <div class="col-md-7">
+          <div class="userName">
+            <nav>
+              <h4>
+                {{currentUser.fullName}}
+              </h4>
+            </nav>
+            <nav>
+              <h4 *ngIf="currentUser.userRole.indexOf('ROLE_ADMIN')>=0">Admin</h4>
+              <h4 *ngIf="currentUser.userRole.indexOf('ROLE_MAN')>=0">Man</h4>
+              <h4 *ngIf="currentUser.userRole.indexOf('ROLE_EMPLOYEE')>=0 && currentUser.userRole.length == 1">Employee</h4>
+            </nav>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="mt-5 userInfo">
-      <form action="" class="form-group">
+      <div class="mt-5 userInfo">
         <div class="row">
           <h6 class="col-md-4 userInfo">Ngày sinh:</h6>
-          <input type="text" class="col-md-8 form-control">
+          <input type="date" class="col-md-8 form-control" formControlName="birthday" id="birthday" (focus)="onFocus()">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-4 userInfo">Số điện thoại:</h6>
-          <input type="text" class="col-md-8 form-control">
+          <input type="tel" class="col-md-8 form-control" formControlName="phoneNumber" id="phoneNumber" (focus)="onFocus()">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-4 userInfo">Địa chỉ:</h6>
-          <input type="text" class="col-md-8 form-control">
+          <input type="text" class="col-md-8 form-control" formControlName="address" id="address" (focus)="onFocus()">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-4 userInfo">Gmail:</h6>
-          <input type="text" class="col-md-8 form-control">
+          <input type="email" class="col-md-8 form-control" formControlName="gmail" id="gmail" (focus)="onFocus()">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-4 userInfo">Skype:</h6>
-          <input type="text" class="col-md-8 form-control">
+          <input type="text" class="col-md-8 form-control" formControlName="skype" id="skype" (focus)="onFocus()">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-4 userInfo">Số năm làm việc:</h6>
-          <input type="text" class="col-md-8 form-control">
+          <input type="number" class="col-md-8 form-control" formControlName="yearsOfWork" id="yearsOfWork" (focus)="onFocus()">
         </div>
-        <div class="row personButton mt-5">
-          <button class="btn btn-hero-success submitButton" type="submit">Lưu thay đổi</button>
-          <button class="btn btn-hero-warning cancelButton" (click)="closeInfoModal()">Hủy</button>
+        <div class="row personButton mt-3 align-middle">
+          <button class="btn btn-hero-success submitButton"  (click)="onSubmit()">Lưu thay đổi</button>
         </div>
-      </form>
-    </div>
+        <div class="alertMsg">
+          <p *ngIf="closeConfirm" class="alertMsg">{{closeWarningMsg}}</p>
+        </div>
+        <div class="alertMsg">
+          <p *ngIf="submitDoneMsg" class="alertMsg">{{submitDoneMsg}}</p>
+        </div>
+      </div>
+    </form>
   </div>
 </div>

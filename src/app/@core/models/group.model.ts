@@ -1,4 +1,4 @@
-import {Activity} from "./activity.model";
+import {Activity} from './activity.model';
 
 export class Group<T> {
   id: number;
