@@ -49,6 +49,7 @@ export class ClubComponent implements OnInit {
     this.group.groupTypeId = groupType;
     this.group.additionalConfig = point;
     this.group.name = this.activityName;
+    this.group.id = this.groupId;
     return this.clubService.updateClub(this.group.id, this.group).subscribe(response => {
       if (response.status_code === 200) {
         this.dismiss();
