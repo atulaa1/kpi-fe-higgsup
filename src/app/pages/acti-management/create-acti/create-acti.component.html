@@ -47,7 +47,7 @@
 
           <td (click)="open(content)" *ngIf="group.groupTypeId.id==1">{{group.name}}
             <ng-template let-c="close" let-d="dismiss" #content>
-              <ngx-seminar [dismiss]="d" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-seminar>
+              <ngx-seminar [dismiss]="d" [groupId]="group.id" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-seminar>
             </ng-template>
           </td>
 
@@ -55,7 +55,7 @@
 
           <td (click)="open(content)" *ngIf="group.groupTypeId.id==2">{{group.name}}
             <ng-template let-c="close" let-d="dismiss" #content>
-              <ngx-club [dismiss]="d" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-club>
+              <ngx-club [dismiss]="d"  [groupId]="group.id" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-club>
             </ng-template>
           </td>
 
@@ -63,7 +63,7 @@
 
           <td (click)="open(content)" *ngIf="group.groupTypeId.id==3">{{group.name}}
             <ng-template let-c="close" let-d="dismiss" #content>
-              <ngx-team-building [dismiss]="d" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-team-building>
+              <ngx-team-building [dismiss]="d" [groupId]="group.id" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-team-building>
             </ng-template>
           </td>
 
@@ -71,7 +71,7 @@
 
           <td (click)="open(content)" *ngIf="group.groupTypeId.id==4">{{group.name}}
             <ng-template let-c="close" let-d="dismiss" #content>
-              <ngx-support [dismiss]="d" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-support>
+              <ngx-support [dismiss]="d" [groupId]="group.id" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-support>
             </ng-template>
           </td>
 

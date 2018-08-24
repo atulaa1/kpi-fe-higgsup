@@ -3,6 +3,9 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {TeambuildingService} from '../../../../@core/services/teambuilding.service';
 import {Group} from '../../../../@core/models/group.model';
 import {CreatedActivity} from '../../../../@core/models/createdActivity.model';
+import {Activity} from '../../../../@core/models/activity.model';
+
+declare let swal: any;
 
 @Component({
   selector: 'ngx-team-building',
@@ -10,16 +13,59 @@ import {CreatedActivity} from '../../../../@core/models/createdActivity.model';
   styleUrls: ['./team-building.component.scss'],
 })
 export class TeamBuildingComponent implements OnInit {
+  @Input() groupId: number;
   @Input() createdActivity: CreatedActivity = new CreatedActivity();
   @Input() activityName: string = '';
   @Input() dismiss;
+  teambuilding = new Group<CreatedActivity>();
 
-  constructor(private activeModal: NgbActiveModal) { }
-
-  ngOnInit() {
+  constructor(private activeModal: NgbActiveModal, private teambuildingService: TeambuildingService) {
   }
+
+
   onClose() {
     this.activeModal.close();
   }
 
+  onAddTeambuilding() {
+    let point = new CreatedActivity();
+    const groupType = new Activity();
+    point  = this.createdActivity;
+    groupType.id = 3;
+    this.teambuilding.groupTypeId = groupType;
+    this.teambuilding.additionalConfig = point;
+    this.teambuilding.name = this.activityName;
+    return this.teambuildingService.addTeambuilding(this.teambuilding).subscribe(response => {
+      if (response.status_code === 200) {
+        this.activeModal.close();
+        swal('Chúc Mừng!', 'Đã tạo thành công!', 'success');
+      }
+      else if (response.status_code === 906) {
+        swal('Thông báo!', 'Hoạt động này đã tồn tại!', 'error');
+      }
+    });
+  }
+
+  onUpdateTeambuilding() {
+    let point = new CreatedActivity();
+    const groupType = new Activity();
+    point  = this.createdActivity;
+    groupType.id = 3;
+    this.teambuilding.groupTypeId = groupType;
+    this.teambuilding.additionalConfig = point;
+    this.teambuilding.name = this.activityName;
+    this.teambuilding.id = this.groupId;
+    return this.teambuildingService.updateTeambuilding(this.teambuilding).subscribe(response => {
+      if (response.status_code === 200) {
+        this.dismiss();
+        swal('Chúc Mừng!', 'Đã sửa thành công!', 'success');
+      }
+      else if (response.status_code === 906) {
+        swal('Thông báo!', 'Hoạt động này đã tồn tại!', 'error');
+      }
+    })
+  }
+
+  ngOnInit() {
+  }
 }

@@ -2,11 +2,11 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <button *ngIf="activityName == ''" type="button" class="close" data-dismiss="modal" aria-label="Close"
+        <button *ngIf="groupId == null" type="button" class="close" data-dismiss="modal" aria-label="Close"
                 (click)="onClose()">
           <span aria-hidden="true">&times;</span>
         </button>
-        <button *ngIf="activityName !== ''" type="button" class="close" data-dismiss="modal" aria-label="Close"
+        <button *ngIf="groupId != null" type="button" class="close" data-dismiss="modal" aria-label="Close"
                 (click)="dismiss()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -18,7 +18,7 @@
       </div>
       <div class="col-md-6">
         <form action="" class="form-group">
-          <input type="text" class="form-control" [(value)]="activityName"/>
+          <input type="text" class="form-control" name="activityName" [(ngModel)]="activityName"/>
         </form>
       </div>
     </div>
@@ -28,7 +28,7 @@
       </div>
       <div class="col-md-6">
         <form action="" class="form-group">
-          <input type="text" class="form-control"  [(value)]="createdActivity.host"/>
+          <input type="text" class="form-control" name="hostName" [(ngModel)]="createdActivity.host"/>
         </form>
       </div>
     </div>
@@ -38,7 +38,7 @@
       </div>
       <div class="col-md-3">
         <form action="" class="form-group">
-          <input type="text" class="form-control" [(value)]="createdActivity.minNumberOfSessions"/>
+          <input type="text" class="form-control" name="numberSession" [(ngModel)]="createdActivity.minNumberOfSessions"/>
         </form>
       </div>
     </div>
@@ -57,17 +57,18 @@
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Tham gia</h6>
-          <input type="text" class="col-md-2  form-control formStruc" [(value)]="createdActivity.participationPoint">
+          <input type="text" class="col-md-2  form-control formStruc" name="joinPoint" [(ngModel)]="createdActivity.participationPoint">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Hiệu quả</h6>
-          <input type="text" class=" col-md-2 form-control formStruc" [(value)]="createdActivity.effectivePoint">
+          <input type="text" class=" col-md-2 form-control formStruc" name="effectPoint" [(ngModel)]="createdActivity.effectivePoint">
         </div>
         <div class="row">
           <div class="clubButton mt-5">
-            <button *ngIf="activityName == ''" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
-            <button *ngIf="activityName != ''" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
-            <button class="btn btn-hero-success submitButton">Lưu</button>
+            <button *ngIf="groupId == null" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
+            <button *ngIf="groupId != null" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
+            <button *ngIf="groupId == null" class="btn btn-hero-success submitButton" (click)="onAddClub()">Lưu</button>
+            <button *ngIf="groupId != null" class="btn btn-hero-success submitButton" (click)="onUpdateClub()">Lưu</button>
           </div>
         </div>
       </form>
