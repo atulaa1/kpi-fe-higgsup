@@ -17,29 +17,6 @@ p {
 .search-inp {
   font-size: 20px;
 }
-.talbe-block {
-  width: 80%;
-  margin: auto;
-  font-size: 20px;
-}
-.details {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-}
-.name, .role, .fix {
-  width: 33.33%;
-  font-size: 35px;
-  margin: auto;
-  text-align: center;
-  padding: 20px;
-  border: 5px solid #000;
-}
-.fix button {
-  width: 40%;
-  margin: auto;
-  font-size: 20px;
-}
 #managementContent {
   height: 400px;
   overflow: scroll;
@@ -58,27 +35,27 @@ p {
 ::-webkit-scrollbar-thumb {
   background: rgb(241,245,248)
 }
-
 #myTable {
   font-size: 20px;
-  border-collapse: collapse; /* Collapse borders */
-  width: 100%; /* Full-width */
-  border: 1px solid #ddd; /* Add a grey border */
-  font-size: 18px; /* Increase font-size */
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
 }
 
 #myTable th, #myTable td {
-  text-align: left; /* Left-align text */
-  padding: 12px; /* Add padding */
+  text-align: left;
+  padding: 12px;
   font-size: 30px;
 }
 
 #myTable tr {
-  /* Add a bottom border to all table rows */
   border-bottom: 1px solid #ddd;
 }
 
 #myTable tr.header, #myTable tr:hover {
-  /* Add a grey background color to the table header and on hover */
   background-color: #f1f1f1;
+}
+#kpi.admin {
+  color: red;
 }

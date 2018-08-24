@@ -3,6 +3,7 @@ import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {AskSaveComponent} from './ask-save/ask-save.component';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {ManagementUsersService} from '../../@core/services/management-users.service';
+import {User} from '../../@core/models/user.model';
 
 @Component({
   selector: 'acc-management',
@@ -10,48 +11,65 @@ import {ManagementUsersService} from '../../@core/services/management-users.serv
   styleUrls: ['./acc-management.component.scss'],
 })
 export class AccManagementComponent implements OnInit {
-  list = [];
-
+  listUser = [];
+  username;
+  btnSave;
+  btnEdit;
+  save;
+  userRole = [
+    'ROLE_ADMIN',
+    'ROLE_EMPLOYEE',
+    ];
   constructor(
     private bsModal: NgbModal,
-    private mService: ManagementUsersService
+    private mService: ManagementUsersService,
   ) { }
-  select = 'Man';
-  show = true;
   logoutModal: NgbModalRef;
   ngOnInit() {
-    this.mService.getUser().subscribe(data => {
-      this.list = data;
+    this.mService.getUser().subscribe(res => {
+      this.listUser = res.data;
     })
   }
-  myFunction() {
+  mySearchFunction() {
       // Declare variables
       let input, filter, table, tr, td, i;
-      input = document.getElementById("myInput");
+      input = document.getElementById('myInput');
       filter = input.value.toUpperCase();
-      table = document.getElementById("myTable");
-      tr = table.getElementsByTagName("tr");
+      table = document.getElementById('myTable');
+      tr = table.getElementsByTagName('tr');
 
-      // Loop through all table rows, and hide those who don't match the search query
       for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[0];
+        td = tr[i].getElementsByTagName('td')[0];
         if (td) {
           if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = "";
+            tr[i].style.display = '';
           } else {
-            tr[i].style.display = "none";
+            tr[i].style.display = 'none';
           }
         }
       }
   }
-  edit() {
-    this.show = !this.show;
-  }
-  save(){
-    this.show = !this.show;
-  }
   openAskSaveModal() {
-    // this.bsModal.show(AskSaveComponent);
     this.bsModal.open(AskSaveComponent);
+    this.btnEdit.style.display = 'block';
+    document.getElementById(this.btnSave).style.display = 'none';
+  }
+  editRole(button, userName) {
+    document.getElementById(userName).innerHTML =
+      '<select>' +
+        '<option>Employee</option>' +
+        '<option>Man</option>' +
+      '</select>';
+    this.btnEdit = document.getElementById(button.currentTarget.id);
+    this.btnEdit.style.display = 'none';
+    this.save = button.currentTarget.id.split('-');
+    this.btnSave = this.save[0] + '-save';
+    document.getElementById(this.btnSave).style.display = 'block';
+    this.username = userName;
+  }
+  updateRoleUser(username) {
+    this.mService.editUser(username, this.userRole ).subscribe(res =>{
+        alert(username);
+    })
   }
 }
