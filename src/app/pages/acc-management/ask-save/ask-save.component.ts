@@ -5,13 +5,13 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {User} from '../../../@core/models/user.model';
 
 @Component({
-  selector: 'ngx-ask-save',
+  selector: 'ngx-ask',
   templateUrl: './ask-save.component.html',
   styleUrls: ['./ask-save.component.scss'],
 })
 export class AskSaveComponent implements OnInit {
   private user = new User();
-
+  @Input() dismiss;
   constructor(private bsModal: BsModalService,
               private mService: ManagementUsersService,
               private activeModal: NgbActiveModal) {
