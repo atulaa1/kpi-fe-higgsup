@@ -13,9 +13,10 @@ export class ProjectmanagementComponent implements OnInit {
   event;
   projects: Project[];
   newProject: Project;
+  projectToEdit: Project;
   statusCode: number;
   projectIdEdit: number;
-  editProject: Project;
+  editedProjectName: string;
 
   constructor(private projectService: ProjectService) {
     this.newProject = new Project();
@@ -27,8 +28,8 @@ export class ProjectmanagementComponent implements OnInit {
 
   Active(project: Project) {
     project.active = 1;
-    this.projectService.updateProject(project).subscribe((response: Project) => {
-      if (response.id === project.id && response.active === project.active) {
+    this.projectService.updateProject(project).subscribe((response: ResponseProjectDTO) => {
+      if (response.status_code === 200) {
         this.getListProject();
       }
     });
@@ -36,8 +37,8 @@ export class ProjectmanagementComponent implements OnInit {
 
   Deactive(project: Project) {
     project.active = 0;
-    this.projectService.updateProject(project).subscribe((response: Project) => {
-      if (response.id === project.id && response.active === project.active) {
+    this.projectService.updateProject(project).subscribe((response: ResponseProjectDTO) => {
+      if (response.status_code === 200) {
         this.getListProject();
       }
     });
@@ -66,15 +67,18 @@ export class ProjectmanagementComponent implements OnInit {
     });
   }
 
-  showEditBox(id: number) {
-    this.projectIdEdit = id;
+  showEditBox(project: Project) {
+    this.projectToEdit = project;
+    this.projectIdEdit = project.id;
+    this.editedProjectName = project.name;
   }
 
-  updateProjectName(project: Project, newName: string, event) {
-    if (event.keyCode === 13) {
-      project.name = newName;
-      this.projectService.updateProject(project).subscribe((response: Project) => {
-        if (response.id === project.id && response.name === project.name) {
+  updateProjectName(project: Project, editName: string) {
+    const confirm = window.confirm('Bạn đã đổi tên ' + project.name + ' thành ' + editName);
+    if (confirm === true) {
+      project.name = editName;
+      this.projectService.updateProject(project).subscribe((response: ResponseProjectDTO) => {
+        if (response.status_code === 200) {
           this.projectIdEdit = 0;
           this.getListProject();
         }
@@ -82,4 +86,14 @@ export class ProjectmanagementComponent implements OnInit {
     }
   }
 
+  deleteProject(project: Project) {
+    const confirm = window.confirm('Bạn có chắc muốn xóa ' + project.name + '?');
+    if (confirm === true) {
+      this.projectService.deleteProject(project).subscribe((response: ResponseProjectDTO) => {
+        if (response.status_code === 200) {
+          this.getListProject();
+        }
+      });
+    }
+  }
 }

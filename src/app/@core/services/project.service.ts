@@ -27,8 +27,12 @@ export class ProjectService {
     return this.http.post<ResponseProjectDTO>(this.url + '/api/projects', projectJson, this.httpOptions);
   }
 
-  updateProject(project: Project): Observable<Project> {
+  updateProject(project: Project): Observable<ResponseProjectDTO> {
     let projectJson = JSON.stringify(project);
-    return this.http.put<Project>(this.url + '/api/projects/' + project.id.toString(), projectJson, this.httpOptions);
+    return this.http.put<ResponseProjectDTO>(this.url + '/api/projects/' + project.id.toString(), projectJson, this.httpOptions);
+  }
+
+  deleteProject(project: Project): Observable<ResponseProjectDTO> {
+    return this.http.delete<ResponseProjectDTO>(this.url + '/api/projects/' + project.id.toString(), this.httpOptions);
   }
 }
