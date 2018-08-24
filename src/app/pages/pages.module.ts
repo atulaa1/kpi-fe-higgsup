@@ -21,7 +21,7 @@ const PAGES_COMPONENTS = [
     DashboardModule,
     MiscellaneousModule,
     ActiManagementModule,
-    AskSaveComponent,
+    // AskSaveComponent,
   ],
   declarations: [
     ...PAGES_COMPONENTS,
