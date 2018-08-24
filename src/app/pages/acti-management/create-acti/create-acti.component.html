@@ -47,7 +47,7 @@
 
           <td (click)="open(content)" *ngIf="group.groupTypeId.id==1">{{group.name}}
             <ng-template let-c="close" let-d="dismiss" #content>
-              <ngx-seminar [dismiss]="d" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-seminar>
+              <ngx-seminar [dismiss]="d" [groupId]="group.id" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-seminar>
             </ng-template>
           </td>
 
