@@ -6,9 +6,8 @@ import {AccManagementComponent} from './acc-management.component';
 @NgModule({
   imports: [
     CommonModule,
-    // AccManagementComponent
   ],
-  declarations: [AskSaveComponent],
-  entryComponents: [AskSaveComponent],
+  declarations: [AccManagementComponent, AskSaveComponent],
+  entryComponents: [AccManagementComponent],
 })
 export class AccManagementModule { }
