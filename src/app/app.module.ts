@@ -23,6 +23,7 @@ import {PersonalInfoComponent} from './modals/personal-info/personal-info.compon
 import {InputFileConfig} from 'ngx-input-file/src/lib/interfaces/input-file-config';
 import {InputFileModule} from 'ngx-input-file';
 import {FormsModule} from '@angular/forms';
+import { DialogEditConfirmationComponent } from './modals/dialog-edit-confirmation/dialog-edit-confirmation.component';
 
 const config: InputFileConfig = {
   sizeLimit: 100,
@@ -31,7 +32,7 @@ const config: InputFileConfig = {
 };
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, LogoutComponent, PersonalInfoComponent],
+  declarations: [AppComponent, LoginComponent, LogoutComponent, PersonalInfoComponent, DialogEditConfirmationComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
