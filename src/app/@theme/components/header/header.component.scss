@@ -237,7 +237,74 @@
 a span {
   color: #5DCFE3;
 }
+
 .userInfo a,
 .userInfo a:hover {
   color: #5DCFE3;
 }
+
+.nav-list {
+  padding: 2em 5rem;
+  font-size: 17px;
+}
+
+.nav-list a {
+  text-transform: uppercase;
+  color: #67700c;
+}
+
+@media (min-width: 992px) {
+  .nav-list {
+    padding: 2rem 1rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .nav-list {
+    padding: 2rem 2rem;
+    font-size: 17px;
+  }
+}
+nb-action{
+  border: none !important;
+}
+.higgigup-nb-action:hover {
+  left: 0;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.higgigup-nb-action {
+  font-family: 'Roboto', sans-serif;
+  position: relative;
+  text-decoration: none;
+  color: #333333;
+  transition: ease .2s;
+  -webkit-transition: ease 2s;
+}
+
+.higgigup-nb-action:before {
+  font-size: 1.1em;
+  margin-right: 10px;
+}
+
+.higgigup-nb-action:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0px;
+  background: #20abe1;
+  transition: ease .2s;
+  -webkit-transition: ease .2s;
+}
+
+.higgigup-nb-action:hover a {
+  color: crimson;
+}
+
+.higgigup-nb-action:hover:after {
+  height: 10px;
+}
+

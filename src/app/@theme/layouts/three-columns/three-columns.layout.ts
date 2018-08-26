@@ -8,7 +8,7 @@ import { takeWhile } from 'rxjs/operators/takeWhile';
   styleUrls: ['./three-columns.layout.scss'],
   template: `
     <nb-layout>
-      <nb-layout-header fixed>
+      <nb-layout-header style="background: #111218 !important;" fixed>
         <ngx-header></ngx-header>
       </nb-layout-header>
 

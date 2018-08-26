@@ -4,12 +4,12 @@
                                               alt="Higgsup"></div>
 </div>
 <!--</div>-->
-<nb-actions size="medium">
-  <nb-action class="higgigup-nb-action "><a href="#">Trang chủ</a></nb-action>
-  <nb-action class="higgigup-nb-action "><a href="#">Giới thiệu - Hướng dẫn</a></nb-action>
-  <nb-action class="higgigup-nb-action "><a href="#">Cách tính điểm</a></nb-action>
-  <nb-action class="higgigup-nb-action "><a href="#">Cơ cấu thưởng</a></nb-action>
-  <nb-action *ngIf="!user.token && !user.username" class="higgigup-nb-action " (click)="openLoginModal()"><a href="#">Đăng nhập</a>
+<nb-actions class="nav" size="medium">
+  <nb-action class="higgigup-nb-action nav-list"><a href="#">Trang chủ</a></nb-action>
+  <nb-action class="higgigup-nb-action nav-list"><a href="#">Giới thiệu - Hướng dẫn</a></nb-action>
+  <nb-action class="higgigup-nb-action nav-list"><a href="#">Cách tính điểm</a></nb-action>
+  <nb-action class="higgigup-nb-action nav-list"><a href="#">Cơ cấu thưởng</a></nb-action>
+  <nb-action *ngIf="!user.token && !user.username" class="higgigup-nb-action nav-list" (click)="openLoginModal()"><a href="#">Đăng nhập</a>
   </nb-action>
   <nb-action *ngIf="user.username">
     <a href="#">
@@ -17,7 +17,7 @@
       <i style="font-size: 25px;" class="far fa-bell"></i>
     </a>
     <div class="btn-group" dropdown>
-      <nb-action dropdownToggle class="higgigup-nb-action" aria-controls="dropdown-basic">
+      <nb-action dropdownToggle class="higgigup-nb-action " aria-controls="dropdown-basic">
         <a>{{user.firstName}} {{user.lastName}}</a>
       </nb-action>
 
