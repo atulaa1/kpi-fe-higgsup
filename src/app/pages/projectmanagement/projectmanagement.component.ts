@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Project} from '../../@core/models/project.model';
 import {ProjectService} from '../../@core/services/project.service';
 import {ResponseProjectDTO} from '../../@core/models/response-project-dto.model';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {DialogEditConfirmationComponent} from '../../modals/dialog-edit-confirmation/dialog-edit-confirmation.component';
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'projectmanagement',
@@ -17,8 +20,11 @@ export class ProjectmanagementComponent implements OnInit {
   statusCode: number;
   projectIdEdit: number;
   editedProjectName: string;
+  confirmModal: NgbModalRef;
 
-  constructor(private projectService: ProjectService) {
+  constructor(private projectService: ProjectService,
+              private bsModal: NgbModal,
+              private dialog: MatDialog) {
     this.newProject = new Project();
   }
 
@@ -62,8 +68,6 @@ export class ProjectmanagementComponent implements OnInit {
   getListProject() {
     this.projectService.getAllProject().subscribe((response: ResponseProjectDTO) => {
       this.projects = response.data;
-    }, error => {
-      alert('Error');
     });
   }
 
@@ -87,13 +91,23 @@ export class ProjectmanagementComponent implements OnInit {
   }
 
   deleteProject(project: Project) {
-    const confirm = window.confirm('Bạn có chắc muốn xóa ' + project.name + '?');
-    if (confirm === true) {
+    this.openConfirmModal();
+    const confirmValue = confirm('Bạn có chắc muốn xóa ' + project.name + '?');
+    if (confirmValue === true) {
       this.projectService.deleteProject(project).subscribe((response: ResponseProjectDTO) => {
         if (response.status_code === 200) {
           this.getListProject();
         }
       });
     }
+  }
+
+  openConfirmModal() {
+    const dialogRef = this.dialog.open(DialogEditConfirmationComponent, {
+      width: '250px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    })
   }
 }
