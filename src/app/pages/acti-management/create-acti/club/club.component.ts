@@ -18,37 +18,36 @@ export class ClubComponent implements OnInit {
   @Input() dismiss;
   @Input() groupId: number = null;
   group = new Group<CreatedActivity>();
+  listActivities: Array<Activity>;
 
   constructor(private activeModal: NgbActiveModal, private clubService: ClubService, private activityService: ActivitiesService) {
   }
 
 
   onAddClub() {
-    // let point = new CreatedActivity();
     const groupType = new Activity();
-    // point = this.createdActivity;
     groupType.id = 2;
     this.group.groupTypeId = groupType;
     this.group.additionalConfig = this.createdActivity;
     this.group.name = this.activityName;
     return this.clubService.addClub(this.group).subscribe(response => {
-      // console.log(response)
       if (response.status_code === 200) {
         this.activeModal.close();
-        this.activityService.getCreatedActivity();
+        this.getCreatedActivities();
 
          swal('Chúc Mừng!', 'Đã tạo thành công!', 'success');
       }
       else if (response.status_code === 906) {
          swal('Thông báo!', 'Hoạt động này đã tồn tại!', 'error');
       }
+      else if (response.status_code === 906) {
+        swal('Thông báo!', 'Hoạt động này đã tồn tại!', 'error');
+      }
     })
   }
 
   onUpdateClub() {
-    // let point = new CreatedActivity();
     const groupType = new Activity();
-    // point = this.createdActivity;
     groupType.id = 2;
     this.group.groupTypeId = groupType;
     this.group.additionalConfig = this.createdActivity;
@@ -56,6 +55,7 @@ export class ClubComponent implements OnInit {
     this.group.id = this.groupId;
     return this.clubService.updateClub(this.group.id, this.group).subscribe(response => {
       if (response.status_code === 200) {
+        this.getCreatedActivities();
         this.dismiss();
         return swal('Chúc Mừng!', 'Đã sửa thành công!', 'success');
       }
@@ -64,8 +64,15 @@ export class ClubComponent implements OnInit {
       }
     })
   }
-
+  getCreatedActivities() {
+    this.activityService.getCreatedActivity().subscribe(response => {
+      if (response.status_code === 200) {
+        this.listActivities = response.data;
+      }
+    })
+  }
   ngOnInit() {
+
   }
 
   onClose() {
