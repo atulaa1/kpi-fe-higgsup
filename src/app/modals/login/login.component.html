@@ -1,8 +1,13 @@
-<div class="modal-header">
-  <h3 class="text-uppercase">đăng nhập</h3>
-  <button class="close" aria-label="Close" (click)="closeModal()">
-    <span aria-hidden="true">&times;</span>
-  </button>
+<div class="modal-header modal-header-cus">
+  <div class="modal-btn-cus">
+    <button class="close " aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-header-title">
+    <h3 class="text-uppercase">đăng nhập</h3>
+  </div>
+
 </div>
 <div class="modal-body">
   <form [formGroup]="loginForm" (submit)="onSubmit()">
@@ -25,10 +30,15 @@
       </div>
     </div>
     <div class="form-group">
-      <input formControlName="remember" type="checkbox"> Ghi nhớ
+      <label class="customised-control customised-checkbox">
+        <input formControlName="remember" class="customised-control-input mr-1" type="checkbox">
+        <span class="customised-control-indicator"></span>
+        <span class="customised-control-description">Ghi nhớ</span>
+      </label>
     </div>
+
     <div class="form-group loginContent">
-      <button class="btn" type="submit">Đăng nhập</button>
+      <button class="btn btn-success btn-hero" type="submit">Đăng nhập</button>
       <div *ngIf="invalidLogin" class="error">
         <div>Invalid credentials.</div>
       </div>
