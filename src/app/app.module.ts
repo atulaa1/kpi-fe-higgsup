@@ -17,10 +17,8 @@ import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BsModalRef, BsModalService, ModalModule} from 'ngx-bootstrap';
 import { LoginComponent } from './modals/login/login.component';
 import { LogoutComponent } from './modals/logout/logout.component';
-import {UserService} from './@core/services/user.service';
 
 import {PersonalInfoComponent} from './modals/personal-info/personal-info.component';
-import {AskSaveComponent} from './pages/acc-management/ask-save/ask-save.component';
 @NgModule({
   declarations: [AppComponent, LoginComponent, LogoutComponent, PersonalInfoComponent],
   imports: [

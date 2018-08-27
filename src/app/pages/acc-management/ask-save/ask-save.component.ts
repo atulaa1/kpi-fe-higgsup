@@ -1,34 +1,41 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ManagementUsersService} from '../../../@core/services/management-users.service';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {User} from '../../../@core/models/user.model';
 
 @Component({
-  selector: 'ngx-ask',
+  selector: 'ngx-save-acc-modal',
   templateUrl: './ask-save.component.html',
   styleUrls: ['./ask-save.component.scss'],
 })
 export class AskSaveComponent implements OnInit {
-  private user = new User();
+  @Input() editedUser = new User();
   @Input() dismiss;
-  constructor(private bsModal: BsModalService,
-              private mService: ManagementUsersService,
-              private activeModal: NgbActiveModal) {
+  @Output() messageEvent = new EventEmitter<User>();
+  constructor(private manageUserService: ManagementUsersService) {
   }
 
   ngOnInit() {
   }
 
   cancelAskSave() {
-    this.activeModal.close();
+    this.dismiss();
   }
 
   saveRole() {
-    alert('da luu');
-    // this.mService.editUser(username, this.user.userRole[0] ).subscribe(res => {
-    //   this.role = res.data.userRole;
-    // })
-    this.activeModal.close();
+    if (this.editedUser.mainRole === 'ROLE_MAN') {
+      this.editedUser.userRole = ['ROLE_MAN',
+        'ROLE_EMPLOYEE']
+    } else {
+      this.editedUser.userRole = ['ROLE_EMPLOYEE']
+    }
+    this.manageUserService.editUser(this.editedUser.username, this.editedUser.userRole).subscribe(res => {
+      if (res.status_code === 200) {
+        this.editedUser.isEdited = false;
+        this.messageEvent.emit(this.editedUser);
+      } else if (res.statusCode === 900) {
+      }
+      this.dismiss();
+    });
+
   }
 }

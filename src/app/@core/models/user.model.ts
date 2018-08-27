@@ -8,4 +8,7 @@ export class User {
   username: string;
   password: string;
   userRole: Array<string>;
+  isEdited: boolean = false;
+  mainRole: string;
+  index: number;
 }
