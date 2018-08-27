@@ -15,4 +15,7 @@ export class User {
   skype: string;
   yearWork: number;
   token: string;
+  isEdited: boolean = false;
+  mainRole: string;
+  index: number;
 }

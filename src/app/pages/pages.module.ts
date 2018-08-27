@@ -6,6 +6,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import {ActiManagementModule} from './acti-management/acti-management.module';
+import {AccManagementModule} from './acc-management/acc-management.module';
 import { ProjectmanagementComponent } from './projectmanagement/projectmanagement.component';
 import {ListOfSurveyModule} from './list-of-survey/list-of-survey.module';
 
@@ -20,7 +21,8 @@ const PAGES_COMPONENTS = [
     DashboardModule,
     MiscellaneousModule,
     ActiManagementModule,
-    ListOfSurveyModule
+    ListOfSurveyModule,
+    AccManagementModule,
   ],
   declarations: [
     ...PAGES_COMPONENTS,
