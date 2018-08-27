@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ActiManagementComponent } from './acti-management.component';
+import { AskSaveComponent } from './ask-save.component';
 
-describe('ActiManagementComponent', () => {
-  let component: ActiManagementComponent;
-  let fixture: ComponentFixture<ActiManagementComponent>;
+describe('AskSaveComponent', () => {
+  let component: AskSaveComponent;
+  let fixture: ComponentFixture<AskSaveComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ActiManagementComponent ],
+      declarations: [ AskSaveComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ActiManagementComponent);
+    fixture = TestBed.createComponent(AskSaveComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

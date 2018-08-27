@@ -237,10 +237,15 @@
 a span {
   color: #5DCFE3;
 }
-
 .userInfo a,
 .userInfo a:hover {
   color: #5DCFE3;
+}
+
+.manipulationMenu {
+  display: flex;
+  border-top: 1px solid #ebeef2;
+  padding: 15px;
 }
 
 .nav-list {

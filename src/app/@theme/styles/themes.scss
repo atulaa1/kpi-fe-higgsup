@@ -12,7 +12,6 @@ $nb-themes: nb-register-theme((
   sidebar-header-height: initial,
   layout-content-width: 1400px,
 
-
   font-main: Roboto,
   font-secondary: Roboto,
 
@@ -20,6 +19,10 @@ $nb-themes: nb-register-theme((
   switcher-background-percentage: 50%,
   drops-icon-line-gadient: -webkit-linear-gradient(#01dbb5, #0bbb79),
 ), default, default);
+
+//$nb-themes: nb-theme((
+//  actions-separator: #ffffff
+//));
 
 $nb-themes: nb-register-theme((
   // app wise variables for each theme
@@ -40,7 +43,8 @@ $nb-themes: nb-register-theme((
   sidebar-header-gap: 2rem,
   sidebar-header-height: initial,
   layout-content-width: 1400px,
-  header-bg: transparent,
+  header-bg: linear-gradient(to right,#6dd5ed, #2193b0 ),
+
   font-main: Roboto,
   font-secondary: Roboto,
 

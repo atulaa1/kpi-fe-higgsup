@@ -4,8 +4,7 @@ import {TeambuildingService} from '../../../../@core/services/teambuilding.servi
 import {Group} from '../../../../@core/models/group.model';
 import {CreatedActivity} from '../../../../@core/models/createdActivity.model';
 import {Activity} from '../../../../@core/models/activity.model';
-
-declare let swal: any;
+import swal from 'sweetalert';
 
 @Component({
   selector: 'ngx-team-building',
