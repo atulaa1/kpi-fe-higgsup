@@ -1,9 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {NgbActiveModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {CreatedActivity} from '../../../../@core/models/createdActivity.model';
 import {Group} from '../../../../@core/models/group.model';
 import {SeminarService} from '../../../../@core/services/seminar.service';
 import {Activity} from '../../../../@core/models/activity.model';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'ngx-seminar',
