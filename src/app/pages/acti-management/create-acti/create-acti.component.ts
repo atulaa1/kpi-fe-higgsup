@@ -40,20 +40,23 @@ export class CreateActiComponent implements OnInit {
   openActivityModal(idGroup) {
     if (idGroup === 1) {
       this.modalService.open(SeminarComponent);
-    }
-    else if (idGroup === 2) {
+    } else if (idGroup === 2) {
       this.modalService.open(ClubComponent);
-    }
-    else if (idGroup === 3) {
+    } else if (idGroup === 3) {
       this.modalService.open(TeamBuildingComponent);
-    }
-    else if (idGroup === 4) {
+    } else if (idGroup === 4) {
       this.modalService.open(SupportComponent);
     }
   }
 
   open(content) {
     this.modalService.open(content);
+  }
+
+  onChange(change: any) {
+    this.activitiesService.getCreatedActivity().subscribe(response => {
+      this.groupList = response.data;
+    })
   }
 
 }
