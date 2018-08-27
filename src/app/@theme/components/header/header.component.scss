@@ -247,15 +247,16 @@ a span {
   border-top: 1px solid #ebeef2;
   padding: 15px;
 }
-
+nb-action{
+  border: none !important;
+}
 .nav-list {
   padding: 2em 5rem;
   font-size: 17px;
 }
 
 .nav-list a {
-  text-transform: uppercase;
-  color: #67700c;
+  color: #fff;
 }
 
 @media (min-width: 992px) {
@@ -270,9 +271,7 @@ a span {
     font-size: 17px;
   }
 }
-nb-action{
-  border: none !important;
-}
+
 .higgigup-nb-action:hover {
   left: 0;
   cursor: pointer;
@@ -300,16 +299,22 @@ nb-action{
   bottom: 0;
   width: 100%;
   height: 0px;
-  background: #20abe1;
+  background: #ffffff;
   transition: ease .2s;
   -webkit-transition: ease .2s;
 }
 
 .higgigup-nb-action:hover a {
-  color: crimson;
+  color: #fff;
 }
 
 .higgigup-nb-action:hover:after {
-  height: 10px;
+  height: 3px;
 }
-
+.drop-cus.show{
+  left: -170px !important;
+}
+.menu-title{
+  color: black !important;
+}
+/*.nav-items-cus:hover a*/
