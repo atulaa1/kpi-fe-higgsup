@@ -25,7 +25,7 @@
         <div style="min-height: 170px" class="row">
           <div class="col-6 col-md-6 ">
             <img style="float: left;height: 150px;margin-left: 10px"
-                 src="http://br-art.vn/wp-content/uploads/2017/11/bo-anh-chan-dung-cua-nag-thai-duy-1.jpg"
+                 src="{{user.avatar}}"
                  class="img-fluid" alt="Responsive image">
           </div>
           <div style="margin-top: 50px" class="col-6 col-md-6 ">
@@ -75,7 +75,7 @@
           <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" style="display: flex;border-top: 1px solid #ebeef2;padding: 15px;"
               class="text-center font-weight-600">
             <i style="  font-size: 23px;" class="fas fa-edit"></i>
-            <a style="margin-left: 10px" ng-reflect-router-link="" title="Quản lý khảo sát" href="#/pages/dashboard">
+            <a style="margin-left: 10px" ng-reflect-router-link="" title="Quản lý khảo sát" href="#/pages/listofsurvey">
               <span class="menu-title">Quản lý khảo sát</span>
             </a>
           </li>
@@ -102,6 +102,13 @@
             <i style="  font-size: 23px;" class="fas fa-plus-circle"></i>
             <a style="margin-left: 10px" ng-reflect-router-link="" title="Tạo hoạt động" href="#/pages/dashboard">
               <span class="menu-title">Tạo hoạt động</span>
+            </a>
+          </li>
+
+          <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" class="text-center font-weight-600 manipulationMenu">
+            <i style="  font-size: 23px;" class="fas fa-file-alt"></i>
+            <a style="margin-left: 10px" ng-reflect-router-link="" title="Quản lý dự án" href="#/pages/project-management">
+              <span class="menu-title">Quản lý dự án</span>
             </a>
           </li>
 

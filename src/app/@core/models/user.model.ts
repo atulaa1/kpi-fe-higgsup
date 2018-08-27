@@ -1,11 +1,21 @@
 export class User {
-  email: string;
-  token: string;
-  firstName: string;
-  lastName: string;
-  fullName: string;
-  remember: boolean;
   username: string;
+  lastName: string;
+  firstName: string;
+  fullName: string;
+  email: string;
   password: string;
   userRole: Array<string>;
+  remember: boolean;
+  avatar: string;
+  birthday: string;
+  numberPhone: string;
+  address: string;
+  gmail: string;
+  skype: string;
+  yearWork: number;
+  token: string;
+  isEdited: boolean = false;
+  mainRole: string;
+  index: number;
 }

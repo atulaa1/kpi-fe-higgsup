@@ -1,0 +1,33 @@
+.titleManagement {
+  text-align: center;
+  h4 {
+    display: inline-block;
+    margin: auto;
+    padding: 15px 20px;
+    border: 4px solid #5DCFE3;
+  }
+}
+
+.nameProject {
+  font-size: 18px;
+}
+
+.listIcon {
+  display: flex;
+  flex-direction: row;
+  font-size: 24px;
+  i {
+    width: 20%;
+  }
+}
+
+.lineHeight {
+  padding-bottom: 2px;
+}
+
+.kpiRow {
+  background-color: #5dcfe3;
+  width: 1114px;
+  margin: 5px;
+  padding: 5px;
+}

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {AskSaveComponent} from './ask-save/ask-save.component';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {ManagementUsersService} from '../../@core/services/management-users.service';
@@ -11,23 +10,29 @@ import {User} from '../../@core/models/user.model';
   styleUrls: ['./acc-management.component.scss'],
 })
 export class AccManagementComponent implements OnInit {
-  listUser = [];
   username;
-  btnSave;
-  btnEdit;
   save;
-  userRole = [
-    'ROLE_ADMIN',
-    'ROLE_EMPLOYEE',
-    ];
+  listUser: Array<User>;
+  editedUser: User;
   constructor(
     private bsModal: NgbModal,
-    private mService: ManagementUsersService,
+    private managementUsersService: ManagementUsersService,
   ) { }
-  logoutModal: NgbModalRef;
   ngOnInit() {
-    this.mService.getUser().subscribe(res => {
-      this.listUser = res.data;
+    this.managementUsersService.getUser().subscribe(res => {
+      this.listUser = <Array<User>>res.data;
+      // add isEdited for all item
+      this.listUser.forEach(function (user, userIndex) {
+        user.isEdited = false;
+        user.index = userIndex;
+        if (user.userRole.indexOf('ROLE_ADMIN') >= 0) {
+          user.mainRole = 'ROLE_ADMIN';
+        } else if (user.userRole.indexOf('ROLE_MAN') >= 0) {
+          user.mainRole = 'ROLE_MAN';
+        } else if (user.userRole.indexOf('ROLE_EMPLOYEE') >= 0 && user.userRole.length === 1) {
+          user.mainRole = 'ROLE_EMPLOYEE';
+        }
+      })
     })
   }
   mySearchFunction() {
@@ -49,27 +54,13 @@ export class AccManagementComponent implements OnInit {
         }
       }
   }
-  openAskSaveModal() {
-    this.bsModal.open(AskSaveComponent);
-    this.btnEdit.style.display = 'block';
-    document.getElementById(this.btnSave).style.display = 'none';
+  updateRole(userInfo: User) {
+    userInfo.isEdited = true;
   }
-  editRole(button, userName) {
-    document.getElementById(userName).innerHTML =
-      '<select>' +
-        '<option>Employee</option>' +
-        '<option>Man</option>' +
-      '</select>';
-    this.btnEdit = document.getElementById(button.currentTarget.id);
-    this.btnEdit.style.display = 'none';
-    this.save = button.currentTarget.id.split('-');
-    this.btnSave = this.save[0] + '-save';
-    document.getElementById(this.btnSave).style.display = 'block';
-    this.username = userName;
+  openSaveModal(content) {
+    this.bsModal.open(content);
   }
-  updateRoleUser(username) {
-    this.mService.editUser(username, this.userRole ).subscribe(res =>{
-        alert(username);
-    })
+  updateSuccess($event) {
+    this.editedUser = $event;
   }
 }
