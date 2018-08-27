@@ -20,9 +20,8 @@ import { LogoutComponent } from './modals/logout/logout.component';
 import {UserService} from './@core/services/user.service';
 
 import {PersonalInfoComponent} from './modals/personal-info/personal-info.component';
-import {AskSaveComponent} from './pages/acc-management/ask-save/ask-save.component';
 @NgModule({
-  declarations: [AppComponent, LoginComponent, LogoutComponent, PersonalInfoComponent, AskSaveComponent],
+  declarations: [AppComponent, LoginComponent, LogoutComponent, PersonalInfoComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -37,7 +36,7 @@ import {AskSaveComponent} from './pages/acc-management/ask-save/ask-save.compone
   providers: [BsModalService, BsModalRef,
     {provide: APP_BASE_HREF, useValue: '/'},
   ],
-  entryComponents: [LoginComponent, PersonalInfoComponent, LogoutComponent, AskSaveComponent],
+  entryComponents: [LoginComponent, PersonalInfoComponent, LogoutComponent],
 })
 export class AppModule {
 }

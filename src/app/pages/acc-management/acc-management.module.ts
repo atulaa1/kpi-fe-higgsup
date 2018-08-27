@@ -6,7 +6,6 @@ import {AccManagementComponent} from './acc-management.component';
 @NgModule({
   imports: [
     CommonModule,
-    // AccManagementComponent
   ],
   declarations: [AskSaveComponent],
   entryComponents: [AskSaveComponent],

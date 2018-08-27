@@ -21,9 +21,9 @@
       <td>
         <button id='{{userInfo.username}}-edit' class='btn btn-hero-success' (click)='editRole($event, userInfo.username)'>Sửa</button>
         <button style='display: none' id='{{userInfo.username}}-save' class='btn btn-hero-warning' (click)="open(content)">Lưu</button>
-        <ng-template let-c="close" let-d="dismiss" #content>
+        <!--<ng-template let-c="close" let-d="dismiss" #content>-->
          <ngx-ask></ngx-ask>
-        </ng-template>
+        <!--</ng-template>-->
       </td>
     </tr>
   </table>
