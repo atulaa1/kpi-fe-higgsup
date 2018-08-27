@@ -7,6 +7,7 @@
     </div>
   </div>
 </div>
+<nb-card>
 <div id="managementContent">
   <table class='table table-hover' id="myTable">
     <tr>
@@ -14,23 +15,17 @@
       <th >User role</th>
       <th >Edit role</th>
     </tr>
-    <tr *ngFor='let userInfo of listUser; let userIndex = index;'>
+    <tr *ngFor='let userInfo of listUser'>
       <td>{{userInfo.username}}</td>
-      <td id='{{userInfo.username}}'>
-        <span [hidden]="userInfo.isEdited">{{userInfo.mainRole}}</span>
-        <select [hidden]="!userInfo.isEdited"  name="roles" [(ngModel)]="userInfo.mainRole"  >
-          <option value="ROLE_MAN">ROLE_MAN</option>
-          <option value="ROLE_EMPLOYEE">ROLE_EMPLOYEE</option>
-        </select>
-      </td>
+      <td id='{{userInfo.username}}'>{{userInfo.userRole[0].slice(5)}}</td>
       <td>
-        <button [hidden]="userInfo.isEdited" id='{{userInfo.username}}-edit' class='btn btn-hero-success' (click)='updateRole(userInfo)'>Sửa</button>
-        <ng-template let-c="close" let-d="dismiss" #content>
-          <ngx-save-acc-modal (messageEvent)="updateSuccess($event)" [editedUser]="userInfo" [dismiss]="d"></ngx-save-acc-modal>
-        </ng-template>
-        <button [hidden]="!userInfo.isEdited"  id='{{userInfo.username}}-save' class='btn btn-hero-warning' (click)="openSaveModal(content)">Lưu</button>
-
+        <button id='{{userInfo.username}}-edit' class='btn btn-hero-success' (click)='editRole($event, userInfo.username)'>Sửa</button>
+        <button style='display: none' id='{{userInfo.username}}-save' class='btn btn-hero-warning' (click)="open(content)">Lưu</button>
+        <!--<ng-template let-c="close" let-d="dismiss" #content>-->
+         <ngx-ask></ngx-ask>
+        <!--</ng-template>-->
       </td>
     </tr>
   </table>
 </div>
+</nb-card>

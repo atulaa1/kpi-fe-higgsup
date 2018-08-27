@@ -27,6 +27,13 @@ const routes: Routes = [{
     {
       path: 'acc-management',
       component: AccManagementComponent,
+      // children: [
+      //   {
+      //   path: 'ask-save',
+      //   component: AskSaveComponent,
+      //   pathMatch: 'full',
+      //   },
+      // ],
     },
     {
       path: 'acti-management',
