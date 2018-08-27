@@ -23,6 +23,7 @@ import {InputFileConfig} from 'ngx-input-file/src/lib/interfaces/input-file-conf
 import {InputFileModule} from 'ngx-input-file';
 import {FormsModule} from '@angular/forms';
 import { DialogEditConfirmationComponent } from './modals/dialog-edit-confirmation/dialog-edit-confirmation.component';
+import {MatDialog, MatDialogModule} from '@angular/material';
 
 const config: InputFileConfig = {
   sizeLimit: 100,
@@ -38,6 +39,7 @@ const config: InputFileConfig = {
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
+    MatDialogModule,
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
@@ -45,10 +47,10 @@ const config: InputFileConfig = {
     InputFileModule.forRoot(config),
   ],
   bootstrap: [AppComponent],
-  providers: [BsModalService, BsModalRef, NgbActiveModal,
+  providers: [BsModalService, BsModalRef, NgbActiveModal, MatDialog,
     {provide: APP_BASE_HREF, useValue: '/'},
   ],
-  entryComponents: [LoginComponent, PersonalInfoComponent, LogoutComponent],
+  entryComponents: [LoginComponent, PersonalInfoComponent, LogoutComponent, DialogEditConfirmationComponent],
 })
 export class AppModule {
 }
