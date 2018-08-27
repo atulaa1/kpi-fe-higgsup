@@ -214,7 +214,7 @@
 
 @media (min-width: 1400px) {
   .higgigup-nb-action {
-    padding: 2em 8rem;
+    padding: 2px 8px;
     color: #bdc4cd;
   }
 }
@@ -311,9 +311,7 @@ nb-action{
 .higgigup-nb-action:hover:after {
   height: 3px;
 }
-.drop-cus.show{
-  left: -170px !important;
-}
+
 .menu-title{
   color: black !important;
 }
