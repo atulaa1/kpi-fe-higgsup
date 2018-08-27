@@ -105,6 +105,13 @@
             </a>
           </li>
 
+          <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" class="text-center font-weight-600 manipulationMenu">
+            <i style="  font-size: 23px;" class="fas fa-file-alt"></i>
+            <a style="margin-left: 10px" ng-reflect-router-link="" title="Quản lý dự án" href="#/pages/project-management">
+              <span class="menu-title">Quản lý dự án</span>
+            </a>
+          </li>
+
           <li style="display: flex;border-top: 1px solid #ebeef2;padding: 15px;"
               class="text-center font-weight-600">
             <i style="  font-size: 23px;" class="fas fa-sign-out-alt"></i>
