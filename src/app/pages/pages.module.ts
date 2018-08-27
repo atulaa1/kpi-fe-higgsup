@@ -8,10 +8,10 @@ import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import {ActiManagementModule} from './acti-management/acti-management.module';
 import { AccManagementComponent } from './acc-management/acc-management.component';
 import {AccManagementModule} from './acc-management/acc-management.module';
+import {ListOfSurveyModule} from './list-of-survey/list-of-survey.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
-
 ];
 
 @NgModule({
@@ -21,6 +21,7 @@ const PAGES_COMPONENTS = [
     DashboardModule,
     MiscellaneousModule,
     ActiManagementModule,
+    ListOfSurveyModule,
     AccManagementModule,
   ],
   declarations: [
