@@ -6,9 +6,10 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import {ActiManagementModule} from './acti-management/acti-management.module';
+import {ProjectmanagementComponent} from './projectmanagement/projectmanagement.component';
 import {AccManagementModule} from './acc-management/acc-management.module';
-import { ProjectmanagementComponent } from './projectmanagement/projectmanagement.component';
 import {ListOfSurveyModule} from './list-of-survey/list-of-survey.module';
+import {DialogConfirmationComponent} from '../modals/dialog-confirmation/dialog-confirmation.component';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -26,8 +27,9 @@ const PAGES_COMPONENTS = [
   ],
   declarations: [
     ...PAGES_COMPONENTS,
-    ProjectmanagementComponent,
+    ProjectmanagementComponent, DialogConfirmationComponent,
   ],
+  entryComponents: [DialogConfirmationComponent],
 })
 export class PagesModule {
 }
