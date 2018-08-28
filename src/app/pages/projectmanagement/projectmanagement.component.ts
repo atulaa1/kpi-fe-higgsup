@@ -2,9 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Project} from '../../@core/models/project.model';
 import {ProjectService} from '../../@core/services/project.service';
 import {ResponseProjectDTO} from '../../@core/models/response-project-dto.model';
-import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
-import {DialogEditConfirmationComponent} from '../../modals/dialog-edit-confirmation/dialog-edit-confirmation.component';
-import {MatDialog} from "@angular/material";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'projectmanagement',
@@ -13,18 +11,18 @@ import {MatDialog} from "@angular/material";
 })
 export class ProjectmanagementComponent implements OnInit {
   add: boolean = true;
-  event;
   projects: Project[];
   newProject: Project;
   projectToEdit: Project;
   statusCode: number;
   projectIdEdit: number;
   editedProjectName: string;
-  confirmModal: NgbModalRef;
+  msg: string;
+  actionType: string;
+  currentProject: Project;
 
   constructor(private projectService: ProjectService,
-              private bsModal: NgbModal,
-              private dialog: MatDialog) {
+              private bsModal: NgbModal) {
     this.newProject = new Project();
   }
 
@@ -32,22 +30,20 @@ export class ProjectmanagementComponent implements OnInit {
     this.getListProject();
   }
 
-  Active(project: Project) {
-    project.active = 1;
-    this.projectService.updateProject(project).subscribe((response: ResponseProjectDTO) => {
-      if (response.status_code === 200) {
-        this.getListProject();
-      }
-    });
+  Active(project: Project, content) {
+    this.actionType = 'EDIT';
+    this.msg = 'Bạn đã đổi trạng thái của ' + project.name + ' thành Đang hoạt động';
+    this.currentProject = Object.assign({}, project);
+    this.currentProject.active = 1;
+    this.bsModal.open(content, {backdrop: 'static', centered: true});
   }
 
-  Deactive(project: Project) {
-    project.active = 0;
-    this.projectService.updateProject(project).subscribe((response: ResponseProjectDTO) => {
-      if (response.status_code === 200) {
-        this.getListProject();
-      }
-    });
+  Deactive(project: Project, content) {
+    this.actionType = 'EDIT';
+    this.msg = 'Bạn đã đổi trạng thái của ' + project.name + ' thành Dừng hoạt động';
+    this.currentProject = Object.assign({}, project);
+    this.currentProject.active = 0;
+    this.bsModal.open(content, {backdrop: 'static', centered: true});
   }
 
   addProject() {
@@ -60,6 +56,7 @@ export class ProjectmanagementComponent implements OnInit {
       this.projectService.addNewProject(this.newProject).subscribe((response: ResponseProjectDTO) => {
         this.getListProject();
         this.statusCode = response.status_code;
+        this.newProject = new Project();
         this.add = !this.add;
       });
     }
@@ -77,37 +74,43 @@ export class ProjectmanagementComponent implements OnInit {
     this.editedProjectName = project.name;
   }
 
-  updateProjectName(project: Project, editName: string) {
-    const confirm = window.confirm('Bạn đã đổi tên ' + project.name + ' thành ' + editName);
-    if (confirm === true) {
-      project.name = editName;
-      this.projectService.updateProject(project).subscribe((response: ResponseProjectDTO) => {
-        if (response.status_code === 200) {
-          this.projectIdEdit = 0;
-          this.getListProject();
-        }
-      });
-    }
+  updateProjectName(project: Project, editName: string, content) {
+    this.actionType = 'EDIT';
+    this.msg = 'Bạn đã đổi tên ' + project.name + ' thành ' + editName;
+    this.currentProject = Object.assign({}, project);
+    this.currentProject.name = editName
+    this.bsModal.open(content, {backdrop: 'static', centered: true});
   }
 
-  deleteProject(project: Project) {
-    this.openConfirmModal();
-    const confirmValue = confirm('Bạn có chắc muốn xóa ' + project.name + '?');
-    if (confirmValue === true) {
-      this.projectService.deleteProject(project).subscribe((response: ResponseProjectDTO) => {
-        if (response.status_code === 200) {
-          this.getListProject();
-        }
-      });
-    }
+  deleteProject(project: Project, content) {
+    this.actionType = 'DELETE';
+    this.msg = 'Bạn có chắc muốn xóa ' + project.name + '?';
+    this.currentProject = Object.assign({}, project);
+    this.bsModal.open(content, {backdrop: 'static', centered: true});
   }
 
-  openConfirmModal() {
-    const dialogRef = this.dialog.open(DialogEditConfirmationComponent, {
-      width: '250px'
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    })
+  receiveConfirmation($event) {
+    if ($event === true) {
+      if (this.actionType === 'DELETE') {
+        this.projectService.deleteProject(this.currentProject).subscribe((response: ResponseProjectDTO) => {
+          if (response.status_code === 200) {
+            this.currentProject = null;
+            this.actionType = null;
+            this.getListProject();
+          }
+        });
+      } else if (this.actionType === 'EDIT') {
+        this.projectService.updateProject(this.currentProject).subscribe((response: ResponseProjectDTO) => {
+          if (response.status_code === 200) {
+            this.projectIdEdit = 0;
+            this.currentProject = null;
+            this.actionType = null;
+            this.getListProject();
+          }
+        });
+      }
+    } else {
+      this.projectIdEdit = 0;
+    }
   }
 }
