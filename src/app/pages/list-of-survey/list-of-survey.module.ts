@@ -11,5 +11,6 @@ import {FormsModule} from '@angular/forms';
     FormsModule,
   ],
   declarations: [ListOfSurveyComponent, PersonalSurveyComponent, SeminarSurveyComponent ],
+  entryComponents: [PersonalSurveyComponent, SeminarSurveyComponent],
 })
 export class ListOfSurveyModule { }
