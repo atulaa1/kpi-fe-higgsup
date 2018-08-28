@@ -1,0 +1,85 @@
+{
+    "data": [
+        {
+            "username": "kpi.admin",
+            "lastName": "kpi",
+            "firstName": "admin",
+            "fullName": "kpi test. admin",
+            "email": "kpi.admin@higgsup.com",
+            "userRole": [
+                "ROLE_ADMIN",
+                "ROLE_EMPLOYEE"
+            ],
+            "error": false
+        },
+        {
+            "username": "kpi.man",
+            "lastName": "kpi",
+            "firstName": "man",
+            "fullName": "kpi test. man",
+            "email": "kpi.man@higgsup.com",
+            "userRole": [
+                "ROLE_MAN",
+                "ROLE_EMPLOYEE"
+            ],
+            "error": false
+        },
+        {
+            "username": "kpi.employee",
+            "lastName": "kpi",
+            "firstName": "employee",
+            "fullName": "kpi test. employee",
+            "email": "kpi.employee@higgsup.com",
+            "userRole": [
+                "ROLE_EMPLOYEE"
+            ],
+            "error": false
+        },
+        {
+            "username": "kpi.test",
+            "lastName": "kpi",
+            "firstName": "test",
+            "fullName": "kpi test. test",
+            "email": "kpi.test@higgsup.com",
+            "userRole": [
+                "ROLE_EMPLOYEE"
+            ],
+            "error": false
+        },
+        {
+            "username": "kpi.test01",
+            "lastName": "kpi",
+            "firstName": "test01",
+            "fullName": "kpi test. test01",
+            "email": "kpi.test01@higgsup.com",
+            "userRole": [
+                "ROLE_EMPLOYEE"
+            ],
+            "error": false
+        },
+        {
+            "username": "kpi.test02",
+            "lastName": "kpi",
+            "firstName": "test02",
+            "fullName": "kpi test. test02",
+            "email": "kpi.test02@higgsup.com",
+            "userRole": [
+                "ROLE_EMPLOYEE"
+            ],
+            "error": false
+        },
+        {
+            "username": "kpi.test03",
+            "lastName": "kpi",
+            "firstName": "test03",
+            "fullName": "kpi test. test03",
+            "email": "kpi.test03@higgsup.com",
+            "userRole": [
+                "ROLE_EMPLOYEE"
+            ],
+            "error": false
+        }
+    ],
+    "message": "OK",
+    "status_code": 200
+}
