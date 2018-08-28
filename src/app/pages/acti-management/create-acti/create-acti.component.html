@@ -1,4 +1,4 @@
-<nb-card class="mt-5">
+<nb-card class="mt-5 listActivity">
   <!--Create Activities Mangagement-->
   <div class="row mt-5 mb-2">
     <div class="col-md-3 ml-5">
@@ -31,54 +31,60 @@
     </div>
   </div>
   <div class="row ml-5 mt-5 mr-5">
-    <div class="col-md-12 tableScroll">
-      <table class="table table-hover">
-        <thead>
-        <tr>
-          <th>Ngày tạo</th>
-          <th>Hoạt động</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let group of groupList">
-          <td>{{group.createdDate}}</td>
+  <table class="table titleTable">
+    <thead>
+    <tr>
+      <th class="dateCreated">Ngày tạo</th>
+      <th>Hoạt động</th>
+    </tr>
+    </thead>
+  </table>
+  </div>
+  <div class="row ml-5 mr-5 tableScroll">
+    <table class="table table-hover">
+      <tbody>
+      <tr *ngFor="let group of groupList">
+        <td>{{group.createdDate}}</td>
 
-          <!--Seminar-->
+        <!--Seminar-->
 
-          <td (click)="open(content)" *ngIf="group.groupTypeId.id==1">{{group.name}}
-            <ng-template let-c="close" let-d="dismiss" #content>
-              <ngx-seminar [dismiss]="d" [groupId]="group.id" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-seminar>
-            </ng-template>
-          </td>
+        <td (click)="open(content)" *ngIf="group.groupTypeId.id==1">{{group.name}}
+          <ng-template let-c="close" let-d="dismiss" #content>
+            <ngx-seminar [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
+                         [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-seminar>
+          </ng-template>
+        </td>
 
-          <!--Club-->
+        <!--Club-->
 
-          <td (click)="open(content)" *ngIf="group.groupTypeId.id==2">{{group.name}}
-            <ng-template let-c="close" let-d="dismiss" #content>
-              <ngx-club [dismiss]="d"  [groupId]="group.id" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-club>
-            </ng-template>
-          </td>
+        <td (click)="open(content)" *ngIf="group.groupTypeId.id==2">{{group.name}}
+          <ng-template let-c="close" let-d="dismiss" #content>
+            <ngx-club [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
+                      [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-club>
+          </ng-template>
+        </td>
 
-          <!--Teambuilding-->
+        <!--Teambuilding-->
 
-          <td (click)="open(content)" *ngIf="group.groupTypeId.id==3">{{group.name}}
-            <ng-template let-c="close" let-d="dismiss" #content>
-              <ngx-team-building [dismiss]="d" [groupId]="group.id" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-team-building>
-            </ng-template>
-          </td>
+        <td (click)="open(content)" *ngIf="group.groupTypeId.id==3">{{group.name}}
+          <ng-template let-c="close" let-d="dismiss" #content>
+            <ngx-team-building [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
+                               [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-team-building>
+          </ng-template>
+        </td>
 
-          <!--Support-->
+        <!--Support-->
 
-          <td (click)="open(content)" *ngIf="group.groupTypeId.id==4">{{group.name}}
-            <ng-template let-c="close" let-d="dismiss" #content>
-              <ngx-support [dismiss]="d" [groupId]="group.id" [activityName]="group.name" [createdActivity]="group.additionalConfig"></ngx-support>
-            </ng-template>
-          </td>
+        <td (click)="open(content)" *ngIf="group.groupTypeId.id==4">{{group.name}}
+          <ng-template let-c="close" let-d="dismiss" #content>
+            <ngx-support [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
+                         [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-support>
+          </ng-template>
+        </td>
 
-        </tr>
-        </tbody>
-      </table>
-    </div>
+      </tr>
+      </tbody>
+    </table>
   </div>
 
 </nb-card>

@@ -58,8 +58,8 @@
           <div class="supportButton mt-5">
             <button *ngIf="groupId == null" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
             <button *ngIf="groupId != null" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
-            <button *ngIf="groupId == null" class="btn btn-hero-success submitButton" (click)="addSupport()" >Lưu</button>
-            <button *ngIf="groupId != null" class="btn btn-hero-success submitButton" (click)="changeSupport()">update</button>
+            <button *ngIf="groupId == null" class="btn btn-hero-success submitButton" (click)="addSupport($event)" >Lưu</button>
+            <button *ngIf="groupId != null" class="btn btn-hero-success submitButton" (click)="changeSupport($event)">Lưu</button>
           </div>
         </div>
       </form>
