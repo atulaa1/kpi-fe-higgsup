@@ -13,7 +13,7 @@ import {CoreModule} from './@core/core.module';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {ThemeModule} from './@theme/theme.module';
-import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BsModalRef, BsModalService, ModalModule} from 'ngx-bootstrap';
 import {LoginComponent} from './modals/login/login.component';
 import {LogoutComponent} from './modals/logout/logout.component';
@@ -23,7 +23,6 @@ import {PersonalInfoComponent} from './modals/personal-info/personal-info.compon
 import {InputFileConfig} from 'ngx-input-file/src/lib/interfaces/input-file-config';
 import {InputFileModule} from 'ngx-input-file';
 import {FormsModule} from '@angular/forms';
-import {MatDialogModule} from '@angular/material';
 
 const config: InputFileConfig = {
   sizeLimit: 100,
@@ -39,7 +38,6 @@ const config: InputFileConfig = {
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    MatDialogModule,
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
