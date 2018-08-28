@@ -35,7 +35,7 @@ export class ProjectmanagementComponent implements OnInit {
     this.msg = 'Bạn đã đổi trạng thái của ' + project.name + ' thành Đang hoạt động';
     this.currentProject = Object.assign({}, project);
     this.currentProject.active = 1;
-    this.bsModal.open(content);
+    this.bsModal.open(content, {backdrop: 'static', centered: true});
   }
 
   Deactive(project: Project, content) {
@@ -43,7 +43,7 @@ export class ProjectmanagementComponent implements OnInit {
     this.msg = 'Bạn đã đổi trạng thái của ' + project.name + ' thành Dừng hoạt động';
     this.currentProject = Object.assign({}, project);
     this.currentProject.active = 0;
-    this.bsModal.open(content);
+    this.bsModal.open(content, {backdrop: 'static', centered: true});
   }
 
   addProject() {
@@ -79,14 +79,14 @@ export class ProjectmanagementComponent implements OnInit {
     this.msg = 'Bạn đã đổi tên ' + project.name + ' thành ' + editName;
     this.currentProject = Object.assign({}, project);
     this.currentProject.name = editName
-    this.bsModal.open(content);
+    this.bsModal.open(content, {backdrop: 'static', centered: true});
   }
 
   deleteProject(project: Project, content) {
     this.actionType = 'DELETE';
     this.msg = 'Bạn có chắc muốn xóa ' + project.name + '?';
     this.currentProject = Object.assign({}, project);
-    this.bsModal.open(content);
+    this.bsModal.open(content, {backdrop: 'static', centered: true});
   }
 
   receiveConfirmation($event) {
