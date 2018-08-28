@@ -19,7 +19,7 @@ export class ClubComponent implements OnInit {
   @Input() groupId: number = null;
   group = new Group<CreatedActivity>();
   listActivities: Array<Activity>;
-  @Output() onChange = new EventEmitter<any>();
+  @Output() change = new EventEmitter<any>();
   constructor(private activeModal: NgbActiveModal, private clubService: ClubService, private activityService: ActivitiesService) {
   }
 
@@ -63,7 +63,7 @@ export class ClubComponent implements OnInit {
     this.group.id = this.groupId;
     return this.clubService.updateClub(this.group.id, this.group).subscribe(response => {
       if (response.status_code === 200) {
-        this.onChange.emit(update);
+        this.change.emit(update);
         this.dismiss();
         return swal('Chúc Mừng!', 'Đã sửa thành công!', 'success');
       }

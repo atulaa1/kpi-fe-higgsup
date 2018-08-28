@@ -17,7 +17,7 @@ export class SupportComponent implements OnInit {
   @Input() groupId: number  = null;
   @Input() dismiss;
   group =  new Group<CreatedActivity>();
-  @Output() onChange = new EventEmitter<any>();
+  @Output() change = new EventEmitter<any>();
   constructor(private activeModal: NgbActiveModal,
               private supportService: SupportService) {}
 
@@ -33,7 +33,7 @@ export class SupportComponent implements OnInit {
     return this.supportService.createSupport(this.group).subscribe(response => {
       if (response.status_code === 200) {
         this.group = response;
-        this.onChange.emit(addNew);
+        this.change.emit(addNew);
         this.activeModal.close();
         swal('Chúc Mừng!', 'Đã tạo thành công!', 'success');
       }
@@ -63,7 +63,7 @@ export class SupportComponent implements OnInit {
     return this.supportService.uppdateSuport(this.group).subscribe(response => {
       if (response.status_code === 200) {
         this.group = response;
-        this.onChange.emit(update);
+        this.change.emit(update);
         this.dismiss();
         swal('Chúc Mừng!', 'Đã sửa thành công!', 'success');
       }

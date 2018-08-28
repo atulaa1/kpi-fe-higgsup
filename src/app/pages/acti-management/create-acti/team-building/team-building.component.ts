@@ -17,7 +17,7 @@ export class TeamBuildingComponent implements OnInit {
   @Input() activityName: string = '';
   @Input() dismiss;
   teambuilding = new Group<CreatedActivity>();
-  @Output() onChange = new EventEmitter<any>();
+  @Output() change = new EventEmitter<any>();
   constructor(private activeModal: NgbActiveModal, private teambuildingService: TeambuildingService) {
   }
 
@@ -36,7 +36,7 @@ export class TeamBuildingComponent implements OnInit {
     this.teambuilding.name = this.activityName;
     return this.teambuildingService.addTeambuilding(this.teambuilding).subscribe(response => {
       if (response.status_code === 200) {
-        this.onChange.emit(addNew);
+        this.change.emit(addNew);
         this.activeModal.close();
         swal('Chúc Mừng!', 'Đã tạo thành công!', 'success');
       } else if (response.status_code === 906) {
@@ -62,7 +62,7 @@ export class TeamBuildingComponent implements OnInit {
     this.teambuilding.id = this.groupId;
     return this.teambuildingService.updateTeambuilding(this.teambuilding).subscribe(response => {
       if (response.status_code === 200) {
-        this.onChange.emit(update);
+        this.change.emit(update);
         this.dismiss();
         swal('Chúc Mừng!', 'Đã sửa thành công!', 'success');
       } else if (response.status_code === 906) {

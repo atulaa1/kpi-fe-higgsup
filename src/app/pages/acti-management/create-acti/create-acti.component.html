@@ -1,4 +1,4 @@
-<nb-card class="mt-5">
+<nb-card class="mt-5 listActivity">
   <!--Create Activities Mangagement-->
   <div class="row mt-5 mb-2">
     <div class="col-md-3 ml-5">
@@ -34,7 +34,7 @@
   <table class="table titleTable">
     <thead>
     <tr>
-      <th width="45.5%">Ngày tạo</th>
+      <th class="dateCreated">Ngày tạo</th>
       <th>Hoạt động</th>
     </tr>
     </thead>
@@ -51,7 +51,7 @@
         <td (click)="open(content)" *ngIf="group.groupTypeId.id==1">{{group.name}}
           <ng-template let-c="close" let-d="dismiss" #content>
             <ngx-seminar [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
-                         [createdActivity]="group.additionalConfig" (onChange)="onChange($event)"></ngx-seminar>
+                         [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-seminar>
           </ng-template>
         </td>
 
@@ -60,7 +60,7 @@
         <td (click)="open(content)" *ngIf="group.groupTypeId.id==2">{{group.name}}
           <ng-template let-c="close" let-d="dismiss" #content>
             <ngx-club [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
-                      [createdActivity]="group.additionalConfig" (onChange)="onChange($event)"></ngx-club>
+                      [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-club>
           </ng-template>
         </td>
 
@@ -69,7 +69,7 @@
         <td (click)="open(content)" *ngIf="group.groupTypeId.id==3">{{group.name}}
           <ng-template let-c="close" let-d="dismiss" #content>
             <ngx-team-building [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
-                               [createdActivity]="group.additionalConfig" (onChange)="onChange($event)"></ngx-team-building>
+                               [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-team-building>
           </ng-template>
         </td>
 
@@ -78,7 +78,7 @@
         <td (click)="open(content)" *ngIf="group.groupTypeId.id==4">{{group.name}}
           <ng-template let-c="close" let-d="dismiss" #content>
             <ngx-support [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
-                         [createdActivity]="group.additionalConfig" (onChange)="onChange($event)"></ngx-support>
+                         [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-support>
           </ng-template>
         </td>
 

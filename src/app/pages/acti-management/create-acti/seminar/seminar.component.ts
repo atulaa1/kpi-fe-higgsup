@@ -18,7 +18,7 @@ export class SeminarComponent implements OnInit {
   @Input() dismiss;
   @Input() groupId: number = null;
   seminarActivity = new Group<CreatedActivity>();
-  @Output() onChange = new EventEmitter<any>();
+  @Output() change = new EventEmitter<any>();
   constructor(private activeModal: NgbActiveModal, private seminarService: SeminarService) {
   }
 
@@ -58,7 +58,7 @@ export class SeminarComponent implements OnInit {
     this.seminarActivity.name = this.activityName;
     return this.seminarService.updateSeminar(this.groupId, this.seminarActivity).subscribe(response => {
       if (response.status_code === 200) {
-        this.onChange.emit(update);
+        this.change.emit(update);
         this.dismiss();
         return swal('Chúc Mừng!', 'Đã sửa thành công!', 'success');
       }
