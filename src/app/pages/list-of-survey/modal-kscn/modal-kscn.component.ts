@@ -4,6 +4,7 @@ import {BsModalRef} from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import {SurveyService} from '../../../@core/services/survey.service';
 import {Survey} from '../../../@core/models/survey.model';
 import swal from 'sweetalert';
+import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class PersonalSurveyComponent implements OnInit {
   listSurvey: Array<Survey>;
   modalRef: BsModalRef;
 
-  constructor(private modalService: BsModalService,
+  constructor(private bsModal: NgbModal,
+              private activeModal: NgbActiveModal,
               private surveyService: SurveyService) {
   }
 
@@ -23,21 +25,17 @@ export class PersonalSurveyComponent implements OnInit {
     surver.showInput = !surver.showInput;
   }
 
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-  }
-
   changeUpdateSurvey() {
     this.surveyService.updateSurvey(this.listSurvey).subscribe(response => {
       if ( response.status_code === 200) {
         swal('Chúc Mừng!', 'Đã update Thành công!', 'success');
-        this.modalRef.hide();
+        this.activeModal.close();
       }
     });
   }
 
-  saveChange() {
-    alert('save')
+  closeModal() {
+    this.activeModal.close();
   }
 
   ngOnInit() {

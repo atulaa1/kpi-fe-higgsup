@@ -70,7 +70,7 @@ export class HeaderComponent implements OnInit {
   }
 
   openLoginModal() {
-    this.loginModal = this.bsModal.open(LoginComponent, {backdrop: 'static'});
+    this.loginModal = this.bsModal.open(LoginComponent, {backdrop: 'static', centered: true});
   }
   openLogoutModal() {
     this.logoutModal = this.bsModal.open(LogoutComponent);
@@ -85,12 +85,13 @@ export class HeaderComponent implements OnInit {
   openPersonalInfo() {
     const ngbModalOptions: NgbModalOptions = {
       backdrop: 'static',
+      centered: true,
       keyboard: false,
     };
     const modalRef = this.bsModal.open(PersonalInfoComponent, ngbModalOptions);
     modalRef.result.then((data) => {
-      }, (reason) => {
-      })
+    }, (reason) => {
+    })
   }
   startSearch() {
   }

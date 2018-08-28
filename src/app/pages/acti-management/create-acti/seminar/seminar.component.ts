@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {NgbActiveModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {CreatedActivity} from '../../../../@core/models/createdActivity.model';
 import {Group} from '../../../../@core/models/group.model';
 import {SeminarService} from '../../../../@core/services/seminar.service';
@@ -18,13 +18,13 @@ export class SeminarComponent implements OnInit {
   @Input() dismiss;
   @Input() groupId: number = null;
   seminarActivity = new Group<CreatedActivity>();
-
+  @Output() change = new EventEmitter<any>();
   constructor(private activeModal: NgbActiveModal, private seminarService: SeminarService) {
   }
 
 
 
-  onAddSeminar() {
+  onAddSeminar(addNew: any) {
     const groupType = new Activity();
     groupType.id = 1;
     this.seminarActivity.groupTypeId = groupType;
@@ -41,11 +41,16 @@ export class SeminarComponent implements OnInit {
       else if (response.status_code === 901) {
         swal('Thông báo!', 'Điểm của Host không hợp lệ!', 'error');
       }
-
+      else if (response.status_code === 900) {
+        swal('Thông báo!', 'Không tìm thấy hoạt động!', 'error');
+      }
+      else if (response.status_code === 926) {
+        swal('Thông báo!', 'Hoạt động này đã tồn tại!', 'error');
+      }
     })
   }
 
-  onUpdateSeminar() {
+  onUpdateSeminar(update: any) {
     const groupType = new Activity();
     groupType.id = 1;
     this.seminarActivity.groupTypeId = groupType;
@@ -53,11 +58,21 @@ export class SeminarComponent implements OnInit {
     this.seminarActivity.name = this.activityName;
     return this.seminarService.updateSeminar(this.groupId, this.seminarActivity).subscribe(response => {
       if (response.status_code === 200) {
+        this.change.emit(update);
         this.dismiss();
         return swal('Chúc Mừng!', 'Đã sửa thành công!', 'success');
       }
-      else if (response.status_code === 906) {
-        return swal('Thông báo!', 'Hoạt động này đã tồn tại!', 'error');
+      else if (response.status_code === 940) {
+        swal('Thông báo!', 'Điểm của người phía dưới không được lớn hơn!', 'error');
+      }
+      else if (response.status_code === 901) {
+        swal('Thông báo!', 'Điểm của Host không hợp lệ!', 'error');
+      }
+      else if (response.status_code === 900) {
+        swal('Thông báo!', 'Không tìm thấy hoạt động!', 'error');
+      }
+      else if (response.status_code === 926) {
+        swal('Thông báo!', 'Hoạt động này đã tồn tại!', 'error');
       }
     })
   }
