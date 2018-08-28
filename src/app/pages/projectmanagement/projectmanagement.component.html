@@ -26,14 +26,20 @@
           <input type="text" class="form-control lineHeight" [hidden]="project.id != projectIdEdit" [value]="project.name" #editName (keyup.enter)="updateProjectName(project, editName.value)">
         </div>
         <div class="col-md-3 listIcon">
-          <i class="far fa-check-circle" *ngIf="project.active == 1" (click)="Deactive(project)"></i>
-          <i class="fas fa-ban" *ngIf="project.active == 0" (click)="Active(project)"></i>
+          <i class="far fa-check-circle" *ngIf="project.active == 1" (click)="Deactive(project, content)"></i>
+          <i class="fas fa-ban" *ngIf="project.active == 0" (click)="Active(project, content)"></i>
           <i class="fas fa-pencil-alt" [hidden]="project.id == projectIdEdit" (click)="showEditBox(project)"></i>
-          <i class="fas fa-save" [hidden]="project.id != projectIdEdit" (click)="updateProjectName(project, editName.value)"></i>
-          <i class="fas fa-trash-alt" (click)="deleteProject(project)"></i>
+          <i class="fas fa-save" [hidden]="project.id != projectIdEdit" (click)="updateProjectName(project, editName.value, content)"></i>
+          <i class="fas fa-trash-alt" (click)="deleteProject(project, content)"></i>
+          <div>
+            <ng-template let-c="close" let-d="dismiss" #content>
+              <dialog-confirmation [dismiss]="d" [choosedProjectId]="project.id" (confirmation)="receiveConfirmation($event)" [msg]="msg"></dialog-confirmation>
+            </ng-template>
+          </div>
         </div>
       </div>
     </div>
-
   </nb-card-body>
 </nb-card>
+
+

@@ -15,15 +15,14 @@ import {AppRoutingModule} from './app-routing.module';
 import {ThemeModule} from './@theme/theme.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BsModalRef, BsModalService, ModalModule} from 'ngx-bootstrap';
-import { LoginComponent } from './modals/login/login.component';
-import { LogoutComponent } from './modals/logout/logout.component';
+import {LoginComponent} from './modals/login/login.component';
+import {LogoutComponent} from './modals/logout/logout.component';
 import {UserService} from './@core/services/user.service';
 
 import {PersonalInfoComponent} from './modals/personal-info/personal-info.component';
 import {InputFileConfig} from 'ngx-input-file/src/lib/interfaces/input-file-config';
 import {InputFileModule} from 'ngx-input-file';
 import {FormsModule} from '@angular/forms';
-import { DialogEditConfirmationComponent } from './modals/dialog-edit-confirmation/dialog-edit-confirmation.component';
 import {MatDialogModule} from '@angular/material';
 
 const config: InputFileConfig = {
@@ -33,7 +32,7 @@ const config: InputFileConfig = {
 };
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, LogoutComponent, PersonalInfoComponent, DialogEditConfirmationComponent],
+  declarations: [AppComponent, LoginComponent, LogoutComponent, PersonalInfoComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -52,7 +51,7 @@ const config: InputFileConfig = {
     {provide: APP_BASE_HREF, useValue: '/'},
     UserService,
   ],
-  entryComponents: [LoginComponent, PersonalInfoComponent, LogoutComponent, DialogEditConfirmationComponent],
+  entryComponents: [LoginComponent, PersonalInfoComponent, LogoutComponent],
 })
 export class AppModule {
 }
