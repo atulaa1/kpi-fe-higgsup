@@ -1,4 +1,6 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
+import {User} from '../../@core/models/user.model';
+import {ManagementUsersService} from '../../@core/services/management-users.service';
 
 interface Title {
   id: String;
@@ -11,12 +13,12 @@ interface Title {
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnDestroy, OnInit {
-
   private alive = true;
   private title: Title[];
   private recentActivity: String[];
-
+  constructor(private mService: ManagementUsersService){}
   ngOnInit() {
+    console.log(this.mService.updateRoleUrl);
     this.title = [
       {id: 'recent', description: 'Hoạt động gần đây'},
       {id: 'notify', description: 'Thông báo'},
@@ -31,8 +33,6 @@ export class DashboardComponent implements OnDestroy, OnInit {
       'Seminar Thread In Java',
     ]
   }
-
-
   ngOnDestroy() {
     this.alive = false;
   }

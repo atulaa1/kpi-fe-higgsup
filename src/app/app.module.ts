@@ -13,7 +13,7 @@ import {CoreModule} from './@core/core.module';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {ThemeModule} from './@theme/theme.module';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BsModalRef, BsModalService, ModalModule} from 'ngx-bootstrap';
 import {LoginComponent} from './modals/login/login.component';
 import {LogoutComponent} from './modals/logout/logout.component';

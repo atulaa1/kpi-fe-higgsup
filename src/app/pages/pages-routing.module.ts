@@ -1,13 +1,14 @@
-import { RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {NgModule} from '@angular/core';
 
-import { PagesComponent } from './pages.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import {PagesComponent} from './pages.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
 import {ActiManagementComponent} from './acti-management/acti-management.component';
 import {CreateActiComponent} from './acti-management/create-acti/create-acti.component';
 import {ConfirmActiComponent} from './acti-management/confirm-acti/confirm-acti.component';
 import {ProjectmanagementComponent} from './projectmanagement/projectmanagement.component';
-import {ListOfSurveyComponent} from "./list-of-survey/list-of-survey.component";
+import {ListOfSurveyComponent} from './list-of-survey/list-of-survey.component';
+import {AccManagementComponent} from './acc-management/acc-management.component';
 
 const routes: Routes = [{
   path: '',
@@ -21,6 +22,10 @@ const routes: Routes = [{
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',
+    },
+    {
+      path: 'acc-management',
+      component: AccManagementComponent,
     },
     {
       path: 'acti-management',
