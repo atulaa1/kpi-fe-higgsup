@@ -53,8 +53,8 @@
           <div class="teamButton mt-5">
             <button *ngIf="groupId == null" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
             <button *ngIf="groupId != null" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
-            <button *ngIf="groupId == null" class="btn btn-hero-success submitButton" (click)="onAddTeambuilding()">Lưu</button>
-            <button *ngIf="groupId != null" class="btn btn-hero-success submitButton" (click)="onUpdateTeambuilding()">Lưu</button>
+            <button *ngIf="groupId == null" class="btn btn-hero-success submitButton" (click)="onAddTeambuilding($event)">Lưu</button>
+            <button *ngIf="groupId != null" class="btn btn-hero-success submitButton" (click)="onUpdateTeambuilding($event)">Lưu</button>
           </div>
         </div>
       </div>

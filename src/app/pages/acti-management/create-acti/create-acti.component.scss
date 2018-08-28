@@ -15,8 +15,8 @@ h5 {
   background-color: #5dcfe3;
 }
 .tableScroll {
-  max-height: 200px;
-  overflow-y: scroll;
+  max-height: 400px;
+  overflow-y: auto;
 }
 .teamButton{
   display: flex;
@@ -36,4 +36,12 @@ h5, h6 {
 .formStruc {
   margin-left: 4%;
 }
-
+.titleTable {
+  margin-bottom: 0px;
+}
+.listActivity {
+  min-height: 650px;
+}
+.dateCreated {
+  width: 54%;
+}
