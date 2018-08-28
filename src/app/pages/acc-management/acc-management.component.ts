@@ -36,29 +36,29 @@ export class AccManagementComponent implements OnInit {
     })
   }
   mySearchFunction() {
-      // Declare variables
-      let input, filter, table, tr, td, i;
-      input = document.getElementById('myInput');
-      filter = input.value.toUpperCase();
-      table = document.getElementById('myTable');
-      tr = table.getElementsByTagName('tr');
+    // Declare variables
+    let input, filter, table, tr, td, i;
+    input = document.getElementById('myInput');
+    filter = input.value.toUpperCase();
+    table = document.getElementById('myTable');
+    tr = table.getElementsByTagName('tr');
 
-      for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName('td')[0];
-        if (td) {
-          if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = '';
-          } else {
-            tr[i].style.display = 'none';
-          }
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName('td')[0];
+      if (td) {
+        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = '';
+        } else {
+          tr[i].style.display = 'none';
         }
       }
+    }
   }
   updateRole(userInfo: User) {
     userInfo.isEdited = true;
   }
   openSaveModal(content) {
-    this.bsModal.open(content);
+    this.bsModal.open(content, {backdrop: 'static', centered: true});
   }
   updateSuccess($event) {
     this.editedUser = $event;
