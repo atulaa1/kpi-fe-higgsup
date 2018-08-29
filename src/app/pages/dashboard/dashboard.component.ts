@@ -16,9 +16,8 @@ export class DashboardComponent implements OnDestroy, OnInit {
   private alive = true;
   private title: Title[];
   private recentActivity: String[];
-  constructor(private mService: ManagementUsersService){}
+  constructor(private mService: ManagementUsersService) {}
   ngOnInit() {
-    console.log(this.mService.updateRoleUrl);
     this.title = [
       {id: 'recent', description: 'Hoạt động gần đây'},
       {id: 'notify', description: 'Thông báo'},
