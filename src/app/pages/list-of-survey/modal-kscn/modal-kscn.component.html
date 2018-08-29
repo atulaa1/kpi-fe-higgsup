@@ -19,7 +19,6 @@
       <input class='form-control' type="text" name="changeBinding" [(ngModel)]='survey.question'
              *ngIf='survey.showInput'>
     </div>
-
     <div class="rating text-center mt-2">
       <span class="far fa-star"></span>
       <span class="far fa-star"></span>
@@ -29,8 +28,8 @@
     </div>
   </div>
   <div>
-    <button class="btn btn-hero-success " (click)='changeUpdateSurvey()'>Lưu</button>
-    <button class=" btn btn-outline-dark btn-gray" (click)="closeModal()">Hủy</button>
+    <button class="btn btn-hero-success" *ngIf="smallBtn" (click)='changeUpdateSurvey()'>Lưu</button>
+    <button class=" btn btn-outline-dark btn-gray" *ngIf="smallBtn" (click)="closeModal()">Hủy</button>
   </div>
 
 </div>

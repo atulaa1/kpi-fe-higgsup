@@ -15,7 +15,7 @@ import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 export class PersonalSurveyComponent implements OnInit {
   listSurvey: Array<Survey>;
   modalRef: BsModalRef;
-
+  smallBtn = false;
   constructor(private bsModal: NgbModal,
               private activeModal: NgbActiveModal,
               private surveyService: SurveyService) {
@@ -23,6 +23,7 @@ export class PersonalSurveyComponent implements OnInit {
 
   changeQuestion(surver) {
     surver.showInput = !surver.showInput;
+    this.smallBtn = !this.smallBtn;
   }
 
   changeUpdateSurvey() {
