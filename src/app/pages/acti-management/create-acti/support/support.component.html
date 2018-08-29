@@ -12,6 +12,9 @@
         </button>
       </div>
     </div>
+    <div class="row mt-1 titleAlert" *ngIf="alert === true">
+      <nav>Vui lòng nhập đầy đủ các thông tin!</nav>
+    </div>
     <div class="row mt-2">
       <div class="col-md-6">
         <h5>Hoạt động</h5>
@@ -35,31 +38,43 @@
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Dọn dẹp</h6>
-          <input type="text" class="col-md-2  form-control formStruc" name="cleanUp" [(ngModel)]="createdActivity.cleanUpPoint">
+          <input type="text" class="col-md-2  form-control formStruc" name="cleanUp"
+                 [(ngModel)]="createdActivity.cleanUpPoint"
+                 appTwoDigitDecimaNumber>
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Mua đồ</h6>
-          <input type="text" class=" col-md-2 form-control formStruc" name="buyingStuff" [(ngModel)]="createdActivity.buyingStuffPoint">
+          <input type="text" class=" col-md-2 form-control formStruc" name="buyingStuff"
+                 [(ngModel)]="createdActivity.buyingStuffPoint"
+                 appTwoDigitDecimaNumber>
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Support hội thảo</h6>
           <input type="text" class=" col-md-2 form-control formStruc" name="conference"
-                 [(value)]="createdActivity.supportConferencePoint" [(ngModel)]="createdActivity.supportConferencePoint">
+                 [(value)]="createdActivity.supportConferencePoint" [(ngModel)]="createdActivity.supportConferencePoint"
+                 appTwoDigitDecimaNumber>
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Training</h6>
-          <input type="text" class=" col-md-2 form-control formStruc" name="training" [(ngModel)]="createdActivity.trainingPoint">
+          <input type="text" class=" col-md-2 form-control formStruc" name="training"
+                 [(ngModel)]="createdActivity.trainingPoint"
+                 appTwoDigitDecimaNumber>
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Vệ sinh hàng tuần</h6>
-          <input type="text" class="col-md-2  form-control formStruc" name="weekyClean" [(ngModel)]="createdActivity.weeklyCleanUpPoint">
+          <input type="text" class="col-md-2  form-control formStruc" name="weekyClean"
+                 [(ngModel)]="createdActivity.weeklyCleanUpPoint"
+                 appTwoDigitDecimaNumber>
         </div>
         <div class="row">
           <div class="supportButton mt-5">
             <button *ngIf="groupId == null" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
             <button *ngIf="groupId != null" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
-            <button *ngIf="groupId == null" class="btn btn-hero-success submitButton" (click)="addSupport($event)" >Lưu</button>
-            <button *ngIf="groupId != null" class="btn btn-hero-success submitButton" (click)="changeSupport($event)">Lưu</button>
+            <button *ngIf="groupId == null" class="btn btn-hero-success submitButton" (click)="addSupport($event)">Lưu
+            </button>
+            <button *ngIf="groupId != null" class="btn btn-hero-success submitButton" (click)="changeSupport($event)">
+              Lưu
+            </button>
           </div>
         </div>
       </form>

@@ -39,13 +39,13 @@ export class CreateActiComponent implements OnInit {
 
   openActivityModal(idGroup) {
     if (idGroup === 1) {
-      this.modalService.open(SeminarComponent);
+      this.modalService.open(SeminarComponent, {backdrop: 'static', centered: true});
     } else if (idGroup === 2) {
-      this.modalService.open(ClubComponent);
+      this.modalService.open(ClubComponent, {backdrop: 'static', centered: true});
     } else if (idGroup === 3) {
-      this.modalService.open(TeamBuildingComponent);
+      this.modalService.open(TeamBuildingComponent,{backdrop: 'static', centered: true});
     } else if (idGroup === 4) {
-      this.modalService.open(SupportComponent);
+      this.modalService.open(SupportComponent,{backdrop: 'static', centered: true});
     }
   }
 
