@@ -9,7 +9,8 @@
   <nb-action class="higgigup-nb-action nav-list"><a href="#">Giới thiệu - Hướng dẫn</a></nb-action>
   <nb-action class="higgigup-nb-action nav-list"><a href="#">Cách tính điểm</a></nb-action>
   <nb-action class="higgigup-nb-action nav-list"><a href="#">Cơ cấu thưởng</a></nb-action>
-  <nb-action *ngIf="!user.token && !user.username" class="higgigup-nb-action nav-list" (click)="openLoginModal()"><a href="#">Đăng nhập</a>
+  <nb-action *ngIf="!user.token && !user.username" class="higgigup-nb-action nav-list" (click)="openLoginModal()"><a
+    href="#">Đăng nhập</a>
   </nb-action>
   <nb-action *ngIf="user.username">
     <a href="#">
@@ -47,49 +48,45 @@
         </div>
 
         <ul>
-          <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" style="display: flex;border-top: 1px solid #ebeef2;padding: 15px;"
-              class="text-center font-weight-600">
+          <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" class="text-center font-weight-600">
             <i style="  font-size: 25px;" class="fas fa-user-circle"></i>
-            <a style="margin-left: 10px" ng-reflect-router-link="" title="Quản lý tài khoản" href="#/pages/acc-management">
+            <a style="margin-left: 10px" ng-reflect-router-link="" title="Quản lý tài khoản"
+               href="#/pages/acc-management">
               <span class="menu-title">Quản lý tài khoản</span>
             </a>
           </li>
 
-          <li style="display: flex;border-top: 1px solid #ebeef2;padding: 15px"
-              class="text-center font-weight-600">
+          <li style="" class="text-center font-weight-600">
             <i style="  font-size: 25px;" class="fas fa-user-circle"></i>
             <a style="margin-left: 10px" ng-reflect-router-link="" title="Quản lý tài khoản" href="#/pages/dashboard">
               <span class="menu-title">Thông tin tài khoản</span>
             </a>
           </li>
 
-          <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" style="display: flex;border-top: 1px solid #ebeef2;padding: 15px;"
-              class="text-center font-weight-600">
+          <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" class="text-center font-weight-600">
             <i style="font-size: 23px;" class="fas fa-users"></i>
-            <a style="margin-left: 10px" ng-reflect-router-link="" title="Quản lý hoạt động" href="#/pages/acti-management">
+            <a style="margin-left: 10px" ng-reflect-router-link="" title="Quản lý hoạt động"
+               href="#/pages/acti-management">
               <span class="menu-title">Quản lý hoạt động</span>
             </a>
           </li>
 
 
-          <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" style="display: flex;border-top: 1px solid #ebeef2;padding: 15px;"
-              class="text-center font-weight-600">
+          <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" class="text-center font-weight-600">
             <i style="  font-size: 23px;" class="fas fa-edit"></i>
             <a style="margin-left: 10px" ng-reflect-router-link="" title="Quản lý khảo sát" href="#/pages/listofsurvey">
               <span class="menu-title">Quản lý khảo sát</span>
             </a>
           </li>
 
-          <li style="display: flex;border-top: 1px solid #ebeef2;padding: 15px;"
-              class="text-center font-weight-600">
+          <li class="text-center font-weight-600">
             <i style="  font-size: 23px;" class="fas fa-pencil-alt"></i>
             <a style="margin-left: 10px" ng-reflect-router-link="" title="Khảo sát" href="#/pages/dashboard">
               <span class="menu-title">Khảo sát</span>
             </a>
           </li>
 
-          <li style="display: flex;border-top: 1px solid #ebeef2;padding: 15px;"
-              class="text-center font-weight-600">
+          <li class="text-center font-weight-600">
             <i style="  font-size: 23px;" class="fas fa-history"></i>
             <a style="margin-left: 10px" ng-reflect-router-link="" title="Xem lịch sử" href="#/pages/dashboard">
               <span class="menu-title">Xem lịch sử</span>
@@ -97,8 +94,7 @@
           </li>
 
 
-          <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" style="display: flex;border-top: 1px solid #ebeef2;padding: 15px;"
-              class="text-center font-weight-600">
+          <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" class="text-center font-weight-600">
             <i style="  font-size: 23px;" class="fas fa-plus-circle"></i>
             <a style="margin-left: 10px" ng-reflect-router-link="" title="Tạo hoạt động" href="#/pages/dashboard">
               <span class="menu-title">Tạo hoạt động</span>
@@ -107,15 +103,16 @@
 
           <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" class="text-center font-weight-600 manipulationMenu">
             <i style="  font-size: 23px;" class="fas fa-file-alt"></i>
-            <a style="margin-left: 10px" ng-reflect-router-link="" title="Quản lý dự án" href="#/pages/project-management">
+            <a style="margin-left: 10px" ng-reflect-router-link="" title="Quản lý dự án"
+               href="#/pages/project-management">
               <span class="menu-title">Quản lý dự án</span>
             </a>
           </li>
 
-          <li style="display: flex;border-top: 1px solid #ebeef2;padding: 15px;"
-              class="text-center font-weight-600">
+          <li class="text-center font-weight-600">
             <i style="  font-size: 23px;" class="fas fa-sign-out-alt"></i>
-            <a style="margin-left: 10px" ng-reflect-router-link="" title="Đăng xuất" (click)="openLogoutModal()" href="#">
+            <a style="margin-left: 10px" ng-reflect-router-link="" title="Đăng xuất" (click)="openLogoutModal()"
+               href="#">
               <span class="menu-title">Đăng xuất</span>
             </a>
           </li>
