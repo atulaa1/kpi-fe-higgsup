@@ -10,6 +10,7 @@ import {ClubComponent} from './create-acti/club/club.component';
 import {TeamBuildingComponent} from './create-acti/team-building/team-building.component';
 import {SupportComponent} from './create-acti/support/support.component';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {TwoDigitDecimaNumberDirective} from '../../@core/services/regex.directive';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
     ThemeModule,
   ],
   declarations: [ActiManagementComponent, CreateActiComponent, ConfirmActiComponent, SeminarComponent, ClubComponent,
-    TeamBuildingComponent, SupportComponent],
+    TeamBuildingComponent, SupportComponent, TwoDigitDecimaNumberDirective],
   entryComponents: [SeminarComponent, ClubComponent, TeamBuildingComponent, SupportComponent],
   providers: [NgbActiveModal],
 })
