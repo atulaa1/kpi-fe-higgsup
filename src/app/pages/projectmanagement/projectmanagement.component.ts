@@ -33,7 +33,7 @@ export class ProjectmanagementComponent implements OnInit {
     this.getListProject();
   }
 
-  Active(project: Project, content) {
+  active(project: Project, content) {
     if (this.isAdding === false && this.isEditing === false) {
       this.actionType = 'EDIT';
       this.msg = 'Bạn có muốn kích hoạt dự án ' + project.name + ' không';
@@ -44,7 +44,7 @@ export class ProjectmanagementComponent implements OnInit {
     }
   }
 
-  Deactive(project: Project, content) {
+  deactive(project: Project, content) {
     if (this.isAdding === false && this.isEditing === false) {
       this.actionType = 'EDIT';
       this.msg = 'Bạn có muốn dừng hoạt động của dự án ' + project.name + ' không?';

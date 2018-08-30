@@ -30,9 +30,9 @@
                    [value]="project.name" #editName (keyup.enter)="updateProjectName(project, editName.value, content)">
           </div>
           <div class="col-md-3">
-            <button class="btn btn-hero-success buttonSpace" *ngIf="project.active == 1" (click)="Deactive(project, content)"><i
+            <button class="btn btn-hero-success buttonSpace" *ngIf="project.active == 1" (click)="deactive(project, content)"><i
               class="far fa-check-circle  fa-2x"></i></button>
-            <button class="btn btn-hero-success buttonSpace" *ngIf="project.active == 0" (click)="Active(project, content)"><i class="fas fa-ban  fa-2x"></i>
+            <button class="btn btn-hero-success buttonSpace" *ngIf="project.active == 0" (click)="active(project, content)"><i class="fas fa-ban  fa-2x"></i>
             </button>
             <button class="btn btn-hero-success buttonSpace" [hidden]="project.id == projectIdEdit" (click)="showEditBox(project)"><i
               class="fas fa-pencil-alt  fa-2x"></i></button>
