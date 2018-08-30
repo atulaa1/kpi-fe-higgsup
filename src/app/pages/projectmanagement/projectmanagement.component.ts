@@ -3,6 +3,7 @@ import {Project} from '../../@core/models/project.model';
 import {ProjectService} from '../../@core/services/project.service';
 import {ResponseProjectDTO} from '../../@core/models/response-project-dto.model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {DialogConfirmationComponent} from '../../modals/dialog-confirmation/dialog-confirmation.component';
 
 @Component({
   selector: 'projectmanagement',
@@ -10,7 +11,8 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./projectmanagement.component.scss'],
 })
 export class ProjectmanagementComponent implements OnInit {
-  add: boolean = true;
+  isAdding: boolean = false;
+  isEditing: boolean = false;
   projects: Project[];
   newProject: Project;
   projectToEdit: Project;
@@ -18,6 +20,7 @@ export class ProjectmanagementComponent implements OnInit {
   projectIdEdit: number;
   editedProjectName: string;
   msg: string;
+  buttonTitle: string;
   actionType: string;
   currentProject: Project;
 
@@ -31,33 +34,50 @@ export class ProjectmanagementComponent implements OnInit {
   }
 
   Active(project: Project, content) {
-    this.actionType = 'EDIT';
-    this.msg = 'Bạn đã đổi trạng thái của ' + project.name + ' thành Đang hoạt động';
-    this.currentProject = Object.assign({}, project);
-    this.currentProject.active = 1;
-    this.bsModal.open(content, {backdrop: 'static', centered: true});
+    if (this.isAdding === false && this.isEditing === false) {
+      this.actionType = 'EDIT';
+      this.msg = 'Bạn có muốn kích hoạt dự án ' + project.name + ' không';
+      this.buttonTitle = 'Lưu thay đổi'
+      this.currentProject = Object.assign({}, project);
+      this.currentProject.active = 1;
+      this.bsModal.open(content, {backdrop: 'static', centered: true});
+    }
   }
 
   Deactive(project: Project, content) {
-    this.actionType = 'EDIT';
-    this.msg = 'Bạn đã đổi trạng thái của ' + project.name + ' thành Dừng hoạt động';
-    this.currentProject = Object.assign({}, project);
-    this.currentProject.active = 0;
-    this.bsModal.open(content, {backdrop: 'static', centered: true});
+    if (this.isAdding === false && this.isEditing === false) {
+      this.actionType = 'EDIT';
+      this.msg = 'Bạn có muốn dừng hoạt động của dự án ' + project.name + ' không?';
+      this.buttonTitle = 'Lưu thay đổi'
+      this.currentProject = Object.assign({}, project);
+      this.currentProject.active = 0;
+      this.bsModal.open(content, {backdrop: 'static', centered: true});
+    }
   }
 
   addProject() {
-    this.add = !this.add;
+    if (this.isEditing === false) {
+      this.isAdding = true;
+    }
+  }
+
+  cancelAddProject() {
+    this.isAdding = false;
   }
 
   confirmAdd(event) {
     const code = (event.keyCode ? event.keyCode : event.which);
     if (event.keyCode === 13) {
       this.projectService.addNewProject(this.newProject).subscribe((response: ResponseProjectDTO) => {
-        this.getListProject();
-        this.statusCode = response.status_code;
-        this.newProject = new Project();
-        this.add = !this.add;
+        if (response.status_code === 200) {
+          this.getListProject();
+          this.newProject = new Project();
+          this.isAdding = false;
+        } else if (response.status_code === 932) {
+          let dialog = this.bsModal.open(DialogConfirmationComponent, {backdrop: 'static', centered: true});
+          dialog.componentInstance.msg = 'Dự án này đã tồn tại!';
+          dialog.componentInstance.buttonTitle = 'Xác nhận';
+        }
       });
     }
   }
@@ -69,24 +89,33 @@ export class ProjectmanagementComponent implements OnInit {
   }
 
   showEditBox(project: Project) {
-    this.projectToEdit = project;
-    this.projectIdEdit = project.id;
-    this.editedProjectName = project.name;
+    if (this.isAdding === false) {
+      this.isEditing = true;
+      this.projectToEdit = project;
+      this.projectIdEdit = project.id;
+      this.editedProjectName = project.name;
+    }
   }
 
   updateProjectName(project: Project, editName: string, content) {
-    this.actionType = 'EDIT';
-    this.msg = 'Bạn đã đổi tên ' + project.name + ' thành ' + editName;
-    this.currentProject = Object.assign({}, project);
-    this.currentProject.name = editName
-    this.bsModal.open(content, {backdrop: 'static', centered: true});
+    if (this.isAdding === false) {
+      this.actionType = 'EDIT';
+      this.msg = 'Bạn có muốn đổi tên ' + project.name + ' thành ' + editName;
+      this.buttonTitle = 'Lưu thay đổi'
+      this.currentProject = Object.assign({}, project);
+      this.currentProject.name = editName
+      this.bsModal.open(content, {backdrop: 'static', centered: true});
+    }
   }
 
   deleteProject(project: Project, content) {
-    this.actionType = 'DELETE';
-    this.msg = 'Bạn có chắc muốn xóa ' + project.name + '?';
-    this.currentProject = Object.assign({}, project);
-    this.bsModal.open(content, {backdrop: 'static', centered: true});
+    if (this.isAdding === false && this.isEditing === false) {
+      this.actionType = 'DELETE';
+      this.msg = 'Bạn có chắc muốn xóa ' + project.name + '?';
+      this.buttonTitle = 'Xóa'
+      this.currentProject = Object.assign({}, project);
+      this.bsModal.open(content, {backdrop: 'static', centered: true});
+    }
   }
 
   receiveConfirmation($event) {
@@ -111,6 +140,8 @@ export class ProjectmanagementComponent implements OnInit {
       }
     } else {
       this.projectIdEdit = 0;
+      this.isAdding = false;
+      this.isEditing = false;
     }
   }
 }

@@ -1,5 +1,5 @@
 <nb-card>
-  <nb-card-body>
+  <nb-card-body class="row ml-5 mr-5">
     <div class="container">
       <div class="row">
         <div class="col-md-12 mt-3 mb-5">
@@ -12,29 +12,41 @@
       </div>
       <div class="row">
         <div class="col-md-3">
-          <button class="btn btn-hero-success mb-5" *ngIf="add" (click)="addProject()">Thêm dự án</button>
-          <div class="row" *ngIf="!add">
-            <input type="text" class="form-control mb-5 col-md-10" (keypress)="confirmAdd($event)" #projectName
+          <button class="btn btn-hero-success mb-5" *ngIf="!isAdding" (click)="addProject()" [disabled]="isEditing">Thêm
+            dự án
+          </button>
+          <div class="row" *ngIf="isAdding">
+            <input type="text" class="inputBox mb-5 col-md-10" (keypress)="confirmAdd($event)" #projectName
                    [(ngModel)]="newProject.name">
-            <i class="fas fa-times col-md-2"></i>
+            <i class="fas fa-times col-md-2" (click)="cancelAddProject()"></i>
           </div>
         </div>
       </div>
-      <div class="row ml-5 kpiRow" *ngFor="let project of projects;">
-        <div class="col-md-6">
-          <p [hidden]="project.id == projectIdEdit" class="nameProject">{{project.name}}</p>
-          <input type="text" class="form-control lineHeight" [hidden]="project.id != projectIdEdit" [value]="project.name" #editName (keyup.enter)="updateProjectName(project, editName.value, content)">
-        </div>
-        <div class="col-md-3 listIcon">
-          <i class="far fa-check-circle" *ngIf="project.active == 1" (click)="Deactive(project, content)"></i>
-          <i class="fas fa-ban" *ngIf="project.active == 0" (click)="Active(project, content)"></i>
-          <i class="fas fa-pencil-alt" [hidden]="project.id == projectIdEdit" (click)="showEditBox(project)"></i>
-          <i class="fas fa-save" [hidden]="project.id != projectIdEdit" (click)="updateProjectName(project, editName.value, content)"></i>
-          <i class="fas fa-trash-alt" (click)="deleteProject(project, content)"></i>
-          <div>
-            <ng-template let-c="close" let-d="dismiss" #content>
-              <dialog-confirmation [dismiss]="d" [choosedProjectId]="project.id" (confirmation)="receiveConfirmation($event)" [msg]="msg"></dialog-confirmation>
-            </ng-template>
+      <div class="table scrollTable">
+        <div class="row border-top border-bottom" [ngClass]="{'activeRow': project.active == 1, 'deactiveRow': project.active == 0}" *ngFor="let project of projects;">
+          <div class="col-md-10">
+            <p [hidden]="project.id == projectIdEdit" class="nameProject">{{project.name}}</p>
+            <input type="text" class="form-control lineHeight" [hidden]="project.id != projectIdEdit"
+                   [value]="project.name" #editName (keyup.enter)="updateProjectName(project, editName.value, content)">
+          </div>
+          <div class="col-md-2">
+            <button class="btn-sm btn-light buttonSpace" *ngIf="project.active == 1" (click)="Deactive(project, content)"><i
+              class="far fa-check-circle  fa-2x"></i></button>
+            <button class="btn-sm btn-light buttonSpace" *ngIf="project.active == 0" (click)="Active(project, content)"><i class="fas fa-ban  fa-2x"></i>
+            </button>
+            <button class="btn-sm btn-light buttonSpace" [hidden]="project.id == projectIdEdit" (click)="showEditBox(project)"><i
+              class="fas fa-pencil-alt  fa-2x"></i></button>
+            <button class="btn-sm btn-light buttonSpace" [hidden]="project.id != projectIdEdit"
+                    (click)="updateProjectName(project, editName.value, content)"><i class="fas fa-save fa-2x"></i>
+            </button>
+            <button class="btn-sm btn-light buttonSpace" (click)="deleteProject(project, content)"><i class="fas fa-trash-alt fa-2x"></i></button>
+            <div>
+              <ng-template let-c="close" let-d="dismiss" #content>
+                <dialog-confirmation [dismiss]="d" [choosedProjectId]="project.id"
+                                     (confirmation)="receiveConfirmation($event)" [msg]="msg"
+                                     [buttonTitle]="buttonTitle"></dialog-confirmation>
+              </ng-template>
+            </div>
           </div>
         </div>
       </div>
