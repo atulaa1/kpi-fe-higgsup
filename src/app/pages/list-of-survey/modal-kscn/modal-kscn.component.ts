@@ -42,6 +42,7 @@ export class PersonalSurveyComponent implements OnInit {
         swal('Chúc Mừng!', 'Đã update Thành công!', 'success');
         this.listSurvey.forEach(survey => {
           survey.showInput = false;
+          this.smallBtn = false;
         })
         // this.activeModal.close();
       } else if (response.status_code === 900) {

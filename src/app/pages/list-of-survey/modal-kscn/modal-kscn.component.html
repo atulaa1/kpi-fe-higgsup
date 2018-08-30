@@ -9,8 +9,8 @@
     <div class="row">
       <span class="pl-3">Câu {{survey.id}} :</span>
       <div class="col-md-12 pd" *ngIf='!survey.showInput'>
-        <span *ngIf="survey.question.length <= 217">{{survey.question}}</span>
-        <span *ngIf="survey.question.length > 217">{{survey.question.slice(0, 217)}}...</span>
+        <span *ngIf="survey.question.length <= 160">{{survey.question}}</span>
+        <span *ngIf="survey.question.length > 160">{{survey.question.slice(0, 160)}}...</span>
       </div>
         <span *ngIf="!survey.showInput" class="pl-2 pisotion-icon"><i (click)='changeQuestion(survey)' class="fas fa-wrench"></i></span>
     </div>
@@ -25,8 +25,8 @@
       </div>
   </div>
   <div>
-    <button class="btn btn-hero-success" *ngIf="smallBtn" (click)='changeUpdateSurvey()'>Lưu</button>
-    <button class=" btn btn-outline-dark btn-gray" *ngIf="smallBtn" (click)="closeModal()">Hủy</button>
+    <button class="btn btn-hero-warning" *ngIf="smallBtn" (click)="closeModal()">Hủy</button>
+    <button class="btn btn-hero-success pull-right" *ngIf="smallBtn" (click)='changeUpdateSurvey()'>Lưu</button>
   </div>
 
 </div>
