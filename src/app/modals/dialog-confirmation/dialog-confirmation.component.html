@@ -1,7 +1,8 @@
 <div class="modal-body">
   <p >{{msg}}</p>
   <div style="text-align: center">
-    <button class='btn btn-hero-warning mr-5' (click)="cancel()">Hủy</button>
-    <button class='btn btn-hero-success' (click)="confirm()">Xác nhận</button>
+    <button [hidden]="buttonTitle == 'Xác nhận'" class='btn btn-hero-warning mr-5' (click)="cancel()">Hủy</button>
+    <button [hidden]="buttonTitle == 'Xác nhận'" class='btn btn-hero-success' (click)="confirm()">{{buttonTitle}}</button>
+    <button [hidden]="buttonTitle != 'Xác nhận'" class='btn btn-hero-success' (click)="close()">{{buttonTitle}}</button>
   </div>
 </div>
