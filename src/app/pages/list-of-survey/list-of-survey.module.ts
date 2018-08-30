@@ -10,7 +10,6 @@ import {ThemeModule} from "../../@theme/theme.module";
   imports: [
     CommonModule,
     FormsModule,
-    ThemeModule,
   ],
   declarations: [ListOfSurveyComponent, PersonalSurveyComponent, SeminarSurveyComponent ],
   entryComponents: [PersonalSurveyComponent, SeminarSurveyComponent],
