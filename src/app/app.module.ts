@@ -23,6 +23,7 @@ import {PersonalInfoComponent} from './modals/personal-info/personal-info.compon
 import {InputFileConfig} from 'ngx-input-file/src/lib/interfaces/input-file-config';
 import {InputFileModule} from 'ngx-input-file';
 import {FormsModule} from '@angular/forms';
+import {DataService} from './@core/services/data.service';
 
 const config: InputFileConfig = {
   sizeLimit: 100,
@@ -48,6 +49,7 @@ const config: InputFileConfig = {
   providers: [BsModalService, BsModalRef,
     {provide: APP_BASE_HREF, useValue: '/'},
     UserService,
+    DataService,
   ],
   entryComponents: [LoginComponent, PersonalInfoComponent, LogoutComponent],
 })

@@ -5,6 +5,7 @@ import {Group} from '../../../../@core/models/group.model';
 import {CreatedActivity} from '../../../../@core/models/createdActivity.model';
 import {Activity} from '../../../../@core/models/activity.model';
 import swal from 'sweetalert';
+import {DataService} from '../../../../@core/services/data.service';
 
 @Component({
   selector: 'ngx-team-building',
@@ -17,8 +18,10 @@ export class TeamBuildingComponent implements OnInit {
   @Input() activityName: string = '';
   @Input() dismiss;
   teambuilding = new Group<CreatedActivity>();
+  message: string;
   @Output() change = new EventEmitter<any>();
-  constructor(private activeModal: NgbActiveModal, private teambuildingService: TeambuildingService) {
+  constructor(private activeModal: NgbActiveModal, private teambuildingService: TeambuildingService,
+              private data: DataService) {
   }
 
 
@@ -36,8 +39,8 @@ export class TeamBuildingComponent implements OnInit {
     this.teambuilding.name = this.activityName;
     return this.teambuildingService.addTeambuilding(this.teambuilding).subscribe(response => {
       if (response.status_code === 200) {
-        this.change.emit(addNew);
         this.activeModal.close();
+        this.data.changeMessage('Created new an activity');
         swal('Chúc Mừng!', 'Đã tạo thành công!', 'success');
       } else if (response.status_code === 906) {
         swal('Thông báo!', 'Hoạt động này đã tồn tại!', 'error');
@@ -78,5 +81,6 @@ export class TeamBuildingComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.data.currentMessage.subscribe(message => this.message = message)
   }
 }
