@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {AuthenService} from '../../@core/services/authen.service';
 import {Router} from '@angular/router';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'ngx-logout',
   templateUrl: './logout.component.html',
@@ -12,7 +13,7 @@ export class LogoutComponent implements OnInit {
 
   constructor(private router: Router,
               private authenService: AuthenService,
-              private bsModal: BsModalService) {
+              private bsModal: NgbActiveModal) {
   }
 
   ngOnInit() {
@@ -25,7 +26,7 @@ export class LogoutComponent implements OnInit {
   }
 
   cancelLogout() {
-    this.bsModal.hide(1);
+    this.bsModal.close();
   }
 
 

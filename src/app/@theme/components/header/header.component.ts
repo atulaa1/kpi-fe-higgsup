@@ -10,6 +10,7 @@ import {LogoutComponent} from '../../../modals/logout/logout.component';
 import {UserService} from '../../../@core/services/user.service';
 import {NgbModal, NgbModalOptions, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {PersonalInfoComponent} from '../../../modals/personal-info/personal-info.component';
+
 @Component({
   selector: 'ngx-header',
   styleUrls: ['./header.component.scss'],
@@ -72,8 +73,9 @@ export class HeaderComponent implements OnInit {
   openLoginModal() {
     this.loginModal = this.bsModal.open(LoginComponent, {backdrop: 'static', centered: true});
   }
+
   openLogoutModal() {
-    this.logoutModal = this.bsModal.open(LogoutComponent);
+    this.logoutModal = this.bsModal.open(LogoutComponent, {backdrop: 'static', centered: true});
   }
 
   logout() {
@@ -93,6 +95,7 @@ export class HeaderComponent implements OnInit {
     }, (reason) => {
     })
   }
+
   startSearch() {
   }
 }
