@@ -20,6 +20,9 @@ export class LoginComponent implements OnInit {
   submitted = false;
   invalidLogin: boolean = false;
   message: String;
+  userName: string;
+  password: string;
+  alert: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -42,6 +45,10 @@ export class LoginComponent implements OnInit {
 
     this.message = null;
     this.submitted = true;
+    if (this.loginForm.controls.userName.value === ''
+    || this.loginForm.controls.password.value === '') {
+      this.message = MessageConstant.blankLogin.toString();
+    }
     if (this.loginForm.invalid) {
       return;
     }
@@ -66,6 +73,7 @@ export class LoginComponent implements OnInit {
       this.invalidLogin = true;
     }
   }
+
   closeModal() {
     this.activeModal.close();
   }
