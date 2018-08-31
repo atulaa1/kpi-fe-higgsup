@@ -73,11 +73,8 @@
           <div class="clubButton mt-5">
             <button *ngIf="groupId == null" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
             <button *ngIf="groupId != null" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
-            <button *ngIf="groupId == null" class="btn btn-hero-success submitButton" (click)="onAddClub($event)">Lưu
-            </button>
-            <button *ngIf="groupId != null" class="btn btn-hero-success submitButton" (click)="onUpdateClub($event)">
-              Lưu
-            </button>
+            <button *ngIf="groupId == null" class="btn btn-hero-success submitButton" (click)="onAddClub($event)">Lưu</button>
+            <button *ngIf="groupId != null" class="btn btn-hero-success submitButton" (click)="onUpdateClub($event)">Lưu</button>
           </div>
         </div>
       </form>

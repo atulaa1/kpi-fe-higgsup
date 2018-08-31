@@ -10,7 +10,7 @@ import {ClubComponent} from './create-acti/club/club.component';
 import {TeamBuildingComponent} from './create-acti/team-building/team-building.component';
 import {SupportComponent} from './create-acti/support/support.component';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {TwoDigitDecimaNumberDirective} from '../../@core/services/regex.directive';
+import {TwoDigitDecimaNumberDirective} from '../../@core/directives/regex.directive';
 
 @NgModule({
   imports: [
