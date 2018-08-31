@@ -5,6 +5,7 @@ import {SupportService} from '../../../../@core/services/support.service';
 import {Group} from '../../../../@core/models/group.model';
 import {Activity} from '../../../../@core/models/activity.model';
 import swal from 'sweetalert';
+import {DataService} from '../../../../@core/services/data.service';
 
 @Component({
   selector: 'ngx-support',
@@ -18,10 +19,12 @@ export class SupportComponent implements OnInit {
   @Input() dismiss;
   group = new Group<CreatedActivity>();
   alert: boolean = false;
+  message: string;
   @Output() change = new EventEmitter<any>();
 
   constructor(private activeModal: NgbActiveModal,
-              private supportService: SupportService) {
+              private supportService: SupportService,
+              private data: DataService) {
   }
 
 
@@ -39,25 +42,20 @@ export class SupportComponent implements OnInit {
       || this.group.additionalConfig.supportConferencePoint === null
       || this.group.additionalConfig.trainingPoint === null) {
       this.alert = true;
-    }
-    else {
+    } else {
       return this.supportService.createSupport(this.group).subscribe(response => {
         if (response.status_code === 200) {
           this.group = response;
-          this.change.emit(addNew);
           this.activeModal.close();
+          this.data.changeMessage('Created new an activity');
           swal('Chúc Mừng!', 'Đã tạo thành công!', 'success');
-        }
-        else if (response.status_code === 906) {
+        } else if (response.status_code === 906) {
           swal('Thông báo!', 'Hoạt động support chung đã được tạo! Bạn chỉ có thể update!', 'error');
-        }
-        else if (response.status_code === 900) {
+        } else if (response.status_code === 900) {
           swal('Thông báo!', 'Không tìm thấy loại hoạt động!', 'error');
-        }
-        else if (response.status_code === 901) {
+        } else if (response.status_code === 901) {
           swal('Thông báo!', 'Điểm không hợp lệ!', 'error');
-        }
-        else if (response.status_code === 905) {
+        } else if (response.status_code === 905) {
           swal('Thông báo!', 'Các trường không được để trống!', 'error');
         }
       })
@@ -78,23 +76,20 @@ export class SupportComponent implements OnInit {
         this.change.emit(update);
         this.dismiss();
         swal('Chúc Mừng!', 'Đã sửa thành công!', 'success');
-      }
-      else if (response.status_code === 906) {
+      } else if (response.status_code === 906) {
         swal('Thông báo!', 'Hoạt động này đã tồn tại!', 'error');
-      }
-      else if (response.status_code === 900) {
+      } else if (response.status_code === 900) {
         swal('Thông báo!', 'Không tìm thấy loại hoạt động!', 'error');
-      }
-      else if (response.status_code === 901) {
+      } else if (response.status_code === 901) {
         swal('Thông báo!', 'Điểm không hợp lệ!', 'error');
-      }
-      else if (response.status_code === 905) {
+      } else if (response.status_code === 905) {
         swal('Thông báo!', 'Các trường không được để trống!', 'error');
       }
     })
   }
 
   ngOnInit() {
+    this.data.currentMessage.subscribe(message => this.message = message)
   }
 
   onClose() {

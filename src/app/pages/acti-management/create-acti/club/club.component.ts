@@ -6,6 +6,7 @@ import {Activity} from '../../../../@core/models/activity.model';
 import {ClubService} from '../../../../@core/services/club.service';
 import swal from 'sweetalert';
 import {ActivitiesService} from '../../../../@core/services/activities.service';
+import {DataService} from '../../../../@core/services/data.service';
 
 @Component({
   selector: 'ngx-club',
@@ -20,7 +21,10 @@ export class ClubComponent implements OnInit {
   group = new Group<CreatedActivity>();
   listActivities: Array<Activity>;
   @Output() change = new EventEmitter<any>();
-  constructor(private activeModal: NgbActiveModal, private clubService: ClubService, private activityService: ActivitiesService) {
+  message: string;
+
+  constructor(private activeModal: NgbActiveModal, private clubService: ClubService, private activityService: ActivitiesService,
+              private data: DataService) {
   }
 
 
@@ -33,22 +37,17 @@ export class ClubComponent implements OnInit {
     return this.clubService.addClub(this.group).subscribe(response => {
       if (response.status_code === 200) {
         this.activeModal.close();
-
-         swal('Chúc Mừng!', 'Đã tạo thành công!', 'success');
-      }
-      else if (response.status_code === 906) {
-         swal('Thông báo!', 'Hoạt động này đã tồn tại!', 'error');
-      }
-      else if (response.status_code === 903) {
+        this.data.changeMessage('Created new an activity');
+        swal('Chúc Mừng!', 'Đã tạo thành công!', 'success');
+      } else if (response.status_code === 906) {
+        swal('Thông báo!', 'Hoạt động này đã tồn tại!', 'error');
+      } else if (response.status_code === 903) {
         swal('Thông báo!', 'Tên CLB không hợp lệ!', 'error');
-      }
-      else if (response.status_code === 901) {
+      } else if (response.status_code === 901) {
         swal('Thông báo!', 'Số buổi hoặc điểm không hợp lệ!', 'error');
-      }
-      else if (response.status_code === 900) {
+      } else if (response.status_code === 900) {
         swal('Thông báo!', 'Loại hoạt động không tồn tại!', 'error');
-      }
-      else if (response.status_code === 932) {
+      } else if (response.status_code === 932) {
         swal('Thông báo!', 'Câu lạc bộ đã tồn tại!', 'error');
       }
     })
@@ -66,21 +65,18 @@ export class ClubComponent implements OnInit {
         this.change.emit(update);
         this.dismiss();
         return swal('Chúc Mừng!', 'Đã sửa thành công!', 'success');
-      }
-      else if (response.status_code === 906) {
+      } else if (response.status_code === 906) {
         return swal('Thông báo!', 'Hoạt động này đã tồn tại!', 'error');
-      }
-      else if (response.status_code === 903) {
+      } else if (response.status_code === 903) {
         return swal('Thông báo!', 'Tên CLB không hợp lệ!', 'error');
-      }
-      else if (response.status_code === 901) {
+      } else if (response.status_code === 901) {
         return swal('Thông báo!', 'Số điểm không hợp lệ!', 'error');
-      }
-      else if (response.status_code === 900) {
+      } else if (response.status_code === 900) {
         return swal('Thông báo!', 'Loại hoạt động không tồn tại!', 'error');
       }
     })
   }
+
   getCreatedActivities() {
     this.activityService.getCreatedActivity().subscribe(response => {
       if (response.status_code === 200) {
@@ -88,9 +84,11 @@ export class ClubComponent implements OnInit {
       }
     })
   }
-  ngOnInit() {
 
+  ngOnInit() {
+    this.data.currentMessage.subscribe(message => this.message = message)
   }
+
 
   onClose() {
     this.activeModal.close();
