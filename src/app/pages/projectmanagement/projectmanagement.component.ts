@@ -132,9 +132,14 @@ export class ProjectmanagementComponent implements OnInit {
         this.projectService.updateProject(this.currentProject).subscribe((response: ResponseProjectDTO) => {
           if (response.status_code === 200) {
             this.projectIdEdit = 0;
+            this.isEditing = false;
             this.currentProject = null;
             this.actionType = null;
             this.getListProject();
+          } else if (response.status_code === 901) {
+            let dialog = this.bsModal.open(DialogConfirmationComponent, {backdrop: 'static', centered: true});
+            dialog.componentInstance.msg = 'Dự án này đã tồn tại!';
+            dialog.componentInstance.buttonTitle = 'Xác nhận';
           }
         });
       }
