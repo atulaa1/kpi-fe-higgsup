@@ -17,10 +17,10 @@
     <tr *ngFor='let userInfo of listUser; let userIndex = index;'>
       <td>{{userInfo.username}}</td>
       <td id='{{userInfo.username}}'>
-        <span [hidden]="userInfo.isEdited">{{userInfo.mainRole}}</span>
+        <span [hidden]="userInfo.isEdited">{{userInfo.mainRole.slice(5)}}</span>
         <select [hidden]="!userInfo.isEdited"  name="roles" [(ngModel)]="userInfo.mainRole"  >
-          <option value="ROLE_MAN">ROLE_MAN</option>
-          <option value="ROLE_EMPLOYEE">ROLE_EMPLOYEE</option>
+          <option value="ROLE_MAN">MAN</option>
+          <option value="ROLE_EMPLOYEE">EMPLOYEE</option>
         </select>
       </td>
       <td>
