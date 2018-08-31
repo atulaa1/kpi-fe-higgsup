@@ -4,7 +4,7 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
   selector: '[appTwoDigitDecimaNumber]'
 })
 export class TwoDigitDecimaNumberDirective {
-  // Regex chỉ cho phép 2 số thập phân và số âm
+  // Regex chỉ cho phép 2 chữ số thập phân và số dương
   private regex: RegExp = new RegExp(/^\d*\.?\d{0,2}$/g);
   // Cho phép một vài phím đặc biệt như:
   // Backspace, tab, end, home
