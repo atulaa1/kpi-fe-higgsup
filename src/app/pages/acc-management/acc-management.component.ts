@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AskSaveComponent} from './ask-save/ask-save.component';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {ManagementUsersService} from '../../@core/services/management-users.service';
@@ -14,10 +14,11 @@ export class AccManagementComponent implements OnInit {
   save;
   listUser: Array<User>;
   editedUser: User;
-  constructor(
-    private bsModal: NgbModal,
-    private managementUsersService: ManagementUsersService,
-  ) { }
+  defaultUser: User;
+  constructor(private bsModal: NgbModal,
+              private managementUsersService: ManagementUsersService,) {
+  }
+
   ngOnInit() {
     this.managementUsersService.getUser().subscribe(res => {
       this.listUser = <Array<User>>res.data;
@@ -35,6 +36,7 @@ export class AccManagementComponent implements OnInit {
       })
     })
   }
+
   mySearchFunction() {
     // Declare variables
     let input, filter, table, tr, td, i;
@@ -54,13 +56,22 @@ export class AccManagementComponent implements OnInit {
       }
     }
   }
+
   updateRole(userInfo: User) {
     userInfo.isEdited = true;
+    this.defaultUser = Object.assign({}, userInfo);
   }
+
   openSaveModal(content) {
     this.bsModal.open(content, {backdrop: 'static', centered: true});
   }
+
   updateSuccess($event) {
     this.editedUser = $event;
+  }
+
+  cancelAction($event) {
+    this.defaultUser = $event;
+    this.listUser.splice(this.defaultUser.index, 1, this.defaultUser)
   }
 }

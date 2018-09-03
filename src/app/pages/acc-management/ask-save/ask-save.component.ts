@@ -11,6 +11,7 @@ import swal from 'sweetalert';
 export class AskSaveComponent implements OnInit {
   @Input() editedUser = new User();
   @Input() dismiss;
+  @Input() defaultUser = new User();
   @Output() messageEvent = new EventEmitter<User>();
   constructor(private manageUserService: ManagementUsersService) {
   }
@@ -18,7 +19,9 @@ export class AskSaveComponent implements OnInit {
   ngOnInit() {
   }
 
-  cancelAskSave() {
+  cancelSave() {
+    this.defaultUser.isEdited = false;
+    this.messageEvent.emit(this.defaultUser);
     this.dismiss();
   }
 

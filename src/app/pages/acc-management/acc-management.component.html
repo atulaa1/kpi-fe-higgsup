@@ -26,7 +26,7 @@
       <td>
         <button [hidden]="userInfo.isEdited" id='{{userInfo.username}}-edit' class='btn btn-hero-success' (click)='updateRole(userInfo)'>Sửa</button>
         <ng-template let-c="close" let-d="dismiss" #content>
-          <ngx-save-acc-modal (messageEvent)="updateSuccess($event)" [editedUser]="userInfo" [dismiss]="d"></ngx-save-acc-modal>
+          <ngx-save-acc-modal (messageEvent)="updateSuccess($event)" (messageEvent)="cancelAction($event)" [editedUser]="userInfo" [dismiss]="d" [defaultUser]="defaultUser"></ngx-save-acc-modal>
         </ng-template>
         <button [hidden]="!userInfo.isEdited"  id='{{userInfo.username}}-save' class='btn btn-hero-warning' (click)="openSaveModal(content)">Lưu</button>
 
