@@ -20,7 +20,7 @@
         <h5>Hoạt động</h5>
       </div>
       <div class="col-md-6">
-        <input type="text" class="form-control" [(ngModel)]="activityName">
+        <input type="text" class="form-control" [(ngModel)]="activityName" maxlength="350">
       </div>
     </div>
     <div class="row">
@@ -39,42 +39,35 @@
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Dọn dẹp</h6>
           <input type="text" class="col-md-2  form-control formStruc" name="cleanUp"
-                 [(ngModel)]="createdActivity.cleanUpPoint"
-                 appTwoDigitDecimaNumber>
+                 [(ngModel)]="createdActivity.cleanUpPoint" maxlength="10" appTwoDigitDecimaNumber>
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Mua đồ</h6>
           <input type="text" class=" col-md-2 form-control formStruc" name="buyingStuff"
-                 [(ngModel)]="createdActivity.buyingStuffPoint"
-                 appTwoDigitDecimaNumber>
+                 [(ngModel)]="createdActivity.buyingStuffPoint" maxlength="10" appTwoDigitDecimaNumber>
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Support hội thảo</h6>
           <input type="text" class=" col-md-2 form-control formStruc" name="conference"
                  [(value)]="createdActivity.supportConferencePoint" [(ngModel)]="createdActivity.supportConferencePoint"
-                 appTwoDigitDecimaNumber>
+                 maxlength="10" appTwoDigitDecimaNumber>
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Training</h6>
           <input type="text" class=" col-md-2 form-control formStruc" name="training"
-                 [(ngModel)]="createdActivity.trainingPoint"
-                 appTwoDigitDecimaNumber>
+                 [(ngModel)]="createdActivity.trainingPoint" maxlength="10" appTwoDigitDecimaNumber>
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Vệ sinh hàng tuần</h6>
           <input type="text" class="col-md-2  form-control formStruc" name="weekyClean"
-                 [(ngModel)]="createdActivity.weeklyCleanUpPoint"
-                 appTwoDigitDecimaNumber>
+                 [(ngModel)]="createdActivity.weeklyCleanUpPoint" maxlength="10" appTwoDigitDecimaNumber>
         </div>
         <div class="row">
           <div class="supportButton mt-5">
             <button *ngIf="groupId == null" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
             <button *ngIf="groupId != null" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
-            <button *ngIf="groupId == null" class="btn btn-hero-success submitButton" (click)="addSupport($event)">Lưu
-            </button>
-            <button *ngIf="groupId != null" class="btn btn-hero-success submitButton" (click)="changeSupport($event)">
-              Lưu
-            </button>
+            <button *ngIf="groupId == null" class="btn btn-hero-success submitButton" (click)="addSupport($event)">Lưu</button>
+            <button *ngIf="groupId != null" class="btn btn-hero-success submitButton" (click)="changeSupport($event)">Lưu</button>
           </div>
         </div>
       </form>

@@ -17,16 +17,16 @@
     <tr *ngFor='let userInfo of listUser; let userIndex = index;'>
       <td>{{userInfo.username}}</td>
       <td id='{{userInfo.username}}'>
-        <span [hidden]="userInfo.isEdited">{{userInfo.mainRole}}</span>
+        <span [hidden]="userInfo.isEdited">{{userInfo.mainRole.slice(5)}}</span>
         <select [hidden]="!userInfo.isEdited"  name="roles" [(ngModel)]="userInfo.mainRole"  >
-          <option value="ROLE_MAN">ROLE_MAN</option>
-          <option value="ROLE_EMPLOYEE">ROLE_EMPLOYEE</option>
+          <option value="ROLE_MAN">MAN</option>
+          <option value="ROLE_EMPLOYEE">EMPLOYEE</option>
         </select>
       </td>
       <td>
         <button [hidden]="userInfo.isEdited" id='{{userInfo.username}}-edit' class='btn btn-hero-success' (click)='updateRole(userInfo)'>Sửa</button>
         <ng-template let-c="close" let-d="dismiss" #content>
-          <ngx-save-acc-modal (messageEvent)="updateSuccess($event)" [editedUser]="userInfo" [dismiss]="d"></ngx-save-acc-modal>
+          <ngx-save-acc-modal (updateEvent)="updateSuccess($event)" (cancelEvent)="cancelAction($event)" [editedUser]="userInfo" [dismiss]="d" [beforeEditedUser]="beforeEditedUser"></ngx-save-acc-modal>
         </ng-template>
         <button [hidden]="!userInfo.isEdited"  id='{{userInfo.username}}-save' class='btn btn-hero-warning' (click)="openSaveModal(content)">Lưu</button>
 

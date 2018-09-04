@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AskSaveComponent} from './ask-save/ask-save.component';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {ManagementUsersService} from '../../@core/services/management-users.service';
@@ -11,13 +11,15 @@ import {User} from '../../@core/models/user.model';
 })
 export class AccManagementComponent implements OnInit {
   username;
-  save;
+  editingUsername: string = null;
   listUser: Array<User>;
   editedUser: User;
-  constructor(
-    private bsModal: NgbModal,
-    private managementUsersService: ManagementUsersService,
-  ) { }
+  beforeEditedUser: User;
+
+  constructor(private bsModal: NgbModal,
+              private managementUsersService: ManagementUsersService) {
+  }
+
   ngOnInit() {
     this.managementUsersService.getUser().subscribe(res => {
       this.listUser = <Array<User>>res.data;
@@ -35,6 +37,7 @@ export class AccManagementComponent implements OnInit {
       })
     })
   }
+
   mySearchFunction() {
     // Declare variables
     let input, filter, table, tr, td, i;
@@ -54,13 +57,27 @@ export class AccManagementComponent implements OnInit {
       }
     }
   }
+
   updateRole(userInfo: User) {
-    userInfo.isEdited = true;
+    if (this.editingUsername === null) {
+      userInfo.isEdited = true;
+      this.editingUsername = userInfo.username;
+      this.beforeEditedUser = Object.assign({}, userInfo);  // clone another user
+    }
   }
+
   openSaveModal(content) {
     this.bsModal.open(content, {backdrop: 'static', centered: true});
   }
+
   updateSuccess($event) {
     this.editedUser = $event;
+    this.editingUsername = null;
+  }
+
+  cancelAction($event) {
+    this.editedUser = $event;
+    this.listUser.splice(this.editedUser.index, 1, this.editedUser);
+    this.editingUsername = null;
   }
 }
