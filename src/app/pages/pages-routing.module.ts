@@ -8,7 +8,9 @@ import {CreateActiComponent} from './acti-management/create-acti/create-acti.com
 import {ConfirmActiComponent} from './acti-management/confirm-acti/confirm-acti.component';
 import {ProjectmanagementComponent} from './projectmanagement/projectmanagement.component';
 import {ListOfSurveyComponent} from './list-of-survey/list-of-survey.component';
-import {AccManagementComponent} from './acc-management/acc-management.component';
+import {AccManagementComponent} from './acc-managements/acc-management/acc-management.component';
+import {AccManagementsComponent} from './acc-managements/acc-managements.component';
+import {AccManagementLateComponent} from './acc-managements/acc-management-late/acc-management-late.component';
 
 const routes: Routes = [{
   path: '',
@@ -24,8 +26,23 @@ const routes: Routes = [{
       pathMatch: 'full',
     },
     {
-      path: 'acc-management',
-      component: AccManagementComponent,
+      path: 'acc-managements',
+      component: AccManagementsComponent,
+      children: [
+        {
+          path: 'edit-role',
+          component: AccManagementComponent,
+        },
+        {
+          path: 'follow-late',
+          component: AccManagementLateComponent,
+        },
+        {
+          path: '',
+          redirectTo: 'follow-late',
+          pathMatch: 'full',
+        },
+      ],
     },
     {
       path: 'acti-management',

@@ -1,18 +1,16 @@
-<p class='mb-5'>QUẢN LÍ TÀI KHOẢN</p>
 <div class="search">
   <div class="form-group row">
-    <label class="col-sm-6 col-form-label">Tìm kiếm tài khoản</label>
-    <div class="col-sm-6">
-      <input class="form-control search-inp" type="text" id="myInput" (keyup)="mySearchFunction()" placeholder="Search for names.." title="Type in a name">
+    <div class="col-sm-6 search-div">
+      <input class="form-control search-inp" type="text" id="myInput" (keyup)="mySearchFunction()" placeholder="Tìm kiếm tài khoản:" title="Type in a name">
     </div>
   </div>
 </div>
 <div id="managementContent">
   <table class='table table-hover' id="myTable">
     <tr>
-      <th >User name</th>
-      <th >User role</th>
-      <th >Edit role</th>
+      <th >Tên tài khoản</th>
+      <th >Phân quyền</th>
+      <th >Sửa quyền</th>
     </tr>
     <tr *ngFor='let userInfo of listUser; let userIndex = index;'>
       <td>{{userInfo.username}}</td>
@@ -29,7 +27,6 @@
           <ngx-save-acc-modal (messageEvent)="updateSuccess($event)" [editedUser]="userInfo" [dismiss]="d"></ngx-save-acc-modal>
         </ng-template>
         <button [hidden]="!userInfo.isEdited"  id='{{userInfo.username}}-save' class='btn btn-hero-warning' (click)="openSaveModal(content)">Lưu</button>
-
       </td>
     </tr>
   </table>
