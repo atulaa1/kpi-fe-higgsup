@@ -14,9 +14,9 @@ export class AccManagementComponent implements OnInit {
   save;
   listUser: Array<User>;
   editedUser: User;
-  defaultUser: User;
+  beforeEditedUser: User;
   constructor(private bsModal: NgbModal,
-              private managementUsersService: ManagementUsersService,) {
+              private managementUsersService: ManagementUsersService ) {
   }
 
   ngOnInit() {
@@ -59,7 +59,7 @@ export class AccManagementComponent implements OnInit {
 
   updateRole(userInfo: User) {
     userInfo.isEdited = true;
-    this.defaultUser = Object.assign({}, userInfo);
+    this.beforeEditedUser = Object.assign({}, userInfo);  // clone another user
   }
 
   openSaveModal(content) {
@@ -71,7 +71,7 @@ export class AccManagementComponent implements OnInit {
   }
 
   cancelAction($event) {
-    this.defaultUser = $event;
-    this.listUser.splice(this.defaultUser.index, 1, this.defaultUser)
+    this.editedUser = $event;
+    this.listUser.splice(this.editedUser.index, 1, this.editedUser);
   }
 }
