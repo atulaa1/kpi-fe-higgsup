@@ -11,12 +11,13 @@ import {User} from '../../@core/models/user.model';
 })
 export class AccManagementComponent implements OnInit {
   username;
-  save;
+  editingUsername: string = null;
   listUser: Array<User>;
   editedUser: User;
   beforeEditedUser: User;
+
   constructor(private bsModal: NgbModal,
-              private managementUsersService: ManagementUsersService ) {
+              private managementUsersService: ManagementUsersService) {
   }
 
   ngOnInit() {
@@ -58,8 +59,11 @@ export class AccManagementComponent implements OnInit {
   }
 
   updateRole(userInfo: User) {
-    userInfo.isEdited = true;
-    this.beforeEditedUser = Object.assign({}, userInfo);  // clone another user
+    if (this.editingUsername === null) {
+      userInfo.isEdited = true;
+      this.editingUsername = userInfo.username;
+      this.beforeEditedUser = Object.assign({}, userInfo);  // clone another user
+    }
   }
 
   openSaveModal(content) {
@@ -68,10 +72,12 @@ export class AccManagementComponent implements OnInit {
 
   updateSuccess($event) {
     this.editedUser = $event;
+    this.editingUsername = null;
   }
 
   cancelAction($event) {
     this.editedUser = $event;
     this.listUser.splice(this.editedUser.index, 1, this.editedUser);
+    this.editingUsername = null;
   }
 }
