@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Pipe} from '@angular/core';
 import {Project} from '../../@core/models/project.model';
 import {ProjectService} from '../../@core/services/project.service';
 import {ResponseProjectDTO} from '../../@core/models/response-project-dto.model';
@@ -85,6 +85,7 @@ export class ProjectmanagementComponent implements OnInit {
   getListProject() {
     this.projectService.getAllProject().subscribe((response: ResponseProjectDTO) => {
       this.projects = response.data;
+      this.sortProjectArrayByActive();
     });
   }
 
@@ -100,7 +101,7 @@ export class ProjectmanagementComponent implements OnInit {
   updateProjectName(project: Project, editName: string, content) {
     if (this.isAdding === false) {
       this.actionType = 'EDIT';
-      this.msg = 'Bạn có muốn đổi tên ' + project.name + ' thành ' + editName;
+      this.msg = 'Bạn có muốn đổi tên ' + project.name + ' thành ' + editName + ' không?';
       this.buttonTitle = 'Lưu thay đổi'
       this.currentProject = Object.assign({}, project);
       this.currentProject.name = editName
@@ -149,4 +150,11 @@ export class ProjectmanagementComponent implements OnInit {
       this.isEditing = false;
     }
   }
+
+  sortProjectArrayByActive() {
+    this.projects.sort((a, b) => {
+      return b.active - a.active || +new Date(b.createdDate) - +new Date(a.createdDate);
+    });
+  }
 }
+
