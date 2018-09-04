@@ -1,6 +1,15 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 import {NbMenuService, NbSidebarService} from '@nebular/theme';
+import {LoginComponent} from '../../../modals/login/login.component';
+import {User} from '../../../@core/models/user.model';
+import {CookieService} from 'ngx-cookie-service';
+import {AuthenService} from '../../../@core/services/authen.service';
+import {Router} from '@angular/router';
+import {LogoutComponent} from '../../../modals/logout/logout.component';
+import {UserService} from '../../../@core/services/user.service';
+import {NgbModal, NgbModalOptions, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {PersonalInfoComponent} from '../../../modals/personal-info/personal-info.component';
 
 @Component({
   selector: 'ngx-header',
@@ -9,19 +18,46 @@ import {NbMenuService, NbSidebarService} from '@nebular/theme';
 })
 export class HeaderComponent implements OnInit {
 
-
+  loginModal: NgbModalRef;
+  logoutModal: NgbModalRef;
   @Input() position = 'normal';
 
-  user: any;
+  user: User;
 
   userMenu = [{title: 'Profile'}, {title: 'Log out'}];
 
+  items = [
+    {
+      title: 'Profile',
+      link: [],
+    },
+    {
+      title: 'Change Password',
+      link: [],
+    },
+    {
+      title: 'Privacy Policy',
+      link: [],
+    },
+    {
+      title: 'Logout',
+      link: [],
+    },
+  ];
+
   constructor(private sidebarService: NbSidebarService,
-              private menuService: NbMenuService) {
+              private menuService: NbMenuService,
+              private bsModal: NgbModal,
+              private cookieService: CookieService,
+              private router: Router,
+              private authenService: AuthenService,
+              private userService: UserService) {
   }
 
   ngOnInit() {
-    this.user = {name: 'sdafaf'};
+    this.user = new User();
+    this.user.token = this.cookieService.get('Authorization');
+    this.userService.currentUser.subscribe(user => this.user = user);
   }
 
 
@@ -32,6 +68,32 @@ export class HeaderComponent implements OnInit {
 
   goToHome() {
     this.menuService.navigateHome();
+  }
+
+  openLoginModal() {
+    this.loginModal = this.bsModal.open(LoginComponent, {backdrop: 'static', centered: true});
+  }
+
+  openLogoutModal() {
+    this.logoutModal = this.bsModal.open(LogoutComponent, {backdrop: 'static', centered: true});
+  }
+
+  logout() {
+    this.authenService.logOut();
+    this.router.navigateByUrl('/');
+    window.location.reload();
+  }
+
+  openPersonalInfo() {
+    const ngbModalOptions: NgbModalOptions = {
+      backdrop: 'static',
+      centered: true,
+      keyboard: false,
+    };
+    const modalRef = this.bsModal.open(PersonalInfoComponent, ngbModalOptions);
+    modalRef.result.then((data) => {
+    }, (reason) => {
+    })
   }
 
   startSearch() {

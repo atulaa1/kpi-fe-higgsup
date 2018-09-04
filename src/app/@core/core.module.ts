@@ -1,10 +1,13 @@
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NbAuthModule, NbDummyAuthStrategy } from '@nebular/auth';
-import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
-import { of as observableOf } from 'rxjs';
+import {ModuleWithProviders, NgModule, Optional, SkipSelf} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {NbAuthModule, NbDummyAuthStrategy} from '@nebular/auth';
+import {NbRoleProvider, NbSecurityModule} from '@nebular/security';
+import {of as observableOf} from 'rxjs';
 
-import { throwIfAlreadyLoaded } from './module-import-guard';
+import {throwIfAlreadyLoaded} from './module-import-guard';
+import {HttpService} from './services/http.service';
+import {AuthenService} from './services/authen.service';
+import {CookieService} from 'ngx-cookie-service';
 
 const socialLinks = [
   {
@@ -76,6 +79,7 @@ export const NB_CORE_PROVIDERS = [
   exports: [
     NbAuthModule,
   ],
+  providers: [HttpService, AuthenService, CookieService],
   declarations: [],
 })
 export class CoreModule {

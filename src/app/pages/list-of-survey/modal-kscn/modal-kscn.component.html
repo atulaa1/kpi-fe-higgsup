@@ -1,0 +1,32 @@
+<div  class="modal-header modal-lg">
+  <h4 class="mt-2">KHẢO SÁT CÁ NHÂN</h4>
+  <button type="button" class="close pull-right cus-btn" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body modal-fonts">
+  <div class="title mb-3" *ngFor='let survey of listSurvey '>
+    <div class="row">
+      <span class="pl-3">Câu {{survey.id}} :</span>
+      <div class="col-md-12 pd" *ngIf='!survey.showInput'>
+        <span *ngIf="survey.question.length <= 160">{{survey.question}}</span>
+        <span *ngIf="survey.question.length > 160">{{survey.question.slice(0, 160)}}...</span>
+      </div>
+        <span *ngIf="!survey.showInput" class="pl-2 pisotion-icon"><i (click)='changeQuestion(survey)' class="fas fa-wrench"></i></span>
+    </div>
+        <input class='form-control' type="text" name="changeBinding" [(ngModel)]='survey.question'
+               *ngIf='survey.showInput'>
+      <div class="ratingg">
+        <i class="ion-android-star" ></i>
+        <i class="ion-android-star" ></i>
+        <i class="ion-android-star" ></i>
+        <i class="ion-android-star" ></i>
+        <i class="ion-android-star" ></i>
+      </div>
+  </div>
+  <div>
+    <button class="btn btn-hero-warning" *ngIf="smallBtn" (click)="closeModal()">Hủy</button>
+    <button class="btn btn-hero-success pull-right" *ngIf="smallBtn" (click)='changeUpdateSurvey()'>Lưu</button>
+  </div>
+
+</div>

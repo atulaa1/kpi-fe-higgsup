@@ -21,6 +21,18 @@
       }
     }
   }
+  footer {
+    display: flex;
+    flex-direction: column;
+    color: #1e0830;
+    font-size: 15px;
+  }
+  span {
+    margin-left: 20px;
+  }
+  #i-phone {
+    margin-left: 1.5px;
+  }
 
   @include media-breakpoint-down(is) {
     .socials {

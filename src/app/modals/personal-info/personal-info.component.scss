@@ -1,0 +1,26 @@
+.avatarUser {
+  height: 150px;
+}
+
+.userName {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.userInfo {
+  margin: auto 0;
+}
+
+.personButton {
+  display: flex;
+  flex-direction: row;
+}
+
+.submitButton {
+  margin: auto;
+}
+
+.alertMsg {
+  text-align: center;
+  color: red;
+}
