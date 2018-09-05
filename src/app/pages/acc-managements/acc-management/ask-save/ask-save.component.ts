@@ -11,14 +11,18 @@ import swal from 'sweetalert';
 export class AskSaveComponent implements OnInit {
   @Input() editedUser = new User();
   @Input() dismiss;
-  @Output() messageEvent = new EventEmitter<User>();
+  @Input() beforeEditedUser = new User();
+  @Output() updateEvent = new EventEmitter<User>();
+  @Output() cancelEvent = new EventEmitter<User>();
   constructor(private manageUserService: ManagementUsersService) {
   }
 
   ngOnInit() {
   }
 
-  cancelAskSave() {
+  cancelSave() {
+    this.beforeEditedUser.isEdited = false;
+    this.cancelEvent.emit(this.beforeEditedUser);
     this.dismiss();
   }
 
@@ -33,7 +37,7 @@ export class AskSaveComponent implements OnInit {
       if (res.status_code === 200) {
         swal('Chúc Mừng!', 'Đã sửa thành công!', 'success');
         this.editedUser.isEdited = false;
-        this.messageEvent.emit(this.editedUser);
+        this.updateEvent.emit(this.editedUser);
       } else if (res.statusCode === 900) {
         swal('Thông báo!', 'User này không tồn tại!', 'error');
       }
