@@ -23,23 +23,30 @@
         </div>
       </div>
       <div class="table scrollTable">
-        <div class="row border-top border-bottom" [ngClass]="{'activeRow': project.active == 1, 'deactiveRow': project.active == 0}" *ngFor="let project of projects;">
+        <div class="row border-top border-bottom"
+             [ngClass]="{'activeRow': project.active == 1, 'deactiveRow': project.active == 0}"
+             *ngFor="let project of projects">
           <div class="col-md-9">
             <p [hidden]="project.id == projectIdEdit" class="nameProject">{{project.name}}</p>
             <input type="text" class="form-control lineHeight" [hidden]="project.id != projectIdEdit"
                    [value]="project.name" #editName (keyup.enter)="updateProjectName(project, editName.value, content)">
           </div>
           <div class="col-md-3">
-            <button class="btn btn-hero-success buttonSpace" *ngIf="project.active == 1" (click)="deactive(project, content)"><i
+            <button class="btn btn-hero-success buttonSpace" *ngIf="project.active == 1"
+                    (click)="deactive(project, content)" [disabled]="isAdding"><i
               class="far fa-check-circle  fa-2x"></i></button>
-            <button class="btn btn-hero-success buttonSpace" *ngIf="project.active == 0" (click)="active(project, content)"><i class="fas fa-ban  fa-2x"></i>
+            <button class="btn btn-hero-success buttonSpace" *ngIf="project.active == 0"
+                    (click)="active(project, content)" [disabled]="isAdding"><i class="fas fa-ban  fa-2x"></i>
             </button>
-            <button class="btn btn-hero-success buttonSpace" [hidden]="project.id == projectIdEdit" (click)="showEditBox(project)"><i
+            <button class="btn btn-hero-success buttonSpace" [hidden]="project.id == projectIdEdit"
+                    (click)="showEditBox(project)" [disabled]="isAdding"><i
               class="fas fa-pencil-alt  fa-2x"></i></button>
             <button class="btn btn-hero-success buttonSpace" [hidden]="project.id != projectIdEdit"
+                    [disabled]="isAdding"
                     (click)="updateProjectName(project, editName.value, content)"><i class="fas fa-save fa-2x"></i>
             </button>
-            <button class="btn btn-hero-success buttonSpace" (click)="deleteProject(project, content)"><i class="fas fa-trash-alt fa-2x"></i></button>
+            <button class="btn btn-hero-success buttonSpace" (click)="deleteProject(project, content)"
+                    [disabled]="isAdding"><i class="fas fa-trash-alt fa-2x"></i></button>
             <div>
               <ng-template let-c="close" let-d="dismiss" #content>
                 <dialog-confirmation [dismiss]="d" [choosedProjectId]="project.id"
