@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ManagementUsersService} from '../../../@core/services/management-users.service';
-import {User} from '../../../@core/models/user.model';
+import {ManagementUsersService} from '../../../../@core/services/management-users.service';
+import {User} from '../../../../@core/models/user.model';
 import swal from 'sweetalert';
 
 @Component({

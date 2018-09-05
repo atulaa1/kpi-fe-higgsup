@@ -24,6 +24,7 @@ import {InputFileConfig} from 'ngx-input-file/src/lib/interfaces/input-file-conf
 import {InputFileModule} from 'ngx-input-file';
 import {FormsModule} from '@angular/forms';
 import {DataService} from './@core/services/data.service';
+import { AccManagementsModule } from './pages/acc-managements/acc-managements.module';
 
 const config: InputFileConfig = {
   sizeLimit: 100,
@@ -44,6 +45,7 @@ const config: InputFileConfig = {
     CoreModule.forRoot(),
     ModalModule.forRoot(),
     InputFileModule.forRoot(config),
+    AccManagementsModule,
   ],
   bootstrap: [AppComponent],
   providers: [BsModalService, BsModalRef,
