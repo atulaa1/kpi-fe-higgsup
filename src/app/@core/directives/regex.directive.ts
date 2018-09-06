@@ -8,7 +8,7 @@ export class TwoDigitDecimaNumberDirective {
   private regex: RegExp = new RegExp(/^\d*\.?\d{0,2}$/g);
   // Cho phép một vài phím đặc biệt như:
   // Backspace, tab, end, home
-  private specialKeys: Array<string> = ['Backspace', 'Tab', 'End', 'Home', '-'];
+  private specialKeys: Array<string> = ['Backspace', 'Tab', 'End', 'Home'];
 
   constructor(private el: ElementRef) {
   }
