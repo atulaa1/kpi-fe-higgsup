@@ -35,7 +35,7 @@
         </div>
         <div class="row mt-2">
           <h6 class="col-md-4 userInfo">Số điện thoại:</h6>
-          <input type="tel" class="col-md-8 form-control" formControlName="phoneNumber" id="phoneNumber" (focus)="onFocus()">
+          <input type="tel" class="col-md-8 form-control" phoneNumberOnly oncopy="return false" onpaste="return false" formControlName="phoneNumber" id="phoneNumber" (focus)="onFocus()">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-4 userInfo">Địa chỉ:</h6>
