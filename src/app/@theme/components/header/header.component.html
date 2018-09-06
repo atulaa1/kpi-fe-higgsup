@@ -12,13 +12,16 @@
   <nb-action *ngIf="!user.token && !user.username" class="higgigup-nb-action nav-list" (click)="openLoginModal()"><a
     href="#">Đăng nhập</a>
   </nb-action>
-  <nb-action class="higgigup-nb-action nav-list" *ngIf="user.username">
-      <a href="#">
-        <nb-badge text="99+" status="danger" position="top left"></nb-badge>
-        <i style="font-size: 25px;" class="far fa-bell"></i>
-      </a>
+  <nb-action class=" cus-nav-list nav-list" *ngIf="user.username">
+    <a href="#">
+      <nb-badge text="99+" status="danger" position="top left"></nb-badge>
+      <i style="font-size: 25px;" class="far fa-bell"></i>
+    </a>
+  </nb-action>
+  <nb-action class="higgigup-nb-action nav-list nav-list-padding" *ngIf="user.username">
+
     <div class="btn-group" dropdown>
-      <div dropdownToggle class="higgigup-nb-action nav-list" aria-controls="dropdown-basic">
+      <div dropdownToggle class="nav-list" aria-controls="dropdown-basic">
         <a>{{user.firstName}} {{user.lastName}}</a>
       </div>
       <div style="width: 300px" id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right">
