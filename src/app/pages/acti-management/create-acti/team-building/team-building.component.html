@@ -39,22 +39,22 @@
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Nhất</h6>
           <input type="text" class="col-md-2  form-control formStruc" name="pointFirst"
-                 [(ngModel)]="createdActivity.firstPrize" maxlength="10" appTwoDigitDecimaNumber>
+                 oncopy='return false' onpaste='return false'[(ngModel)]="createdActivity.firstPrize" maxlength="10" appTwoDigitDecimaNumber>
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Nhì</h6>
           <input type="text" class=" col-md-2 form-control formStruc" name="pointSecond"
-                 [(ngModel)]="createdActivity.secondPrize" maxlength="10" appTwoDigitDecimaNumber>
+                 oncopy='return false' onpaste='return false' [(ngModel)]="createdActivity.secondPrize" maxlength="10" appTwoDigitDecimaNumber>
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Ba</h6>
           <input type="text" class=" col-md-2 form-control formStruc" name="pointThird"
-                 [(ngModel)]="createdActivity.thirdPrize" maxlength="10" appTwoDigitDecimaNumber>
+                 oncopy='return false' onpaste='return false' [(ngModel)]="createdActivity.thirdPrize" maxlength="10" appTwoDigitDecimaNumber>
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Ban tổ chức</h6>
           <input type="text" class=" col-md-2 form-control formStruc" name="pointOrganize"
-                 [(ngModel)]="createdActivity.organizers" maxlength="10" appTwoDigitDecimaNumber>
+                 oncopy='return false' onpaste='return false' [(ngModel)]="createdActivity.organizers" maxlength="10" appTwoDigitDecimaNumber>
         </div>
         <div class="row">
           <div class="teamButton mt-5">

@@ -36,11 +36,11 @@ export class SupportComponent implements OnInit {
     this.group.groupTypeId = groupType;
     this.group.additionalConfig = point;
     this.group.name = this.activityName;
-    if (this.group.name === '' || this.group.additionalConfig.cleanUpPoint === null
-      || this.group.additionalConfig.buyingStuffPoint === null
-      || this.group.additionalConfig.weeklyCleanUpPoint === null
-      || this.group.additionalConfig.supportConferencePoint === null
-      || this.group.additionalConfig.trainingPoint === null) {
+    if (this.group.name === '' || !this.group.additionalConfig.cleanUpPoint
+      || !this.group.additionalConfig.buyingStuffPoint
+      || !this.group.additionalConfig.weeklyCleanUpPoint
+      || !this.group.additionalConfig.supportConferencePoint
+      || !this.group.additionalConfig.trainingPoint) {
       this.alert = true;
     } else {
       this.alert = false;
@@ -55,7 +55,7 @@ export class SupportComponent implements OnInit {
         } else if (response.status_code === 900) {
           swal('Thông báo!', 'Không tìm thấy loại hoạt động!', 'error');
         } else if (response.status_code === 901) {
-          swal('Thông báo!', 'Điểm không hợp lệ!', 'error');
+          swal('Thông báo!', 'Điểm đã nhập không hợp lệ!', 'error');
         } else if (response.status_code === 905) {
           swal('Thông báo!', 'Các trường không được để trống!', 'error');
         }
@@ -71,11 +71,11 @@ export class SupportComponent implements OnInit {
     this.group.groupTypeId = groupType;
     this.group.additionalConfig = point;
     this.group.name = this.activityName;
-    if (this.group.name === '' || this.group.additionalConfig.cleanUpPoint.toString() === ''
-      || this.group.additionalConfig.buyingStuffPoint.toString() === ''
-      || this.group.additionalConfig.weeklyCleanUpPoint.toString() === ''
-      || this.group.additionalConfig.supportConferencePoint.toString() === ''
-      || this.group.additionalConfig.trainingPoint.toString() === '') {
+    if (this.group.name === '' || !this.group.additionalConfig.cleanUpPoint
+      || !this.group.additionalConfig.buyingStuffPoint
+      || !this.group.additionalConfig.weeklyCleanUpPoint
+      || !this.group.additionalConfig.supportConferencePoint
+      || !this.group.additionalConfig.trainingPoint) {
       this.alert = true;
     } else {
       this.alert = false;
