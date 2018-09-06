@@ -250,7 +250,7 @@ a span {
 nb-action.higgigup-nb-action{
   border: none !important;
 }
-.cus-nav-list.nav-list{
+nb-action[name$="notification"]{
   border: none !important;
 }
 .nav-list {
@@ -328,7 +328,7 @@ li {
 li:hover span ,li:hover i {
   color: #5DCFE3 !important;
 }
-.nav-list.nav-list-padding{
+.nav-list[name$="padding"]{
   padding: 2rem 0.2rem;
 }
 
