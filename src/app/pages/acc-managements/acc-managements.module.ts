@@ -6,6 +6,7 @@ import {FormsModule} from '@angular/forms';
 import {AskSaveComponent} from './acc-management/ask-save/ask-save.component';
 import {RouterModule} from '@angular/router';
 import { AccManagementLateComponent } from './acc-management-late/acc-management-late.component';
+import {NormalCharacterOnlyDirective} from '../../@core/directives/normal-character-only.directive';
 
 @NgModule({
   imports: [
@@ -13,7 +14,7 @@ import { AccManagementLateComponent } from './acc-management-late/acc-management
     FormsModule,
     RouterModule,
   ],
-  declarations: [AccManagementsComponent, AccManagementComponent, AskSaveComponent, AccManagementLateComponent],
+  declarations: [AccManagementsComponent, AccManagementComponent, AskSaveComponent, AccManagementLateComponent, NormalCharacterOnlyDirective],
   entryComponents: [AccManagementsComponent],
 })
 export class AccManagementsModule { }

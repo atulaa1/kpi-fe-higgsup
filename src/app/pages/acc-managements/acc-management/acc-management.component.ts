@@ -15,7 +15,6 @@ export class AccManagementComponent implements OnInit {
   listUser: Array<User>;
   editedUser: User;
   beforeEditedUser: User;
-
   constructor(private bsModal: NgbModal,
               private managementUsersService: ManagementUsersService) {
   }
@@ -39,13 +38,11 @@ export class AccManagementComponent implements OnInit {
   }
 
   mySearchFunction() {
-    // Declare variables
     let input, filter, table, tr, td, i;
     input = document.getElementById('myInput');
     filter = input.value.toUpperCase();
     table = document.getElementById('myTable');
     tr = table.getElementsByTagName('tr');
-
     for (i = 0; i < tr.length; i++) {
       td = tr[i].getElementsByTagName('td')[0];
       if (td) {
@@ -54,6 +51,18 @@ export class AccManagementComponent implements OnInit {
         } else {
           tr[i].style.display = 'none';
         }
+      }
+    }
+  }
+  errorMessage(){
+    const table = document.getElementById('myTable');
+    const tr = table.getElementsByTagName('tr');
+    const p = document.getElementById('error');
+    for (let i = 0; i < tr.length; i++) {
+      if(tr[i].getAttribute('style') !== '') {
+        p.style.display = 'block';
+      } else {
+        return p.style.display = 'none';
       }
     }
   }
