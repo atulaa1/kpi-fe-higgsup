@@ -25,6 +25,7 @@ import {InputFileModule} from 'ngx-input-file';
 import {FormsModule} from '@angular/forms';
 import {DataService} from './@core/services/data.service';
 import { AccManagementsModule } from './pages/acc-managements/acc-managements.module';
+import {PhoneNumberOnlyDirective} from './@core/directives/number.directive';
 
 const config: InputFileConfig = {
   sizeLimit: 100,
@@ -33,7 +34,7 @@ const config: InputFileConfig = {
 };
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, LogoutComponent, PersonalInfoComponent],
+  declarations: [AppComponent, LoginComponent, LogoutComponent, PersonalInfoComponent, PhoneNumberOnlyDirective],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

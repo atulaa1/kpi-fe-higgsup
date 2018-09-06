@@ -10,7 +10,7 @@
   <nb-action class="higgigup-nb-action nav-list"><a href="#">Cách tính điểm</a></nb-action>
   <nb-action class="higgigup-nb-action nav-list"><a href="#">Cơ cấu thưởng</a></nb-action>
   <nb-action *ngIf="!user.token && !user.username" class="higgigup-nb-action nav-list" (click)="openLoginModal()"><a
-    href="#">Đăng nhập</a>
+    href="javascript:">Đăng nhập</a>
   </nb-action>
   <nb-action *ngIf="user.username">
     <a href="#">
@@ -41,7 +41,7 @@
               <span *ngIf="user.userRole.indexOf('ROLE_EMPLOYEE')>=0 && user.userRole.length == 1">Employee</span>
             </div>
             <div class="font-weight-600 userInfo mt-5">
-              <a href="#" (click)="openPersonalInfo()">Hồ sơ trên KPI</a>
+              <a href="javascript:" (click)="openPersonalInfo()">Hồ sơ trên KPI</a>
             </div>
           </div>
 
@@ -112,7 +112,7 @@
           <li class="text-center font-weight-600">
             <i style="  font-size: 23px;" class="fas fa-sign-out-alt"></i>
             <a style="margin-left: 10px" ng-reflect-router-link="" title="Đăng xuất" (click)="openLogoutModal()"
-               href="#">
+               href="javascript:">
               <span class="menu-title">Đăng xuất</span>
             </a>
           </li>
