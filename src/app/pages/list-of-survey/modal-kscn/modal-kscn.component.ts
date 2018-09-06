@@ -13,7 +13,7 @@ import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 export class PersonalSurveyComponent implements OnInit {
   listSurvey: Array<Survey>;
   smallBtn = false;
-
+  showHandle = false;
   constructor(private bsModal: NgbModal,
               private activeModal: NgbActiveModal,
               private surveyService: SurveyService) {
@@ -43,7 +43,7 @@ export class PersonalSurveyComponent implements OnInit {
           swal('Chúc Mừng!', 'Đã update Thành công!', 'success');
           this.listSurvey.forEach(survey => {
             survey.showInput = false;
-          })
+          });
           this.smallBtn = false;
           // this.activeModal.close();
         } else if (response.status_code === 900) {
@@ -51,7 +51,7 @@ export class PersonalSurveyComponent implements OnInit {
         }
       });
     } else {
-      swal('Thông báo!', 'Không được để trống', 'error')
+      this.showHandle = true;
     }
   }
 
