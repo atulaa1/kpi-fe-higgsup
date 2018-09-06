@@ -12,13 +12,13 @@
   <nb-action *ngIf="!user.token && !user.username" class="higgigup-nb-action nav-list" (click)="openLoginModal()"><a
     href="#">Đăng nhập</a>
   </nb-action>
-  <nb-action *ngIf="user.username">
+  <nb-action class="higgigup-nb-action nav-list" *ngIf="user.username">
     <a href="#">
       <nb-badge text="99+" status="danger" position="top left"></nb-badge>
       <i style="font-size: 25px;" class="far fa-bell"></i>
     </a>
-    <div class="btn-group" dropdown>
-      <nb-action dropdownToggle class="higgigup-nb-action" aria-controls="dropdown-basic">
+    <div class="btn-group top-rel" dropdown>
+      <nb-action dropdownToggle class="pd-b-25" aria-controls="dropdown-basic">
         <a>{{user.firstName}} {{user.lastName}}</a>
       </nb-action>
 
