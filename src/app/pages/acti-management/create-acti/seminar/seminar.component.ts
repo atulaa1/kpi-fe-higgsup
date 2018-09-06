@@ -33,32 +33,35 @@ export class SeminarComponent implements OnInit {
     this.seminarActivity.groupTypeId = groupType;
     this.seminarActivity.additionalConfig = this.createdActivity;
     this.seminarActivity.name = this.activityName;
-    console.log(this.seminarActivity)
-    // if (this.seminarActivity.name === ''
-    //   || this.seminarActivity.additionalConfig.host === null
-    //   || this.seminarActivity.additionalConfig.member === null
-    //   || this.seminarActivity.additionalConfig.listener === null) {
-    //   this.alert = true;
-    // } else {
-    //   this.alert = false;
-    //   return this.seminarService.addSeminar(this.seminarActivity).subscribe(response => {
-    //     if (response.status_code === 200) {
-    //       this.activeModal.close();
-    //       this.data.changeMessage('Created new an activity');
-    //       swal('Chúc Mừng!', 'Đã tạo thành công!', 'success');
-    //     } else if (response.status_code === 940 && response.message === 'point host not larger than point member') {
-    //       swal('Thông báo!', 'Điểm của thành viên không được lớn hơn hoặc bằng điểm của Host!', 'error');
-    //     } else if (response.status_code === 940 && response.message === 'point member not larger than point listener') {
-    //       swal('Thông báo!', 'Điểm của người dự thính không được lớn hơn hoặc bằng điểm của thành viên!', 'error');
-    //     } else if (response.status_code === 901) {
-    //       swal('Thông báo!', 'Điểm của Host không hợp lệ!', 'error');
-    //     } else if (response.status_code === 900) {
-    //       swal('Thông báo!', 'Không tìm thấy hoạt động!', 'error');
-    //     } else if (response.status_code === 926) {
-    //       swal('Thông báo!', 'Hoạt động này đã tồn tại!', 'error');
-    //     }
-    //   })
-    // }
+    if (this.seminarActivity.name === ''
+      || !this.seminarActivity.additionalConfig.host
+      || !this.seminarActivity.additionalConfig.member
+      || !this.seminarActivity.additionalConfig.listener) {
+      this.alert = true;
+    } else {
+      this.alert = false;
+      return this.seminarService.addSeminar(this.seminarActivity).subscribe(response => {
+        if (response.status_code === 200) {
+          this.activeModal.close();
+          this.data.changeMessage('Created new an activity');
+          swal('Chúc Mừng!', 'Đã tạo thành công!', 'success');
+        } else if (response.status_code === 906) {
+          swal('Thông báo!', 'Hoạt động Seminar này đã tồn tại!', 'error');
+        } else if (response.status_code === 900) {
+          swal('Thông báo!', 'Loại hoạt động không tồn tại!', 'error');
+        } else if (response.status_code === 901 && response.message === 'parameter point of host is not valid') {
+          swal('Thông báo!', 'Điểm của Host không hợp lệ!', 'error');
+        } else if (response.status_code === 901 && response.message === 'parameter point of member is not valid') {
+          swal('Thông báo!', 'Điểm của thành viên không hợp lệ!', 'error');
+        } else if (response.status_code === 901 && response.message === 'parameter point of listener is not valid') {
+          swal('Thông báo!', 'Điểm của người dự thính không hợp lệ!', 'error');
+        } else if (response.status_code === 901 && response.message === 'host score can not be null') {
+          swal('Thông báo!', 'Điểm của Host không được bằng 0!', 'error');
+        } else if (response.status_code === 901 && response.message === 'member score can not be null') {
+          swal('Thông báo!', 'Điểm của thành viên không được bằng 0!', 'error');
+        }
+      })
+    }
   }
 
   onUpdateSeminar(update: any) {
@@ -68,9 +71,9 @@ export class SeminarComponent implements OnInit {
     this.seminarActivity.additionalConfig = this.createdActivity;
     this.seminarActivity.name = this.activityName;
     if (this.seminarActivity.name === ''
-      || this.seminarActivity.additionalConfig.host.toString() === ''
-      || this.seminarActivity.additionalConfig.member.toString() === ''
-      || this.seminarActivity.additionalConfig.listener.toString() === '') {
+      || !this.seminarActivity.additionalConfig.host
+      || !this.seminarActivity.additionalConfig.member
+      || !this.seminarActivity.additionalConfig.listener) {
       this.alert = true;
     } else {
       this.alert = false;
@@ -79,14 +82,20 @@ export class SeminarComponent implements OnInit {
           this.change.emit(update);
           this.dismiss();
           return swal('Chúc Mừng!', 'Đã sửa thành công!', 'success');
-        } else if (response.status_code === 940) {
-          swal('Thông báo!', 'Điểm của người phía dưới không được lớn hơn!', 'error');
-        } else if (response.status_code === 901) {
-          swal('Thông báo!', 'Điểm của Host không hợp lệ!', 'error');
+        } else if (response.status_code === 906) {
+          swal('Thông báo!', 'Hoạt động Seminar này đã tồn tại!', 'error');
         } else if (response.status_code === 900) {
-          swal('Thông báo!', 'Không tìm thấy hoạt động!', 'error');
-        } else if (response.status_code === 926) {
-          swal('Thông báo!', 'Hoạt động này đã tồn tại!', 'error');
+          swal('Thông báo!', 'Loại hoạt động không tồn tại!', 'error');
+        } else if (response.status_code === 901 && response.message === 'parameter point of host is not valid') {
+          swal('Thông báo!', 'Điểm của Host không hợp lệ!', 'error');
+        } else if (response.status_code === 901 && response.message === 'parameter point of member is not valid') {
+          swal('Thông báo!', 'Điểm của thành viên không hợp lệ!', 'error');
+        } else if (response.status_code === 901 && response.message === 'parameter point of listener is not valid') {
+          swal('Thông báo!', 'Điểm của người dự thính không hợp lệ!', 'error');
+        } else if (response.status_code === 901 && response.message === 'host score can not be null') {
+          swal('Thông báo!', 'Điểm của Host không được bằng 0!', 'error');
+        } else if (response.status_code === 901 && response.message === 'member score can not be null') {
+          swal('Thông báo!', 'Điểm của thành viên không được bằng 0!', 'error');
         }
       })
     }
