@@ -20,7 +20,6 @@ export class AccInfoComponent implements OnInit {
     this.userInfo = new User();
     this.userService.getUserInfo(this.userName).subscribe((response: ResponseDTO)  => {
     this.userInfo =  (response.data);
-    console.log(this.userInfo)
     });
   }
 }
