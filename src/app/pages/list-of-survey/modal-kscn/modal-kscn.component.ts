@@ -37,6 +37,7 @@ export class PersonalSurveyComponent implements OnInit {
   }
 
   changeUpdateSurvey() {
+    this.showHandle = false;
     if (this.listSurvey.map(survey => survey.question).indexOf('') === -1) {
       this.surveyService.updateSurvey(this.listSurvey).subscribe(response => {
         if (response.status_code === 200) {
