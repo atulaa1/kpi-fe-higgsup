@@ -13,7 +13,7 @@
         <span *ngIf="survey.question.length <= 160">{{survey.question}}</span>
         <span *ngIf="survey.question.length > 160">{{survey.question.slice(0, 160)}}...</span>
       </div>
-        <span *ngIf="!survey.showInput" class="pl-2 pisotion-icon"><i (click)='changeQuestion(survey)' class="fas fa-wrench"></i></span>
+        <span *ngIf="!survey.showInput" class="pl-2 pisotion-icon"><i (click)='changeQuestion(survey)' class="fas fa-pencil-alt"></i></span>
     </div>
         <input class='form-control' type="text" name="changeBinding" [(ngModel)]='survey.question'
                *ngIf='survey.showInput'>
