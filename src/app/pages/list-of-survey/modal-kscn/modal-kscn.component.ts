@@ -38,8 +38,8 @@ export class PersonalSurveyComponent implements OnInit {
 
   changeUpdateSurvey() {
     if (this.listSurvey.map(survey => survey.question).indexOf('') === -1) {
+      this.showHandle = false;
       this.surveyService.updateSurvey(this.listSurvey).subscribe(response => {
-        this.showHandle = false;
         if (response.status_code === 200) {
           swal('Chúc Mừng!', 'Đã update Thành công!', 'success');
           this.listSurvey.forEach(survey => {
