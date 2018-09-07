@@ -13,7 +13,7 @@ import {DataService} from '../../../../@core/services/data.service';
   styleUrls: ['./team-building.component.scss'],
 })
 export class TeamBuildingComponent implements OnInit {
-  @Input() groupId: number;
+  @Input() groupId: number = null;
   @Input() createdActivity: CreatedActivity = new CreatedActivity();
   @Input() activityName: string = '';
   @Input() dismiss;
@@ -36,14 +36,14 @@ export class TeamBuildingComponent implements OnInit {
     const groupType = new Activity();
     point = this.createdActivity;
     groupType.id = 3;
-    this.teambuilding.groupTypeId = groupType;
+    this.teambuilding.groupType = groupType;
     this.teambuilding.additionalConfig = point;
     this.teambuilding.name = this.activityName;
     if (this.teambuilding.name === ''
-      || !this.teambuilding.additionalConfig.firstPrize
-      || !this.teambuilding.additionalConfig.secondPrize
-      || !this.teambuilding.additionalConfig.thirdPrize
-      || !this.teambuilding.additionalConfig.organizers) {
+      || !this.teambuilding.additionalConfig.firstPrizePoint
+      || !this.teambuilding.additionalConfig.secondPrizePoint
+      || !this.teambuilding.additionalConfig.thirdPrizePoint
+      || !this.teambuilding.additionalConfig.organizerPoint) {
       this.alert = true;
     } else {
       this.alert = false;
@@ -86,19 +86,19 @@ export class TeamBuildingComponent implements OnInit {
     const groupType = new Activity();
     point = this.createdActivity;
     groupType.id = 3;
-    this.teambuilding.groupTypeId = groupType;
+    this.teambuilding.groupType = groupType;
     this.teambuilding.additionalConfig = point;
     this.teambuilding.name = this.activityName;
     this.teambuilding.id = this.groupId;
     if (this.teambuilding.name === ''
-      || !this.teambuilding.additionalConfig.firstPrize
-      || !this.teambuilding.additionalConfig.secondPrize
-      || !this.teambuilding.additionalConfig.thirdPrize
-      || !this.teambuilding.additionalConfig.organizers) {
+      || !this.teambuilding.additionalConfig.firstPrizePoint
+      || !this.teambuilding.additionalConfig.secondPrizePoint
+      || !this.teambuilding.additionalConfig.thirdPrizePoint
+      || !this.teambuilding.additionalConfig.organizerPoint) {
       this.alert = true;
     } else {
       this.alert = false;
-      return this.teambuildingService.updateTeambuilding(this.teambuilding).subscribe(response => {
+      return this.teambuildingService.updateTeambuilding(this.groupId, this.teambuilding).subscribe(response => {
         if (response.status_code === 200) {
           this.change.emit(update);
           this.dismiss();

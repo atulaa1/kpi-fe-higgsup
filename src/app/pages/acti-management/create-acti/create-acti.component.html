@@ -44,11 +44,11 @@
     <table class="table table-hover">
       <tbody>
       <tr *ngFor="let group of groupList">
-        <td class="dateCreated">{{group.createdDate}}</td>
+        <td class="dateCreated">{{group.createdDate | date: 'dd-MM-yyyy' }}</td>
 
         <!--Seminar-->
 
-        <td (click)="open(content)" *ngIf="group.groupTypeId.id==1">{{group.name}}
+        <td (click)="open(content)" *ngIf="group.groupType.id==1">{{group.name}}
           <ng-template let-c="close" let-d="dismiss" #content>
             <ngx-seminar [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
                          [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-seminar>
@@ -57,7 +57,7 @@
 
         <!--Club-->
 
-        <td (click)="open(content)" *ngIf="group.groupTypeId.id==2">{{group.name}}
+        <td (click)="open(content)" *ngIf="group.groupType.id==2">{{group.name}}
           <ng-template let-c="close" let-d="dismiss" #content>
             <ngx-club [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
                       [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-club>
@@ -66,7 +66,7 @@
 
         <!--Teambuilding-->
 
-        <td (click)="open(content)" *ngIf="group.groupTypeId.id==3">{{group.name}}
+        <td (click)="open(content)" *ngIf="group.groupType.id==3">{{group.name}}
           <ng-template let-c="close" let-d="dismiss" #content>
             <ngx-team-building [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
                                [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-team-building>
@@ -75,7 +75,7 @@
 
         <!--Support-->
 
-        <td (click)="open(content)" *ngIf="group.groupTypeId.id==4">{{group.name}}
+        <td (click)="open(content)" *ngIf="group.groupType.id==4">{{group.name}}
           <ng-template let-c="close" let-d="dismiss" #content>
             <ngx-support [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
                          [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-support>

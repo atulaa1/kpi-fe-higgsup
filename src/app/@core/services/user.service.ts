@@ -19,7 +19,8 @@ export class UserService {
   constructor(private http: HttpClient, private cookieService: CookieService, private httpService: HttpService) {
   }
 
-  getUserUrl = 'http://192.168.1.137:8080/kpi/api/users/';
+  getUserUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
+    + BaseConstant.standardServicePort.toString() + '/kpi/api/users/';
 
   getUserInfoHttp(username: string) {
     const httpOptions = this.httpService.setHeaderToken();
@@ -36,7 +37,7 @@ export class UserService {
     const httpOptions = this.httpService.setHeaderToken();
     const updatedUser = JSON.stringify(user);
     return this.http.put<User>(BaseConstant.protocol.toString() + BaseConstant.server.toString()
-      + BaseConstant.standardServicePort.toString() + '/api/users/' + user.username, updatedUser, httpOptions);
+      + BaseConstant.standardServicePort.toString() + '/kpi/api/users/' + user.username, updatedUser, httpOptions);
   }
 
   getUserInfo(username: string) {
