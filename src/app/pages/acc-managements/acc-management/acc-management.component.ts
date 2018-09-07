@@ -89,4 +89,7 @@ export class AccManagementComponent implements OnInit {
     this.listUser.splice(this.editedUser.index, 1, this.editedUser);
     this.editingUsername = null;
   }
+  open(content) {
+    this.bsModal.open(content,  {backdrop: 'static', centered: true});
+  }
 }

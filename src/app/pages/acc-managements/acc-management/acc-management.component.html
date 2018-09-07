@@ -13,7 +13,11 @@
       <th >Sửa quyền</th>
     </tr>
     <tr style *ngFor='let userInfo of listUser; let userIndex = index;'>
-      <td>{{userInfo.username}}</td>
+      <td (click)="open(accountInfo)">{{userInfo.username}}
+        <ng-template let-c="close" let-d="dismiss" #accountInfo>
+          <ngx-acc-info [dismiss]="d" [userName]="userInfo.username"></ngx-acc-info>
+        </ng-template>
+      </td>
       <td id='{{userInfo.username}}'>
         <span [hidden]="userInfo.isEdited">{{userInfo.mainRole.slice(5)}}</span>
         <select [hidden]="!userInfo.isEdited"  name="roles" [(ngModel)]="userInfo.mainRole"  >
