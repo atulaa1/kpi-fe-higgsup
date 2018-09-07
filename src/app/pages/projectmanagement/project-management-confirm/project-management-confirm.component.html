@@ -8,8 +8,10 @@
   <p class="text-center" name="modalHandle-style" *ngIf="isDuplicateName">Dự án này đã tồn tại!</p>
   <p class="text-center" name="modalHandle-style" *ngIf="!isValidate">Tên dự án không được để trống</p>
   <div class="row">
-    <div class="col-3"><span class="mr-2">Tên dự án</span><i class="fas fa-asterisk icon-abs"></i></div>
-    <input  type="text" class="form-control  col-9 mb-5" #projectName [(ngModel)]="newProject.name">
+    <div class="col-3 pt-3"><span class="mr-2 pl-3">Tên dự án</span><i class="fas fa-asterisk icon-abs"></i></div>
+    <div class="col-9">
+      <input  type="text" class="form-control mb-5" #projectName [(ngModel)]="newProject.name">
+    </div>
   </div>
   <div class="pb-5">
     <button class="btn btn-hero-success pull-to-right" (click)="confirmAdd()">Lưu</button>

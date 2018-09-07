@@ -31,8 +31,9 @@ export class ProjectManagementConfirmComponent implements OnInit {
   }
 
   confirmAdd() {
-    if (this.newProject.name == null || this.newProject.name === undefined) {
+    if (this.newProject.name == null || this.newProject.name === undefined || this.newProject.name === '') {
      this.isValidate = false;
+     this.isDuplicateName = false;
     }else {
       this.projectService.addNewProject(this.newProject).subscribe((response: ResponseProjectDTO) => {
         if (response.status_code === 200) {
@@ -43,6 +44,7 @@ export class ProjectManagementConfirmComponent implements OnInit {
           this.isDuplicateName = false;
         } else if (response.status_code === 932) {
           this.isDuplicateName = true;
+          this.isValidate = true;
         }
       });
     }
