@@ -4,6 +4,7 @@ import {ProjectService} from '../../@core/services/project.service';
 import {ResponseProjectDTO} from '../../@core/models/response-project-dto.model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DialogConfirmationComponent} from '../../modals/dialog-confirmation/dialog-confirmation.component';
+import {ProjectManagementConfirmComponent} from "./project-management-confirm/project-management-confirm.component";
 
 @Component({
   selector: 'projectmanagement',
@@ -56,9 +57,7 @@ export class ProjectmanagementComponent implements OnInit {
   }
 
   addProject() {
-    if (this.isEditing === false) {
-      this.isAdding = true;
-    }
+      this.bsModal.open(ProjectManagementConfirmComponent, {backdrop: 'static', centered: true})
   }
 
   cancelAddProject() {
