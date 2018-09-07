@@ -13,7 +13,7 @@ export class TeambuildingService {
   }
 
   private teambuildingUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
-    + BaseConstant.standardServicePort.toString() + '/api/groups/team-building';
+    + BaseConstant.standardServicePort.toString() + '/kpi/api/groups/team-building';
 
   private httpOptions = this.httpService.setHeaderToken();
 
@@ -21,7 +21,7 @@ export class TeambuildingService {
 
     return this.http.post(this.teambuildingUrl, teambuilding, this.httpOptions);
   }
-  updateTeambuilding(teambuilding): Observable<any> {
-    return this.http.put(this.teambuildingUrl, teambuilding, this.httpOptions);
+  updateTeambuilding(id, teambuilding): Observable<any> {
+    return this.http.put(`${this.teambuildingUrl}/${id}`, teambuilding, this.httpOptions);
   }
 }

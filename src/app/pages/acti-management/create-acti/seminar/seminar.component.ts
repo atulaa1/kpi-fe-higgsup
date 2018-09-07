@@ -30,13 +30,13 @@ export class SeminarComponent implements OnInit {
   onAddSeminar(addNew: any) {
     const groupType = new Activity();
     groupType.id = 1;
-    this.seminarActivity.groupTypeId = groupType;
+    this.seminarActivity.groupType = groupType;
     this.seminarActivity.additionalConfig = this.createdActivity;
     this.seminarActivity.name = this.activityName;
     if (this.seminarActivity.name === ''
-      || !this.seminarActivity.additionalConfig.host
-      || !this.seminarActivity.additionalConfig.member
-      || !this.seminarActivity.additionalConfig.listener) {
+      || !this.seminarActivity.additionalConfig.hostPoint
+      || !this.seminarActivity.additionalConfig.memberPoint
+      || !this.seminarActivity.additionalConfig.listenerPoint) {
       this.alert = true;
     } else {
       this.alert = false;
@@ -67,13 +67,13 @@ export class SeminarComponent implements OnInit {
   onUpdateSeminar(update: any) {
     const groupType = new Activity();
     groupType.id = 1;
-    this.seminarActivity.groupTypeId = groupType;
+    this.seminarActivity.groupType = groupType;
     this.seminarActivity.additionalConfig = this.createdActivity;
     this.seminarActivity.name = this.activityName;
     if (this.seminarActivity.name === ''
-      || !this.seminarActivity.additionalConfig.host
-      || !this.seminarActivity.additionalConfig.member
-      || !this.seminarActivity.additionalConfig.listener) {
+      || !this.seminarActivity.additionalConfig.hostPoint
+      || !this.seminarActivity.additionalConfig.memberPoint
+      || !this.seminarActivity.additionalConfig.listenerPoint) {
       this.alert = true;
     } else {
       this.alert = false;
