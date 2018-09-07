@@ -28,10 +28,10 @@ export class UserService {
   }
 
 
-  updatePersonalInfo(user: User): Observable<User> {
+  updatePersonalInfo(user: User): Observable<ResponseDTO> {
     const httpOptions = this.httpService.setHeaderToken();
     const updatedUser = JSON.stringify(user);
-    return this.http.put<User>(BaseConstant.protocol.toString() + BaseConstant.server.toString()
+    return this.http.put<ResponseDTO>(BaseConstant.protocol.toString() + BaseConstant.server.toString()
       + BaseConstant.standardServicePort.toString() + '/api/users/' + user.username, updatedUser, httpOptions);
   }
 }

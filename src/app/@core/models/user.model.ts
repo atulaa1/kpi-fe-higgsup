@@ -13,7 +13,7 @@ export class User {
   address: string;
   gmail: string;
   skype: string;
-  yearWork: number;
+  dateStartWork: Date;
   token: string;
   isEdited: boolean = false;
   mainRole: string;
