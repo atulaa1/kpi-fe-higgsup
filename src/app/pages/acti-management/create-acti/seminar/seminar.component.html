@@ -50,10 +50,10 @@
         </div>
         <div class="row">
           <div class="seminarButton mt-5">
-            <button *ngIf="groupId == null" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
-            <button *ngIf="groupId != null" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
             <button *ngIf="groupId == null" class="btn btn-hero-success submitButton" (click)="onAddSeminar($event)">Lưu</button>
             <button *ngIf="groupId != null" class="btn btn-hero-success submitButton" (click)="onUpdateSeminar($event)">Lưu</button>
+            <button *ngIf="groupId == null" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
+            <button *ngIf="groupId != null" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
           </div>
         </div>
       </form>
