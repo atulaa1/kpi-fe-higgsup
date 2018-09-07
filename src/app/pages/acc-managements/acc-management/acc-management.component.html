@@ -1,7 +1,7 @@
 <div class="search">
   <div class="form-group row">
     <div class="col-sm-6 search-div">
-      <input normalCharacterOnly oncopy='return false' onpaste='return false' class="form-control search-inp" type="text" id="myInput" (keyup)='mySearchFunction(); errorMessage();' placeholder="Tìm kiếm tài khoản:" title="Type in a name" />
+      <input normalCharacterOnly oncopy='return false' onpaste='return false' class="form-control search-inp" type="text" id="myInput" (keyup)='mySearchFunction()' placeholder="Tìm kiếm tài khoản:" title="Type in a name" />
     </div>
   </div>
 </div>
@@ -12,7 +12,7 @@
       <th >Phân quyền</th>
       <th >Sửa quyền</th>
     </tr>
-    <tr style *ngFor='let userInfo of listUser; let userIndex = index;'>
+    <tr *ngFor='let userInfo of listUser; let userIndex = index;'>
       <td (click)="open(accountInfo)">{{userInfo.username}}
         <ng-template let-c="close" let-d="dismiss" #accountInfo>
           <ngx-acc-info [dismiss]="d" [userName]="userInfo.username"></ngx-acc-info>
@@ -34,5 +34,5 @@
       </td>
     </tr>
   </table>
-  <p id='error'>Không tìm thấy kết quả phù hợp!</p>
+  <p *ngIf='showMsg' id='error'>Không tìm thấy kết quả phù hợp!</p>
 </div>

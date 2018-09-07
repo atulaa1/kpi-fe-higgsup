@@ -12,6 +12,7 @@ import {User} from '../../../@core/models/user.model';
 export class AccManagementComponent implements OnInit {
   username;
   editingUsername: string = null;
+  showMsg: boolean = false;
   listUser: Array<User>;
   editedUser: User;
   beforeEditedUser: User;
@@ -38,6 +39,7 @@ export class AccManagementComponent implements OnInit {
   }
 
   mySearchFunction() {
+    this.showMsg = true;
     let input, filter, table, tr, td, i;
     input = document.getElementById('myInput');
     filter = input.value.toUpperCase();
@@ -48,25 +50,13 @@ export class AccManagementComponent implements OnInit {
       if (td) {
         if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
           tr[i].style.display = '';
+          this.showMsg = false;
         } else {
           tr[i].style.display = 'none';
         }
       }
     }
   }
-  errorMessage(){
-    const table = document.getElementById('myTable');
-    const tr = table.getElementsByTagName('tr');
-    const p = document.getElementById('error');
-    for (let i = 0; i < tr.length; i++) {
-      if(tr[i].getAttribute('style') !== '') {
-        p.style.display = 'block';
-      } else {
-        return p.style.display = 'none';
-      }
-    }
-  }
-
   updateRole(userInfo: User) {
     if (this.editingUsername === null) {
       userInfo.isEdited = true;
