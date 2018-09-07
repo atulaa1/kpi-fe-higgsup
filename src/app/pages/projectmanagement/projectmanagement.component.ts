@@ -1,4 +1,4 @@
-import {Component, OnInit, Pipe} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Project} from '../../@core/models/project.model';
 import {ProjectService} from '../../@core/services/project.service';
 import {ResponseProjectDTO} from '../../@core/models/response-project-dto.model';
@@ -54,16 +54,10 @@ export class ProjectmanagementComponent implements OnInit {
       this.bsModal.open(content, {backdrop: 'static', centered: true});
     }
   }
-
-  addProject() {
-    if (this.isEditing === false) {
-      this.isAdding = true;
-    }
+  open(content) {
+    this.bsModal.open(content, {backdrop: 'static', centered: true});
   }
 
-  cancelAddProject() {
-    this.isAdding = false;
-  }
 
   confirmAdd(event) {
     const code = (event.keyCode ? event.keyCode : event.which);
@@ -155,6 +149,10 @@ export class ProjectmanagementComponent implements OnInit {
     this.projects.sort((a, b) => {
       return b.active - a.active || +new Date(b.createdDate) - +new Date(a.createdDate);
     });
+  }
+
+  onAddProject($event) {
+    this.getListProject();
   }
 }
 

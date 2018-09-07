@@ -10,6 +10,8 @@ import {ProjectmanagementComponent} from './projectmanagement/projectmanagement.
 import {ListOfSurveyModule} from './list-of-survey/list-of-survey.module';
 import {DialogConfirmationComponent} from '../modals/dialog-confirmation/dialog-confirmation.component';
 import {AccManagementsModule} from './acc-managements/acc-managements.module';
+import { ProjectManagementConfirmComponent } from './projectmanagement/project-management-confirm/project-management-confirm.component';
+import {ProjectmanagementModule} from "./projectmanagement/projectmanagement.module";
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -24,10 +26,11 @@ const PAGES_COMPONENTS = [
     ActiManagementModule,
     ListOfSurveyModule,
     AccManagementsModule,
+    ProjectmanagementModule
   ],
   declarations: [
     ...PAGES_COMPONENTS,
-    ProjectmanagementComponent, DialogConfirmationComponent,
+    ProjectmanagementComponent, DialogConfirmationComponent, ProjectManagementConfirmComponent,
   ],
   entryComponents: [DialogConfirmationComponent],
 })
