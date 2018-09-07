@@ -1,10 +1,9 @@
-import {Component, OnInit, Pipe} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Project} from '../../@core/models/project.model';
 import {ProjectService} from '../../@core/services/project.service';
 import {ResponseProjectDTO} from '../../@core/models/response-project-dto.model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DialogConfirmationComponent} from '../../modals/dialog-confirmation/dialog-confirmation.component';
-import {ProjectManagementConfirmComponent} from "./project-management-confirm/project-management-confirm.component";
 
 @Component({
   selector: 'projectmanagement',
@@ -55,9 +54,8 @@ export class ProjectmanagementComponent implements OnInit {
       this.bsModal.open(content, {backdrop: 'static', centered: true});
     }
   }
-
-  addProject() {
-      this.bsModal.open(ProjectManagementConfirmComponent, {backdrop: 'static', centered: true})
+  open(content) {
+    this.bsModal.open(content, {backdrop: 'static', centered: true});
   }
 
   cancelAddProject() {
@@ -154,6 +152,10 @@ export class ProjectmanagementComponent implements OnInit {
     this.projects.sort((a, b) => {
       return b.active - a.active || +new Date(b.createdDate) - +new Date(a.createdDate);
     });
+  }
+
+  onAddProject($event) {
+    this.getListProject();
   }
 }
 

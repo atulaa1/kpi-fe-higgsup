@@ -1,0 +1,18 @@
+<div  class="modal-header modal-lg">
+  <h4 class="mt-2">THÊM DỰ ÁN</h4>
+  <button type="button" class="close pull-right cus-btn" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div name="modal-relative" class="modal-body modal-fonts">
+  <p class="text-center" name="modalHandle-style" *ngIf="isDuplicateName">Dự án này đã tồn tại!</p>
+  <p class="text-center" name="modalHandle-style" *ngIf="!isValidate">Tên dự án không được để trống</p>
+  <div class="row">
+    <div class="col-3"><span class="mr-2">Tên dự án</span><i class="fas fa-asterisk icon-abs"></i></div>
+    <input  type="text" class="form-control  col-9 mb-5" #projectName [(ngModel)]="newProject.name">
+  </div>
+  <div class="pb-5">
+    <button class="btn btn-hero-success pull-to-right" (click)="confirmAdd()">Lưu</button>
+    <button class='btn btn-hero-warning pull-to-right' (click)="closeModal()">Hủy</button>
+  </div>
+</div>
