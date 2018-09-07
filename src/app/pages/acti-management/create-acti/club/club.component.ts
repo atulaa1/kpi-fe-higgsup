@@ -36,10 +36,10 @@ export class ClubComponent implements OnInit {
     this.group.additionalConfig = this.createdActivity;
     this.group.name = this.activityName;
     if (this.group.name === ''
-      || this.group.additionalConfig.host === null
-      || this.group.additionalConfig.minNumberOfSessions === null
-      || this.group.additionalConfig.participationPoint === null
-      || this.group.additionalConfig.effectivePoint === null) {
+      || !this.group.additionalConfig.host
+      || !this.group.additionalConfig.minNumberOfSessions
+      || !this.group.additionalConfig.participationPoint
+      || !this.group.additionalConfig.effectivePoint) {
       this.alert = true;
     } else {
       this.alert = false;
@@ -52,8 +52,10 @@ export class ClubComponent implements OnInit {
           swal('Thông báo!', 'Hoạt động này đã tồn tại!', 'error');
         } else if (response.status_code === 903) {
           swal('Thông báo!', 'Tên CLB không hợp lệ!', 'error');
-        } else if (response.status_code === 901) {
-          swal('Thông báo!', 'Số buổi hoặc điểm không hợp lệ!', 'error');
+        } else if (response.status_code === 901 && response.message === 'parameter point is not valid') {
+          swal('Thông báo!', 'Số điểm không hợp lệ!', 'error');
+        } else if (response.status_code === 901 && response.message === 'parameter min number of sessions is not valid') {
+          swal('Thông báo!', 'Số buổi đăng kí không hợp lệ!', 'error');
         } else if (response.status_code === 900) {
           swal('Thông báo!', 'Loại hoạt động không tồn tại!', 'error');
         } else if (response.status_code === 932) {
@@ -71,10 +73,10 @@ export class ClubComponent implements OnInit {
     this.group.name = this.activityName;
     this.group.id = this.groupId;
     if (this.group.name === ''
-      || this.group.additionalConfig.host === null
-      || this.group.additionalConfig.minNumberOfSessions.toString() === ''
-      || this.group.additionalConfig.participationPoint.toString() === ''
-      || this.group.additionalConfig.effectivePoint.toString() === '') {
+      || !this.group.additionalConfig.host
+      || !this.group.additionalConfig.minNumberOfSessions
+      || !this.group.additionalConfig.participationPoint
+      || !this.group.additionalConfig.effectivePoint) {
       this.alert = true;
     } else {
       this.alert = false;
@@ -87,10 +89,14 @@ export class ClubComponent implements OnInit {
           return swal('Thông báo!', 'Hoạt động này đã tồn tại!', 'error');
         } else if (response.status_code === 903) {
           return swal('Thông báo!', 'Tên CLB không hợp lệ!', 'error');
-        } else if (response.status_code === 901) {
-          return swal('Thông báo!', 'Số điểm không hợp lệ!', 'error');
-        } else if (response.status_code === 900) {
-          return swal('Thông báo!', 'Loại hoạt động không tồn tại!', 'error');
+        } else if (response.status_code === 901 && response.message === 'parameter point is not valid') {
+          swal('Thông báo!', 'Số điểm không hợp lệ!', 'error');
+        } else if (response.status_code === 901 && response.message === 'parameter min number of sessions is not valid') {
+          swal('Thông báo!', 'Số buổi đăng kí không hợp lệ!', 'error');
+        } else if (response.status_code === 900 && response.message === 'group type does not exist') {
+          swal('Thông báo!', 'Loại hoạt động không tồn tại!', 'error');
+        } else if (response.status_code === 900 && response.message === 'not find') {
+          swal('Thông báo!', 'Không tìm thấy hoạt động để cập nhật!', 'error');
         }
       })
     }

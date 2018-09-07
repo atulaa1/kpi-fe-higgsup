@@ -38,7 +38,7 @@ export class ProjectmanagementComponent implements OnInit {
     if (this.isAdding === false && this.isEditing === false) {
       this.actionType = 'EDIT';
       this.msg = 'Bạn có muốn kích hoạt dự án ' + project.name + ' không';
-      this.buttonTitle = 'Lưu thay đổi'
+      this.buttonTitle = 'Lưu'
       this.currentProject = Object.assign({}, project);
       this.currentProject.active = 1;
       this.bsModal.open(content, {backdrop: 'static', centered: true});
@@ -49,7 +49,7 @@ export class ProjectmanagementComponent implements OnInit {
     if (this.isAdding === false && this.isEditing === false) {
       this.actionType = 'EDIT';
       this.msg = 'Bạn có muốn dừng hoạt động của dự án ' + project.name + ' không?';
-      this.buttonTitle = 'Lưu thay đổi'
+      this.buttonTitle = 'Lưu'
       this.currentProject = Object.assign({}, project);
       this.currentProject.active = 0;
       this.bsModal.open(content, {backdrop: 'static', centered: true});
@@ -101,7 +101,7 @@ export class ProjectmanagementComponent implements OnInit {
     if (this.isAdding === false) {
       this.actionType = 'EDIT';
       this.msg = 'Bạn có muốn đổi tên ' + project.name + ' thành ' + editName + ' không?';
-      this.buttonTitle = 'Lưu thay đổi'
+      this.buttonTitle = 'Lưu'
       this.currentProject = Object.assign({}, project);
       this.currentProject.name = editName
       this.bsModal.open(content, {backdrop: 'static', centered: true});

@@ -13,7 +13,7 @@ import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 export class PersonalSurveyComponent implements OnInit {
   listSurvey: Array<Survey>;
   smallBtn = false;
-
+  showHandle = false;
   constructor(private bsModal: NgbModal,
               private activeModal: NgbActiveModal,
               private surveyService: SurveyService) {
@@ -37,18 +37,23 @@ export class PersonalSurveyComponent implements OnInit {
   }
 
   changeUpdateSurvey() {
-    this.surveyService.updateSurvey(this.listSurvey).subscribe(response => {
-      if (response.status_code === 200) {
-        swal('Chúc Mừng!', 'Đã update Thành công!', 'success');
-        this.listSurvey.forEach(survey => {
-          survey.showInput = false;
-        })
-        this.smallBtn = false;
-        // this.activeModal.close();
-      } else if (response.status_code === 900) {
-        swal('Thông báo!', 'Không tìm thấy câu hỏi để update', 'error');
-      }
-    });
+    if (this.listSurvey.map(survey => survey.question).indexOf('') === -1) {
+      this.showHandle = false;
+      this.surveyService.updateSurvey(this.listSurvey).subscribe(response => {
+        if (response.status_code === 200) {
+          swal('Chúc Mừng!', 'Đã update Thành công!', 'success');
+          this.listSurvey.forEach(survey => {
+            survey.showInput = false;
+          });
+          this.smallBtn = false;
+          // this.activeModal.close();
+        } else if (response.status_code === 900) {
+          swal('Thông báo!', 'Không tìm thấy câu hỏi để update', 'error');
+        }
+      });
+    } else {
+      this.showHandle = true;
+    }
   }
 
   closeModal() {
