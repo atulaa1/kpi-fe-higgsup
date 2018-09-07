@@ -58,9 +58,6 @@ export class ProjectmanagementComponent implements OnInit {
     this.bsModal.open(content, {backdrop: 'static', centered: true});
   }
 
-  cancelAddProject() {
-    this.isAdding = false;
-  }
 
   confirmAdd(event) {
     const code = (event.keyCode ? event.keyCode : event.which);

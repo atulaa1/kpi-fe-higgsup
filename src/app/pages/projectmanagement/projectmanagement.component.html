@@ -18,11 +18,6 @@
           <ng-template let-c="close" let-d="dismiss" #content>
             <project-management-confirm [dismiss]="d" (addEvent)="onAddProject($event)"></project-management-confirm>
           </ng-template>
-          <div class="row" *ngIf="isAdding">
-            <input type="text" class="form-control mb-5 col-md-10" (keypress)="confirmAdd($event)" #projectName
-                   [(ngModel)]="newProject.name">
-            <i class="fas fa-times col-md-2" (click)="cancelAddProject()"></i>
-          </div>
         </div>
       </div>
       <div class="table scrollTable">
