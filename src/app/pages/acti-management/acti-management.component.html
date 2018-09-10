@@ -1,15 +1,29 @@
+<!--<div class="container">-->
+  <!--<div class="row">-->
+    <!--<div class="col-6 col-md-6">-->
+      <!--<nav class="titleAciMan">-->
+        <!--<button  routerLink="confirm-acti" class="btn btn-hero-success btn-semi-round btnChoice">Xác nhận hoạt động</button>-->
+      <!--</nav>-->
+    <!--</div>-->
+    <!--<div class="col-6 col-md-6">-->
+      <!--<nav class="titleAciMan">-->
+        <!--<button  routerLink="create-acti" class="btn btn-hero-success btn-semi-round btnChoice">Tạo khung hoạt động</button>-->
+      <!--</nav>-->
+    <!--</div>-->
+  <!--</div>-->
+    <!--<router-outlet></router-outlet>-->
+<!--</div>-->
 <div class="container">
-  <div class="row">
-    <div class="col-6 col-md-6">
-      <nav class="titleAciMan">
-        <button  routerLink="confirm-acti" class="btn btn-hero-success btn-semi-round btnChoice">Xác nhận hoạt động</button>
-      </nav>
-    </div>
-    <div class="col-6 col-md-6">
-      <nav class="titleAciMan">
-        <button  routerLink="create-acti" class="btn btn-hero-success btn-semi-round btnChoice">Tạo khung hoạt động</button>
-      </nav>
-    </div>
-  </div>
-    <router-outlet></router-outlet>
+<nb-card>
+  <nb-card-body>
+    <nb-tabset fullWidth>
+      <nb-tab class='mt-5' tabTitle="Xác nhận hoạt động">
+        <confirm-acti></confirm-acti>
+      </nb-tab>
+      <nb-tab class='mt-5' tabTitle="Tạo khung hoạt động">
+        <ngx-create-acti></ngx-create-acti>
+      </nb-tab>
+    </nb-tabset>
+  </nb-card-body>
+</nb-card>
 </div>

@@ -1,5 +1,19 @@
-<div class='acc-menu'>
-  <p routerLink='follow-late' routerLinkActive='active'>Theo dõi đi muộn</p>
-  <p routerLink='edit-role' routerLinkActive='active'>Cập nhật quyền</p>
+<!--<div class='acc-menu'>-->
+  <!--<p routerLink='follow-late' routerLinkActive='active'>Theo dõi đi muộn</p>-->
+  <!--<p routerLink='edit-role' routerLinkActive='active'>Cập nhật quyền</p>-->
+<!--</div>-->
+<div class="container">
+  <nb-card>
+    <nb-card-body>
+      <nb-tabset fullWidth>
+        <nb-tab class='mt-5' tabTitle="Theo dõi đi muộn">
+          <acc-management-late></acc-management-late>
+        </nb-tab>
+        <nb-tab class='mt-5' tabTitle="Cập nhật quyền">
+          <acc-management></acc-management>
+        </nb-tab>
+      </nb-tabset>
+    </nb-card-body>
+  </nb-card>
 </div>
-<router-outlet></router-outlet>
+

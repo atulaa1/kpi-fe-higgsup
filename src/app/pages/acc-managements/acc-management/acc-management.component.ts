@@ -5,7 +5,7 @@ import {ManagementUsersService} from '../../../@core/services/management-users.s
 import {User} from '../../../@core/models/user.model';
 
 @Component({
-  selector: 'ngx-acc-management',
+  selector: 'acc-management',
   templateUrl: './acc-management.component.html',
   styleUrls: ['./acc-management.component.scss'],
 })

@@ -7,10 +7,12 @@ import {AskSaveComponent} from './acc-management/ask-save/ask-save.component';
 import {RouterModule} from '@angular/router';
 import { AccManagementLateComponent } from './acc-management-late/acc-management-late.component';
 import { AccInfoComponent } from './acc-management/acc-info/acc-info.component';
+import {ThemeModule} from '../../@theme/theme.module';
 
 @NgModule({
   imports: [
     CommonModule,
+    ThemeModule,
     FormsModule,
     RouterModule,
   ],
