@@ -43,7 +43,7 @@ h5, h6 {
   min-height: 650px;
 }
 .dateCreated {
-  width: 50%;
+  width: 30%;
 }
 table {
   table-layout: fixed;
@@ -53,4 +53,18 @@ table {
 table td {
   word-wrap: break-word;
   overflow-wrap: break-word;
+}
+.search {
+  font-size: 14px;
+  width: 35%;
+  margin: 10px auto;
+  .search-div {
+    margin: auto;
+    .search-inp {
+      font-size: 14px;
+    }
+  }
+}
+#error {
+  text-align: center;
 }

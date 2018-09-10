@@ -30,21 +30,27 @@
       </nav>
     </div>
   </div>
-  <div class="row ml-5 mt-5 mr-5">
+  <div class="search">
+    <div class="form-group row">
+      <div class="col-sm-6 search-div">
+        <input class="form-control search-inp" type="text" id="myInput" (keyup)="mySearchFunction()" placeholder="Tìm kiếm hoạt động" title="Type in a name">
+      </div>
+    </div>
+  </div>
+  <div class="row ml-5 mr-5">
   <table class="table titleTable">
     <thead>
     <tr>
-      <th class="dateCreated">Ngày tạo</th>
       <th>Hoạt động</th>
+      <th class="dateCreated">Ngày tạo</th>
     </tr>
     </thead>
   </table>
   </div>
   <div class="row ml-5 mr-5 tableScroll">
-    <table class="table table-hover">
+    <table class="table table-hover" id="myTable">
       <tbody>
       <tr *ngFor="let group of groupList">
-        <td class="dateCreated">{{group.createdDate | date: 'dd-MM-yyyy' }}</td>
 
         <!--Seminar-->
 
@@ -82,6 +88,12 @@
           </ng-template>
         </td>
 
+        <!--Date Created Activities-->
+        <td class="dateCreated">{{group.createdDate | date: 'dd-MM-yyyy' }}</td>
+
+      </tr>
+      <tr>
+        <p *ngIf='showMsg' id='error' class="mt-2">Không tìm thấy kết quả phù hợp!</p>
       </tr>
       </tbody>
     </table>
