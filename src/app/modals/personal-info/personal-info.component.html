@@ -42,13 +42,12 @@
       <div class="mt-5 userInfo">
         <div class="row">
           <h6 class="col-md-4 userInfo">Ngày sinh:</h6>
-          <!--<input type="date" class="col-md-8 form-control" [(ngModel)]="birthday" name="birthday">-->
           <input class="col-md-8 form-control" placeholder="Năm-Tháng-Ngày"
                  name="d1" [(ngModel)]="birthday" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-4 userInfo">Số điện thoại:</h6>
-          <input type="tel" class="col-md-8 form-control" phoneNumberOnly oncopy="return false" onpaste="return false" formControlName="phoneNumber" id="phoneNumber" (focus)="onFocus()">
+          <input type="tel" class="col-md-8 form-control" phoneNumberOnly oncopy="return false" onpaste="return false" [(ngModel)]="phoneNumber" name="phoneNumber">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-4 userInfo">Địa chỉ:</h6>
