@@ -11,7 +11,7 @@ import {Observable} from 'rxjs/Rx';
 
 export class SupportService {
   private supportUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
-    + BaseConstant.standardServicePort.toString() + '/api/groups/support';
+    + BaseConstant.standardServicePort.toString() + '/kpi/api/groups/support';
   private httpOptions = this.httpService.setHeaderToken();
 
   constructor(private http: HttpClient, private httpService: HttpService) {

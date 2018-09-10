@@ -1,11 +1,11 @@
 export class CreatedActivity {
   // team building
-  firstPrize: number = null;
-  secondPrize: number = null;
-  thirdPrize: number = null;
-  organizers: number = null;
+  firstPrizePoint: number = null;
+  secondPrizePoint: number = null;
+  thirdPrizePoint: number = null;
+  organizerPoint: number = null;
   // club
-  host: number = null;
+  host: string = '';
   minNumberOfSessions: number = null;
   participationPoint: number = null;
   effectivePoint: number = null;
@@ -16,7 +16,8 @@ export class CreatedActivity {
   trainingPoint: number = null;
   weeklyCleanUpPoint: number = null;
   // seminar
-  member: number = null;
-  listener: number = null;
+  hostPoint: number = null;
+  memberPoint: number = null;
+  listenerPoint: number = null;
 
 }
