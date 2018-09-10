@@ -26,11 +26,11 @@ export class AccManagementComponent implements OnInit {
     this.managementUsersService.getUser().subscribe(res => {
       this.listUser = <Array<User>>res.data;
       // add isEdited for all item
-      this.eachUser();
+      this.loadUser();
     });
   }
 
-  eachUser() {
+  loadUser() {
     this.listUser.forEach(function (user, userIndex) {
       user.isEdited = false;
       user.index = userIndex;
@@ -90,7 +90,7 @@ export class AccManagementComponent implements OnInit {
     this.managementUsersService.getUser().subscribe(res => {
       this.listUser = <Array<User>>res.data;
       // add isEdited for all item
-      this.eachUser();
+      this.loadUser();
     })
   }
 
