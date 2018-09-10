@@ -1,7 +1,7 @@
 <div class="modal-body">
 <div class="askModal m-5">
-  <p class=''>Bạn có muốn sửa không?</p>
-  <button class='btn btn-hero-warning mr-5' (click)='cancelSave()'>Hủy</button>
-  <button class='btn btn-hero-success' (click)='saveRole()'>Sửa</button>
+  <p class=''>Bạn có muốn thay đổi quyền cho {{editedUser.lastName}} {{editedUser.firstName}} là {{editedUser.mainRole.slice(5)}} không ?</p>
+  <button class='btn btn-hero-success mr-5' (click)='saveRole()'>Sửa</button>
+  <button class='btn btn-hero-warning' (click)='cancelSave()'>Hủy</button>
 </div>
 </div>

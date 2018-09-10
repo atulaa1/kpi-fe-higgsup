@@ -1,4 +1,4 @@
-import {Component, OnInit, Pipe} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Project} from '../../@core/models/project.model';
 import {ProjectService} from '../../@core/services/project.service';
 import {ResponseProjectDTO} from '../../@core/models/response-project-dto.model';
@@ -37,7 +37,7 @@ export class ProjectmanagementComponent implements OnInit {
     if (this.isAdding === false && this.isEditing === false) {
       this.actionType = 'EDIT';
       this.msg = 'Bạn có muốn kích hoạt dự án ' + project.name + ' không';
-      this.buttonTitle = 'Lưu thay đổi'
+      this.buttonTitle = 'Lưu'
       this.currentProject = Object.assign({}, project);
       this.currentProject.active = 1;
       this.bsModal.open(content, {backdrop: 'static', centered: true});
@@ -48,22 +48,16 @@ export class ProjectmanagementComponent implements OnInit {
     if (this.isAdding === false && this.isEditing === false) {
       this.actionType = 'EDIT';
       this.msg = 'Bạn có muốn dừng hoạt động của dự án ' + project.name + ' không?';
-      this.buttonTitle = 'Lưu thay đổi'
+      this.buttonTitle = 'Lưu'
       this.currentProject = Object.assign({}, project);
       this.currentProject.active = 0;
       this.bsModal.open(content, {backdrop: 'static', centered: true});
     }
   }
-
-  addProject() {
-    if (this.isEditing === false) {
-      this.isAdding = true;
-    }
+  open(content) {
+    this.bsModal.open(content, {backdrop: 'static', centered: true});
   }
 
-  cancelAddProject() {
-    this.isAdding = false;
-  }
 
   confirmAdd(event) {
     const code = (event.keyCode ? event.keyCode : event.which);
@@ -102,7 +96,7 @@ export class ProjectmanagementComponent implements OnInit {
     if (this.isAdding === false) {
       this.actionType = 'EDIT';
       this.msg = 'Bạn có muốn đổi tên ' + project.name + ' thành ' + editName + ' không?';
-      this.buttonTitle = 'Lưu thay đổi'
+      this.buttonTitle = 'Lưu'
       this.currentProject = Object.assign({}, project);
       this.currentProject.name = editName
       this.bsModal.open(content, {backdrop: 'static', centered: true});
@@ -155,6 +149,10 @@ export class ProjectmanagementComponent implements OnInit {
     this.projects.sort((a, b) => {
       return b.active - a.active || +new Date(b.updatedDate) - +new Date(a.updatedDate);
     });
+  }
+
+  onAddProject($event) {
+    this.getListProject();
   }
 }
 

@@ -4,7 +4,7 @@ export class Group<T> {
   id: number;
   name: string;
   description: string;
-  groupTypeId: Activity;
+  groupType: Activity;
   createdDate: string;
   additionalConfig: T;
 }

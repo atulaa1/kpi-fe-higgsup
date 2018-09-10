@@ -1,7 +1,7 @@
 <div class="search">
   <div class="form-group row">
     <div class="col-sm-6 search-div">
-      <input class="form-control search-inp" type="text" id="myInput" (keyup)="mySearchFunction()" placeholder="Tìm kiếm tài khoản:" title="Type in a name">
+      <input normalCharacterOnly oncopy='return false' onpaste='return false' [(ngModel)]="nameSearch" class="form-control search-inp" type="text" id="myInput" (keyup)='handleKeyDown($event)' placeholder="Tìm kiếm tài khoản:" title="Type in a name"  />
     </div>
   </div>
 </div>
@@ -13,8 +13,12 @@
       <th >Sửa quyền</th>
     </tr>
     <tr *ngFor='let userInfo of listUser; let userIndex = index;'>
-      <td>{{userInfo.username}}</td>
-      <td id='{{userInfo.username}}'>
+      <td (click)="open(accountInfo)">{{userInfo.lastName}} {{userInfo.firstName}}
+        <ng-template let-c="close" let-d="dismiss" #accountInfo>
+          <ngx-acc-info [dismiss]="d" [userName]="userInfo.username"></ngx-acc-info>
+        </ng-template>
+      </td>
+      <td>
         <span [hidden]="userInfo.isEdited">{{userInfo.mainRole.slice(5)}}</span>
         <select [hidden]="!userInfo.isEdited"  name="roles" [(ngModel)]="userInfo.mainRole"  >
           <option value="ROLE_MAN">MAN</option>
@@ -30,4 +34,5 @@
       </td>
     </tr>
   </table>
+  <p *ngIf='showMsg' name='notFoundMsg'>Không tìm thấy kết quả phù hợp!</p>
 </div>

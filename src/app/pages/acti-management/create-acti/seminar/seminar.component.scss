@@ -4,15 +4,19 @@
   width: 100%;
 }
 .cancelButton {
-  margin-left: 65%;
+  width: 20%;
   margin-right: 5%;
 }
 .submitButton {
-  width: 20%;
+  margin-left: 65%;
   margin-right: 5%;
 }
 h5, h6 {
   padding-top: 10px;
+}
+h5.requiredInput:after, h6:after {
+  content: " *";
+  color: red;
 }
 .formStruc {
   margin-left: 4%;
