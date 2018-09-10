@@ -12,14 +12,12 @@
       </div>
       <div class="row">
         <div class="col-md-3">
-          <button class="btn btn-hero-success mb-5" *ngIf="!isAdding" (click)="addProject()" [disabled]="isEditing">Thêm
+          <button class="btn btn-hero-success mb-5" *ngIf="!isAdding" (click)="open(content)" [disabled]="isEditing">Thêm
             dự án
           </button>
-          <div class="row" *ngIf="isAdding">
-            <input type="text" class="form-control mb-5 col-md-10" (keypress)="confirmAdd($event)" #projectName
-                   [(ngModel)]="newProject.name">
-            <i class="fas fa-times col-md-2" (click)="cancelAddProject()"></i>
-          </div>
+          <ng-template let-c="close" let-d="dismiss" #content>
+            <project-management-confirm [dismiss]="d" (addEvent)="onAddProject($event)"></project-management-confirm>
+          </ng-template>
         </div>
       </div>
       <div class="table scrollTable">
@@ -33,20 +31,20 @@
           </div>
           <div class="col-md-3">
             <button class="btn btn-hero-success buttonSpace" *ngIf="project.active == 1"
-                    (click)="deactive(project, content)" [disabled]="isAdding"><i
+                    (click)="deactive(project, content)" [disabled]="isAdding || isEditing"><i
               class="far fa-check-circle  fa-2x"></i></button>
             <button class="btn btn-hero-success buttonSpace" *ngIf="project.active == 0"
-                    (click)="active(project, content)" [disabled]="isAdding"><i class="fas fa-ban  fa-2x"></i>
+                    (click)="active(project, content)" [disabled]="isAdding || isEditing"><i class="fas fa-ban fa-2x"></i>
             </button>
             <button class="btn btn-hero-success buttonSpace" [hidden]="project.id == projectIdEdit"
-                    (click)="showEditBox(project)" [disabled]="isAdding"><i
+                    (click)="showEditBox(project)" [disabled]="isAdding || isEditing"><i
               class="fas fa-pencil-alt  fa-2x"></i></button>
             <button class="btn btn-hero-success buttonSpace" [hidden]="project.id != projectIdEdit"
                     [disabled]="isAdding"
                     (click)="updateProjectName(project, editName.value, content)"><i class="fas fa-save fa-2x"></i>
             </button>
             <button class="btn btn-hero-success buttonSpace" (click)="deleteProject(project, content)"
-                    [disabled]="isAdding"><i class="fas fa-trash-alt fa-2x"></i></button>
+                    [disabled]="isAdding || isEditing"><i class="fas fa-trash-alt fa-2x"></i></button>
             <div>
               <ng-template let-c="close" let-d="dismiss" #content>
                 <dialog-confirmation [dismiss]="d" [choosedProjectId]="project.id"

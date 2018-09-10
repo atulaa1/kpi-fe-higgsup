@@ -1,0 +1,19 @@
+.pull-to-right{
+  float: right;
+}
+.btn-hero-success.pull-to-right{
+  margin-left: 30px;
+}
+.text-center[name$="modalHandle-style"]{
+  color:red;
+  font-size: 14px;
+}
+.modal-body[name$="modal-relative"]{
+  position: relative;
+}
+.icon-abs.fa-asterisk{
+  color:red;
+  left: 5px;
+  top: 15px;
+  font-size: 10px;
+}

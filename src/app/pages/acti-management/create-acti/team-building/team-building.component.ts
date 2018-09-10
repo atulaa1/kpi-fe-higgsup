@@ -13,7 +13,7 @@ import {DataService} from '../../../../@core/services/data.service';
   styleUrls: ['./team-building.component.scss'],
 })
 export class TeamBuildingComponent implements OnInit {
-  @Input() groupId: number;
+  @Input() groupId: number = null;
   @Input() createdActivity: CreatedActivity = new CreatedActivity();
   @Input() activityName: string = '';
   @Input() dismiss;
@@ -36,14 +36,14 @@ export class TeamBuildingComponent implements OnInit {
     const groupType = new Activity();
     point = this.createdActivity;
     groupType.id = 3;
-    this.teambuilding.groupTypeId = groupType;
+    this.teambuilding.groupType = groupType;
     this.teambuilding.additionalConfig = point;
     this.teambuilding.name = this.activityName;
     if (this.teambuilding.name === ''
-      || this.teambuilding.additionalConfig.firstPrize === null
-      || this.teambuilding.additionalConfig.secondPrize === null
-      || this.teambuilding.additionalConfig.thirdPrize === null
-      || this.teambuilding.additionalConfig.organizers === null) {
+      || !this.teambuilding.additionalConfig.firstPrizePoint
+      || !this.teambuilding.additionalConfig.secondPrizePoint
+      || !this.teambuilding.additionalConfig.thirdPrizePoint
+      || !this.teambuilding.additionalConfig.organizerPoint) {
       this.alert = true;
     } else {
       this.alert = false;
@@ -52,14 +52,30 @@ export class TeamBuildingComponent implements OnInit {
           this.activeModal.close();
           this.data.changeMessage('Created new an activity');
           swal('Chúc Mừng!', 'Đã tạo thành công!', 'success');
-        } else if (response.status_code === 906) {
-          swal('Thông báo!', 'Hoạt động này đã tồn tại!', 'error');
         } else if (response.status_code === 900) {
           swal('Thông báo!', 'Không tìm thấy loại hoạt động!', 'error');
         } else if (response.status_code === 932) {
           swal('Thông báo!', 'Hoạt động này đã tồn tại!', 'error');
-        } else if (response.status_code === 931) {
+        } else if (response.status_code === 931 && response.message === 'The first prize score can not be null') {
           swal('Thông báo!', 'Điểm của giải Nhất không được để trống!', 'error');
+        } else if (response.status_code === 931 && response.message === 'The second prize score can not be null') {
+          swal('Thông báo!', 'Điểm của giải Nhì không được để trống!', 'error');
+        } else if (response.status_code === 931 && response.message === 'The third prize score can not be null') {
+          swal('Thông báo!', 'Điểm của giải Ba không được để trống!', 'error');
+        } else if (response.status_code === 931 && response.message === 'The orgnizers score can not be null') {
+          swal('Thông báo!', 'Điểm của Ban Tổ chức không được để trống!', 'error');
+        } else if (response.status_code === 901 && response.message === 'Invalidated first prize') {
+          swal('Thông báo!', 'Điểm của giải Nhất không hợp lệ!', 'error');
+        } else if (response.status_code === 901 && response.message === 'Invalidated second  prize') {
+          swal('Thông báo!', 'Điểm của giải Nhì không hợp lệ!', 'error');
+        } else if (response.status_code === 901 && response.message === 'Invalidated third prize') {
+          swal('Thông báo!', 'Điểm của giải Ba không hợp lệ!', 'error');
+        } else if (response.status_code === 901 && response.message === 'Invalidated orgnizers prize') {
+          swal('Thông báo!', 'Điểm của Ban Tổ chức không hợp lệ!', 'error');
+        } else if (response.status_code === 901 && response.message === 'First prize has to large than second prize') {
+          swal('Thông báo!', 'Điểm của giải Nhất phải lớn hơn điểm của giải Nhì!', 'error');
+        } else if (response.status_code === 901 && response.message === 'Second prize has to large than thirst prize') {
+          swal('Thông báo!', 'Điểm của giải Nhì phải lớn hơn điểm của giải Ba!', 'error');
         }
       });
     }
@@ -70,19 +86,19 @@ export class TeamBuildingComponent implements OnInit {
     const groupType = new Activity();
     point = this.createdActivity;
     groupType.id = 3;
-    this.teambuilding.groupTypeId = groupType;
+    this.teambuilding.groupType = groupType;
     this.teambuilding.additionalConfig = point;
     this.teambuilding.name = this.activityName;
     this.teambuilding.id = this.groupId;
     if (this.teambuilding.name === ''
-      || this.teambuilding.additionalConfig.firstPrize.toString() === ''
-      || this.teambuilding.additionalConfig.secondPrize.toString() === ''
-      || this.teambuilding.additionalConfig.thirdPrize.toString() === ''
-      || this.teambuilding.additionalConfig.organizers.toString() === '') {
+      || !this.teambuilding.additionalConfig.firstPrizePoint
+      || !this.teambuilding.additionalConfig.secondPrizePoint
+      || !this.teambuilding.additionalConfig.thirdPrizePoint
+      || !this.teambuilding.additionalConfig.organizerPoint) {
       this.alert = true;
     } else {
       this.alert = false;
-      return this.teambuildingService.updateTeambuilding(this.teambuilding).subscribe(response => {
+      return this.teambuildingService.updateTeambuilding(this.groupId, this.teambuilding).subscribe(response => {
         if (response.status_code === 200) {
           this.change.emit(update);
           this.dismiss();
@@ -93,8 +109,26 @@ export class TeamBuildingComponent implements OnInit {
           swal('Thông báo!', 'Không tìm thấy loại hoạt động!', 'error');
         } else if (response.status_code === 932) {
           swal('Thông báo!', 'Hoạt động này đã tồn tại!', 'error');
-        } else if (response.status_code === 931) {
+        } else if (response.status_code === 931 && response.message === 'The first prize score can not be null') {
           swal('Thông báo!', 'Điểm của giải Nhất không được để trống!', 'error');
+        } else if (response.status_code === 931 && response.message === 'The second prize score can not be null') {
+          swal('Thông báo!', 'Điểm của giải Nhì không được để trống!', 'error');
+        } else if (response.status_code === 931 && response.message === 'The third prize score can not be null') {
+          swal('Thông báo!', 'Điểm của giải Ba không được để trống!', 'error');
+        } else if (response.status_code === 931 && response.message === 'The orgnizers score can not be null') {
+          swal('Thông báo!', 'Điểm của Ban Tổ chức không được để trống!', 'error');
+        } else if (response.status_code === 901 && response.message === 'Invalidated first prize') {
+          swal('Thông báo!', 'Điểm của giải Nhất không hợp lệ!', 'error');
+        } else if (response.status_code === 901 && response.message === 'Invalidated second  prize') {
+          swal('Thông báo!', 'Điểm của giải Nhì không hợp lệ!', 'error');
+        } else if (response.status_code === 901 && response.message === 'Invalidated third prize') {
+          swal('Thông báo!', 'Điểm của giải Ba không hợp lệ!', 'error');
+        } else if (response.status_code === 901 && response.message === 'Invalidated orgnizers prize') {
+          swal('Thông báo!', 'Điểm của Ban Tổ chức không hợp lệ!', 'error');
+        } else if (response.status_code === 901 && response.message === 'First prize has to large than second prize') {
+          swal('Thông báo!', 'Điểm của giải Nhất phải lớn hơn điểm của giải Nhì!', 'error');
+        } else if (response.status_code === 901 && response.message === 'Second prize has to large than thirst prize') {
+          swal('Thông báo!', 'Điểm của giải Nhì phải lớn hơn điểm của giải Ba!', 'error');
         }
       })
     }

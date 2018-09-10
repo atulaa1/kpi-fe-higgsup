@@ -17,7 +17,7 @@
     </div>
     <div class="row mt-2">
       <div class="col-md-6">
-        <h5>Hoạt động</h5>
+        <h5 class="requiredInput">Hoạt động</h5>
       </div>
       <div class="col-md-6">
         <form action="" class="form-group">
@@ -27,7 +27,7 @@
     </div>
     <div class="row mt-2">
       <div class="col-md-6">
-        <h5>Chủ Câu lạc bộ</h5>
+        <h5 class="requiredInput">Chủ Câu lạc bộ</h5>
       </div>
       <div class="col-md-6">
         <form action="" class="form-group">
@@ -37,12 +37,12 @@
     </div>
     <div class="row mt-2">
       <div class="col-md-9">
-        <h5>Số buổi tối thiểu hoạt động trong tháng</h5>
+        <h5 class="requiredInput">Số buổi tối thiểu hoạt động trong tháng</h5>
       </div>
       <div class="col-md-3">
         <form action="" class="form-group">
           <input type="text" class="form-control" name="numberSession" [(ngModel)]="createdActivity.minNumberOfSessions"
-                 maxlength="10" appTwoDigitDecimaNumber/>
+                 oncopy='return false' onpaste='return false'  maxlength="10" appTwoDigitDecimaNumber/>
         </form>
       </div>
     </div>
@@ -62,19 +62,19 @@
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Tham gia</h6>
           <input type="text" class="col-md-2  form-control formStruc" name="joinPoint"
-                 [(ngModel)]="createdActivity.participationPoint" maxlength="10" appTwoDigitDecimaNumber>
+                 [(ngModel)]="createdActivity.participationPoint" oncopy='return false' onpaste='return false' maxlength="10" appTwoDigitDecimaNumber>
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Hiệu quả</h6>
           <input type="text" class=" col-md-2 form-control formStruc" name="effectPoint"
-                 [(ngModel)]="createdActivity.effectivePoint" maxlength="10" appTwoDigitDecimaNumber>
+                 [(ngModel)]="createdActivity.effectivePoint" oncopy='return false' onpaste='return false' maxlength="10" appTwoDigitDecimaNumber>
         </div>
         <div class="row">
           <div class="clubButton mt-5">
-            <button *ngIf="groupId == null" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
-            <button *ngIf="groupId != null" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
             <button *ngIf="groupId == null" class="btn btn-hero-success submitButton" (click)="onAddClub($event)">Lưu</button>
             <button *ngIf="groupId != null" class="btn btn-hero-success submitButton" (click)="onUpdateClub($event)">Lưu</button>
+            <button *ngIf="groupId == null" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
+            <button *ngIf="groupId != null" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
           </div>
         </div>
       </form>

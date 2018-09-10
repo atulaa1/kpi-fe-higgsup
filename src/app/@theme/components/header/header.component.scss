@@ -237,10 +237,6 @@
 a span {
   color: #5DCFE3;
 }
-.userInfo a,
-.userInfo a:hover {
-  color: #5DCFE3;
-}
 
 .manipulationMenu {
   display: flex;
@@ -250,14 +246,17 @@ a span {
 nb-action.higgigup-nb-action{
   border: none !important;
 }
+nb-action[name$="notification"]{
+  border: none !important;
+}
 .nav-list {
   padding: 2em 5rem;
   font-size: 17px;
 }
-
 .nav-list a {
   color: #fff;
 }
+
 
 @media (min-width: 992px) {
   .nav-list {
@@ -304,8 +303,9 @@ nb-action.higgigup-nb-action{
   -webkit-transition: ease .2s;
 }
 
-.higgigup-nb-action:hover a {
-  color: #fff;
+.userInfo a,
+.userInfo a:hover {
+  color: #5DCFE3;
 }
 
 .higgigup-nb-action:hover:after {
@@ -319,10 +319,13 @@ li {
   padding: 10px !important;
   display: flex;
   border-top: 1px solid #ebeef2;
-  padding: 15px
-  //font-size: 1;
 }
 li:hover span ,li:hover i {
   color: #5DCFE3 !important;
 }
+.nav-list[name$="navList"]{
+  padding-left: 0;
+  padding-right: 0;
+}
+
 

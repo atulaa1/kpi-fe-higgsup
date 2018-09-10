@@ -1,21 +1,20 @@
 import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[appTwoDigitDecimaNumber]'
+  selector: '[phoneNumberOnly]',
 })
-export class TwoDigitDecimaNumberDirective {
-  // Regex chỉ cho phép 2 chữ số thập phân và số dương
-  private regex: RegExp = new RegExp(/^\d*\.?\d{0,2}$/g);
-  // Cho phép một vài phím đặc biệt như:
+export class PhoneNumberOnlyDirective {
+  // Chỉ cho phép dạng số dài tối đa 16 kí tự
+  private regex: RegExp = new RegExp(/^[0-9]{0,16}$/g);
+  // Cho phép key đặc biệt :
   // Backspace, tab, end, home
-  private specialKeys: Array<string> = ['Backspace', 'Tab', 'End', 'Home'];
+  private specialKeys: Array<string> = [ 'Backspace', 'Tab', 'End', 'Home' ];
 
   constructor(private el: ElementRef) {
   }
-  @HostListener('keydown', ['$event'])
+  @HostListener('keydown', [ '$event' ])
   onKeyDown(event: KeyboardEvent) {
-
-    // Cho phép dùng Backspace, tab, end, and home keys
+    // Cho phép key Backspace, tab, end, and home keys
     if (this.specialKeys.indexOf(event.key) !== -1) {
       return;
     }

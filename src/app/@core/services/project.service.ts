@@ -19,20 +19,20 @@ export class ProjectService {
   private httpOptions = this.httpService.setHeaderToken();
 
   getAllProject(): Observable<ResponseProjectDTO> {
-    return this.http.get<ResponseProjectDTO>(this.url + '/api/projects', this.httpOptions);
+    return this.http.get<ResponseProjectDTO>(this.url + '/kpi/api/projects', this.httpOptions);
   }
 
   addNewProject(project: Project): Observable<ResponseProjectDTO> {
     let projectJson = JSON.stringify(project);
-    return this.http.post<ResponseProjectDTO>(this.url + '/api/projects', projectJson, this.httpOptions);
+    return this.http.post<ResponseProjectDTO>(this.url + '/kpi/api/projects', projectJson, this.httpOptions);
   }
 
   updateProject(project: Project): Observable<ResponseProjectDTO> {
     let projectJson = JSON.stringify(project);
-    return this.http.put<ResponseProjectDTO>(this.url + '/api/projects/' + project.id.toString(), projectJson, this.httpOptions);
+    return this.http.put<ResponseProjectDTO>(this.url + '/kpi/api/projects/' + project.id.toString(), projectJson, this.httpOptions);
   }
 
   deleteProject(project: Project): Observable<ResponseProjectDTO> {
-    return this.http.delete<ResponseProjectDTO>(this.url + '/api/projects/' + project.id.toString(), this.httpOptions);
+    return this.http.delete<ResponseProjectDTO>(this.url + '/kpi/api/projects/' + project.id.toString(), this.httpOptions);
   }
 }

@@ -1,8 +1,8 @@
 <div class="modal-body">
-  <p >{{msg}}</p>
-  <div style="text-align: center">
-    <button [hidden]="buttonTitle == 'Xác nhận'" class='btn btn-hero-warning mr-5' (click)="cancel()">Hủy</button>
-    <button [hidden]="buttonTitle == 'Xác nhận'" class='btn btn-hero-success' (click)="confirm()">{{buttonTitle}}</button>
+  <p class="messageConfirm">{{msg}}</p>
+  <div class="buttonConfirm">
+    <button [hidden]="buttonTitle == 'Xác nhận'" class='btn btn-hero-success mr-5' (click)="confirm()">{{buttonTitle}}</button>
     <button [hidden]="buttonTitle != 'Xác nhận'" class='btn btn-hero-success' (click)="close()">{{buttonTitle}}</button>
+    <button [hidden]="buttonTitle == 'Xác nhận'" class='btn btn-hero-warning' (click)="cancel()">Hủy</button>
   </div>
 </div>

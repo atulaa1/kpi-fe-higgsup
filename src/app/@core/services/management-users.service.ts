@@ -16,10 +16,10 @@ export class ManagementUsersService implements OnInit {
   }
 
   getUsersUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
-    + BaseConstant.standardServicePort.toString() + '/api/users';
+    + BaseConstant.standardServicePort.toString() + '/kpi/api/users';
 
   updateRoleUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
-    + BaseConstant.standardServicePort.toString() + '/api/users';
+    + BaseConstant.standardServicePort.toString() + '/kpi/api/users';
 
   ngOnInit() {
   }

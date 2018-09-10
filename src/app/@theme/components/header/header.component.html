@@ -10,18 +10,19 @@
   <nb-action class="higgigup-nb-action nav-list"><a href="#">Cách tính điểm</a></nb-action>
   <nb-action class="higgigup-nb-action nav-list"><a href="#">Cơ cấu thưởng</a></nb-action>
   <nb-action *ngIf="!user.token && !user.username" class="higgigup-nb-action nav-list" (click)="openLoginModal()"><a
-    href="#">Đăng nhập</a>
+    href="javascript:">Đăng nhập</a>
   </nb-action>
-  <nb-action *ngIf="user.username">
+  <nb-action name="notification" class=" nav-list" *ngIf="user.username">
     <a href="#">
       <nb-badge text="99+" status="danger" position="top left"></nb-badge>
       <i style="font-size: 25px;" class="far fa-bell"></i>
     </a>
+  </nb-action>
+  <nb-action class="higgigup-nb-action nav-list" name="navList" *ngIf="user.username">
     <div class="btn-group" dropdown>
-      <nb-action dropdownToggle class="higgigup-nb-action" aria-controls="dropdown-basic">
+      <div dropdownToggle class="nav-list" aria-controls="dropdown-basic">
         <a>{{user.firstName}} {{user.lastName}}</a>
-      </nb-action>
-
+      </div>
       <div style="width: 300px" id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right">
         <div style="min-height: 170px" class="row">
           <div class="col-6 col-md-6 ">
@@ -41,7 +42,7 @@
               <span *ngIf="user.userRole.indexOf('ROLE_EMPLOYEE')>=0 && user.userRole.length == 1">Employee</span>
             </div>
             <div class="font-weight-600 userInfo mt-5">
-              <a href="#" (click)="openPersonalInfo()">Hồ sơ trên KPI</a>
+              <a href="javascript:" (click)="openPersonalInfo()">Hồ sơ trên KPI</a>
             </div>
           </div>
 
@@ -112,7 +113,7 @@
           <li class="text-center font-weight-600">
             <i style="  font-size: 23px;" class="fas fa-sign-out-alt"></i>
             <a style="margin-left: 10px" ng-reflect-router-link="" title="Đăng xuất" (click)="openLogoutModal()"
-               href="#">
+               href="javascript:">
               <span class="menu-title">Đăng xuất</span>
             </a>
           </li>
