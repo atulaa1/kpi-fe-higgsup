@@ -17,6 +17,7 @@ export class AccManagementComponent implements OnInit {
   editedUser: User;
   beforeEditedUser: User;
   nameSearch: string;
+
   constructor(private bsModal: NgbModal,
               private managementUsersService: ManagementUsersService) {
   }
@@ -25,17 +26,21 @@ export class AccManagementComponent implements OnInit {
     this.managementUsersService.getUser().subscribe(res => {
       this.listUser = <Array<User>>res.data;
       // add isEdited for all item
-      this.listUser.forEach(function (user, userIndex) {
-        user.isEdited = false;
-        user.index = userIndex;
-        if (user.userRole.indexOf('ROLE_ADMIN') >= 0) {
-          user.mainRole = 'ROLE_ADMIN';
-        } else if (user.userRole.indexOf('ROLE_MAN') >= 0) {
-          user.mainRole = 'ROLE_MAN';
-        } else if (user.userRole.indexOf('ROLE_EMPLOYEE') >= 0 && user.userRole.length === 1) {
-          user.mainRole = 'ROLE_EMPLOYEE';
-        }
-      })
+      this.eachUser();
+    });
+  }
+
+  eachUser() {
+    this.listUser.forEach(function (user, userIndex) {
+      user.isEdited = false;
+      user.index = userIndex;
+      if (user.userRole.indexOf('ROLE_ADMIN') >= 0) {
+        user.mainRole = 'ROLE_ADMIN';
+      } else if (user.userRole.indexOf('ROLE_MAN') >= 0) {
+        user.mainRole = 'ROLE_MAN';
+      } else if (user.userRole.indexOf('ROLE_EMPLOYEE') >= 0 && user.userRole.length === 1) {
+        user.mainRole = 'ROLE_EMPLOYEE';
+      }
     })
   }
 
@@ -85,17 +90,7 @@ export class AccManagementComponent implements OnInit {
     this.managementUsersService.getUser().subscribe(res => {
       this.listUser = <Array<User>>res.data;
       // add isEdited for all item
-      this.listUser.forEach(function (user, userIndex) {
-        user.isEdited = false;
-        user.index = userIndex;
-        if (user.userRole.indexOf('ROLE_ADMIN') >= 0) {
-          user.mainRole = 'ROLE_ADMIN';
-        } else if (user.userRole.indexOf('ROLE_MAN') >= 0) {
-          user.mainRole = 'ROLE_MAN';
-        } else if (user.userRole.indexOf('ROLE_EMPLOYEE') >= 0 && user.userRole.length === 1) {
-          user.mainRole = 'ROLE_EMPLOYEE';
-        }
-      })
+      this.eachUser();
     })
   }
 

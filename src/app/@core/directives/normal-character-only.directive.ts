@@ -4,7 +4,7 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
   selector: '[normalCharacterOnly]',
 })
 export class NormalCharacterOnlyDirective {
-  private regex: RegExp = new RegExp(/^[0-9a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]+$/);
+  private regex: RegExp = new RegExp(/^[0-9a-zA-Z_\u00C0-\u1EF9 ]+$/);
   private specialKeys: Array<string> = ['Backspace', 'Tab', 'End', 'Home'];
 
   constructor(private el: ElementRef) {

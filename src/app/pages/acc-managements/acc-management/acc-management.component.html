@@ -18,7 +18,7 @@
           <ngx-acc-info [dismiss]="d" [userName]="userInfo.username"></ngx-acc-info>
         </ng-template>
       </td>
-      <td id='{{userInfo.firstName}}'>
+      <td>
         <span [hidden]="userInfo.isEdited">{{userInfo.mainRole.slice(5)}}</span>
         <select [hidden]="!userInfo.isEdited"  name="roles" [(ngModel)]="userInfo.mainRole"  >
           <option value="ROLE_MAN">MAN</option>
@@ -34,5 +34,5 @@
       </td>
     </tr>
   </table>
-  <p *ngIf='showMsg' id='error'>Không tìm thấy kết quả phù hợp!</p>
+  <p *ngIf='showMsg' name='notFoundMsg'>Không tìm thấy kết quả phù hợp!</p>
 </div>
