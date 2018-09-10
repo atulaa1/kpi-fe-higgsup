@@ -16,6 +16,7 @@ export class AccManagementComponent implements OnInit {
   listUser: Array<User>;
   editedUser: User;
   beforeEditedUser: User;
+  nameSearch: string;
   constructor(private bsModal: NgbModal,
               private managementUsersService: ManagementUsersService) {
   }
@@ -38,6 +39,14 @@ export class AccManagementComponent implements OnInit {
     })
   }
 
+  handleKeyDown(event: any) {
+    if (event.keyCode === 13) {
+      this.mySearchFunction();
+    } else if (this.nameSearch === '') {
+      this.mySearchFunction();
+    }
+  }
+
   mySearchFunction() {
     this.showMsg = true;
     let input, filter, table, tr, td, i;
@@ -57,6 +66,7 @@ export class AccManagementComponent implements OnInit {
       }
     }
   }
+
   updateRole(userInfo: User) {
     if (this.editingUsername === null) {
       userInfo.isEdited = true;
@@ -72,6 +82,21 @@ export class AccManagementComponent implements OnInit {
   updateSuccess($event) {
     this.editedUser = $event;
     this.editingUsername = null;
+    this.managementUsersService.getUser().subscribe(res => {
+      this.listUser = <Array<User>>res.data;
+      // add isEdited for all item
+      this.listUser.forEach(function (user, userIndex) {
+        user.isEdited = false;
+        user.index = userIndex;
+        if (user.userRole.indexOf('ROLE_ADMIN') >= 0) {
+          user.mainRole = 'ROLE_ADMIN';
+        } else if (user.userRole.indexOf('ROLE_MAN') >= 0) {
+          user.mainRole = 'ROLE_MAN';
+        } else if (user.userRole.indexOf('ROLE_EMPLOYEE') >= 0 && user.userRole.length === 1) {
+          user.mainRole = 'ROLE_EMPLOYEE';
+        }
+      })
+    })
   }
 
   cancelAction($event) {
@@ -79,7 +104,8 @@ export class AccManagementComponent implements OnInit {
     this.listUser.splice(this.editedUser.index, 1, this.editedUser);
     this.editingUsername = null;
   }
+
   open(content) {
-    this.bsModal.open(content,  {backdrop: 'static', centered: true});
+    this.bsModal.open(content, {backdrop: 'static', centered: true});
   }
 }
