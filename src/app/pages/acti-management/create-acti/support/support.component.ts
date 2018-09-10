@@ -33,7 +33,7 @@ export class SupportComponent implements OnInit {
     const groupType = new Activity();
     point = this.createdActivity;
     groupType.id = 4; // 4 is support
-    this.group.groupTypeId = groupType;
+    this.group.groupType = groupType;
     this.group.additionalConfig = point;
     this.group.name = this.activityName;
     if (this.group.name === '' || !this.group.additionalConfig.cleanUpPoint
@@ -68,7 +68,7 @@ export class SupportComponent implements OnInit {
     const groupType = new Activity();
     point = this.createdActivity;
     groupType.id = 4; // 4 is support
-    this.group.groupTypeId = groupType;
+    this.group.groupType = groupType;
     this.group.additionalConfig = point;
     this.group.name = this.activityName;
     if (this.group.name === '' || !this.group.additionalConfig.cleanUpPoint

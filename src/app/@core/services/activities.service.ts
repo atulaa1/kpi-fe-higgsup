@@ -14,10 +14,10 @@ export class ActivitiesService {
   }
 
   private activitiesUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
-    + BaseConstant.standardServicePort.toString() + '/api/group-types';
+    + BaseConstant.standardServicePort.toString() + '/kpi/api/group-types';
 
   private createdActivitesUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
-    + BaseConstant.standardServicePort.toString() + '/api/groups';
+    + BaseConstant.standardServicePort.toString() + '/kpi/api/groups';
   private httpOptions = this.httpService.setHeaderToken();
 
   getListActivities(): Observable<any> {

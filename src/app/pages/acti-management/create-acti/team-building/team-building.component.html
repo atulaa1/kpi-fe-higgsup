@@ -18,7 +18,7 @@
     <form action="" class="form-group">
       <div class="row mt-2">
         <div class="col-md-6">
-          <h5>Hoạt động</h5>
+          <h5 class="requiredInput">Hoạt động</h5>
         </div>
         <div class="col-md-6">
           <input type="text" class="form-control" name="teambuilding" [(ngModel)]="activityName" maxlength="350">
@@ -39,29 +39,29 @@
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Nhất</h6>
           <input type="text" class="col-md-2  form-control formStruc" name="pointFirst"
-                 oncopy='return false' onpaste='return false'[(ngModel)]="createdActivity.firstPrize" maxlength="10" appTwoDigitDecimaNumber>
+                 oncopy='return false' onpaste='return false'[(ngModel)]="createdActivity.firstPrizePoint" maxlength="10" appTwoDigitDecimaNumber>
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Nhì</h6>
           <input type="text" class=" col-md-2 form-control formStruc" name="pointSecond"
-                 oncopy='return false' onpaste='return false' [(ngModel)]="createdActivity.secondPrize" maxlength="10" appTwoDigitDecimaNumber>
+                 oncopy='return false' onpaste='return false' [(ngModel)]="createdActivity.secondPrizePoint" maxlength="10" appTwoDigitDecimaNumber>
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Ba</h6>
           <input type="text" class=" col-md-2 form-control formStruc" name="pointThird"
-                 oncopy='return false' onpaste='return false' [(ngModel)]="createdActivity.thirdPrize" maxlength="10" appTwoDigitDecimaNumber>
+                 oncopy='return false' onpaste='return false' [(ngModel)]="createdActivity.thirdPrizePoint" maxlength="10" appTwoDigitDecimaNumber>
         </div>
         <div class="row mt-2">
           <h6 class="col-md-8 ml-5">Ban tổ chức</h6>
           <input type="text" class=" col-md-2 form-control formStruc" name="pointOrganize"
-                 oncopy='return false' onpaste='return false' [(ngModel)]="createdActivity.organizers" maxlength="10" appTwoDigitDecimaNumber>
+                 oncopy='return false' onpaste='return false' [(ngModel)]="createdActivity.organizerPoint" maxlength="10" appTwoDigitDecimaNumber>
         </div>
         <div class="row">
           <div class="teamButton mt-5">
-            <button *ngIf="groupId == null" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
-            <button *ngIf="groupId != null" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
             <button *ngIf="groupId == null" class="btn btn-hero-success submitButton" (click)="onAddTeambuilding($event)">Lưu</button>
             <button *ngIf="groupId != null" class="btn btn-hero-success submitButton" (click)="onUpdateTeambuilding($event)">Lưu</button>
+            <button *ngIf="groupId == null" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
+            <button *ngIf="groupId != null" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
           </div>
         </div>
       </div>

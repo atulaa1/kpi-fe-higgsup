@@ -11,7 +11,7 @@ import {Survey} from '../models/survey.model';
 export class SurveyService {
 
   private surveyUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
-    + BaseConstant.standardServicePort.toString() + '/api/survey/questions-man';
+    + BaseConstant.standardServicePort.toString() + '/kpi/api/survey/questions-man';
   private httpOptions = this.httpService.setHeaderToken();
 
   constructor(private http: HttpClient, private httpService: HttpService) {

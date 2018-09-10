@@ -32,7 +32,7 @@ export class ClubComponent implements OnInit {
   onAddClub(addNew: any) {
     const groupType = new Activity();
     groupType.id = 2;
-    this.group.groupTypeId = groupType;
+    this.group.groupType = groupType;
     this.group.additionalConfig = this.createdActivity;
     this.group.name = this.activityName;
     if (this.group.name === ''
@@ -68,7 +68,7 @@ export class ClubComponent implements OnInit {
   onUpdateClub(update: any) {
     const groupType = new Activity();
     groupType.id = 2;
-    this.group.groupTypeId = groupType;
+    this.group.groupType = groupType;
     this.group.additionalConfig = this.createdActivity;
     this.group.name = this.activityName;
     this.group.id = this.groupId;

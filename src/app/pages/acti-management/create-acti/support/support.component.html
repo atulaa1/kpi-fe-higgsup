@@ -17,7 +17,7 @@
     </div>
     <div class="row mt-2">
       <div class="col-md-6">
-        <h5>Hoạt động</h5>
+        <h5 class="requiredInput">Hoạt động</h5>
       </div>
       <div class="col-md-6">
         <input type="text" class="form-control" [(ngModel)]="activityName" maxlength="350">
@@ -64,10 +64,10 @@
         </div>
         <div class="row">
           <div class="supportButton mt-5">
-            <button *ngIf="groupId == null" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
-            <button *ngIf="groupId != null" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
             <button *ngIf="groupId == null" class="btn btn-hero-success submitButton" (click)="addSupport($event)">Lưu</button>
             <button *ngIf="groupId != null" class="btn btn-hero-success submitButton" (click)="changeSupport($event)">Lưu</button>
+            <button *ngIf="groupId == null" class="btn btn-hero-warning cancelButton" (click)="onClose()">Huỷ</button>
+            <button *ngIf="groupId != null" class="btn btn-hero-warning cancelButton" (click)="dismiss()">Huỷ</button>
           </div>
         </div>
       </form>
