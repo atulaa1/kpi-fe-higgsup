@@ -116,7 +116,9 @@
       <div class="mt-5 userInfo">
         <div class="row">
           <h6 class="col-md-4 userInfo">Ngày sinh:</h6>
-          <input type="date" class="col-md-8 form-control" [(ngModel)]="birthday" name="birthday">
+          <!--<input type="date" class="col-md-8 form-control" [(ngModel)]="birthday" name="birthday">-->
+          <input class="col-md-8 form-control" placeholder="Năm-Tháng-Ngày"
+                 name="d1" [(ngModel)]="birthday" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-4 userInfo">Số điện thoại:</h6>
@@ -134,15 +136,15 @@
           <h6 class="col-md-4 userInfo">Skype:</h6>
           <input type="text" class="col-md-8 form-control" [(ngModel)]="skype" name="skype">
         </div>
-        <div class="row mt-2">
-          <h6 class="col-md-4 userInfo">Số năm làm việc:</h6>
-          <input type="number" class="col-md-8 form-control" [(ngModel)]="yearsOfWork" name="yearsOfWork"
-                 required="true">
-        </div>
+        <!--<div class="row mt-2">-->
+          <!--<h6 class="col-md-4 userInfo">Số năm làm việc:</h6>-->
+          <!--<input type="number" class="col-md-8 form-control" [(ngModel)]="yearsOfWork" name="yearsOfWork"-->
+                 <!--required="true">-->
+        <!--</div>-->
         <div class="row mt-2">
           <h6 class="col-md-4 userInfo">Ngày bắt đầu làm việc:</h6>
-          <input class="col-md-8 form-control" placeholder="Ngày-Tháng-Năm"
-                 name="d" [(ngModel)]="toDate" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()">
+          <input class="col-md-8 form-control" placeholder="Năm-Tháng-Ngày"
+                 name="d" [(ngModel)]="dpStartWorkDay" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()">
         </div>
         <div class="row personButton mt-3 align-middle">
           <button class="btn btn-hero-success submitButton" (click)="saveChange()">Lưu thay đổi</button>

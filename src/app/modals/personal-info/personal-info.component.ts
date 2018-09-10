@@ -7,6 +7,7 @@ import {MessageConstant} from '../../@core/glossary/message.constant';
 import {CookieService} from 'ngx-cookie-service';
 import {ResponseDTO} from '../../@core/models/responseDTO.model';
 import {NgbDate} from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
+import {isNull} from 'util';
 
 @Component({
   selector: 'ngx-personal-info',
@@ -29,13 +30,11 @@ export class PersonalInfoComponent implements OnInit {
   closeWarningMsg: string;
   emailWarning: string;
   avatar: string;
-  birthday: string;
+  birthday: NgbDate;
   phoneNumber: string;
   address: string;
   secondaryEmail: string;
   skype: string;
-  yearsOfWork: number;
-  toDate: NgbDate;
 
   constructor(private activeModal: NgbActiveModal,
               private cookieService: CookieService,
@@ -46,23 +45,29 @@ export class PersonalInfoComponent implements OnInit {
 
   ngOnInit() {
     this.userService.currentUser.subscribe(user => this.currentUser = user);
+    if (typeof (this.currentUser.birthday) === 'string') {
+      this.currentUser.birthday = new Date(this.currentUser.birthday);
+    }
+    if (typeof (this.currentUser.dateStartWork) === 'string') {
+      this.currentUser.dateStartWork = new Date(this.currentUser.dateStartWork);
+    }
     this.fileBase64 = this.currentUser.avatar;
-    this.birthday = this.currentUser.birthday;
+    this.birthday = this.convertDateToNgbDate(this.currentUser.birthday);
     this.phoneNumber = this.currentUser.numberPhone;
     this.address = this.currentUser.address;
     this.secondaryEmail = this.currentUser.gmail;
     this.skype = this.currentUser.skype;
-    this.dpStartWorkDay = new NgbDate(this.currentUser.dateStartWork.getFullYear(),
-      this.currentUser.dateStartWork.getMonth() + 1, this.currentUser.dateStartWork.getDay());
+    this.dpStartWorkDay = this.convertDateToNgbDate(this.currentUser.dateStartWork);
   }
 
   isInfoChanged(): boolean {
-    if (this.fileBase64 !== this.currentUser.avatar || this.birthday !== this.currentUser.birthday ||
-      this.phoneNumber !== this.currentUser.numberPhone || this.address !== this.currentUser.address ||
-      this.secondaryEmail !== this.currentUser.gmail || this.skype !== this.currentUser.skype ||
-      this.dpStartWorkDay.year !== this.currentUser.dateStartWork.getFullYear() ||
-      this.dpStartWorkDay.month !== this.currentUser.dateStartWork.getMonth() + 1 ||
-      this.dpStartWorkDay.day !== this.currentUser.dateStartWork.getDay()) {
+    if (this.fileBase64 !== this.currentUser.avatar ||
+      this.convertNgbDateToDate(this.birthday) !== this.currentUser.birthday ||
+      this.phoneNumber !== this.currentUser.numberPhone ||
+      this.address !== this.currentUser.address ||
+      this.secondaryEmail !== this.currentUser.gmail ||
+      this.skype !== this.currentUser.skype ||
+      this.convertNgbDateToDate(this.dpStartWorkDay) !== this.currentUser.dateStartWork) {
       return true;
     }
     return false;
@@ -103,22 +108,22 @@ export class PersonalInfoComponent implements OnInit {
     } else {
       let userTemp = this.currentUser;
       userTemp.avatar = this.fileBase64;
-      userTemp.birthday = this.birthday;
+      userTemp.birthday = isNull(this.birthday) ? null : this.convertNgbDateToDate(this.birthday);
       userTemp.numberPhone = this.phoneNumber;
       userTemp.address = this.address;
       userTemp.gmail = this.secondaryEmail;
       userTemp.skype = this.skype;
-      // userTemp.dateStartWork = this.dpStartWorkDay;
+      userTemp.dateStartWork = isNull(this.dpStartWorkDay) ? null : this.convertNgbDateToDate(this.dpStartWorkDay);
       userTemp.username = this.cookieService.get('username');
       this.userService.updatePersonalInfo(userTemp).subscribe(
         (response: ResponseDTO) => {
           this.currentUser.avatar = response.data.avatar;
-          this.currentUser.birthday = response.data.birthday;
+          this.currentUser.birthday = new Date(response.data.birthday);
           this.currentUser.numberPhone = response.data.numberPhone;
           this.currentUser.address = response.data.address;
           this.currentUser.gmail = response.data.gmail;
           this.currentUser.skype = response.data.skype;
-          this.currentUser.dateStartWork = response.data.dateStartWork;
+          this.currentUser.dateStartWork = new Date(response.data.dateStartWork);
           this.submitDoneMsg = MessageConstant.MSG7;
           setTimeout(() => {
             this.submitDoneMsg = '';
@@ -132,7 +137,18 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   isValidatedEmail(): boolean {
-    const pattern = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    const pattern = new RegExp(/^([A-Za-z0-9_\-.+])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,})$/);
     return pattern.test(this.secondaryEmail);
+  }
+
+  convertDateToNgbDate(date: Date): NgbDate {
+    if (isNull(date)) {
+      return null;
+    }
+    return new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
+  }
+
+  convertNgbDateToDate(ngbDate: NgbDate): Date {
+    return new Date(ngbDate.year, ngbDate.month, ngbDate.day);
   }
 }
