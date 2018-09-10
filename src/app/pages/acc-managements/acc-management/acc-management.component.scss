@@ -39,10 +39,10 @@
       background-color: #ECECEC;
     }
   }
-  #error {
-    font-size: 30px;
-    text-align: center;
-  }
+}
+[name$='notFoundMsg'] {
+  font-size: 14px;
+  text-align: center;
 }
 .fix {
   position: fixed;
