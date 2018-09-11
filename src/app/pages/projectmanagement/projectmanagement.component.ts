@@ -147,7 +147,11 @@ export class ProjectmanagementComponent implements OnInit {
 
   sortProjectArrayByActive() {
     this.projects.sort((a, b) => {
-      return b.active - a.active || +new Date(b.updatedDate) - +new Date(a.updatedDate);
+      if (b.active !== a.active) {
+        return b.active - a.active;
+      } else {
+        return new Date(b.updatedDate).getTime() - new Date(a.updatedDate).getTime();
+      }
     });
   }
 
