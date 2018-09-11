@@ -21,61 +21,66 @@
           </ng-template>
         </div>
       </div>
-      <div class="row ml-5 mr-5">
+      <div class="search">
+        <div class="form-group row">
+          <div class="col-sm-6 search-div">
+            <input normalCharacterOnly oncopy='return false' onpaste='return false' [(ngModel)]="nameSearch"
+                   class="form-control search-inp" type="text" id="myInput" (keyup)='handleKeyDown($event)'
+                   placeholder="Tìm kiếm dự án:" title="Type in a name"/>
+          </div>
+        </div>
+      </div>
+      <div class="row">
         <table class="table titleTable">
           <thead>
           <tr>
-            <th>Tên dự án</th>
-            <th>Ngày tạo</th>
-            <th>Trạng thái</th>
-            <th>Tùy chỉnh</th>
+            <th name="projectTitle">Tên dự án</th>
+            <th class="projectDetail">Ngày tạo</th>
+            <th class="projectDetail">Trạng thái</th>
+            <th class="projectDetail">Tùy chỉnh</th>
           </tr>
           </thead>
         </table>
       </div>
-      <div class="row ml-5 mr-5 tableScroll">
-        <div class="table scrollTable">
-          <table class="table table-hover">
-            <tbody>
-            <div class="row border-top border-bottom"
-                 [ngClass]="{'activeRow': project.active == 1, 'deactiveRow': project.active == 0}"
-                 *ngFor="let project of projects">
-              <div class="col-md-9">
-                <p [hidden]="project.id == projectIdEdit" class="nameProject">{{project.name}}</p>
-                <input type="text" class="form-control lineHeight" [hidden]="project.id != projectIdEdit"
-                       [value]="project.name" #editName
-                       (keyup.enter)="updateProjectName(project, editName.value, content)">
+      <div class="row tableScroll">
+        <table class="table table-hover" id="myTable">
+          <tbody>
+
+          <!--Tên Dự án-->
+          <tr *ngFor="let project of projects">
+            <td name="projectTitle">
+              <p [hidden]="project.id == projectIdEdit">{{project.name}}</p>
+              <input type="text" class="form-control" [hidden]="project.id != projectIdEdit"
+                     [value]="project.name" #editName
+                     (keyup.enter)="updateProjectName(project, editName.value, content)">
+            </td>
+
+            <td class="projectDetail">{{project.createdDate}}</td>
+            <td class="projectDetail">
+              <i class="far fa-check-circle fa-2x" name="activeIcon" *ngIf="project.active == 1"></i>
+              <i class="fas fa-ban fa-2x" *ngIf="project.active == 0"></i>
+            </td>
+            <!--Tools config-->
+            <td class="projectDetail">
+              <i class="fas fa-sync fa-2x swapIcon" (click)="changeStatus(project, content)"></i>
+              <i class="fas fa-pencil-alt fa-2x editIcon" *ngIf="project.id !== projectIdEdit"
+                 (click)="showEditBox(project)"></i>
+              <i class="fas fa-save fa-2x editIcon" *ngIf="project.id == projectIdEdit"
+                 (click)="updateProjectName(project, editName.value, content)"></i>
+              <i class="fas fa-trash-alt fa-2x deleteIcon" (click)="deleteProject(project, content)"></i>
+              <div>
+                <ng-template let-c="close" let-d="dismiss" #content>
+                  <dialog-confirmation [dismiss]="d" [choosedProjectId]="project.id"
+                                       (confirmation)="receiveConfirmation($event)" [msg]="msg"
+                                       [buttonTitle]="buttonTitle"></dialog-confirmation>
+                </ng-template>
               </div>
-              <div class="col-md-3">
-                <button class="btn btn-hero-success buttonSpace" *ngIf="project.active == 1"
-                        (click)="deactive(project, content)" [disabled]="isAdding || isEditing"><i
-                  class="far fa-check-circle  fa-2x"></i></button>
-                <button class="btn btn-hero-success buttonSpace" *ngIf="project.active == 0"
-                        (click)="active(project, content)" [disabled]="isAdding || isEditing"><i
-                  class="fas fa-ban fa-2x"></i>
-                </button>
-                <button class="btn btn-hero-success buttonSpace" [hidden]="project.id == projectIdEdit"
-                        (click)="showEditBox(project)" [disabled]="isAdding || isEditing"><i
-                  class="fas fa-pencil-alt  fa-2x"></i></button>
-                <button class="btn btn-hero-success buttonSpace" [hidden]="project.id != projectIdEdit"
-                        [disabled]="isAdding"
-                        (click)="updateProjectName(project, editName.value, content)"><i class="fas fa-save fa-2x"></i>
-                </button>
-                <button class="btn btn-hero-success buttonSpace" (click)="deleteProject(project, content)"
-                        [disabled]="isAdding || isEditing"><i class="fas fa-trash-alt fa-2x"></i></button>
-                <div>
-                  <ng-template let-c="close" let-d="dismiss" #content>
-                    <dialog-confirmation [dismiss]="d" [choosedProjectId]="project.id"
-                                         (confirmation)="receiveConfirmation($event)" [msg]="msg"
-                                         [buttonTitle]="buttonTitle"></dialog-confirmation>
-                  </ng-template>
-                </div>
-              </div>
-            </div>
-            </tbody>
-          </table>
-        </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
+      <p *ngIf='showMsg' name='notFoundMsg'>Không tìm thấy kết quả phù hợp!</p>
     </div>
   </nb-card-body>
 </nb-card>

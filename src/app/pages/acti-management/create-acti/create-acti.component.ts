@@ -22,6 +22,7 @@ export class CreateActiComponent implements OnInit {
   groupList: Array<Group<CreatedActivity>>;
   message: string;
   showMsg: boolean = false;
+  nameSearch: string;
   constructor(private modalService: NgbModal, private activitiesService: ActivitiesService, private data: DataService) {
   }
 
@@ -69,6 +70,14 @@ export class CreateActiComponent implements OnInit {
         this.groupList = response.data;
       }
     })
+  }
+
+  handleKeyDown(event: any) {
+    if (event.keyCode === 13) {
+      this.mySearchFunction();
+    } else if (this.nameSearch === '') {
+      this.mySearchFunction();
+    }
   }
 
   mySearchFunction() {
