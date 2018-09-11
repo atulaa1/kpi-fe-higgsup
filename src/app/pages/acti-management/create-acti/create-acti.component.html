@@ -41,20 +41,20 @@
   <table class="table titleTable">
     <thead>
     <tr>
-      <th>Hoạt động</th>
+      <th class="activity-creating">Hoạt động</th>
       <th class="dateCreated">Ngày tạo</th>
     </tr>
     </thead>
   </table>
   </div>
   <div class="row ml-5 mr-5 tableScroll">
-    <table class="table table-hover" id="myTable">
+    <table class="table table-hover">
       <tbody>
       <tr *ngFor="let group of groupList">
 
         <!--Seminar-->
 
-        <td (click)="open(content)" *ngIf="group.groupType.id==1">{{group.name}}
+        <td (click)="open(content)" *ngIf="group.groupType.id==1" class="activity-creating">{{group.name}}
           <ng-template let-c="close" let-d="dismiss" #content>
             <ngx-seminar [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
                          [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-seminar>
@@ -63,7 +63,7 @@
 
         <!--Club-->
 
-        <td (click)="open(content)" *ngIf="group.groupType.id==2">{{group.name}}
+        <td (click)="open(content)" *ngIf="group.groupType.id==2" class="activity-creating">{{group.name}}
           <ng-template let-c="close" let-d="dismiss" #content>
             <ngx-club [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
                       [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-club>
@@ -72,7 +72,7 @@
 
         <!--Teambuilding-->
 
-        <td (click)="open(content)" *ngIf="group.groupType.id==3">{{group.name}}
+        <td (click)="open(content)" *ngIf="group.groupType.id==3" class="activity-creating">{{group.name}}
           <ng-template let-c="close" let-d="dismiss" #content>
             <ngx-team-building [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
                                [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-team-building>
@@ -81,7 +81,7 @@
 
         <!--Support-->
 
-        <td (click)="open(content)" *ngIf="group.groupType.id==4">{{group.name}}
+        <td (click)="open(content)" *ngIf="group.groupType.id==4" class="activity-creating">{{group.name}}
           <ng-template let-c="close" let-d="dismiss" #content>
             <ngx-support [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
                          [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-support>
@@ -92,10 +92,8 @@
         <td class="dateCreated">{{group.createdDate | date: 'dd-MM-yyyy' }}</td>
 
       </tr>
-      <tr>
-        <p *ngIf='showMsg' id='error' class="mt-2">Không tìm thấy kết quả phù hợp!</p>
-      </tr>
       </tbody>
     </table>
   </div>
+  <p *ngIf='showMsg' name='notFoundMsg'>Không tìm thấy kết quả phù hợp!</p>
 </nb-card>
