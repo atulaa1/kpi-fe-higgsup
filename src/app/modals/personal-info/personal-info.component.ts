@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 import {InputFile} from 'ngx-input-file';
 import {User} from '../../@core/models/user.model';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../@core/services/user.service';
 import {MessageConstant} from '../../@core/glossary/message.constant';
 import {CookieService} from 'ngx-cookie-service';
+import {ResponseDTO} from '../../@core/models/responseDTO.model';
+import {NgbDate} from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
+import {isNull} from 'util';
 
 @Component({
   selector: 'ngx-personal-info',
@@ -14,11 +16,10 @@ import {CookieService} from 'ngx-cookie-service';
 })
 export class PersonalInfoComponent implements OnInit {
 
-  private fileBase64: string;
-
+  private fileBase64: string = null;
+  dpStartWorkDay: NgbDate;
   image: any;
   currentUser: User;
-  userInfoForm: FormGroup;
   picture: string;
   avatarImg: string;
   clickCloseCount: number = 0;
@@ -27,37 +28,61 @@ export class PersonalInfoComponent implements OnInit {
   submitConfirm: boolean = false;
   submitDoneMsg: string;
   closeWarningMsg: string;
+  emailWarning: string;
+  avatar: string;
+  birthday: NgbDate;
+  phoneNumber: string;
+  address: string;
+  secondaryEmail: string;
+  skype: string;
 
   constructor(private activeModal: NgbActiveModal,
               private cookieService: CookieService,
-              private userService: UserService) { }
+              private calendar: NgbCalendar,
+              private userService: UserService) {
+
+  }
 
   ngOnInit() {
     this.userService.currentUser.subscribe(user => this.currentUser = user);
-    this.userInfoForm = new FormGroup({
-      birthday: new FormControl(this.currentUser.birthday),
-      phoneNumber: new FormControl(this.currentUser.numberPhone),
-      address: new FormControl(this.currentUser.address),
-      gmail: new FormControl(this.currentUser.gmail, Validators.pattern(/^[a-z0-9](\.?[a-z0-9])*@gmail.com$/)),
-      skype: new FormControl(this.currentUser.skype),
-      yearsOfWork: new FormControl(this.currentUser.yearWork),
-      submitMessage: new FormControl(MessageConstant.MSG7.toString()),
-    });
+    if (typeof (this.currentUser.birthday) === 'string') {
+      this.currentUser.birthday = new Date(this.currentUser.birthday);
+    }
+    if (typeof (this.currentUser.dateStartWork) === 'string') {
+      this.currentUser.dateStartWork = new Date(this.currentUser.dateStartWork);
+    }
+    this.fileBase64 = this.currentUser.avatar;
+    this.birthday = this.convertDateToNgbDate(this.currentUser.birthday);
+    this.phoneNumber = this.currentUser.numberPhone;
+    this.address = this.currentUser.address;
+    this.secondaryEmail = this.currentUser.gmail;
+    this.skype = this.currentUser.skype;
+    this.dpStartWorkDay = this.convertDateToNgbDate(this.currentUser.dateStartWork);
   }
 
-  onFocus() {
-    this.inputFocused = true;
+  isInfoChanged(): boolean {
+    if (this.fileBase64 !== this.currentUser.avatar ||
+      this.convertNgbDateToDate(this.birthday) !== this.currentUser.birthday ||
+      this.phoneNumber !== this.currentUser.numberPhone ||
+      this.address !== this.currentUser.address ||
+      this.secondaryEmail !== this.currentUser.gmail ||
+      this.skype !== this.currentUser.skype ||
+      this.convertNgbDateToDate(this.dpStartWorkDay) !== this.currentUser.dateStartWork) {
+      return true;
+    }
+    return false;
   }
 
   closeInfoModal() {
-    if (this.inputFocused === false) {
+    this.emailWarning = null;
+    if (!this.isInfoChanged()) {
       this.activeModal.close();
       this.submitConfirm = false;
     } else {
       this.clickCloseCount += 1;
       if (this.clickCloseCount === 1) {
         this.closeConfirm = true;
-        this.closeWarningMsg = MessageConstant.MSG6;
+        this.closeWarningMsg = MessageConstant.MSG_WARNING_CHANGE_NOT_SAVE;
       } else if (this.clickCloseCount === 2) {
         this.activeModal.close();
         this.clickCloseCount = 0;
@@ -77,28 +102,53 @@ export class PersonalInfoComponent implements OnInit {
 
   }
 
-  onSubmit() {
-    let userTemp = this.currentUser;
-    userTemp.avatar = this.fileBase64;
-    userTemp.birthday = this.userInfoForm.controls.birthday.value;
-    userTemp.numberPhone = this.userInfoForm.controls.phoneNumber.value;
-    userTemp.address = this.userInfoForm.controls.address.value;
-    userTemp.gmail = this.userInfoForm.controls.gmail.value;
-    userTemp.skype = this.userInfoForm.controls.skype.value;
-    userTemp.yearWork = this.userInfoForm.controls.yearsOfWork.value;
-    userTemp.username = this.cookieService.get('username');
-    this.userService.updatePersonalInfo(userTemp).subscribe(
-      (personInfo: User) => {
-        this.currentUser = personInfo;
-        this.currentUser.userRole = userTemp.userRole;
-        this.submitDoneMsg = MessageConstant.MSG7;
-        setTimeout(() => {
-          this.submitDoneMsg = '';
-        }, 2000);
-      });
-    this.inputFocused = false;
-    this.closeConfirm = false;
-    this.submitConfirm = true;
-    this.clickCloseCount = 0;
+  saveChange() {
+    if (!this.isValidatedEmail()) {
+      this.emailWarning = MessageConstant.MSG_INVALID_EMAIL;
+    } else {
+      let userTemp = this.currentUser;
+      userTemp.avatar = this.fileBase64;
+      userTemp.birthday = isNull(this.birthday) ? null : this.convertNgbDateToDate(this.birthday);
+      userTemp.numberPhone = this.phoneNumber;
+      userTemp.address = this.address;
+      userTemp.gmail = this.secondaryEmail;
+      userTemp.skype = this.skype;
+      userTemp.dateStartWork = isNull(this.dpStartWorkDay) ? null : this.convertNgbDateToDate(this.dpStartWorkDay);
+      userTemp.username = this.cookieService.get('username');
+      this.userService.updatePersonalInfo(userTemp).subscribe(
+        (response: ResponseDTO) => {
+          this.currentUser.avatar = response.data.avatar;
+          this.currentUser.birthday = new Date(response.data.birthday);
+          this.currentUser.numberPhone = response.data.numberPhone;
+          this.currentUser.address = response.data.address;
+          this.currentUser.gmail = response.data.gmail;
+          this.currentUser.skype = response.data.skype;
+          this.currentUser.dateStartWork = new Date(response.data.dateStartWork);
+          this.submitDoneMsg = MessageConstant.MSG_SAVE_SUCCESSFUL;
+          setTimeout(() => {
+            this.submitDoneMsg = '';
+          }, 2000);
+        });
+      this.inputFocused = false;
+      this.closeConfirm = false;
+      this.submitConfirm = true;
+      this.clickCloseCount = 0;
+    }
+  }
+
+  isValidatedEmail(): boolean {
+    const pattern = new RegExp(/^([A-Za-z0-9_\-.+])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,})$/);
+    return pattern.test(this.secondaryEmail);
+  }
+
+  convertDateToNgbDate(date: Date): NgbDate {
+    if (isNull(date)) {
+      return null;
+    }
+    return new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
+  }
+
+  convertNgbDateToDate(ngbDate: NgbDate): Date {
+    return new Date(ngbDate.year, ngbDate.month, ngbDate.day);
   }
 }

@@ -8,12 +8,12 @@ export class User {
   userRole: Array<string>;
   remember: boolean;
   avatar: string;
-  birthday: string;
+  birthday: Date;
   numberPhone: string;
   address: string;
   gmail: string;
   skype: string;
-  yearWork: number;
+  dateStartWork: Date;
   token: string;
   isEdited: boolean = false;
   mainRole: string;

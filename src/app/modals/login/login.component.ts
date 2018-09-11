@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     if (this.loginForm.controls.userName.value === ''
     || this.loginForm.controls.password.value === '') {
-      this.message = MessageConstant.blankLogin.toString();
+      this.message = MessageConstant.MSG_ACCOUNT_PASSWORD_BLANK.toString();
     }
     if (this.loginForm.invalid) {
       return;
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
           this.activeModal.close();
         },
         (error) => {
-          this.message = MessageConstant.loginFalse.toString();
+          this.message = MessageConstant.MSG_LOGIN_FAIL.toString();
           return false;
         },
       )

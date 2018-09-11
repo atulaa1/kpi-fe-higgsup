@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Project} from '../../@core/models/project.model';
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'dialog-confirmation',
@@ -9,7 +9,7 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 })
 export class DialogConfirmationComponent implements OnInit {
 
-  @Input() choosedProjectId
+  @Input() choosedProjectId;
   @Input() msg: string;
   @Input() project: Project;
   @Input() dismiss;
