@@ -35,6 +35,7 @@ export class PersonalInfoComponent implements OnInit {
   secondaryEmail: string;
   skype: string;
   private fileBase64: string = null;
+  avatarActive: boolean = true;
 
   constructor(private activeModal: NgbActiveModal,
               private cookieService: CookieService,
@@ -95,14 +96,11 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   saveAvatarImg(inputFile: InputFile) {
-    document.getElementById('avatarUpload').style.display = 'block';
-    document.getElementById('avatarUpload').style.opacity = '100';
-    document.getElementById('avatarUpload').style.position = 'unset';
-    document.getElementById('imgFake').style.display = 'none';
     const reader: FileReader = new FileReader();
     reader.readAsDataURL(inputFile.file);
     reader.onload = () => {
       this.fileBase64 = reader.result;
+      this.avatarActive = false;
     };
 
   }

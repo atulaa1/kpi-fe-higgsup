@@ -24,8 +24,15 @@
   text-align: center;
   color: red;
 }
-input-file#avatarUpload{
+.avatarUpload{
   opacity: 0;
   position: absolute;
 }
-
+.styleAvatarUpload{
+  display: block;
+  position: unset;
+  opacity: 100;
+}
+.StyleImgFake{
+  display: none;
+}
