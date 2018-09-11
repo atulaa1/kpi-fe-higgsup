@@ -37,7 +37,7 @@ export class ProjectmanagementComponent implements OnInit {
     if (this.isAdding === false && this.isEditing === false) {
       this.actionType = 'EDIT';
       this.msg = 'Bạn có muốn kích hoạt dự án ' + project.name + ' không';
-      this.buttonTitle = 'Lưu'
+      this.buttonTitle = 'Lưu';
       this.currentProject = Object.assign({}, project);
       this.currentProject.active = 1;
       this.bsModal.open(content, {backdrop: 'static', centered: true});
@@ -48,7 +48,7 @@ export class ProjectmanagementComponent implements OnInit {
     if (this.isAdding === false && this.isEditing === false) {
       this.actionType = 'EDIT';
       this.msg = 'Bạn có muốn dừng hoạt động của dự án ' + project.name + ' không?';
-      this.buttonTitle = 'Lưu'
+      this.buttonTitle = 'Lưu';
       this.currentProject = Object.assign({}, project);
       this.currentProject.active = 0;
       this.bsModal.open(content, {backdrop: 'static', centered: true});
@@ -96,9 +96,9 @@ export class ProjectmanagementComponent implements OnInit {
     if (this.isAdding === false) {
       this.actionType = 'EDIT';
       this.msg = 'Bạn có muốn đổi tên ' + project.name + ' thành ' + editName + ' không?';
-      this.buttonTitle = 'Lưu'
+      this.buttonTitle = 'Lưu';
       this.currentProject = Object.assign({}, project);
-      this.currentProject.name = editName
+      this.currentProject.name = editName;
       this.bsModal.open(content, {backdrop: 'static', centered: true});
     }
   }
@@ -107,7 +107,7 @@ export class ProjectmanagementComponent implements OnInit {
     if (this.isAdding === false && this.isEditing === false) {
       this.actionType = 'DELETE';
       this.msg = 'Bạn có chắc muốn xóa ' + project.name + '?';
-      this.buttonTitle = 'Xóa'
+      this.buttonTitle = 'Xóa';
       this.currentProject = Object.assign({}, project);
       this.bsModal.open(content, {backdrop: 'static', centered: true});
     }
@@ -147,7 +147,11 @@ export class ProjectmanagementComponent implements OnInit {
 
   sortProjectArrayByActive() {
     this.projects.sort((a, b) => {
-      return b.active - a.active || +new Date(b.createdDate) - +new Date(a.createdDate);
+      if (b.active !== a.active) {
+        return b.active - a.active;
+      } else {
+        return new Date(b.updatedDate).getTime() - new Date(a.updatedDate).getTime();
+      }
     });
   }
 
