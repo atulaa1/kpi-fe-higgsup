@@ -18,10 +18,11 @@
         <p *ngIf="emailWarning" class="alertMsg">{{emailWarning}}</p>
       </div>
       <div class="row">
-        <div class="col-md-5">
-          <input-file [inputId]="avatarImg" (acceptedFile)="saveAvatarImg($event)" [placeholder]="picture"
-                      (ngModel)="avatar">
+        <div class="col-md-5" >
+          <input-file id="avatarUpload" #avatarUpload  [inputId]="avatarImg" (acceptedFile)="saveAvatarImg($event)" [placeholder]="picture"
+                      (ngModel)="avatar"   sizeLimit="5000">
           </input-file>
+          <img  id="imgFake"   width="140" height="140" [src]="avatar">
         </div>
         <div class="col-md-7">
           <div class="userName">

@@ -16,7 +16,6 @@ import {isNull} from 'util';
 })
 export class PersonalInfoComponent implements OnInit {
 
-  private fileBase64: string = null;
   dpStartWorkDay: NgbDate;
   image: any;
   currentUser: User;
@@ -35,6 +34,7 @@ export class PersonalInfoComponent implements OnInit {
   address: string;
   secondaryEmail: string;
   skype: string;
+  private fileBase64: string = null;
 
   constructor(private activeModal: NgbActiveModal,
               private cookieService: CookieService,
@@ -58,6 +58,7 @@ export class PersonalInfoComponent implements OnInit {
     this.secondaryEmail = this.currentUser.gmail;
     this.skype = this.currentUser.skype;
     this.dpStartWorkDay = this.convertDateToNgbDate(this.currentUser.dateStartWork);
+    this.avatar = this.currentUser.avatar;
   }
 
   isInfoChanged(): boolean {
@@ -94,6 +95,10 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   saveAvatarImg(inputFile: InputFile) {
+    document.getElementById('avatarUpload').style.display = 'block';
+    document.getElementById('avatarUpload').style.opacity = '100';
+    document.getElementById('avatarUpload').style.position = 'unset';
+    document.getElementById('imgFake').style.display = 'none';
     const reader: FileReader = new FileReader();
     reader.readAsDataURL(inputFile.file);
     reader.onload = () => {
@@ -101,6 +106,8 @@ export class PersonalInfoComponent implements OnInit {
     };
 
   }
+
+
 
   saveChange() {
     if (!this.isValidatedEmail()) {
