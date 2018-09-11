@@ -18,7 +18,8 @@ h5 {
   max-height: 400px;
   overflow-y: auto;
 }
-.teamButton{
+
+.teamButton {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -67,4 +68,8 @@ table td {
 }
 #error {
   text-align: center;
+}
+
+nb-card[name$='activityCreating'] {
+  border: none;
 }
