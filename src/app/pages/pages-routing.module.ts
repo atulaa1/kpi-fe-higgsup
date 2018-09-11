@@ -32,21 +32,6 @@ const routes: Routes = [{
     {
       path: 'acti-management',
       component: ActiManagementComponent,
-      children: [
-        {
-          path: 'create-acti',
-          component: CreateActiComponent,
-        },
-        {
-          path: '',
-          redirectTo: 'create-acti',
-          pathMatch: 'full',
-        },
-        {
-          path: 'confirm-acti',
-          component: ConfirmActiComponent,
-        },
-      ],
     },
     {
       path: 'project-management',
