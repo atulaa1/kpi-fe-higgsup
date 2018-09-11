@@ -82,7 +82,7 @@ export class PersonalInfoComponent implements OnInit {
       this.clickCloseCount += 1;
       if (this.clickCloseCount === 1) {
         this.closeConfirm = true;
-        this.closeWarningMsg = MessageConstant.MSG6;
+        this.closeWarningMsg = MessageConstant.MSG_WARNING_CHANGE_NOT_SAVE;
       } else if (this.clickCloseCount === 2) {
         this.activeModal.close();
         this.clickCloseCount = 0;
@@ -104,7 +104,7 @@ export class PersonalInfoComponent implements OnInit {
 
   saveChange() {
     if (!this.isValidatedEmail()) {
-      this.emailWarning = MessageConstant.MSG14;
+      this.emailWarning = MessageConstant.MSG_INVALID_EMAIL;
     } else {
       let userTemp = this.currentUser;
       userTemp.avatar = this.fileBase64;
@@ -124,7 +124,7 @@ export class PersonalInfoComponent implements OnInit {
           this.currentUser.gmail = response.data.gmail;
           this.currentUser.skype = response.data.skype;
           this.currentUser.dateStartWork = new Date(response.data.dateStartWork);
-          this.submitDoneMsg = MessageConstant.MSG7;
+          this.submitDoneMsg = MessageConstant.MSG_SAVE_SUCCESSFUL;
           setTimeout(() => {
             this.submitDoneMsg = '';
           }, 2000);
