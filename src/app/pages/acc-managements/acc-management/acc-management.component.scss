@@ -39,3 +39,14 @@ th.titleField {
 #myTable tr:hover {
   background-color: #bee5eb;
 }
+.searchIcon {
+  float: right;
+  margin-right: 12px;
+  margin-top: -40px;
+  position: relative;
+  z-index: 2;
+  color: #bee5eb;
+}
+.searchIcon:hover {
+  color: #58C3DC;
+}
