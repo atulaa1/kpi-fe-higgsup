@@ -27,29 +27,29 @@
         </div>
       </div>
       <div class="mt-5 userInfo">
-        <div class="row mt-2">
+        <div class="row mt-3">
           <h6 class="col-md-4 userInfo">Ngày sinh:</h6>
-          <div class="col-md-8 form-control">{{userInfo.birthday}}</div>
+          <div class="col-md-8">{{userInfo.birthday}}</div>
         </div>
-        <div class="row mt-2">
+        <div class="row mt-3">
           <h6 class="col-md-4 userInfo">Số điện thoại:</h6>
-          <div class="col-md-8 form-control">{{userInfo.numberPhone}}</div>
+          <div class="col-md-8">{{userInfo.numberPhone}}</div>
         </div>
-        <div class="row mt-2">
+        <div class="row mt-3">
           <h6 class="col-md-4 userInfo">Địa chỉ:</h6>
-          <div class="col-md-8 form-control">{{userInfo.address}}</div>
+          <div class="col-md-8">{{userInfo.address}}</div>
         </div>
-        <div class="row mt-2">
+        <div class="row mt-3">
           <h6 class="col-md-4 userInfo">Gmail:</h6>
-          <div class="col-md-8 form-control">{{userInfo.gmail}}</div>
+          <div class="col-md-8">{{userInfo.gmail}}</div>
         </div>
-        <div class="row mt-2">
+        <div class="row mt-3">
           <h6 class="col-md-4 userInfo">Skype:</h6>
-          <div class="col-md-8 form-control">{{userInfo.skype}}</div>
+          <div class="col-md-8">{{userInfo.skype}}</div>
         </div>
-        <div class="row mt-2">
-          <h6 class="col-md-4 userInfo">Số năm làm việc:</h6>
-          <div class="col-md-8 form-control">{{userInfo.yearWork}}</div>
+        <div class="row mt-3">
+          <h6 class="col-md-4 userInfo">Thời gian làm việc:</h6>
+          <div class="col-md-8" *ngIf="userInfo.dateStartWork">{{numberMonthOfWork}}</div>
         </div>
       </div>
   </div>

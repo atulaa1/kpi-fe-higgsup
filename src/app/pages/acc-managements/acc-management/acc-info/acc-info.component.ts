@@ -12,6 +12,7 @@ export class AccInfoComponent implements OnInit {
   @Input() dismiss;
   @Input() userName: string;
   userInfo: User;
+  numberMonthOfWork: number;
 
   constructor(private userService: UserService) {
   }
@@ -20,6 +21,29 @@ export class AccInfoComponent implements OnInit {
     this.userInfo = new User();
     this.userService.getUserInfo(this.userName).subscribe((response: ResponseDTO)  => {
     this.userInfo =  (response.data);
+    this.numberMonthOfWork = this.getNumberMonthOfWork();
     });
+  }
+
+  getNumberMonthOfWork(): number {
+    let now = new Date();
+    let startWorkDate: Date;
+    if (typeof this.userInfo.dateStartWork === 'string') {
+      startWorkDate = new Date(this.userInfo.dateStartWork);
+    } else {
+      startWorkDate = this.userInfo.dateStartWork;
+    }
+    this.numberMonthOfWork = (now.getFullYear() - startWorkDate.getFullYear()) * 12;
+    this.numberMonthOfWork -= startWorkDate.getMonth() + 1;
+    if (now.getFullYear() >= startWorkDate.getFullYear()) {
+      if (now.getDate() >= startWorkDate.getDate()) {
+        this.numberMonthOfWork += now.getMonth() + 1;
+      } else {
+        this.numberMonthOfWork += now.getMonth()
+      }
+    } else {
+      return 0;
+    }
+    return this.numberMonthOfWork;
   }
 }
