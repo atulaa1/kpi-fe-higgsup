@@ -233,7 +233,11 @@
 .font-weight-600 {
   font-weight: 600;
 }
-
+li.font-weight-600 a{
+  width: 100%;
+  text-align: left;
+  padding: 10px 0;
+}
 a span {
   color: #5DCFE3;
 }
@@ -316,7 +320,7 @@ nb-action[name$="notification"]{
   color: black !important;
 }
 li {
-  padding: 10px !important;
+  padding: 0px !important;
   display: flex;
   border-top: 1px solid #ebeef2;
 }
@@ -327,5 +331,3 @@ li:hover span ,li:hover i {
   padding-left: 0;
   padding-right: 0;
 }
-
-
