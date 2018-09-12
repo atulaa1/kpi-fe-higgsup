@@ -22,7 +22,7 @@
   <table class="table table-hover" id="myTable">
     <tbody>
     <tr *ngFor='let userInfo of listUser; let userIndex = index;'>
-      <td (click)="open(accountInfo)" class="infoUser">{{userInfo.lastName}} {{userInfo.firstName}}
+      <td (click)="open(accountInfo)" class="infoUser">{{userInfo.fullName}}
         <ng-template let-c="close" let-d="dismiss" #accountInfo>
           <ngx-acc-info [dismiss]="d" [userName]="userInfo.username"></ngx-acc-info>
         </ng-template>
