@@ -1,38 +1,54 @@
 <div class="search">
   <div class="form-group row">
     <div class="col-sm-6 search-div">
-      <input normalCharacterOnly oncopy='return false' onpaste='return false' [(ngModel)]="nameSearch" class="form-control search-inp" type="text" id="myInput" (keyup)='handleKeyDown($event)' placeholder="Tìm kiếm tài khoản:" title="Type in a name"  />
+      <input normalCharacterOnly oncopy='return false' onpaste='return false' [(ngModel)]="nameSearch"
+             class="form-control search-inp" type="text" id="myInput" (keyup)='handleKeyDown($event)'
+             placeholder="Tìm kiếm tài khoản:" title="Type in a name"/>
     </div>
   </div>
 </div>
-<div id="managementContent">
-  <table class='table table-hover' id="myTable">
+<div class="row ml-5 mt-5 mr-5">
+  <table class='table titleTable'>
+    <thead>
     <tr>
-      <th >Tên tài khoản</th>
-      <th >Phân quyền</th>
-      <th >Sửa quyền</th>
+      <th class="titleField">Họ và tên</th>
+      <th class="titleField">Phân quyền</th>
+      <th class="titleField">Sửa quyền</th>
     </tr>
+    </thead>
+  </table>
+</div>
+<div class="row ml-5 mr-5 tableScroll">
+  <table class="table table-hover" id="myTable">
+    <tbody>
     <tr *ngFor='let userInfo of listUser; let userIndex = index;'>
-      <td (click)="open(accountInfo)">{{userInfo.lastName}} {{userInfo.firstName}}
+      <td (click)="open(accountInfo)" class="infoUser">{{userInfo.fullName}}
         <ng-template let-c="close" let-d="dismiss" #accountInfo>
           <ngx-acc-info [dismiss]="d" [userName]="userInfo.username"></ngx-acc-info>
         </ng-template>
       </td>
-      <td>
+      <td class="infoUser">
         <span [hidden]="userInfo.isEdited">{{userInfo.mainRole.slice(5)}}</span>
-        <select [hidden]="!userInfo.isEdited"  name="roles" [(ngModel)]="userInfo.mainRole"  >
+        <select [hidden]="!userInfo.isEdited" name="roles" [(ngModel)]="userInfo.mainRole">
           <option value="ROLE_MAN">MAN</option>
           <option value="ROLE_EMPLOYEE">EMPLOYEE</option>
         </select>
       </td>
-      <td>
-        <button [hidden]="userInfo.isEdited" id='{{userInfo.username}}-edit' class='btn btn-hero-success' (click)='updateRole(userInfo)'>Sửa</button>
+      <td class="infoUser">
+        <button [hidden]="userInfo.isEdited" id='{{userInfo.username}}-edit' class='btn btn-hero-success'
+                (click)='updateRole(userInfo)'>Sửa
+        </button>
         <ng-template let-c="close" let-d="dismiss" #content>
-          <ngx-save-acc-modal (updateEvent)="updateSuccess($event)" (cancelEvent)="cancelAction($event)" [editedUser]="userInfo" [dismiss]="d" [beforeEditedUser]="beforeEditedUser"></ngx-save-acc-modal>
+          <ngx-save-acc-modal (updateEvent)="updateSuccess($event)" (cancelEvent)="cancelAction($event)"
+                              [editedUser]="userInfo" [dismiss]="d"
+                              [beforeEditedUser]="beforeEditedUser"></ngx-save-acc-modal>
         </ng-template>
-        <button [hidden]="!userInfo.isEdited"  id='{{userInfo.username}}-save' class='btn btn-hero-warning' (click)="openSaveModal(content)">Lưu</button>
+        <button [hidden]="!userInfo.isEdited" id='{{userInfo.username}}-save' class='btn btn-hero-warning'
+                (click)="openSaveModal(content)">Lưu
+        </button>
       </td>
     </tr>
+    </tbody>
   </table>
-  <p *ngIf='showMsg' name='notFoundMsg'>Không tìm thấy kết quả phù hợp!</p>
 </div>
+<p *ngIf='showMsg' name='notFoundMsg'>Không tìm thấy kết quả phù hợp!</p>

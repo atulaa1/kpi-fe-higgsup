@@ -23,6 +23,8 @@ export class ProjectmanagementComponent implements OnInit {
   buttonTitle: string;
   actionType: string;
   currentProject: Project;
+  showMsg: boolean = false;
+  nameSearch: string;
 
   constructor(private projectService: ProjectService,
               private bsModal: NgbModal) {
@@ -33,27 +35,27 @@ export class ProjectmanagementComponent implements OnInit {
     this.getListProject();
   }
 
-  active(project: Project, content) {
+  changeStatus(project: Project, content) {
     if (this.isAdding === false && this.isEditing === false) {
+      const running = 'kích hoạt';
+      const stopping = 'dừng hoạt động';
       this.actionType = 'EDIT';
-      this.msg = 'Bạn có muốn kích hoạt dự án ' + project.name + ' không';
-      this.buttonTitle = 'Lưu';
-      this.currentProject = Object.assign({}, project);
-      this.currentProject.active = 1;
-      this.bsModal.open(content, {backdrop: 'static', centered: true});
+      if (project.active === 1) {
+        this.msg = 'Bạn có muốn ' + stopping + ' của dự án ' + project.name + ' không?';
+        this.buttonTitle = 'Lưu';
+        this.currentProject = Object.assign({}, project);
+        this.currentProject.active = 0;
+        this.bsModal.open(content, {backdrop: 'static', centered: true});
+      } else {
+        this.msg = 'Bạn có muốn ' + running + ' dự án ' + project.name + ' không?';
+        this.buttonTitle = 'Lưu';
+        this.currentProject = Object.assign({}, project);
+        this.currentProject.active = 1;
+        this.bsModal.open(content, {backdrop: 'static', centered: true});
+      }
     }
   }
 
-  deactive(project: Project, content) {
-    if (this.isAdding === false && this.isEditing === false) {
-      this.actionType = 'EDIT';
-      this.msg = 'Bạn có muốn dừng hoạt động của dự án ' + project.name + ' không?';
-      this.buttonTitle = 'Lưu';
-      this.currentProject = Object.assign({}, project);
-      this.currentProject.active = 0;
-      this.bsModal.open(content, {backdrop: 'static', centered: true});
-    }
-  }
   open(content) {
     this.bsModal.open(content, {backdrop: 'static', centered: true});
   }
@@ -84,7 +86,7 @@ export class ProjectmanagementComponent implements OnInit {
   }
 
   showEditBox(project: Project) {
-    if (this.isAdding === false) {
+    if (this.isAdding === false && this.isEditing === false) {
       this.isEditing = true;
       this.projectToEdit = project;
       this.projectIdEdit = project.id;
@@ -157,6 +159,34 @@ export class ProjectmanagementComponent implements OnInit {
 
   onAddProject($event) {
     this.getListProject();
+  }
+
+  handleKeyDown(event: any) {
+    if (event.keyCode === 13) {
+      this.mySearchFunction();
+    } else if (this.nameSearch === '') {
+      this.mySearchFunction();
+    }
+  }
+
+  mySearchFunction() {
+    this.showMsg = true;
+    let input, filter, table, tr, td, i;
+    input = document.getElementById('myInput');
+    filter = input.value.toUpperCase();
+    table = document.getElementById('myTable');
+    tr = table.getElementsByTagName('tr');
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName('td')[0];
+      if (td) {
+        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = '';
+          this.showMsg = false;
+        } else {
+          tr[i].style.display = 'none';
+        }
+      }
+    }
   }
 }
 

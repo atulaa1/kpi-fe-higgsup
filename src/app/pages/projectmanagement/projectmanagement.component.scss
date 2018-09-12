@@ -8,46 +8,79 @@
   }
 }
 
-.nameProject {
-  font-size: 14px;
-  padding: 10px 0;
-  margin: 0;
+.tableScroll {
+  max-height: 400px;
+  overflow: auto;
 }
 
-.listIcon {
-  display: flex;
-  flex-direction: row;
-  font-size: 24px;
-  i {
-    width: 20%;
+.search {
+  font-size: 14px;
+  width: 35%;
+  margin: 10px auto;
+  .search-div {
+    margin: auto;
+    .search-inp {
+      font-size: 14px;
+    }
   }
 }
 
-.lineHeight {
-  padding-bottom: 2px;
+#myTable tr:hover {
+  background-color: #bee5eb;
 }
 
-.kpiRow {
-  margin: 5px;
-  padding: 5px;
+.titleTable {
+  margin-bottom: 0px;
 }
 
-.buttonSpace {
-  margin: 0 3px;
+[name$='notFoundMsg'] {
+  font-size: 14px;
+  text-align: center;
 }
 
-.activeRow {
-  background-color: white;
+[name$='projectTitle'] {
+  width: 40%;
+  vertical-align: inherit;
+}
+[name$='projectTitle'] p {
+  margin: 0;
 }
 
-.deactiveRow {
-  background-color: lightgray;
+[name$='activeIcon'] {
+  color: green;
 }
 
-.scrollTable {
-  width: 100%;
-  display: block;
-  height: 494px;
-  overflow-y: auto;
-  overflow-x: hidden;
+.projectDetail {
+  width: 20%;
+  text-align: center;
+  vertical-align: inherit;
+}
+.projectDetail i {
+  padding-left: 30px;
+  }
+
+i {
+  letter-spacing: 25px;
+}
+
+.swapIcon {
+  color: #5DCFE3
+}
+.swapIcon:hover {
+  text-shadow: 0px 0px 20px #000000;
+}
+
+.deleteIcon {
+  color: red;
+}
+
+.deleteIcon:hover {
+  text-shadow: 0px 0px 20px #000000;
+}
+.editIcon {
+  color: #FF9D33;
+}
+
+.editIcon:hover {
+  text-shadow: 0px 0px 20px #000000;
 }
