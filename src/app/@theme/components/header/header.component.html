@@ -21,7 +21,7 @@
   <nb-action class="higgigup-nb-action nav-list" name="navList" *ngIf="user.username">
     <div class="btn-group" dropdown>
       <div dropdownToggle class="nav-list" aria-controls="dropdown-basic">
-        <a>{{user.firstName}} {{user.lastName}}</a>
+        <a>{{user.fullName}}</a>
       </div>
       <div style="width: 300px" id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right">
         <div style="min-height: 170px" class="row">

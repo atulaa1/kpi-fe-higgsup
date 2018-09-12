@@ -2,49 +2,64 @@
   border: solid 2px #5dcfe3;
   box-shadow: 0 0 20px 0 #5dcfe3;
 }
+
 #btnDropdown:active {
   background-color: #5dcfe3;
 }
+
 h5 {
- padding: 10px;
+  padding: 10px;
 }
+
 #listDrop {
   border: solid 2px #5dcfe3;
 }
+
 #listDrop li:hover {
   background-color: #5dcfe3;
 }
+
 .tableScroll {
   max-height: 400px;
-  overflow-y: auto;
+  overflow: auto;
 }
-.teamButton{
+
+.teamButton {
   display: flex;
   flex-direction: row;
   width: 100%;
 }
+
 .cancelButton {
   margin-left: 65%;
   margin-right: 5%;
 }
+
 .submitButton {
   margin-right: 5%;
 }
+
 h5, h6 {
   padding-top: 12px;
 }
+
 .formStruc {
   margin-left: 4%;
 }
+
 .titleTable {
   margin-bottom: 0px;
 }
+
 .listActivity {
   min-height: 650px;
 }
+
 .dateCreated {
   width: 50%;
+  text-align: center;
 }
+
 table {
   table-layout: fixed;
   width: 100%;
@@ -53,4 +68,31 @@ table {
 table td {
   word-wrap: break-word;
   overflow-wrap: break-word;
+}
+
+.search {
+  font-size: 14px;
+  width: 35%;
+  margin: 10px auto;
+  .search-div {
+    margin: auto;
+    .search-inp {
+      font-size: 14px;
+    }
+  }
+}
+
+[name$='notFoundMsg'] {
+  font-size: 14px;
+  text-align: center;
+}
+
+nb-card[name$='activityCreating'] {
+  border: none;
+}
+#myTable tr:hover {
+  background-color: #bee5eb;
+}
+.activity-creating {
+  text-align: center;
 }
