@@ -28,6 +28,7 @@
               <input normalCharacterOnly oncopy='return false' onpaste='return false' [(ngModel)]="nameSearch"
                      class="form-control search-inp" type="text" id="myInput" (keyup)='handleKeyDown($event)'
                      placeholder="Tìm kiếm dự án:" title="Type in a name"/>
+              <span class="fas fa-search searchIcon" (click)='mySearchFunction()'></span>
             </div>
           </div>
         </div>

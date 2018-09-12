@@ -13,7 +13,7 @@ export class TeambuildingService {
   }
 
   private teambuildingUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
-    + BaseConstant.standardServicePort.toString() + '/kpi/api/groups/team-building';
+    + BaseConstant.standardServicePort.toString() + '/api/groups/team-building';
 
   private httpOptions = this.httpService.setHeaderToken();
 

@@ -71,13 +71,13 @@ table td {
 }
 
 .search {
-  font-size: 14px;
-  width: 35%;
-  margin: 10px auto;
+  font-size: 25px;
+  width: 50%;
+  margin: auto;
   .search-div {
     margin: auto;
     .search-inp {
-      font-size: 14px;
+      font-size: 20px;
     }
   }
 }
@@ -95,4 +95,15 @@ nb-card[name$='activityCreating'] {
 }
 .activity-creating {
   text-align: center;
+}
+.searchIcon {
+  float: right;
+  margin-right: 12px;
+  margin-top: -40px;
+  position: relative;
+  z-index: 2;
+  color: #bee5eb;
+}
+.searchIcon:hover {
+  color: #58C3DC;
 }
