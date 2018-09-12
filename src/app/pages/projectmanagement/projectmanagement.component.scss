@@ -40,6 +40,10 @@
 
 [name$='projectTitle'] {
   width: 40%;
+  vertical-align: inherit;
+}
+[name$='projectTitle'] p {
+  margin: 0;
 }
 
 [name$='activeIcon'] {
@@ -49,7 +53,11 @@
 .projectDetail {
   width: 20%;
   text-align: center;
+  vertical-align: inherit;
 }
+.projectDetail i {
+  padding-left: 30px;
+  }
 
 i {
   letter-spacing: 25px;
