@@ -3,15 +3,6 @@
     <nb-card-body class="row ml-5 mr-5">
       <div class="container">
         <div class="row">
-          <div class="col-md-12 mt-3 mb-5">
-            <div class="titleManagement">
-              <h4>
-                QUẢN LÝ DỰ ÁN
-              </h4>
-            </div>
-          </div>
-        </div>
-        <div class="row">
           <div class="col-md-3">
             <button class="btn btn-hero-success mb-5" *ngIf="!isAdding" (click)="open(content)" [disabled]="isEditing">
               Thêm
@@ -37,7 +28,7 @@
             <thead>
             <tr>
               <th name="projectTitle">Tên dự án</th>
-              <th class="projectDetail">Ngày tạo</th>
+              <th class="projectDetail">Thời gian tạo</th>
               <th class="projectDetail">Trạng thái</th>
               <th class="projectDetail">Tùy chỉnh</th>
             </tr>

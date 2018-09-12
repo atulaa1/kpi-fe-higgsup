@@ -318,6 +318,9 @@ nb-action[name$="notification"]{
 
 .menu-title{
   color: black !important;
+  position: relative;
+  top: -5px;
+  padding-left: 10px;
 }
 li {
   padding: 0px !important;
@@ -330,4 +333,11 @@ li:hover span ,li:hover i {
 .nav-list[name$="navList"]{
   padding-left: 0;
   padding-right: 0;
+}
+.iconStyle{
+  color:black;
+  font-size: 25px;
+  display: inline-block;
+  width: 30px;
+  text-align: center;
 }
