@@ -21,7 +21,7 @@ h5 {
 
 .tableScroll {
   max-height: 400px;
-  overflow-y: auto;
+  overflow: auto;
 }
 
 .teamButton {
@@ -56,7 +56,7 @@ h5, h6 {
 }
 
 .dateCreated {
-  width: 40%;
+  width: 50%;
   text-align: center;
 }
 
@@ -94,5 +94,5 @@ nb-card[name$='activityCreating'] {
   background-color: #bee5eb;
 }
 .activity-creating {
-  padding-left: 20px;
+  text-align: center;
 }

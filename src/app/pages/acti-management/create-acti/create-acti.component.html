@@ -1,101 +1,106 @@
 <nb-card class="listActivity" name="activityCreating">
-  <!--Create Activities Mangagement-->
-  <div class="row mt-2 mb-2">
-    <div class="col-md-3 ml-5">
-      <nav>
-        <h5>
-          Chọn hoạt động:
-        </h5>
-      </nav>
-    </div>
-    <div class="col-md-4">
-      <div class="dropdown ghost-dropdown" ngbDropdown>
-        <button id="btnDropdown" class="btn btn-primary" type="button" ngbDropdownToggle>
-          - - Chọn - -
-        </button>
-        <ul id="listDrop" class="dropdown-menu" ngbDropdownMenu>
-          <li *ngFor="let activity of listActivities" class="dropdown-item" (click)="openActivityModal(activity.id)">
-            {{activity.name}}
-          </li>
-        </ul>
+  <div class="container">
+    <!--Create Activities Mangagement-->
+    <div class="row mt-2 mb-2 ml-2 mr-2">
+      <div class="col-md-3 ml-5">
+        <nav>
+          <h5>
+            Chọn hoạt động:
+          </h5>
+        </nav>
+      </div>
+      <div class="col-md-4">
+        <div class="dropdown ghost-dropdown" ngbDropdown>
+          <button id="btnDropdown" class="btn btn-primary" type="button" ngbDropdownToggle>
+            - - Chọn - -
+          </button>
+          <ul id="listDrop" class="dropdown-menu" ngbDropdownMenu>
+            <li *ngFor="let activity of listActivities" class="dropdown-item" (click)="openActivityModal(activity.id)">
+              {{activity.name}}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12 mt-5 ml-5">
-      <nav>
+
+    <div class="row mt-5"></div>
+    <div class="col-md-12">
+      <nav class="ml-5">
         <h5>
           Hoạt động đã tạo:
         </h5>
       </nav>
-    </div>
-  </div>
-  <div class="search">
-    <div class="form-group row">
-      <div class="col-sm-6 search-div">
-        <input normalCharacterOnly oncopy='return false' onpaste='return false' [(ngModel)]="nameSearch"
-               class="form-control search-inp" type="text" id="myInput" (keyup)='handleKeyDown($event)'
-               placeholder="Tìm kiếm hoạt động:" title="Type in a name"/>
+      <div class="col-md-12">
+        <div class="search">
+          <div class="form-group row">
+            <div class="col-sm-6 search-div">
+              <input normalCharacterOnly oncopy='return false' onpaste='return false' [(ngModel)]="nameSearch"
+                     class="form-control search-inp" type="text" id="myInput" (keyup)='handleKeyDown($event)'
+                     placeholder="Tìm kiếm hoạt động:" title="Type in a name"/>
+            </div>
+          </div>
+        </div>
+        <div class="row ml-5 mr-5">
+          <table class="table titleTable">
+            <thead>
+            <tr>
+              <th class="activity-creating">Hoạt động</th>
+              <th class="dateCreated">Ngày tạo</th>
+            </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="row ml-5 mr-5 tableScroll">
+          <table class="table table-hover" id="myTable">
+            <tbody>
+            <tr *ngFor="let group of groupList">
+
+              <!--Seminar-->
+
+              <td (click)="open(content)" *ngIf="group.groupType.id==1" class="activity-creating">{{group.name}}
+                <ng-template let-c="close" let-d="dismiss" #content>
+                  <ngx-seminar [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
+                               [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-seminar>
+                </ng-template>
+              </td>
+
+              <!--Club-->
+
+              <td (click)="open(content)" *ngIf="group.groupType.id==2" class="activity-creating">{{group.name}}
+                <ng-template let-c="close" let-d="dismiss" #content>
+                  <ngx-club [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
+                            [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-club>
+                </ng-template>
+              </td>
+
+              <!--Teambuilding-->
+
+              <td (click)="open(content)" *ngIf="group.groupType.id==3" class="activity-creating">{{group.name}}
+                <ng-template let-c="close" let-d="dismiss" #content>
+                  <ngx-team-building [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
+                                     [createdActivity]="group.additionalConfig"
+                                     (change)="onChange($event)"></ngx-team-building>
+                </ng-template>
+              </td>
+
+              <!--Support-->
+
+              <td (click)="open(content)" *ngIf="group.groupType.id==4" class="activity-creating">{{group.name}}
+                <ng-template let-c="close" let-d="dismiss" #content>
+                  <ngx-support [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
+                               [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-support>
+                </ng-template>
+              </td>
+
+              <!--Date Created Activities-->
+              <td class="dateCreated">{{group.createdDate}}</td>
+
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <p *ngIf='showMsg' name='notFoundMsg'>Không tìm thấy kết quả phù hợp!</p>
       </div>
     </div>
   </div>
-  <div class="row ml-5 mr-5">
-  <table class="table titleTable">
-    <thead>
-    <tr>
-      <th class="activity-creating">Hoạt động</th>
-      <th class="dateCreated">Ngày tạo</th>
-    </tr>
-    </thead>
-  </table>
-  </div>
-  <div class="row ml-5 mr-5 tableScroll">
-    <table class="table table-hover" id="myTable">
-      <tbody>
-      <tr *ngFor="let group of groupList">
-
-        <!--Seminar-->
-
-        <td (click)="open(content)" *ngIf="group.groupType.id==1" class="activity-creating">{{group.name}}
-          <ng-template let-c="close" let-d="dismiss" #content>
-            <ngx-seminar [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
-                         [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-seminar>
-          </ng-template>
-        </td>
-
-        <!--Club-->
-
-        <td (click)="open(content)" *ngIf="group.groupType.id==2" class="activity-creating">{{group.name}}
-          <ng-template let-c="close" let-d="dismiss" #content>
-            <ngx-club [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
-                      [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-club>
-          </ng-template>
-        </td>
-
-        <!--Teambuilding-->
-
-        <td (click)="open(content)" *ngIf="group.groupType.id==3" class="activity-creating">{{group.name}}
-          <ng-template let-c="close" let-d="dismiss" #content>
-            <ngx-team-building [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
-                               [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-team-building>
-          </ng-template>
-        </td>
-
-        <!--Support-->
-
-        <td (click)="open(content)" *ngIf="group.groupType.id==4" class="activity-creating">{{group.name}}
-          <ng-template let-c="close" let-d="dismiss" #content>
-            <ngx-support [dismiss]="d" [groupId]="group.id" [activityName]="group.name"
-                         [createdActivity]="group.additionalConfig" (change)="onChange($event)"></ngx-support>
-          </ng-template>
-        </td>
-
-        <!--Date Created Activities-->
-        <td class="dateCreated">{{group.createdDate | date: 'dd-MM-yyyy' }}</td>
-
-      </tr>
-      </tbody>
-    </table>
-  </div>
-  <p *ngIf='showMsg' name='notFoundMsg'>Không tìm thấy kết quả phù hợp!</p>
 </nb-card>
