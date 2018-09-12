@@ -20,7 +20,7 @@ export class UserService {
   }
 
   getUserUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
-    + BaseConstant.standardServicePort.toString() + '/kpi/api/users/';
+    + BaseConstant.standardServicePort.toString() + '/api/users/';
 
   getUserInfoHttp(username: string) {
     const httpOptions = this.httpService.setHeaderToken();
@@ -37,7 +37,7 @@ export class UserService {
     const httpOptions = this.httpService.setHeaderToken();
     const updatedUser = JSON.stringify(user);
     return this.http.put<ResponseDTO>(BaseConstant.protocol.toString() + BaseConstant.server.toString()
-      + BaseConstant.standardServicePort.toString() + '/kpi/api/users/' + user.username, updatedUser, httpOptions);
+      + BaseConstant.standardServicePort.toString() + '/api/users/' + user.username, updatedUser, httpOptions);
   }
 
   getUserInfo(username: string) {

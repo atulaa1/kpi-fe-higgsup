@@ -13,7 +13,7 @@ export class SeminarService {
   }
 
   private seminarUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
-    + BaseConstant.standardServicePort.toString() + '/kpi/api/groups/seminar';
+    + BaseConstant.standardServicePort.toString() + '/api/groups/seminar';
 
   private httpOptions = this.httpService.setHeaderToken();
 
