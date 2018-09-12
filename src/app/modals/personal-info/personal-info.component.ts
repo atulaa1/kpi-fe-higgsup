@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NgbActiveModal, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {InputFile} from 'ngx-input-file';
 import {User} from '../../@core/models/user.model';
 import {UserService} from '../../@core/services/user.service';
@@ -38,7 +38,6 @@ export class PersonalInfoComponent implements OnInit {
 
   constructor(private activeModal: NgbActiveModal,
               private cookieService: CookieService,
-              private calendar: NgbCalendar,
               private userService: UserService) {
 
   }
@@ -125,6 +124,7 @@ export class PersonalInfoComponent implements OnInit {
           this.currentUser.skype = response.data.skype;
           this.currentUser.dateStartWork = new Date(response.data.dateStartWork);
           this.submitDoneMsg = MessageConstant.MSG_SAVE_SUCCESSFUL;
+          this.emailWarning = null;
           setTimeout(() => {
             this.submitDoneMsg = '';
           }, 2000);
@@ -150,5 +150,11 @@ export class PersonalInfoComponent implements OnInit {
 
   convertNgbDateToDate(ngbDate: NgbDate): Date {
     return new Date(ngbDate.year, ngbDate.month, ngbDate.day);
+  }
+
+  deleteOnly(event) {
+    if (event.keyCode !== 8 && event.keyCode !== 46) {
+      event.preventDefault();
+    }
   }
 }
