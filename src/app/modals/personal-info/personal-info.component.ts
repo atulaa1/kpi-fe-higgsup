@@ -168,10 +168,4 @@ export class PersonalInfoComponent implements OnInit {
     }
     return new Date(ngbDate.year, ngbDate.month - 1, ngbDate.day);
   }
-
-  deleteOnly(event) {
-    if (event.keyCode !== 8 && event.keyCode !== 46) {
-      event.preventDefault();
-    }
-  }
 }
