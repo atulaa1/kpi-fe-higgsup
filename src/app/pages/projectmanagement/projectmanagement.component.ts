@@ -170,7 +170,7 @@ export class ProjectmanagementComponent implements OnInit {
   }
 
   mySearchFunction() {
-    if (this.isEditing = false) {
+    if (this.isEditing === false) {
       this.showMsg = true;
       let input, filter, table, tr, td, i;
       input = document.getElementById('myInput');
