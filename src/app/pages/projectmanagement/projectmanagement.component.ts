@@ -191,5 +191,4 @@ export class ProjectmanagementComponent implements OnInit {
     }
   }
 }
-}
 
