@@ -19,7 +19,7 @@
       </div>
       <div class="row">
         <div class="col-md-5" >
-          <input-file [ngClass]="{'avatarUpload': avatarActive == true, 'styleAvatarUpload': avatarActive == false}" #avatarUpload  [inputId]="avatarImg" (acceptedFile)="saveAvatarImg($event)"
+          <input-file [ngClass]="{'avatarUpload': avatarActive == true, 'styleAvatarUpload': avatarActive == false}" #avatarUpload (acceptedFile)="saveAvatarImg($event)"
                       (ngModel)="avatar">
           </input-file>
           <img  [ngClass]="{'styleImgFake': avatarActive == false}"   width="140" height="140" [src]="avatar">

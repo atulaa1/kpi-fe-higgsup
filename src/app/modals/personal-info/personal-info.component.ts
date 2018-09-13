@@ -17,9 +17,7 @@ import {isNull} from 'util';
 export class PersonalInfoComponent implements OnInit {
 
   dpStartWorkDay: NgbDate;
-  image: any;
   currentUser: User;
-  avatarImg: string;
   clickCloseCount: number = 0;
   closeConfirm: boolean = false;
   submitDoneMsg: string;
