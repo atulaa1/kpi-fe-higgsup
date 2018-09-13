@@ -19,12 +19,9 @@ export class PersonalInfoComponent implements OnInit {
   dpStartWorkDay: NgbDate;
   image: any;
   currentUser: User;
-  picture: string;
   avatarImg: string;
   clickCloseCount: number = 0;
-  inputFocused: boolean = false;
   closeConfirm: boolean = false;
-  submitConfirm: boolean = false;
   submitDoneMsg: string;
   closeWarningMsg: string;
   emailWarning: string;
@@ -92,7 +89,6 @@ export class PersonalInfoComponent implements OnInit {
     this.emailWarning = null;
     if (!this.isInfoChanged()) {
       this.activeModal.close();
-      this.submitConfirm = false;
     } else {
       this.clickCloseCount += 1;
       if (this.clickCloseCount === 1) {
@@ -102,8 +98,6 @@ export class PersonalInfoComponent implements OnInit {
         this.activeModal.close();
         this.clickCloseCount = 0;
         this.closeConfirm = false;
-        this.inputFocused = false;
-        this.submitConfirm = false;
       }
     }
   }
@@ -148,9 +142,7 @@ export class PersonalInfoComponent implements OnInit {
             this.submitDoneMsg = '';
           }, 2000);
         });
-      this.inputFocused = false;
       this.closeConfirm = false;
-      this.submitConfirm = true;
       this.clickCloseCount = 0;
     }
   }
