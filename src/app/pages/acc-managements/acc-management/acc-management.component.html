@@ -3,8 +3,8 @@
     <div class="col-sm-6 search-div">
       <input normalCharacterOnly oncopy='return false' onpaste='return false' [(ngModel)]="nameSearch"
              class="form-control search-inp" type="text" id="myInput" (keyup)='handleKeyDown($event)'
-             placeholder="Tìm kiếm tài khoản:" title="Type in a name"/>
-      <span class="fas fa-search searchIcon" (click)='mySearchFunction()'></span>
+             placeholder="Tìm kiếm tài khoản:" title="Type in a name" [disabled]="editingUsername !== null"/>
+      <span class="fas fa-search searchIcon" (click)='mySearchFunction()' [hidden]="editingUsername !== null"></span>
     </div>
   </div>
 </div>
