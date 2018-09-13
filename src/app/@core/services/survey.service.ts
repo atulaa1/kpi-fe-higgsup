@@ -23,6 +23,6 @@ export class SurveyService {
   }
 
   updateSurvey(surveys: Array<Survey>): Observable<any> {
-    return this.http.put(this.surveyUrl, surveys,this.httpOptions);
+    return this.http.put(this.surveyUrl, surveys , this.httpOptions);
   }
 }
