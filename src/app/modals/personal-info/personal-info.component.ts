@@ -40,15 +40,11 @@ export class PersonalInfoComponent implements OnInit {
 
   ngOnInit() {
     this.userService.currentUser.subscribe((user: User) => this.currentUser = user);
-    if (typeof (this.currentUser.birthday) === 'string') {
-      if (this.currentUser.birthday !== null) {
-        this.currentUser.birthday = new Date(this.currentUser.birthday);
-      }
+    if (typeof (this.currentUser.birthday) === 'string' && this.currentUser.birthday !== null) {
+      this.currentUser.birthday = new Date(this.currentUser.birthday);
     }
-    if (typeof (this.currentUser.dateStartWork) === 'string') {
-      if (this.currentUser.dateStartWork !== null) {
-        this.currentUser.dateStartWork = new Date(this.currentUser.dateStartWork);
-      }
+    if (typeof (this.currentUser.dateStartWork) === 'string' && this.currentUser.dateStartWork !== null) {
+      this.currentUser.dateStartWork = new Date(this.currentUser.dateStartWork);
     }
     this.fileBase64 = this.currentUser.avatar;
     this.birthday = this.convertDateToNgbDate(this.currentUser.birthday);
@@ -109,7 +105,6 @@ export class PersonalInfoComponent implements OnInit {
     };
 
   }
-
 
 
   saveChange() {
