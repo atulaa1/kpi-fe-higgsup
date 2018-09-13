@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {InputFile} from 'ngx-input-file';
 import {User} from '../../@core/models/user.model';
 import {UserService} from '../../@core/services/user.service';
@@ -36,6 +36,8 @@ export class PersonalInfoComponent implements OnInit {
   skype: string;
   private fileBase64: string = null;
   avatarActive: boolean = true;
+  maxBirthday: NgbDateStruct;
+  minStartWorkDate: NgbDateStruct;
 
   constructor(private activeModal: NgbActiveModal,
               private cookieService: CookieService,
@@ -59,6 +61,17 @@ export class PersonalInfoComponent implements OnInit {
     this.skype = this.currentUser.skype;
     this.dpStartWorkDay = this.convertDateToNgbDate(this.currentUser.dateStartWork);
     this.avatar = this.currentUser.avatar;
+    let now = new Date();
+    this.maxBirthday = {
+      day: 31,
+      month: 12,
+      year: now.getFullYear() - 16,
+    }
+    this.minStartWorkDate = {
+      day: 1,
+      month: 9,
+      year: 2015,
+    }
   }
 
   isInfoChanged(): boolean {
@@ -103,8 +116,6 @@ export class PersonalInfoComponent implements OnInit {
     };
 
   }
-
-
 
   saveChange() {
     if (!this.isValidatedEmail()) {

@@ -41,7 +41,7 @@
     "@nebular/auth": "2.0.0-rc.9",
     "@nebular/security": "2.0.0-rc.9",
     "@nebular/theme": "2.0.0-rc.9",
-    "@ng-bootstrap/ng-bootstrap": "1.1.0",
+    "@ng-bootstrap/ng-bootstrap": "2.0.0",
     "angular-modal-service": "^0.13.0",
     "bootstrap": "4.0.0",
     "classlist.js": "1.1.20150312",
