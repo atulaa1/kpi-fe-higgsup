@@ -14,7 +14,7 @@
     <tr>
       <th class="titleField text-left">Họ và tên</th>
       <th class="titleField">Phân quyền</th>
-      <th class="titleField text-right">Sửa quyền</th>
+      <th class="titleField">Sửa quyền</th>
     </tr>
     </thead>
   </table>
@@ -35,7 +35,7 @@
           <option value="ROLE_EMPLOYEE">EMPLOYEE</option>
         </select>
       </td>
-      <td class="infoUser text-right">
+      <td class="infoUser">
         <button [hidden]="userInfo.isEdited" id='{{userInfo.username}}-edit' class='btn btn-hero-success'
                 (click)='updateRole(userInfo)'>Sửa
         </button>
