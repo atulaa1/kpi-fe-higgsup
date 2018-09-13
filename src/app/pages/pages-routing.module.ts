@@ -28,40 +28,10 @@ const routes: Routes = [{
     {
       path: 'acc-managements',
       component: AccManagementsComponent,
-      children: [
-        {
-          path: 'edit-role',
-          component: AccManagementComponent,
-        },
-        {
-          path: 'follow-late',
-          component: AccManagementLateComponent,
-        },
-        {
-          path: '',
-          redirectTo: 'follow-late',
-          pathMatch: 'full',
-        },
-      ],
     },
     {
       path: 'acti-management',
       component: ActiManagementComponent,
-      children: [
-        {
-          path: 'create-acti',
-          component: CreateActiComponent,
-        },
-        {
-          path: '',
-          redirectTo: 'create-acti',
-          pathMatch: 'full',
-        },
-        {
-          path: 'confirm-acti',
-          component: ConfirmActiComponent,
-        },
-      ],
     },
     {
       path: 'project-management',

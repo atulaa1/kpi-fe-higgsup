@@ -21,7 +21,7 @@
   <nb-action class="higgigup-nb-action nav-list" name="navList" *ngIf="user.username">
     <div class="btn-group" dropdown>
       <div dropdownToggle class="nav-list" aria-controls="dropdown-basic">
-        <a>{{user.firstName}} {{user.lastName}}</a>
+        <a>{{user.fullName}}</a>
       </div>
       <div style="width: 300px" id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right">
         <div style="min-height: 170px" class="row">
@@ -49,71 +49,71 @@
         </div>
 
         <ul>
-          <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" class="text-center font-weight-600">
-            <i style="  font-size: 25px;" class="fas fa-user-circle"></i>
-            <a style="margin-left: 10px" ng-reflect-router-link="" title="Quản lý tài khoản"
+          <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0"  class="text-center font-weight-600">
+            <a title="Quản lý tài khoản"
                href="#/pages/acc-managements">
+              <i  class="fas fa-user-circle mt-2 iconStyle"></i>
               <span class="menu-title">Quản lý tài khoản</span>
             </a>
           </li>
 
           <li *ngIf="user.userRole.indexOf('ROLE_EMPLOYEE')>=0 && user.userRole.length == 1" style="" class="text-center font-weight-600">
-            <i style="  font-size: 25px;" class="fas fa-user-circle"></i>
-            <a style="margin-left: 10px" ng-reflect-router-link="" title="Quản lý tài khoản" href="#/pages/dashboard">
+            <a title="Quản lý tài khoản" href="#/pages/dashboard">
+              <i class="fas fa-user-circle mt-2 iconStyle"></i>
               <span class="menu-title">Thông tin tài khoản</span>
             </a>
           </li>
 
           <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" class="text-center font-weight-600">
-            <i style="font-size: 23px;" class="fas fa-users"></i>
-            <a style="margin-left: 10px" ng-reflect-router-link="" title="Quản lý hoạt động"
+            <a title="Quản lý hoạt động"
                href="#/pages/acti-management">
+              <i  class="fas fa-users mt-2 iconStyle"></i>
               <span class="menu-title">Quản lý hoạt động</span>
             </a>
           </li>
 
 
           <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" class="text-center font-weight-600">
-            <i style="  font-size: 23px;" class="fas fa-edit"></i>
-            <a style="margin-left: 10px" ng-reflect-router-link="" title="Quản lý khảo sát" href="#/pages/listofsurvey">
+            <a title="Quản lý khảo sát" href="#/pages/listofsurvey">
+              <i class="fas fa-edit mt-2 iconStyle"></i>
               <span class="menu-title">Quản lý khảo sát</span>
             </a>
           </li>
 
           <li *ngIf="user.userRole.indexOf('ROLE_ADMIN') < 0" class="text-center font-weight-600">
-            <i style="  font-size: 23px;" class="fas fa-pencil-alt"></i>
-            <a style="margin-left: 10px" ng-reflect-router-link="" title="Khảo sát" href="#/pages/dashboard">
+            <a title="Khảo sát" href="#/pages/dashboard">
+              <i  class="fas fa-pencil-alt mt-2 iconStyle"></i>
               <span class="menu-title">Khảo sát</span>
             </a>
           </li>
 
           <li *ngIf="user.userRole.indexOf('ROLE_MAN')>=0" class="text-center font-weight-600">
-            <i style="  font-size: 23px;" class="fas fa-history"></i>
-            <a style="margin-left: 10px" ng-reflect-router-link="" title="Xem lịch sử" href="#/pages/dashboard">
+            <a title="Xem lịch sử" href="#/pages/dashboard">
+              <i class="fas fa-history mt-2 iconStyle"></i>
               <span class="menu-title">Xem lịch sử</span>
             </a>
           </li>
 
 
           <li *ngIf="user.userRole.indexOf('ROLE_ADMIN') < 0" class="text-center font-weight-600">
-            <i style="  font-size: 23px;" class="fas fa-plus-circle"></i>
-            <a style="margin-left: 10px" ng-reflect-router-link="" title="Tạo hoạt động" href="#/pages/dashboard">
+            <a title="Tạo hoạt động" href="#/pages/dashboard">
+              <i class="fas fa-plus-circle iconStyle"></i>
               <span class="menu-title">Tạo hoạt động</span>
             </a>
           </li>
 
           <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" class="text-center font-weight-600 manipulationMenu">
-            <i style="  font-size: 23px;" class="fas fa-file-alt"></i>
-            <a style="margin-left: 10px" ng-reflect-router-link="" title="Quản lý dự án"
+            <a title="Quản lý dự án"
                href="#/pages/project-management">
+              <i class="fas fa-file-alt mt-2 iconStyle"></i>
               <span class="menu-title">Quản lý dự án</span>
             </a>
           </li>
 
           <li class="text-center font-weight-600">
-            <i style="  font-size: 23px;" class="fas fa-sign-out-alt"></i>
-            <a style="margin-left: 10px" ng-reflect-router-link="" title="Đăng xuất" (click)="openLogoutModal()"
+            <a title="Đăng xuất" (click)="openLogoutModal()"
                href="javascript:">
+              <i class="fas fa-sign-out-alt mt-2 iconStyle"></i>
               <span class="menu-title">Đăng xuất</span>
             </a>
           </li>

@@ -13,9 +13,9 @@ export class ClubService {
   }
 
   private clubUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
-    + BaseConstant.standardServicePort.toString() + '/kpi/api/groups/club';
+    + BaseConstant.standardServicePort.toString() + '/api/groups/club';
   private createdClubUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
-    + BaseConstant.standardServicePort.toString() + '/kpi/api/groups/club';
+    + BaseConstant.standardServicePort.toString() + '/api/groups/club';
   private httpOptions = this.httpService.setHeaderToken();
 
   addClub(club): Observable<any> {
