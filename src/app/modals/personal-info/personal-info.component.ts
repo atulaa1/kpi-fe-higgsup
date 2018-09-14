@@ -111,7 +111,7 @@ export class PersonalInfoComponent implements OnInit {
     if (!this.isValidatedEmail()) {
       this.emailWarning = MessageConstant.MSG_INVALID_EMAIL;
     } else {
-      let userTemp = this.currentUser;
+      const userTemp = this.currentUser;
       userTemp.avatar = this.fileBase64;
       userTemp.birthday = isNull(this.birthday) ? null : this.convertNgbDateToDate(this.birthday);
       userTemp.numberPhone = this.phoneNumber;
@@ -119,7 +119,7 @@ export class PersonalInfoComponent implements OnInit {
       userTemp.gmail = this.secondaryEmail;
       userTemp.skype = this.skype;
       userTemp.dateStartWork = isNull(this.dpStartWorkDay) ? null : this.convertNgbDateToDate(this.dpStartWorkDay);
-      userTemp.username = this.cookieService.get('username');
+      userTemp.username = this.currentUser.username;
       this.userService.updatePersonalInfo(userTemp).subscribe(
         (response: ResponseDTO) => {
           this.currentUser.avatar = response.data.avatar;
@@ -129,6 +129,8 @@ export class PersonalInfoComponent implements OnInit {
           this.currentUser.gmail = response.data.gmail;
           this.currentUser.skype = response.data.skype;
           this.currentUser.dateStartWork = new Date(response.data.dateStartWork);
+          const user = JSON.stringify(this.currentUser);
+          localStorage.setItem('currentUser', user);
           this.submitDoneMsg = MessageConstant.MSG_SAVE_SUCCESSFUL;
           this.emailWarning = null;
           setTimeout(() => {
