@@ -20,8 +20,6 @@ export class LoginComponent implements OnInit {
   submitted = false;
   invalidLogin: boolean = false;
   message: String;
-  userName: string;
-  password: string;
   alert: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
@@ -60,7 +58,6 @@ export class LoginComponent implements OnInit {
       this.authenService.attemptAuth(user).subscribe(
         res => {
           this.userService.getUserInfoHttp(res.body.username);
-          this.cookieService.set('username', res.body.username);
           this.activeModal.close();
         },
         (error) => {

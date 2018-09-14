@@ -35,5 +35,6 @@ export class AuthenService {
 
   logOut() {
     this.cookieService.delete('Authorization');
+    localStorage.clear();
   }
 }
