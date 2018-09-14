@@ -60,6 +60,8 @@ export class ClubComponent implements OnInit {
           swal('Thông báo!', 'Loại hoạt động không tồn tại!', 'error');
         } else if (response.status_code === 932) {
           swal('Thông báo!', 'Câu lạc bộ đã tồn tại!', 'error');
+        } else if (response.status_code === 914 && response.message === 'minimum session must be bigger than zero') {
+          swal('Thông báo!', 'Số buổi hoạt động tối thiểu phải lớn hơn 0!', 'error');
         }
       })
     }
@@ -74,9 +76,9 @@ export class ClubComponent implements OnInit {
     this.group.id = this.groupId;
     if (this.group.name === ''
       || !this.group.additionalConfig.host
-      || !this.group.additionalConfig.minNumberOfSessions
-      || !this.group.additionalConfig.participationPoint
-      || !this.group.additionalConfig.effectivePoint) {
+      || !(this.group.additionalConfig.minNumberOfSessions === 0 || this.group.additionalConfig.minNumberOfSessions)
+      || !(this.group.additionalConfig.participationPoint === 0 || this.group.additionalConfig.participationPoint)
+      || !(this.group.additionalConfig.effectivePoint === 0 || this.group.additionalConfig.effectivePoint)) {
       this.alert = true;
     } else {
       this.alert = false;
@@ -97,6 +99,8 @@ export class ClubComponent implements OnInit {
           swal('Thông báo!', 'Loại hoạt động không tồn tại!', 'error');
         } else if (response.status_code === 900 && response.message === 'not find') {
           swal('Thông báo!', 'Không tìm thấy hoạt động để cập nhật!', 'error');
+        } else if (response.status_code === 914 && response.message === 'minimum session must be bigger than zero') {
+          swal('Thông báo!', 'Số buổi hoạt động tối thiểu phải lớn hơn 0!', 'error');
         }
       })
     }
