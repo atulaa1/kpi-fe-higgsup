@@ -12,7 +12,7 @@ import {CookieService} from 'ngx-cookie-service';
   providedIn: 'root',
 })
 export class UserService {
-  private userSource = new BehaviorSubject(new User());
+  userSource = new BehaviorSubject(new User());
   currentUser = this.userSource.asObservable();
   private user = new User();
 
@@ -28,6 +28,8 @@ export class UserService {
       (response: ResponseDTO) => {
         this.user = response.data;
         this.userSource.next(this.user);
+        const user = JSON.stringify(this.user);
+        localStorage.setItem('currentUser', user)
       },
     );
   }
