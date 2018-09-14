@@ -1,5 +1,5 @@
 <div class="container">
-  <nb-card>
+  <nb-card class="nb-card-custom">
     <nb-card-body class="row ml-5 mr-5">
       <div class="container">
         <div class="row">
@@ -18,12 +18,12 @@
             <div class="col-sm-6 search-div">
               <input normalCharacterOnly oncopy='return false' onpaste='return false' [(ngModel)]="nameSearch"
                      class="form-control search-inp" type="text" id="myInput" (keyup)='handleKeyDown($event)'
-                     placeholder="Tìm kiếm dự án:" title="Type in a name"/>
+                     placeholder="Tìm kiếm dự án:" title="Type in a name" [disabled]="isEditing"/>
               <span class="fas fa-search searchIcon" (click)='mySearchFunction()'></span>
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row mt-5">
           <table class="table titleTable">
             <thead>
             <tr>
