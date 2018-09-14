@@ -71,11 +71,11 @@ export class SupportComponent implements OnInit {
     this.group.groupType = groupType;
     this.group.additionalConfig = point;
     this.group.name = this.activityName;
-    if (this.group.name === '' || !this.group.additionalConfig.cleanUpPoint
-      || !this.group.additionalConfig.buyingStuffPoint
-      || !this.group.additionalConfig.weeklyCleanUpPoint
-      || !this.group.additionalConfig.supportConferencePoint
-      || !this.group.additionalConfig.trainingPoint) {
+    if (this.group.name === '' || !(this.group.additionalConfig.cleanUpPoint === 0 || this.group.additionalConfig.cleanUpPoint)
+      || !(this.group.additionalConfig.buyingStuffPoint === 0 || this.group.additionalConfig.buyingStuffPoint)
+      || !(this.group.additionalConfig.weeklyCleanUpPoint === 0 || this.group.additionalConfig.weeklyCleanUpPoint)
+      || !(this.group.additionalConfig.supportConferencePoint === 0 || this.group.additionalConfig.supportConferencePoint)
+      || !(this.group.additionalConfig.trainingPoint === 0 || this.group.additionalConfig.trainingPoint)) {
       this.alert = true;
     } else {
       this.alert = false;

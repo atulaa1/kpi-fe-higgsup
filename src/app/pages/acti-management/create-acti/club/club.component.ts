@@ -74,9 +74,9 @@ export class ClubComponent implements OnInit {
     this.group.id = this.groupId;
     if (this.group.name === ''
       || !this.group.additionalConfig.host
-      || !this.group.additionalConfig.minNumberOfSessions
-      || !this.group.additionalConfig.participationPoint
-      || !this.group.additionalConfig.effectivePoint) {
+      || !(this.group.additionalConfig.minNumberOfSessions === 0 || this.group.additionalConfig.minNumberOfSessions)
+      || !(this.group.additionalConfig.participationPoint === 0 || this.group.additionalConfig.participationPoint)
+      || !(this.group.additionalConfig.effectivePoint === 0 || this.group.additionalConfig.effectivePoint)) {
       this.alert = true;
     } else {
       this.alert = false;

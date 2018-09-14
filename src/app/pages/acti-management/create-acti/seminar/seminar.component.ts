@@ -71,8 +71,8 @@ export class SeminarComponent implements OnInit {
     this.seminarActivity.additionalConfig = this.createdActivity;
     this.seminarActivity.name = this.activityName;
     if (this.seminarActivity.name === ''
-      || !this.seminarActivity.additionalConfig.hostPoint
-      || !this.seminarActivity.additionalConfig.memberPoint
+      || !(this.seminarActivity.additionalConfig.hostPoint === 0 || this.seminarActivity.additionalConfig.hostPoint)
+      || !(this.seminarActivity.additionalConfig.memberPoint === 0 || this.seminarActivity.additionalConfig.memberPoint)
       || !(this.seminarActivity.additionalConfig.listenerPoint === 0 || this.seminarActivity.additionalConfig.listenerPoint)) {
       this.alert = true;
     } else {

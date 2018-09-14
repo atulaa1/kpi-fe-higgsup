@@ -91,10 +91,10 @@ export class TeamBuildingComponent implements OnInit {
     this.teambuilding.name = this.activityName;
     this.teambuilding.id = this.groupId;
     if (this.teambuilding.name === ''
-      || !this.teambuilding.additionalConfig.firstPrizePoint
-      || !this.teambuilding.additionalConfig.secondPrizePoint
-      || !this.teambuilding.additionalConfig.thirdPrizePoint
-      || !this.teambuilding.additionalConfig.organizerPoint) {
+      || !(this.teambuilding.additionalConfig.firstPrizePoint === 0 || this.teambuilding.additionalConfig.firstPrizePoint)
+      || !(this.teambuilding.additionalConfig.secondPrizePoint === 0 || this.teambuilding.additionalConfig.secondPrizePoint)
+      || !(this.teambuilding.additionalConfig.thirdPrizePoint === 0 || this.teambuilding.additionalConfig.thirdPrizePoint)
+      || !(this.teambuilding.additionalConfig.organizerPoint === 0 || this.teambuilding.additionalConfig.organizerPoint)) {
       this.alert = true;
     } else {
       this.alert = false;
