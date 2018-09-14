@@ -17,14 +17,9 @@ import {isNull} from 'util';
 export class PersonalInfoComponent implements OnInit {
 
   dpStartWorkDay: NgbDate;
-  image: any;
   currentUser: User;
-  picture: string;
-  avatarImg: string;
   clickCloseCount: number = 0;
-  inputFocused: boolean = false;
   closeConfirm: boolean = false;
-  submitConfirm: boolean = false;
   submitDoneMsg: string;
   closeWarningMsg: string;
   emailWarning: string;
@@ -44,11 +39,11 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.currentUser.subscribe(user => this.currentUser = user);
-    if (typeof (this.currentUser.birthday) === 'string') {
+    this.userService.currentUser.subscribe((user: User) => this.currentUser = user);
+    if (typeof (this.currentUser.birthday) === 'string' && this.currentUser.birthday !== null) {
       this.currentUser.birthday = new Date(this.currentUser.birthday);
     }
-    if (typeof (this.currentUser.dateStartWork) === 'string') {
+    if (typeof (this.currentUser.dateStartWork) === 'string' && this.currentUser.dateStartWork !== null) {
       this.currentUser.dateStartWork = new Date(this.currentUser.dateStartWork);
     }
     this.fileBase64 = this.currentUser.avatar;
@@ -62,13 +57,23 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   isInfoChanged(): boolean {
-    if (this.fileBase64 !== this.currentUser.avatar ||
-      this.convertNgbDateToDate(this.birthday) !== this.currentUser.birthday ||
-      this.phoneNumber !== this.currentUser.numberPhone ||
-      this.address !== this.currentUser.address ||
-      this.secondaryEmail !== this.currentUser.gmail ||
-      this.skype !== this.currentUser.skype ||
-      this.convertNgbDateToDate(this.dpStartWorkDay) !== this.currentUser.dateStartWork) {
+    if (this.birthday !== null && this.currentUser.birthday !== null &&
+      this.dpStartWorkDay !== null && this.currentUser.dateStartWork !== null) {
+      if (this.fileBase64 !== this.currentUser.avatar ||
+        this.birthday.year !== this.currentUser.birthday.getFullYear() ||
+        this.birthday.month !== this.currentUser.birthday.getMonth() + 1 ||
+        this.birthday.day !== this.currentUser.birthday.getDate() ||
+        this.phoneNumber !== this.currentUser.numberPhone ||
+        this.address !== this.currentUser.address ||
+        this.secondaryEmail !== this.currentUser.gmail ||
+        this.skype !== this.currentUser.skype ||
+        this.dpStartWorkDay.year !== this.currentUser.dateStartWork.getFullYear() ||
+        this.dpStartWorkDay.month !== this.currentUser.dateStartWork.getMonth() + 1 ||
+        this.dpStartWorkDay.day !== this.currentUser.dateStartWork.getDate()) {
+        return true;
+      }
+    } else if ((this.birthday !== null || this.currentUser.birthday !== null) ||
+      (this.dpStartWorkDay !== null || this.currentUser.dateStartWork !== null)) {
       return true;
     }
     return false;
@@ -78,7 +83,6 @@ export class PersonalInfoComponent implements OnInit {
     this.emailWarning = null;
     if (!this.isInfoChanged()) {
       this.activeModal.close();
-      this.submitConfirm = false;
     } else {
       this.clickCloseCount += 1;
       if (this.clickCloseCount === 1) {
@@ -88,8 +92,6 @@ export class PersonalInfoComponent implements OnInit {
         this.activeModal.close();
         this.clickCloseCount = 0;
         this.closeConfirm = false;
-        this.inputFocused = false;
-        this.submitConfirm = false;
       }
     }
   }
@@ -103,7 +105,6 @@ export class PersonalInfoComponent implements OnInit {
     };
 
   }
-
 
 
   saveChange() {
@@ -134,9 +135,7 @@ export class PersonalInfoComponent implements OnInit {
             this.submitDoneMsg = '';
           }, 2000);
         });
-      this.inputFocused = false;
       this.closeConfirm = false;
-      this.submitConfirm = true;
       this.clickCloseCount = 0;
     }
   }
@@ -154,12 +153,9 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   convertNgbDateToDate(ngbDate: NgbDate): Date {
-    return new Date(ngbDate.year, ngbDate.month, ngbDate.day);
-  }
-
-  deleteOnly(event) {
-    if (event.keyCode !== 8 && event.keyCode !== 46) {
-      event.preventDefault();
+    if (isNull(ngbDate)) {
+      return null;
     }
+    return new Date(ngbDate.year, ngbDate.month - 1, ngbDate.day);
   }
 }
