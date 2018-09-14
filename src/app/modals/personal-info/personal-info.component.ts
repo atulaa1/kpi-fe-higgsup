@@ -1,22 +1,23 @@
 import {Component, OnInit} from '@angular/core';
-import {NgbActiveModal, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {InputFile} from 'ngx-input-file';
 import {User} from '../../@core/models/user.model';
 import {UserService} from '../../@core/services/user.service';
 import {MessageConstant} from '../../@core/glossary/message.constant';
 import {CookieService} from 'ngx-cookie-service';
 import {ResponseDTO} from '../../@core/models/responseDTO.model';
-import {NgbDate} from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date';
 import {isNull} from 'util';
+import {KpiDateFormatter} from './kpi-date-formatter';
 
 @Component({
   selector: 'ngx-personal-info',
   templateUrl: './personal-info.component.html',
   styleUrls: ['./personal-info.component.scss'],
+  providers: [{provide: NgbDateParserFormatter, useClass: KpiDateFormatter}]
 })
 export class PersonalInfoComponent implements OnInit {
 
-  dpStartWorkDay: NgbDate;
+  dpStartWorkDay: NgbDateStruct;
   currentUser: User;
   clickCloseCount: number = 0;
   closeConfirm: boolean = false;
@@ -24,7 +25,7 @@ export class PersonalInfoComponent implements OnInit {
   closeWarningMsg: string;
   emailWarning: string;
   avatar: string;
-  birthday: NgbDate;
+  birthday: NgbDateStruct;
   phoneNumber: string;
   address: string;
   secondaryEmail: string;
@@ -49,12 +50,12 @@ export class PersonalInfoComponent implements OnInit {
       this.currentUser.dateStartWork = new Date(this.currentUser.dateStartWork);
     }
     this.fileBase64 = this.currentUser.avatar;
-    this.birthday = this.convertDateToNgbDate(this.currentUser.birthday);
+    this.birthday = this.convertDatetoNgbDateStruct(this.currentUser.birthday);
     this.phoneNumber = this.currentUser.numberPhone;
     this.address = this.currentUser.address;
     this.secondaryEmail = this.currentUser.gmail;
     this.skype = this.currentUser.skype;
-    this.dpStartWorkDay = this.convertDateToNgbDate(this.currentUser.dateStartWork);
+    this.dpStartWorkDay = this.convertDatetoNgbDateStruct(this.currentUser.dateStartWork);
     this.avatar = this.currentUser.avatar;
     let now = new Date();
     this.maxBirthday = {
@@ -73,20 +74,18 @@ export class PersonalInfoComponent implements OnInit {
     if (this.birthday !== null && this.currentUser.birthday !== null &&
       this.dpStartWorkDay !== null && this.currentUser.dateStartWork !== null) {
       if (this.fileBase64 !== this.currentUser.avatar ||
-        this.birthday.year !== this.currentUser.birthday.getFullYear() ||
-        this.birthday.month !== this.currentUser.birthday.getMonth() + 1 ||
-        this.birthday.day !== this.currentUser.birthday.getDate() ||
+        new Date(this.birthday.year, this.birthday.month - 1, this.birthday.day) !== this.currentUser.birthday ||
         this.phoneNumber !== this.currentUser.numberPhone ||
         this.address !== this.currentUser.address ||
         this.secondaryEmail !== this.currentUser.gmail ||
         this.skype !== this.currentUser.skype ||
-        this.dpStartWorkDay.year !== this.currentUser.dateStartWork.getFullYear() ||
-        this.dpStartWorkDay.month !== this.currentUser.dateStartWork.getMonth() + 1 ||
-        this.dpStartWorkDay.day !== this.currentUser.dateStartWork.getDate()) {
+        new Date(this.dpStartWorkDay.year, this.dpStartWorkDay.month - 1, this.dpStartWorkDay.day) !== this.currentUser.dateStartWork) {
         return true;
       }
-    } else if ((this.birthday !== null || this.currentUser.birthday !== null) ||
-      (this.dpStartWorkDay !== null || this.currentUser.dateStartWork !== null)) {
+    } else if ((this.birthday === null && this.currentUser.birthday !== null) ||
+      (this.birthday !== null && this.currentUser.birthday === null) ||
+      (this.dpStartWorkDay === null && this.currentUser.dateStartWork !== null) ||
+      (this.dpStartWorkDay !== null && this.currentUser.dateStartWork === null)) {
       return true;
     }
     return false;
@@ -126,12 +125,14 @@ export class PersonalInfoComponent implements OnInit {
     } else {
       let userTemp = this.currentUser;
       userTemp.avatar = this.fileBase64;
-      userTemp.birthday = isNull(this.birthday) ? null : this.convertNgbDateToDate(this.birthday);
+      userTemp.birthday = isNull(this.birthday) ?
+        null : new Date(this.birthday.year, this.birthday.month - 1, this.birthday.day);
       userTemp.numberPhone = this.phoneNumber;
       userTemp.address = this.address;
       userTemp.gmail = this.secondaryEmail;
       userTemp.skype = this.skype;
-      userTemp.dateStartWork = isNull(this.dpStartWorkDay) ? null : this.convertNgbDateToDate(this.dpStartWorkDay);
+      userTemp.dateStartWork = isNull(this.dpStartWorkDay) ?
+        null : new Date(this.dpStartWorkDay.year, this.dpStartWorkDay.month, this.dpStartWorkDay.day);
       userTemp.username = this.cookieService.get('username');
       this.userService.updatePersonalInfo(userTemp).subscribe(
         (response: ResponseDTO) => {
@@ -158,17 +159,7 @@ export class PersonalInfoComponent implements OnInit {
     return pattern.test(this.secondaryEmail);
   }
 
-  convertDateToNgbDate(date: Date): NgbDate {
-    if (isNull(date)) {
-      return null;
-    }
-    return new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate());
-  }
-
-  convertNgbDateToDate(ngbDate: NgbDate): Date {
-    if (isNull(ngbDate)) {
-      return null;
-    }
-    return new Date(ngbDate.year, ngbDate.month - 1, ngbDate.day);
+  convertDatetoNgbDateStruct(date: Date): NgbDateStruct {
+    return date ? {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()} : null;
   }
 }

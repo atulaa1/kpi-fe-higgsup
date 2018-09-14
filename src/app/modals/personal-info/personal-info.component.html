@@ -18,8 +18,9 @@
         <p *ngIf="emailWarning" class="alertMsg">{{emailWarning}}</p>
       </div>
       <div class="row">
-        <div class="col-md-5" >
-          <input-file [ngClass]="{'avatarUpload': avatarActive == true, 'styleAvatarUpload': avatarActive == false}" #avatarUpload (acceptedFile)="saveAvatarImg($event)"
+        <div class="col-md-5">
+          <input-file [ngClass]="{'avatarUpload': avatarActive == true, 'styleAvatarUpload': avatarActive == false}"
+                      #avatarUpload (acceptedFile)="saveAvatarImg($event)"
                       (ngModel)="avatar">
           </input-file>
           <img [ngClass]="{'styleImgFake': avatarActive == false}" width="140" height="140" [src]="avatar">
@@ -65,7 +66,8 @@
         </div>
         <div class="row mt-2">
           <h6 class="col-md-4 userInfo">Ngày bắt đầu làm việc:</h6>
-          <input class="col-md-8 form-control" placeholder="Năm-Tháng-Ngày" [minDate]="minStartWorkDate" [readonly]="true"
+          <input class="col-md-8 form-control" placeholder="Năm-Tháng-Ngày" [minDate]="minStartWorkDate"
+                 [readonly]="true"
                  name="d" [(ngModel)]="dpStartWorkDay" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()">
         </div>
         <div class="row personButton mt-3 align-middle">
