@@ -129,6 +129,8 @@ export class PersonalInfoComponent implements OnInit {
           this.currentUser.gmail = response.data.gmail;
           this.currentUser.skype = response.data.skype;
           this.currentUser.dateStartWork = new Date(response.data.dateStartWork);
+          const user = JSON.stringify(this.currentUser);
+          localStorage.setItem('currentUser', user);
           this.submitDoneMsg = MessageConstant.MSG_SAVE_SUCCESSFUL;
           this.emailWarning = null;
           setTimeout(() => {
