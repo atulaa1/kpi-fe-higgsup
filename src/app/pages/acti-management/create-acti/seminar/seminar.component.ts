@@ -55,9 +55,9 @@ export class SeminarComponent implements OnInit {
           swal('Thông báo!', 'Điểm của thành viên không hợp lệ!', 'error');
         } else if (response.status_code === 901 && response.message === 'parameter point of listener is not valid') {
           swal('Thông báo!', 'Điểm của người dự thính không hợp lệ!', 'error');
-        } else if (response.status_code === 901 && response.message === 'host score can not be null') {
+        } else if (response.status_code === 901 && response.message === 'host score can be not null') {
           swal('Thông báo!', 'Điểm của Host không được bằng 0!', 'error');
-        } else if (response.status_code === 901 && response.message === 'member score can not be null') {
+        } else if (response.status_code === 901 && response.message === 'member score can be not null') {
           swal('Thông báo!', 'Điểm của thành viên không được bằng 0!', 'error');
         }
       })
@@ -71,9 +71,9 @@ export class SeminarComponent implements OnInit {
     this.seminarActivity.additionalConfig = this.createdActivity;
     this.seminarActivity.name = this.activityName;
     if (this.seminarActivity.name === ''
-      || !this.seminarActivity.additionalConfig.hostPoint
-      || !this.seminarActivity.additionalConfig.memberPoint
-      || !this.seminarActivity.additionalConfig.listenerPoint) {
+      || !(this.seminarActivity.additionalConfig.hostPoint === 0 || this.seminarActivity.additionalConfig.hostPoint)
+      || !(this.seminarActivity.additionalConfig.memberPoint === 0 || this.seminarActivity.additionalConfig.memberPoint)
+      || !(this.seminarActivity.additionalConfig.listenerPoint === 0 || this.seminarActivity.additionalConfig.listenerPoint)) {
       this.alert = true;
     } else {
       this.alert = false;
@@ -92,9 +92,9 @@ export class SeminarComponent implements OnInit {
           swal('Thông báo!', 'Điểm của thành viên không hợp lệ!', 'error');
         } else if (response.status_code === 901 && response.message === 'parameter point of listener is not valid') {
           swal('Thông báo!', 'Điểm của người dự thính không hợp lệ!', 'error');
-        } else if (response.status_code === 901 && response.message === 'host score can not be null') {
+        } else if (response.status_code === 901 && response.message === 'host score can be not null') {
           swal('Thông báo!', 'Điểm của Host không được bằng 0!', 'error');
-        } else if (response.status_code === 901 && response.message === 'member score can not be null') {
+        } else if (response.status_code === 901 && response.message === 'member score can be not null') {
           swal('Thông báo!', 'Điểm của thành viên không được bằng 0!', 'error');
         }
       })

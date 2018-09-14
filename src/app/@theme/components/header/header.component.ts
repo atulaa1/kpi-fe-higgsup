@@ -57,6 +57,13 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.user = new User();
     this.user.token = this.cookieService.get('Authorization');
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser) {
+      this.user = currentUser;
+      // when has currentUser then set data from currentUser
+      this.userService.userSource.next(this.user);
+    }
+    // always subscribe when currentUser change
     this.userService.currentUser.subscribe(user => this.user = user);
   }
 
