@@ -8,6 +8,7 @@ import {CookieService} from 'ngx-cookie-service';
 import {ResponseDTO} from '../../@core/models/responseDTO.model';
 import {isNull} from 'util';
 import {KpiDateFormatter} from './kpi-date-formatter';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'ngx-personal-info',
@@ -74,12 +75,13 @@ export class PersonalInfoComponent implements OnInit {
     if (this.birthday !== null && this.currentUser.birthday !== null &&
       this.dpStartWorkDay !== null && this.currentUser.dateStartWork !== null) {
       if (this.fileBase64 !== this.currentUser.avatar ||
-        new Date(this.birthday.year, this.birthday.month - 1, this.birthday.day) !== this.currentUser.birthday ||
+        new Date(this.convertNgbDateStructToString(this.birthday)).getTime() !== this.currentUser.birthday.getTime() ||
         this.phoneNumber !== this.currentUser.numberPhone ||
         this.address !== this.currentUser.address ||
         this.secondaryEmail !== this.currentUser.gmail ||
         this.skype !== this.currentUser.skype ||
-        new Date(this.dpStartWorkDay.year, this.dpStartWorkDay.month - 1, this.dpStartWorkDay.day) !== this.currentUser.dateStartWork) {
+        new Date(this.convertNgbDateStructToString(this.dpStartWorkDay)).getTime() !==
+        this.currentUser.dateStartWork.getTime()) {
         return true;
       }
     } else if ((this.birthday === null && this.currentUser.birthday !== null) ||
@@ -132,24 +134,28 @@ export class PersonalInfoComponent implements OnInit {
       userTemp.gmail = this.secondaryEmail;
       userTemp.skype = this.skype;
       userTemp.dateStartWork = isNull(this.dpStartWorkDay) ?
-        null : new Date(this.dpStartWorkDay.year, this.dpStartWorkDay.month, this.dpStartWorkDay.day);
-      userTemp.username = this.cookieService.get('username');
+        null : new Date(this.dpStartWorkDay.year, this.dpStartWorkDay.month - 1, this.dpStartWorkDay.day);
       this.userService.updatePersonalInfo(userTemp).subscribe(
         (response: ResponseDTO) => {
           this.currentUser.avatar = response.data.avatar;
-          this.currentUser.birthday = new Date(response.data.birthday);
+          if (typeof (response.data.birthday) === 'string' && this.currentUser.birthday !== null) {
+            this.currentUser.birthday = new Date(response.data.birthday);
+          } else {
+            this.currentUser.birthday = response.data.birthday;
+          }
           this.currentUser.numberPhone = response.data.numberPhone;
           this.currentUser.address = response.data.address;
           this.currentUser.gmail = response.data.gmail;
           this.currentUser.skype = response.data.skype;
-          this.currentUser.dateStartWork = new Date(response.data.dateStartWork);
+          if (typeof (response.data.dateStartWork) === 'string' && this.currentUser.birthday !== null) {
+            this.currentUser.dateStartWork = new Date(response.data.dateStartWork);
+          } else {
+            this.currentUser.dateStartWork = response.data.dateStartWork;
+          }
           const user = JSON.stringify(this.currentUser);
           localStorage.setItem('currentUser', user);
-          this.submitDoneMsg = MessageConstant.MSG_SAVE_SUCCESSFUL;
           this.emailWarning = null;
-          setTimeout(() => {
-            this.submitDoneMsg = '';
-          }, 2000);
+          swal('Chúc mừng!', MessageConstant.MSG_SAVE_SUCCESSFUL, 'success');
         });
       this.closeConfirm = false;
       this.clickCloseCount = 0;
@@ -163,5 +169,21 @@ export class PersonalInfoComponent implements OnInit {
 
   convertDatetoNgbDateStruct(date: Date): NgbDateStruct {
     return date ? {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()} : null;
+  }
+
+  private convertNgbDateStructToString(date: NgbDateStruct): string {
+    return date ? `${date.year}-${this.padNumber(date.month)}-${this.padNumber(date.day)}` : null;
+  }
+
+  private isNumber(value: any): boolean {
+    return !isNaN(parseInt(value, 10));
+  }
+
+  private padNumber(value: number) {
+    if (this.isNumber(value)) {
+      return `0${value}`.slice(-2);
+    } else {
+      return '';
+    }
   }
 }
