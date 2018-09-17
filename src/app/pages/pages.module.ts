@@ -11,7 +11,8 @@ import {ListOfSurveyModule} from './list-of-survey/list-of-survey.module';
 import {DialogConfirmationComponent} from '../modals/dialog-confirmation/dialog-confirmation.component';
 import {AccManagementsModule} from './acc-managements/acc-managements.module';
 import { ProjectManagementConfirmComponent } from './projectmanagement/project-management-confirm/project-management-confirm.component';
-import {ProjectmanagementModule} from "./projectmanagement/projectmanagement.module";
+import {ProjectmanagementModule} from './projectmanagement/projectmanagement.module';
+import {ActivitiesModule} from './activities/activities.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -26,12 +27,12 @@ const PAGES_COMPONENTS = [
     ActiManagementModule,
     ListOfSurveyModule,
     AccManagementsModule,
-    ProjectmanagementModule
+    ProjectmanagementModule,
+    ActivitiesModule,
   ],
   declarations: [
     ...PAGES_COMPONENTS,
-    ProjectmanagementComponent, DialogConfirmationComponent, ProjectManagementConfirmComponent,
-  ],
+    ProjectmanagementComponent, DialogConfirmationComponent, ProjectManagementConfirmComponent],
   entryComponents: [DialogConfirmationComponent],
 })
 export class PagesModule {
