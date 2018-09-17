@@ -78,6 +78,10 @@ table td {
     margin: auto;
     .search-inp {
       font-size: 20px;
+      position: relative;
+      line-height: 43px;
+      padding: 0px 10px;
+      border-radius:10px ;
     }
   }
 }
@@ -92,17 +96,17 @@ nb-card[name$='activityCreating'] {
 }
 #myTable tr:hover {
   background-color: #bee5eb;
+  cursor: pointer;
 }
 .activity-creating {
   text-align: center;
 }
 .searchIcon {
-  float: right;
-  margin-right: 12px;
-  margin-top: -40px;
-  position: relative;
-  z-index: 2;
+  position: absolute;
+  top: 14px;
+  right: 25px;
   color: #bee5eb;
+  font-size: 20px;
 }
 .searchIcon:hover {
   color: #58C3DC;

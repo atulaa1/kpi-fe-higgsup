@@ -11,6 +11,8 @@ import {ListOfSurveyComponent} from './list-of-survey/list-of-survey.component';
 import {AccManagementComponent} from './acc-managements/acc-management/acc-management.component';
 import {AccManagementsComponent} from './acc-managements/acc-managements.component';
 import {AccManagementLateComponent} from './acc-managements/acc-management-late/acc-management-late.component';
+import {AuthGuard} from '../@core/services/auth.guard';
+import {ActivitiesComponent} from './activities/activities.component';
 
 const routes: Routes = [{
   path: '',
@@ -28,18 +30,27 @@ const routes: Routes = [{
     {
       path: 'acc-managements',
       component: AccManagementsComponent,
+      canActivate: [AuthGuard],
     },
     {
       path: 'acti-management',
       component: ActiManagementComponent,
+      canActivate: [AuthGuard],
     },
     {
       path: 'project-management',
       component: ProjectmanagementComponent,
+      canActivate: [AuthGuard],
     },
     {
       path: 'listofsurvey',
       component: ListOfSurveyComponent,
+      canActivate: [AuthGuard],
+    },
+    {
+      path: 'creating-activities',
+      component: ActivitiesComponent,
+      canActivate: [AuthGuard],
     },
   ],
 }];
