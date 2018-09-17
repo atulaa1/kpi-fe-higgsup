@@ -18,11 +18,12 @@
         <p *ngIf="emailWarning" class="alertMsg">{{emailWarning}}</p>
       </div>
       <div class="row">
-        <div class="col-md-5" >
-          <input-file [ngClass]="{'avatarUpload': avatarActive == true, 'styleAvatarUpload': avatarActive == false}" #avatarUpload (acceptedFile)="saveAvatarImg($event)"
+        <div class="col-md-5">
+          <input-file [ngClass]="{'avatarUpload': avatarActive == true, 'styleAvatarUpload': avatarActive == false}"
+                      #avatarUpload (acceptedFile)="saveAvatarImg($event)"
                       (ngModel)="avatar">
           </input-file>
-          <img  [ngClass]="{'styleImgFake': avatarActive == false}"   width="140" height="140" [src]="avatar">
+          <img [ngClass]="{'styleImgFake': avatarActive == false}" width="140" height="140" [src]="avatar">
         </div>
         <div class="col-md-7">
           <div class="userName">
@@ -43,12 +44,13 @@
       <div class="mt-5 userInfo">
         <div class="row">
           <h6 class="col-md-4 userInfo">Ngày sinh:</h6>
-          <input class="col-md-8 form-control" placeholder="Năm-Tháng-Ngày" [readonly]="true"
+          <input class="col-md-8 form-control" placeholder="Năm-Tháng-Ngày" [maxDate]="maxBirthday" [readonly]="true"
                  name="d1" [(ngModel)]="birthday" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-4 userInfo">Số điện thoại:</h6>
-          <input type="tel" class="col-md-8 form-control" phoneNumberOnly oncopy="return false" onpaste="return false" [(ngModel)]="phoneNumber" name="phoneNumber">
+          <input type="tel" class="col-md-8 form-control" phoneNumberOnly oncopy="return false" onpaste="return false"
+                 [(ngModel)]="phoneNumber" name="phoneNumber">
         </div>
         <div class="row mt-2">
           <h6 class="col-md-4 userInfo">Địa chỉ:</h6>
@@ -64,7 +66,8 @@
         </div>
         <div class="row mt-2">
           <h6 class="col-md-4 userInfo">Ngày bắt đầu làm việc:</h6>
-          <input class="col-md-8 form-control" placeholder="Năm-Tháng-Ngày" [readonly]="true"
+          <input class="col-md-8 form-control" placeholder="Năm-Tháng-Ngày" [minDate]="minStartWorkDate"
+                 [readonly]="true"
                  name="d" [(ngModel)]="dpStartWorkDay" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()">
         </div>
         <div class="row personButton mt-3 align-middle">

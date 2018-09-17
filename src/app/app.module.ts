@@ -3,13 +3,13 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import {APP_BASE_HREF} from '@angular/common';
+import {APP_BASE_HREF, registerLocaleData} from '@angular/common';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgModule} from '@angular/core';
+import {NgModule, LOCALE_ID} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {CoreModule} from './@core/core.module';
-
+import localeVi from '@angular/common/locales/vi';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {ThemeModule} from './@theme/theme.module';
@@ -24,7 +24,7 @@ import {InputFileConfig} from 'ngx-input-file/src/lib/interfaces/input-file-conf
 import {InputFileModule} from 'ngx-input-file';
 import {FormsModule} from '@angular/forms';
 import {DataService} from './@core/services/data.service';
-import { AccManagementsModule } from './pages/acc-managements/acc-managements.module';
+import {AccManagementsModule} from './pages/acc-managements/acc-managements.module';
 import {PhoneNumberOnlyDirective} from './@core/directives/number.directive';
 
 const config: InputFileConfig = {
@@ -52,10 +52,15 @@ const config: InputFileConfig = {
   bootstrap: [AppComponent],
   providers: [BsModalService, BsModalRef,
     {provide: APP_BASE_HREF, useValue: '/'},
+    {provide: LOCALE_ID, useValue: 'vi'},
     UserService,
     DataService,
   ],
   entryComponents: [LoginComponent, PersonalInfoComponent, LogoutComponent],
 })
 export class AppModule {
+
+  constructor() {
+    registerLocaleData(localeVi, 'vi');
+  }
 }
