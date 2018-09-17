@@ -14,7 +14,7 @@ import swal from 'sweetalert';
   selector: 'ngx-personal-info',
   templateUrl: './personal-info.component.html',
   styleUrls: ['./personal-info.component.scss'],
-  providers: [{provide: NgbDateParserFormatter, useClass: KpiDateFormatter}]
+  providers: [{provide: NgbDateParserFormatter, useClass: KpiDateFormatter}],
 })
 export class PersonalInfoComponent implements OnInit {
 
