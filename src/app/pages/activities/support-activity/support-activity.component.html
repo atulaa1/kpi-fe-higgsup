@@ -8,7 +8,7 @@
   <div class="container">
     <div class="row mt-2">
       <h5 class="col-md-4 requiredInput">Ngày diễn ra hoạt động</h5>
-      <input type="text" class="col-md-8 form-control">
+      <input type="text" class="col-md-8 form-control" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()">
     </div>
     <div class="row mt-2" name="supportActivities">
       <div class="col-md-12">

@@ -12,7 +12,7 @@
 }
 
 .activity-creating {
-  width: 50%;
+  width: 60%;
   text-align: center;
 }
 
@@ -71,4 +71,7 @@ nb-card[name$='activityCreating'] {
 
 .searchIcon:hover {
   color: #58C3DC;
+}
+[name$='numberOrder'] {
+  text-align: center;
 }
