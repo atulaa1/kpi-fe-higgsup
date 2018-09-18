@@ -43,3 +43,6 @@ h5.requiredInput:after {
   min-height: 150px;
   max-height: 200px;
 }
+[name$='timeInput'] {
+  padding-left: 42px;
+}
