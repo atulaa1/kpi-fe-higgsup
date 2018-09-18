@@ -21,6 +21,7 @@ export class CreatingActivitiesComponent implements OnInit {
     this.activitiesService.getCreatedActivity().subscribe(response => {
       if (response.status_code === 200) {
         this.groupList = response.data;
+        this.sortActivityArrayByType();
       }
     });
   }
@@ -55,5 +56,21 @@ export class CreatingActivitiesComponent implements OnInit {
 
   open(content) {
     this.modalService.open(content, {backdrop: 'static', centered: true, size: 'lg'});
+  }
+
+  sortActivityArrayByType() {
+    this.groupList.sort((a, b) => {
+      const nameA = a.groupType.name.toUpperCase(); // bỏ qua in hoa thường
+      const nameB = b.groupType.name.toUpperCase(); // bỏ qua in hoa thường
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+
+      // names must be equal
+      return 0;
+    });
   }
 }
