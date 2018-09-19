@@ -28,11 +28,16 @@
   <div class="row ml-5 mr-5 tableScroll">
     <table class="table table-hover" id="myTable">
       <tbody>
-        <tr>
-          <td class="infoUser">1</td>
-          <td class="infoUser">Nguyễn Văn A</td>
-          <td class="infoUser">NGUYENvANa@GMAIL.COM</td>
-          <td class="infoUser">2</td>
+        <tr *ngFor="let late of listLate, let i = index">
+          <td class="infoUser">{{i +1}}</td>
+          <td class="infoUser">{{late.user.fullName}}</td>
+          <td class="infoUser">{{late.user.gmail}}</td>
+          <td class="infoUser">
+            <span>
+              {{late.lateTimes}}
+            </span>
+            <i class="fas fa-pencil-alt"></i>
+          </td>
         </tr>
       </tbody>
     </table>
