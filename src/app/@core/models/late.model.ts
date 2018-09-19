@@ -1,7 +1,7 @@
 import {User} from './user.model';
 
-export class Late<T> {
+export class Late {
   id: number;
   lastTimes: number;
-  userInfo: T;
+  user: User;
 }
