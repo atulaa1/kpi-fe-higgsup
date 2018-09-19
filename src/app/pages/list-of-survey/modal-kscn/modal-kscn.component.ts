@@ -23,6 +23,7 @@ export class PersonalSurveyComponent implements OnInit {
     this.surveyService.getListSurvey().subscribe(response => {
       if (response.status_code === 200) {
         this.listSurvey = response.data;
+        console.log(this.listSurvey);
         this.listSurvey.forEach(survey => {
           survey.showInput = false;
         })
