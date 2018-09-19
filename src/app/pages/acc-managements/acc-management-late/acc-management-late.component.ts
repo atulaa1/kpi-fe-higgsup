@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ManagementTolateService} from '../../../@core/services/management-tolate.service';
-import {Late} from '../../../@core/models/late.model';
+import {LateInfo} from '../../../@core/models/lateInfo.model';
 
 @Component({
   selector: 'acc-management-late',
@@ -8,7 +8,7 @@ import {Late} from '../../../@core/models/late.model';
   styleUrls: ['./acc-management-late.component.scss'],
 })
 export class AccManagementLateComponent implements OnInit {
-  listLate: Array<Late>;
+  listLate: Array<LateInfo>;
 
   constructor(private managementTolateService: ManagementTolateService) {
   }
