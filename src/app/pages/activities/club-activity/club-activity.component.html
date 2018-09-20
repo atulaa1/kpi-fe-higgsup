@@ -15,13 +15,13 @@
         <h5 class="col-md-4 requiredInput">Thời gian bắt đầu</h5>
         <input type="text" class="col-md-5 form-control" [(ngModel)]="startDate" ngbDatepicker #startDay="ngbDatepicker"
                (click)="startDay.toggle()">
-        <ngb-timepicker class="col-md-3" [(ngModel)]="time" [spinners]="spinners" name="timeInput"></ngb-timepicker>
+        <ngb-timepicker class="col-md-3" [(ngModel)]="startTime" [spinners]="spinners" name="timeInput"></ngb-timepicker>
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Thời gian kết thúc</h5>
-        <input type="text" class="col-md-5 form-control" [(ngModel)]="endDate" [minDate]="minEndDate" ngbDatepicker
+        <input type="text" class="col-md-5 form-control" [(ngModel)]="endDate" ngbDatepicker
                #endDay="ngbDatepicker" (click)="endDay.toggle()">
-        <ngb-timepicker class="col-md-3" [(ngModel)]="time" [spinners]="spinners" name="timeInput"></ngb-timepicker>
+        <ngb-timepicker class="col-md-3" [(ngModel)]="endTime" [spinners]="spinners" name="timeInput"></ngb-timepicker>
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4">Địa điểm</h5>
@@ -65,7 +65,7 @@
       </div>
       <div class="row mt-5">
         <div class="groupButton">
-          <button class="btn btn-hero-success saveButton">Lưu</button>
+          <button class="btn btn-hero-success saveButton" (click)="onSubmit()">Lưu</button>
           <button class="btn btn-hero-warning" (click)="closeModal()">Huỷ</button>
         </div>
       </div>
