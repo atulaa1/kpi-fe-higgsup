@@ -44,7 +44,7 @@
       <div class="mt-5 userInfo">
         <div class="row">
           <h6 class="col-md-4 userInfo">Ngày sinh:</h6>
-          <input class="col-md-8 form-control" placeholder="Năm-Tháng-Ngày" [maxDate]="maxBirthday" [readonly]="true"
+          <input class="col-md-8 form-control" placeholder="Ngày/Tháng/Năm" [maxDate]="maxBirthday" [readonly]="true"
                  name="d1" [(ngModel)]="birthday" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()">
         </div>
         <div class="row mt-2">
@@ -66,7 +66,7 @@
         </div>
         <div class="row mt-2">
           <h6 class="col-md-4 userInfo">Ngày bắt đầu làm việc:</h6>
-          <input class="col-md-8 form-control" placeholder="Năm-Tháng-Ngày" [minDate]="minStartWorkDate"
+          <input class="col-md-8 form-control" placeholder="Ngày/Tháng/Năm" [minDate]="minStartWorkDate"
                  [readonly]="true"
                  name="d" [(ngModel)]="dpStartWorkDay" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()">
         </div>

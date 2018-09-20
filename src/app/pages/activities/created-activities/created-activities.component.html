@@ -1,0 +1,73 @@
+<nb-card class="listActivity nb-card-custom" name="activityCreating">
+  <div class="container">
+    <div class="col-md-12">
+      <div class="search">
+        <div class="form-group row">
+          <div class="col-sm-6 search-div">
+            <input normalCharacterOnly oncopy='return false' onpaste='return false' [(ngModel)]="nameSearch"
+                   class="form-control search-inp" type="text" id="myInput" (keyup)='handleKeyDown($event)'
+                   placeholder="Tìm kiếm hoạt động:" title="Type in a name"/>
+            <span class="fas fa-search searchIcon" (click)='mySearchFunction()'></span>
+          </div>
+        </div>
+      </div>
+      <div class="row ml-5 mr-5 mt-5">
+        <table class="table titleTable">
+          <thead>
+          <tr>
+            <th>STT</th>
+            <th class="activity-creating">Hoạt động</th>
+            <th class="dateCreated">Ngày tạo</th>
+          </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="row ml-5 mr-5 tableScroll">
+        <table class="table table-hover" id="myTable">
+          <tbody>
+          <tr>
+            <td>1</td>
+
+            <!--Seminar-->
+            <td (click)="open(content)" class="activity-creating">Seminar
+            </td>
+            <!--Type Created Activities-->
+            <td class="dateCreated">17/9/2018</td>
+          </tr>
+
+          <tr>
+            <td>2</td>
+
+            <!--Club-->
+            <td (click)="open(content)" class="activity-creating">Câu lạc bộ 1
+            </td>
+            <!--Type Created Activities-->
+            <td class="dateCreated">17/9/2018</td>
+          </tr>
+
+          <tr>
+            <td>3</td>
+
+            <!--Support-->
+            <td (click)="open(content)" class="activity-creating">Support chung
+            </td>
+            <!--Type Created Activities-->
+            <td class="dateCreated">17/9/2018</td>
+          </tr>
+
+          <tr>
+            <td>4</td>
+
+            <!--Club-->
+            <td (click)="open(content)" class="activity-creating">Câu lạc bộ 2
+            </td>
+            <!--Type Created Activities-->
+            <td class="dateCreated">17/9/2018</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <p *ngIf='showMsg' name='notFoundMsg'>Không tìm thấy kết quả phù hợp!</p>
+    </div>
+  </div>
+</nb-card>

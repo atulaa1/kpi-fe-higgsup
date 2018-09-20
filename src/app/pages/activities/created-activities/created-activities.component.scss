@@ -1,0 +1,74 @@
+.tableScroll {
+  max-height: 400px;
+  overflow: auto;
+}
+
+.titleTable {
+  margin-bottom: 0px;
+}
+
+.listActivity {
+  min-height: 650px;
+}
+
+.activity-creating {
+  width: 50%;
+  text-align: center;
+}
+
+.dateCreated {
+  width: 30%;
+  text-align: center;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+table td {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.search {
+  font-size: 25px;
+  width: 50%;
+  margin: auto;
+  .search-div {
+    margin: auto;
+    .search-inp {
+      font-size: 20px;
+      position: relative;
+      line-height: 43px;
+      padding: 0px 10px;
+      border-radius: 10px;
+    }
+  }
+}
+
+[name$='notFoundMsg'] {
+  font-size: 14px;
+  text-align: center;
+}
+
+nb-card[name$='activityCreating'] {
+  border: none;
+}
+
+#myTable tr:hover {
+  background-color: #bee5eb;
+  cursor: pointer;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 14px;
+  right: 25px;
+  color: #bee5eb;
+  font-size: 20px;
+}
+
+.searchIcon:hover {
+  color: #58C3DC;
+}
