@@ -49,6 +49,6 @@ export class UserService {
 
   getUsers(): Observable<any> {
     const httpOptions = this.httpService.setHeaderAuthor(this.cookieService.get('Authorization'));
-    return this.http.get(`${this.getUserUrl}?role=man,employee`, httpOptions);
+    return this.http.get(`${this.getUserUrl}?roles=man,employee`, httpOptions);
   }
 }

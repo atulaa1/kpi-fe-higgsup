@@ -33,19 +33,19 @@
           <mat-form-field class="example-chip-list" (click)="onGetUser()">
             <mat-chip-list #chipList>
               <mat-chip
-                *ngFor="let fruit of fruits"
+                *ngFor="let username of usernames"
                 [selectable]="selectable"
                 [removable]="removable"
-                (removed)="remove(fruit)">
+                (removed)="remove(username)">
                 <mat-icon matChipAvatar name="iconAvatar">
-                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJdtQSpRDlcriWT5zZS-8LR-kSVmxZ3QV-suuM7yn1c5t_2VCU" name="iconMem">
+                  <img src="{{listUser[1].avatar}}" name="iconMem">  <!--Ảnh vẫn đang fix cứng, no solution :( -->
                 </mat-icon>
-                {{fruit}}
+                {{username}}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
               </mat-chip>
               <input
-                #fruitInput
-                [formControl]="fruitCtrl"
+                #userInput
+                [formControl]="userCtrl"
                 [matAutocomplete]="auto"
                 [matChipInputFor]="chipList"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -54,10 +54,10 @@
             </mat-chip-list>
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
 
-              <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+              <mat-option *ngFor="let filteredUser of filteredUsers | async" [value]="filteredUser">
 
-                <img name="avatarMem" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJdtQSpRDlcriWT5zZS-8LR-kSVmxZ3QV-suuM7yn1c5t_2VCU">
-                {{fruit}}
+                <img name="avatarMem" src="{{listUser[1].avatar}}">  <!--Ảnh vẫn đang fix cứng, no solution :( -->
+                {{filteredUser}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>

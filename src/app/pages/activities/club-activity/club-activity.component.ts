@@ -25,23 +25,22 @@ export class ClubActivityComponent implements OnInit {
   startDate: NgbDateStruct;
   endDate: NgbDateStruct;
   listUser: Array<User>;
-  listUserName: Array<string> = ['Someone'];
+  listUserName: Array<string> = [];
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = false;
   separatorKeysCodes: Array<number> = [ENTER, COMMA];
-  fruitCtrl = new FormControl();
-  filteredFruits: Observable<Array<string>>;
-  fruits: string[] = ['Lemon'];
-  allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
+  userCtrl = new FormControl();
+  filteredUsers: Observable<Array<string>>;
+  usernames: Array<string> = [];
 
-  @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
+  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
 
   constructor(private userService: UserService) {
-    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+    this.filteredUsers = this.userCtrl.valueChanges.pipe(
       startWith(null),
-      map((fruit: string | null) => fruit ? this._filter(fruit) : this.allFruits.slice()));
+      map((filteredUser: string | null) => filteredUser ? this._filter(filteredUser) : this.listUserName.slice()));
   }
 
 
@@ -51,7 +50,7 @@ export class ClubActivityComponent implements OnInit {
 
     // Add our fruit
     if ((value || '').trim()) {
-      this.fruits.push(value.trim());
+      this.usernames.push(value.trim());
     }
 
     // Reset the input value
@@ -59,27 +58,27 @@ export class ClubActivityComponent implements OnInit {
       input.value = '';
     }
 
-    this.fruitCtrl.setValue(null);
+    this.userCtrl.setValue(null);
   }
 
   remove(fruit: string): void {
-    const index = this.fruits.indexOf(fruit);
+    const index = this.usernames.indexOf(fruit);
 
     if (index >= 0) {
-      this.fruits.splice(index, 1);
+      this.usernames.splice(index, 1);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.fruits.push(event.option.viewValue);
-    this.fruitInput.nativeElement.value = '';
-    this.fruitCtrl.setValue(null);
+    this.usernames.push(event.option.viewValue);
+    this.userInput.nativeElement.value = '';
+    this.userCtrl.setValue(null);
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.allFruits.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
+    return this.listUserName.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
   }
 
   convertDatetoNgbDateStruct(date: Date): NgbDateStruct {
@@ -113,7 +112,6 @@ export class ClubActivityComponent implements OnInit {
         for (let i = 0; i < this.listUser.length; i++) {
          this.listUserName.push(this.listUser[i].fullName);
         }
-        console.log(this.listUserName)
       }
     });
   }
