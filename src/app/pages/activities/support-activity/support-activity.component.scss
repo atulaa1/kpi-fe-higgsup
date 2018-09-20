@@ -38,10 +38,24 @@ h5.requiredInput:after {
   content: " *";
   color: red;
 }
+
 textarea {
   min-height: 150px;
   max-height: 200px;
 }
+
 [name$='supportActivities'] {
   margin: 0 255px;
+}
+
+[name$='iconMem'] {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+
+}
+[name$='avatarMem'] {
+  width: 40px;
+  height: 40px;
+
 }

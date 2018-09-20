@@ -23,15 +23,111 @@
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Host</h5>
-        <textarea class="col-md-8 form-control" name="host"></textarea>
+        <div class="col-md-8 mat-app-background basic-container form-control"  name="host">
+          <mat-form-field class="example-chip-list">
+            <mat-chip-list #chipList>
+              <mat-chip
+                *ngFor="let fruit of fruits"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="remove(fruit)">
+                <mat-icon matChipAvatar name="iconAvatar">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJdtQSpRDlcriWT5zZS-8LR-kSVmxZ3QV-suuM7yn1c5t_2VCU" name="iconMem">
+                </mat-icon>
+                {{fruit}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input
+                #fruitInput
+                [formControl]="fruitCtrl"
+                [matAutocomplete]="auto"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+
+              <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+
+                <img name="avatarMem" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJdtQSpRDlcriWT5zZS-8LR-kSVmxZ3QV-suuM7yn1c5t_2VCU">
+                {{fruit}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Người tham gia</h5>
-        <textarea class="col-md-8 form-control" name="participant"></textarea>
+        <div class="col-md-8 mat-app-background basic-container form-control"  name="participant">
+          <mat-form-field class="example-chip-list">
+            <mat-chip-list #chipList>
+              <mat-chip
+                *ngFor="let fruit of fruits"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="remove(fruit)">
+                <mat-icon matChipAvatar name="iconAvatar">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJdtQSpRDlcriWT5zZS-8LR-kSVmxZ3QV-suuM7yn1c5t_2VCU" name="iconMem">
+                </mat-icon>
+                {{fruit}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input
+                #fruitInput
+                [formControl]="fruitCtrl"
+                [matAutocomplete]="auto"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+
+              <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+
+                <img name="avatarMem" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJdtQSpRDlcriWT5zZS-8LR-kSVmxZ3QV-suuM7yn1c5t_2VCU">
+                {{fruit}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4">Dự thính</h5>
-        <textarea class="col-md-8 form-control" name="listener"></textarea>
+        <div class="col-md-8 mat-app-background basic-container form-control"  name="listener">
+          <mat-form-field class="example-chip-list">
+            <mat-chip-list #chipList>
+              <mat-chip
+                *ngFor="let fruit of fruits"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="remove(fruit)">
+                <mat-icon matChipAvatar name="iconAvatar">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJdtQSpRDlcriWT5zZS-8LR-kSVmxZ3QV-suuM7yn1c5t_2VCU" name="iconMem">
+                </mat-icon>
+                {{fruit}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input
+                #fruitInput
+                [formControl]="fruitCtrl"
+                [matAutocomplete]="auto"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+
+              <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+
+                <img name="avatarMem" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJdtQSpRDlcriWT5zZS-8LR-kSVmxZ3QV-suuM7yn1c5t_2VCU">
+                {{fruit}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
       </div>
       <div class="row mt-5">
         <div class="groupButton">

@@ -7,11 +7,20 @@ import {ThemeModule} from '../../@theme/theme.module';
 import { ClubActivityComponent } from './club-activity/club-activity.component';
 import { SeminarActivityComponent } from './seminar-activity/seminar-activity.component';
 import { SupportActivityComponent } from './support-activity/support-activity.component';
+import {MatFormFieldModule, MatIconModule} from '@angular/material';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatOptionModule} from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule,
     ThemeModule,
+    MatFormFieldModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatOptionModule,
+    MatIconModule,
   ],
   declarations: [CreatingActivitiesComponent, CreatedActivitiesComponent, ActivitiesComponent, ClubActivityComponent,
     SeminarActivityComponent, SupportActivityComponent],
