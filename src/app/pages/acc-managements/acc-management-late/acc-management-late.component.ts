@@ -19,7 +19,7 @@ export class AccManagementLateComponent implements OnInit {
   ngOnInit() {
     this.managementTolateService.getListLate().subscribe(value => {
         this.listLate = value.data;
-        this.listLateClone = Object.assign(this.listLate);
+        this.listLateClone =  Object.assign(this.listLate);
       },
     );
   }
