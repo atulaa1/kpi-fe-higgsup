@@ -22,9 +22,9 @@ export class SeminarActivityComponent implements OnInit {
   selectable = true;
   removable = true;
   addOnBlur = false;
-  separatorKeysCodes: number[] = [ENTER, COMMA];
+  separatorKeysCodes: Array<number> = [ENTER, COMMA];
   fruitCtrl = new FormControl();
-  filteredFruits: Observable<string[]>;
+  filteredFruits: Observable<Array<string>>;
   fruits: string[] = ['Lemon'];
   allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
 

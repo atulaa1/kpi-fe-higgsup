@@ -66,9 +66,13 @@ h5.requiredInput:after {
   position: relative;
 }
 
-[name$='avatarMem'] {
+[name$='iconMem'] {
   position: absolute;
   width: 40px;
   height: 40px;
+}
 
+[name$='avatarMem'] {
+  width: 40px;
+  height: 40px;
 }
