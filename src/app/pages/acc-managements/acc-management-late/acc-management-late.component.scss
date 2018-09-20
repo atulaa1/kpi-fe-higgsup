@@ -15,6 +15,11 @@
   cursor: pointer;
 }
 
+.butn:active {
+  color: gray;
+  background-color: #73a1ff;
+}
+
 .upload-btn-wrapper input[type=file] {
   font-size: 100px;
   position: absolute;
