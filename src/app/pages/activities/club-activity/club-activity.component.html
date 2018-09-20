@@ -30,7 +30,7 @@
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Thành viên tham gia</h5>
         <div class="col-md-8 mat-app-background basic-container form-control"  name="participant">
-          <mat-form-field class="example-chip-list">
+          <mat-form-field class="example-chip-list" (click)="onGetUser()">
             <mat-chip-list #chipList>
               <mat-chip
                 *ngFor="let fruit of fruits"

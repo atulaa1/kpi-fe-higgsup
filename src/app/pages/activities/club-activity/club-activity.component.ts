@@ -6,6 +6,9 @@ import {Observable} from 'rxjs';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatAutocompleteSelectedEvent, MatChipInputEvent} from '@angular/material';
 import {map, startWith} from 'rxjs/operators';
+import {UserService} from '../../../@core/services/user.service';
+import {User} from '../../../@core/models/user.model';
+import {ResponseUserDTO} from '../../../@core/models/responseUserDTO.model';
 
 
 @Component({
@@ -21,7 +24,8 @@ export class ClubActivityComponent implements OnInit {
   spinners: boolean = false;
   startDate: NgbDateStruct;
   endDate: NgbDateStruct;
-
+  listUser: Array<User>;
+  listUserName: Array<string> = ['Someone'];
   visible = true;
   selectable = true;
   removable = true;
@@ -34,7 +38,7 @@ export class ClubActivityComponent implements OnInit {
 
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
 
-  constructor() {
+  constructor(private userService: UserService) {
     this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
       startWith(null),
       map((fruit: string | null) => fruit ? this._filter(fruit) : this.allFruits.slice()));
@@ -103,10 +107,23 @@ export class ClubActivityComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userService.getUsers().subscribe((response: ResponseUserDTO) => {
+      if (response.status_code === 200) {
+        this.listUser = response.data;
+        for (let i = 0; i < this.listUser.length; i++) {
+         this.listUserName.push(this.listUser[i].fullName);
+        }
+        console.log(this.listUserName)
+      }
+    });
   }
 
   closeModal() {
     this.dismiss();
+  }
+
+  onGetUser() {
+
   }
 
 }
