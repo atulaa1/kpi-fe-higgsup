@@ -16,6 +16,8 @@ export class ClubService {
     + BaseConstant.standardServicePort.toString() + '/api/groups/club';
   private createdClubUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
     + BaseConstant.standardServicePort.toString() + '/api/groups/club';
+  private clubEventUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
+    + BaseConstant.standardServicePort.toString() + '/api/events/club';
   private httpOptions = this.httpService.setHeaderToken();
 
   addClub(club): Observable<any> {
@@ -25,5 +27,9 @@ export class ClubService {
 
   updateClub(id, club): Observable<any> {
     return this.http.put(`${this.createdClubUrl}/${id}`, club, this.httpOptions);
+  }
+
+  addEventClub(eventClub): Observable<any> {
+    return this.http.post(this.clubEventUrl, eventClub, this.httpOptions);
   }
 }
