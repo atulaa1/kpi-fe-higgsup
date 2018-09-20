@@ -15,13 +15,13 @@
         <h5 class="col-md-4 requiredInput">Thời gian bắt đầu</h5>
         <input type="text" class="col-md-5 form-control" [(ngModel)]="startDate" ngbDatepicker #startDay="ngbDatepicker"
                (click)="startDay.toggle()">
-        <ngb-timepicker class="col-md-3" [(ngModel)]="time" [spinners]="spinners" name="timeInput"></ngb-timepicker>
+        <ngb-timepicker class="col-md-3" [(ngModel)]="startTime" [spinners]="spinners" name="timeInput"></ngb-timepicker>
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Thời gian kết thúc</h5>
-        <input type="text" class="col-md-5 form-control" [(ngModel)]="endDate" [minDate]="minEndDate" ngbDatepicker
+        <input type="text" class="col-md-5 form-control" [(ngModel)]="endDate" ngbDatepicker
                #endDay="ngbDatepicker" (click)="endDay.toggle()">
-        <ngb-timepicker class="col-md-3" [(ngModel)]="time" [spinners]="spinners" name="timeInput"></ngb-timepicker>
+        <ngb-timepicker class="col-md-3" [(ngModel)]="endTime" [spinners]="spinners" name="timeInput"></ngb-timepicker>
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4">Địa điểm</h5>
@@ -30,22 +30,22 @@
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Thành viên tham gia</h5>
         <div class="col-md-8 mat-app-background basic-container form-control"  name="participant">
-          <mat-form-field class="example-chip-list">
+          <mat-form-field class="example-chip-list" (click)="onGetUser()">
             <mat-chip-list #chipList>
               <mat-chip
-                *ngFor="let fruit of fruits"
+                *ngFor="let username of usernames"
                 [selectable]="selectable"
                 [removable]="removable"
-                (removed)="remove(fruit)">
+                (removed)="remove(username)">
                 <mat-icon matChipAvatar name="iconAvatar">
-                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJdtQSpRDlcriWT5zZS-8LR-kSVmxZ3QV-suuM7yn1c5t_2VCU" name="iconMem">
+                  <img src="{{listUser[1].avatar}}" name="iconMem">  <!--Ảnh vẫn đang fix cứng, no solution :( -->
                 </mat-icon>
-                {{fruit}}
+                {{username}}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
               </mat-chip>
               <input
-                #fruitInput
-                [formControl]="fruitCtrl"
+                #userInput
+                [formControl]="userCtrl"
                 [matAutocomplete]="auto"
                 [matChipInputFor]="chipList"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -54,10 +54,10 @@
             </mat-chip-list>
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
 
-              <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+              <mat-option *ngFor="let filteredUser of filteredUsers | async" [value]="filteredUser">
 
-                <img name="avatarMem" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJdtQSpRDlcriWT5zZS-8LR-kSVmxZ3QV-suuM7yn1c5t_2VCU">
-                {{fruit}}
+                <img name="avatarMem" src="{{listUser[1].avatar}}">  <!--Ảnh vẫn đang fix cứng, no solution :( -->
+                {{filteredUser}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
@@ -65,7 +65,7 @@
       </div>
       <div class="row mt-5">
         <div class="groupButton">
-          <button class="btn btn-hero-success saveButton">Lưu</button>
+          <button class="btn btn-hero-success saveButton" (click)="onSubmit()">Lưu</button>
           <button class="btn btn-hero-warning" (click)="closeModal()">Huỷ</button>
         </div>
       </div>

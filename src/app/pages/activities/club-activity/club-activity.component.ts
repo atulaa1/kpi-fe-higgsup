@@ -1,11 +1,14 @@
 import {Component, Input, OnInit, ElementRef, ViewChild} from '@angular/core';
-import {NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateParserFormatter, NgbDateStruct, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 import {KpiDateFormatter} from '../../../modals/personal-info/kpi-date-formatter';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatAutocompleteSelectedEvent, MatChipInputEvent} from '@angular/material';
 import {map, startWith} from 'rxjs/operators';
+import {UserService} from '../../../@core/services/user.service';
+import {User} from '../../../@core/models/user.model';
+import {ResponseUserDTO} from '../../../@core/models/responseUserDTO.model';
 
 
 @Component({
@@ -16,25 +19,28 @@ import {map, startWith} from 'rxjs/operators';
 })
 export class ClubActivityComponent implements OnInit {
   @Input() dismiss;
-  time = {hour: 12, minute: 0o0};
+  startTime = {hour: 12, minute: 0o0, second: 0o0};
+  endTime = {hour: 12, minute: 0o0, second: 0o0};
   spinners: boolean = false;
-
+  startDate: NgbDateStruct;
+  endDate: NgbDateStruct;
+  listUser: Array<User>;
+  listUserName: Array<string> = [];
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = false;
   separatorKeysCodes: Array<number> = [ENTER, COMMA];
-  fruitCtrl = new FormControl();
-  filteredFruits: Observable<Array<string>>;
-  fruits: string[] = ['Lemon'];
-  allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
+  userCtrl = new FormControl();
+  filteredUsers: Observable<Array<string>>;
+  usernames: Array<string> = [];
 
-  @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
+  @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
 
-  constructor() {
-    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+  constructor(private userService: UserService) {
+    this.filteredUsers = this.userCtrl.valueChanges.pipe(
       startWith(null),
-      map((fruit: string | null) => fruit ? this._filter(fruit) : this.allFruits.slice()));
+      map((filteredUser: string | null) => filteredUser ? this._filter(filteredUser) : this.listUserName.slice()));
   }
 
 
@@ -44,7 +50,7 @@ export class ClubActivityComponent implements OnInit {
 
     // Add our fruit
     if ((value || '').trim()) {
-      this.fruits.push(value.trim());
+      this.usernames.push(value.trim());
     }
 
     // Reset the input value
@@ -52,33 +58,70 @@ export class ClubActivityComponent implements OnInit {
       input.value = '';
     }
 
-    this.fruitCtrl.setValue(null);
+    this.userCtrl.setValue(null);
   }
 
   remove(fruit: string): void {
-    const index = this.fruits.indexOf(fruit);
+    const index = this.usernames.indexOf(fruit);
 
     if (index >= 0) {
-      this.fruits.splice(index, 1);
+      this.usernames.splice(index, 1);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.fruits.push(event.option.viewValue);
-    this.fruitInput.nativeElement.value = '';
-    this.fruitCtrl.setValue(null);
+    this.usernames.push(event.option.viewValue);
+    this.userInput.nativeElement.value = '';
+    this.userCtrl.setValue(null);
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.allFruits.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
+    return this.listUserName.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  convertDatetoNgbDateStruct(date: Date): NgbDateStruct {
+    return date ? {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()} : null;
+  }
+
+  private convertNgbDateStructToString(date: NgbDateStruct): string {
+    return date ? `${this.padNumber(date.day)}-${this.padNumber(date.month)}-${date.year}` : null;
+  }
+
+  private convertNgbtimeStructToString(time: NgbTimeStruct): string {
+    return time ? `${this.padNumber(time.hour)}:${this.padNumber(time.minute)}` : null;
+  }
+
+  private isNumber(value: any): boolean {
+    return !isNaN(parseInt(value, 10));
+  }
+
+  private padNumber(value: number) {
+    if (this.isNumber(value)) {
+      return `0${value}`.slice(-2);
+    } else {
+      return '';
+    }
   }
 
   ngOnInit() {
+    this.userService.getUsers().subscribe((response: ResponseUserDTO) => {
+      if (response.status_code === 200) {
+        this.listUser = response.data;
+        for (let i = 0; i < this.listUser.length; i++) {
+         this.listUserName.push(this.listUser[i].fullName);
+        }
+      }
+    });
   }
+
   closeModal() {
     this.dismiss();
+  }
+
+  onGetUser() {
+
   }
 
 }
