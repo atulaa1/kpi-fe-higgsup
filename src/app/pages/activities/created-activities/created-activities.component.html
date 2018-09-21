@@ -15,7 +15,7 @@
         <table class="table titleTable">
           <thead>
           <tr>
-            <th name="numberOrder">STT</th>
+            <th>STT</th>
             <th class="activity-creating">Hoạt động</th>
             <th class="dateCreated">Ngày tạo</th>
           </tr>
@@ -25,30 +25,42 @@
       <div class="row ml-5 mr-5 tableScroll">
         <table class="table table-hover" id="myTable">
           <tbody>
-          <tr *ngFor="let createdActivity of groupList; let i = index">
-            <td *ngIf="createdActivity.group.groupType.id !=3" name="numberOrder">{{i + 1}}</td>
+          <tr>
+            <td>1</td>
 
             <!--Seminar-->
-            <td (click)="open(content)" *ngIf="createdActivity.group.groupType.id==1" class="activity-creating">{{createdActivity.name}}
-              <ng-template let-c="close" let-d="dismiss" #content>
-                <ngx-seminar-activity [dismiss]="d"></ngx-seminar-activity>
-              </ng-template>
+            <td (click)="open(content)" class="activity-creating">Seminar
             </td>
+            <!--Type Created Activities-->
+            <td class="dateCreated">17/9/2018</td>
+          </tr>
+
+          <tr>
+            <td>2</td>
 
             <!--Club-->
-            <td (click)="open(content)" *ngIf="createdActivity.group.groupType.id==2" class="activity-creating">{{createdActivity.name}}
-              <ng-template let-c="close" let-d="dismiss" #content>
-                <ngx-club-activity [dismiss]="d" [eventClubInfo]="createdActivity" [groupId]="createdActivity.group.id"></ngx-club-activity>
-              </ng-template>
+            <td (click)="open(content)" class="activity-creating">Câu lạc bộ 1
             </td>
+            <!--Type Created Activities-->
+            <td class="dateCreated">17/9/2018</td>
+          </tr>
+
+          <tr>
+            <td>3</td>
 
             <!--Support-->
-            <td (click)="open(content)" *ngIf="createdActivity.group.groupType.id==4" class="activity-creating">{{createdActivity.name}}
-              <ng-template let-c="close" let-d="dismiss" #content>
-                <ngx-support-activity [dismiss]="d"></ngx-support-activity>
-              </ng-template>
+            <td (click)="open(content)" class="activity-creating">Support chung
             </td>
+            <!--Type Created Activities-->
+            <td class="dateCreated">17/9/2018</td>
+          </tr>
 
+          <tr>
+            <td>4</td>
+
+            <!--Club-->
+            <td (click)="open(content)" class="activity-creating">Câu lạc bộ 2
+            </td>
             <!--Type Created Activities-->
             <td class="dateCreated">17/9/2018</td>
           </tr>

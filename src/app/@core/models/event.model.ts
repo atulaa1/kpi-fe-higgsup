@@ -1,13 +1,16 @@
+import {Group} from './group.model';
 import {Activity} from './activity.model';
-import {EventUser} from './eventUser.model';
+import {UserType} from './userType.model';
+import {CreatedActivity} from './createdActivity.model';
 
 export class Event {
-  id: number;
+
   name: string;
   description: string;
   address: string;
-  group: Activity;
   beginDate: string;
   endDate: string;
-  eventUserList: Array<EventUser>;
+  group: Group<Activity>;
+  eventUserList: Array<UserType>;
+  additionalConfig: CreatedActivity;
 }

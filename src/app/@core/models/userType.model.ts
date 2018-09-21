@@ -1,6 +1,6 @@
 import {User} from './user.model';
 
-export class EventUser {
+export class UserType {
   user: User;
   type: number;
 }

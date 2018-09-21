@@ -9,7 +9,7 @@
     <div class="container">
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Tên hoạt động</h5>
-        <input type="text" class="col-md-8 form-control" [(ngModel)]="eventClub.name">
+        <input type="text" class="col-md-8 form-control" [(ngModel)]="eventName">
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Thời gian bắt đầu</h5>
@@ -25,7 +25,7 @@
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4">Địa điểm</h5>
-        <input type="text" class="col-md-8 form-control" [(ngModel)]="eventClub.address">
+        <input type="text" class="col-md-8 form-control" [(ngModel)]="eventAddress">
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Thành viên tham gia</h5>
@@ -33,14 +33,14 @@
           <mat-form-field class="example-chip-list">
             <mat-chip-list #chipList>
               <mat-chip
-                *ngFor="let userName of userNames"
+                *ngFor="let user of userClone; let i of index"
                 [selectable]="selectable"
                 [removable]="removable"
-                (removed)="remove(userName)">
+                (removed)="remove(user, i)">
                 <mat-icon matChipAvatar name="iconAvatar">
-                  <img src="{{listUser[1].avatar}}" name="iconMem">  <!--Ảnh vẫn đang fix cứng, no solution :( -->
+                  <img src="{{user.avatar}}" name="iconMem">
                 </mat-icon>
-                {{userName}}
+                {{user.fullName}}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
               </mat-chip>
               <input
@@ -50,14 +50,14 @@
                 [matChipInputFor]="chipList"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 [matChipInputAddOnBlur]="addOnBlur"
-              >
+                (matChipInputTokenEnd)="add($event)">
             </mat-chip-list>
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
 
-              <mat-option *ngFor="let filteredUser of filteredUsers | async" [value]="filteredUser">
+              <mat-option *ngFor="let user of filteredUsers | async;" [value]="user">
 
-                <img name="avatarMem" src="{{listUser[1].avatar}}">  <!--Ảnh vẫn đang fix cứng, no solution :( -->
-                {{filteredUser}}
+                <img name="avatarMem" src="{{user.avatar}}">
+                {{user.fullName}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
@@ -65,7 +65,7 @@
       </div>
       <div class="row mt-5">
         <div class="groupButton">
-          <button class="btn btn-hero-success saveButton" (click)="onSubmitAdd()">Lưu</button>
+          <button class="btn btn-hero-success saveButton" (click)="onSubmit()">Lưu</button>
           <button class="btn btn-hero-warning" (click)="closeModal()">Huỷ</button>
         </div>
       </div>

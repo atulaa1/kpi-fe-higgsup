@@ -3,6 +3,7 @@ import {Observable} from 'rxjs/Rx';
 import {HttpClient} from '@angular/common/http';
 import {HttpService} from './http.service';
 import {BaseConstant} from '../glossary/base.constant';
+import {ResponseEventDTO} from '../models/responseEventDTO.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,7 @@ export class ClubService {
     + BaseConstant.standardServicePort.toString() + '/api/groups/club';
   private clubEventUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
     + BaseConstant.standardServicePort.toString() + '/api/events/club';
+
   private httpOptions = this.httpService.setHeaderToken();
 
   addClub(club): Observable<any> {
@@ -28,8 +30,7 @@ export class ClubService {
   updateClub(id, club): Observable<any> {
     return this.http.put(`${this.createdClubUrl}/${id}`, club, this.httpOptions);
   }
-
-  addEventClub(eventClub): Observable<any> {
-    return this.http.post(this.clubEventUrl, eventClub, this.httpOptions);
+  addEventClub(clubEvent): Observable<any> {
+    return this.http.post(this.createdClubUrl, clubEvent, this.httpOptions);
   }
 }

@@ -1,7 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivitiesService} from '../../../@core/services/activities.service';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Event} from '../../../@core/models/event.model';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ngx-created-activities',
@@ -11,20 +8,10 @@ import {Event} from '../../../@core/models/event.model';
 export class CreatedActivitiesComponent implements OnInit {
   showMsg: boolean = false;
   nameSearch: string;
-  groupList: Array<Event>;
-
-  constructor(private activitiesService: ActivitiesService, private modalService: NgbModal) {
-  }
+  constructor() { }
 
   ngOnInit() {
-    this.activitiesService.getCreatedActivitiesByMem().subscribe(response => {
-      if (response.status_code === 200) {
-        this.groupList = response.data;
-        this.sortActivityArrayByType();
-      }
-    });
   }
-
   handleKeyDown(event: any) {
     if (event.keyCode === 13) {
       this.mySearchFunction();
@@ -51,25 +38,5 @@ export class CreatedActivitiesComponent implements OnInit {
         }
       }
     }
-  }
-
-  open(content) {
-    this.modalService.open(content, {backdrop: 'static', centered: true, size: 'lg'});
-  }
-
-  sortActivityArrayByType() {
-    this.groupList.sort((a, b) => {
-      const nameA = a.group.groupType.name.toUpperCase(); // bỏ qua in hoa thường
-      const nameB = b.group.groupType.name.toUpperCase(); // bỏ qua in hoa thường
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-
-      // names must be equal
-      return 0;
-    });
   }
 }

@@ -5,16 +5,14 @@ import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatAutocompleteSelectedEvent, MatChipInputEvent} from '@angular/material';
-import {map, startWith} from 'rxjs/operators';
 import {UserService} from '../../../@core/services/user.service';
 import {User} from '../../../@core/models/user.model';
 import {ResponseUserDTO} from '../../../@core/models/responseUserDTO.model';
 import {Event} from '../../../@core/models/event.model';
-import {EventUser} from '../../../@core/models/eventUser.model';
-import {ClubService} from '../../../@core/services/club.service';
-import swal from 'sweetalert';
+import {UserType} from '../../../@core/models/userType.model';
 import {Activity} from '../../../@core/models/activity.model';
-
+import {Group} from '../../../@core/models/group.model';
+import {ClubService} from '../../../@core/services/club.service';
 
 @Component({
   selector: 'ngx-club-activity',
@@ -25,74 +23,75 @@ import {Activity} from '../../../@core/models/activity.model';
 export class ClubActivityComponent implements OnInit {
   @Input() dismiss;
   @Input() eventClubInfo;
-  @Input() groupId;
   startTime = {hour: 12, minute: 0o0, second: 0o0};
   endTime = {hour: 12, minute: 0o0, second: 0o0};
   spinners: boolean = false;
   startDate: NgbDateStruct;
   endDate: NgbDateStruct;
   listUser: Array<User>;
-  listUserName: Array<string> = [];
-
-  eventClub = new Event();
-  userHost: User = new User();
+  listCloneUser: Array<User>;
+  eventClub: Event = new Event();
+  eventName: string = '';
+  listEventUser: Array<UserType>;
+  userCtrl = new FormControl();
+  filteredUsers: Observable<Array<User>>;
+  userClone: Array<User> = new Array<User>();
+  separatorKeysCodes: Array<number> = [ENTER, COMMA];
 
 
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = false;
-  separatorKeysCodes: Array<number> = [ENTER, COMMA];
-  userCtrl = new FormControl();
-  filteredUsers: Observable<Array<string>>;
-  userNames: Array<string> = [];
 
-  listEventUser: Array<EventUser> = [];
 
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
 
   constructor(private userService: UserService, private clubService: ClubService) {
-    this.filteredUsers = this.userCtrl.valueChanges.pipe(
-      startWith(null),
-      map((filteredUser: string | null) => filteredUser ? this._filter(filteredUser) : this.listUserName.slice()));
+    this.userCtrl = new FormControl();
+    this.filteredUsers = this.userCtrl.valueChanges
+      .startWith(null)
+      .map(user => user && typeof user === 'object' ? user.fullName : user)
+      .map(user => this.filterUsers(user));
   }
 
+  filterUsers(val) {
+    return val ? this.listCloneUser.filter(user => user.fullName.toLowerCase().indexOf(val.toLowerCase()) === 0)
+      : this.listCloneUser;
+  }
 
-  /*  add(event: MatChipInputEvent): void {
-      const input = event.input;
-      const value = event.value;
+  displayFn(user): string {
+    return user ? user.fullName : user;
+  }
 
-      // Add userName
-      if ((value || '').trim()) {
-        this.userNames.push(value.trim());
-      }
-    console.info(value)
-      // Reset the input value
-      if (input) {
-        input.value = '';
-      }
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
 
-      this.userCtrl.setValue(null);
-    }*/
-
-  remove(user: string): void {
-    const index = this.userNames.indexOf(user);
-
-    if (index >= 0) {
-      this.userNames.splice(index, 1);
+    // Add user
+    if ((value || '').trim()) {
+      this.userClone.push({
+        fullName: value.trim(),
+        username: value.trim()
+      });
     }
-  }
 
-  selected(event: MatAutocompleteSelectedEvent): void {
-    this.userNames.push(event.option.viewValue);
-    this.userInput.nativeElement.value = '';
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+
     this.userCtrl.setValue(null);
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+  remove(fullName, i): void {
+    this.userClone.splice(i, 1);
+  }
 
-    return this.listUserName.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.userClone.push(event.option.value);
+    this.userInput.nativeElement.value = '';
+    this.userCtrl.setValue(null);
   }
 
   convertDatetoNgbDateStruct(date: Date): NgbDateStruct {
@@ -123,9 +122,7 @@ export class ClubActivityComponent implements OnInit {
     this.userService.getUsers().subscribe((response: ResponseUserDTO) => {
       if (response.status_code === 200) {
         this.listUser = response.data;
-        for (let i = 0; i < this.listUser.length; i++) {
-          this.listUserName.push(this.listUser[i].username);
-        }
+        this.listCloneUser = Object.assign([], this.listUser);
       }
     });
   }
@@ -134,19 +131,18 @@ export class ClubActivityComponent implements OnInit {
     this.dismiss();
   }
 
-  onSubmitAdd() {
-    this.eventClub.beginDate = this.convertNgbDateStructToString(this.startDate)
-      + ' ' + this.convertNgbtimeStructToString(this.startTime);
-    this.eventClub.endDate = this.convertNgbDateStructToString(this.endDate)
-      + ' ' + this.convertNgbtimeStructToString(this.endTime);
-
-
+  onSubmit() {
+    this.eventClub.name = this.eventName;
+    this.eventClub.beginDate = this.convertNgbDateStructToString(this.startDate) + ' '
+      + this.convertNgbtimeStructToString(this.startTime);
+    this.eventClub.endDate = this.convertNgbDateStructToString(this.endDate) + ' '
+      + this.convertNgbtimeStructToString(this.endTime);
 
     // Lấy username trong array đã chọn ở mục chọn người tham gia gán vào username
-    for (let i = 0; i < this.userNames.length; i++) {
+    for (let i = 0; i < this.userClone.length; i++) {
       const userMem: User = new User();
-      const eventUser: EventUser = new EventUser();
-      userMem.username = this.userNames[i];
+      const eventUser: UserType = new UserType();
+      userMem.username = this.userClone[i].username;
       if (userMem.username === this.eventClubInfo.additionalConfig.host) {
         eventUser.user = userMem;
         eventUser.type = 1;
@@ -158,12 +154,12 @@ export class ClubActivityComponent implements OnInit {
       }
     }
     this.eventClub.eventUserList = this.listEventUser;
-    const activity: Activity = new Activity();
-    activity.id = this.groupId;
-    this.eventClub.group = activity;
+    const group: Group<Activity> = new Group();
+    group.id = this.eventClubInfo.groupType.id;
+    this.eventClub.group = group;
     this.clubService.addEventClub(this.eventClub).subscribe((response: ResponseUserDTO) => {
       if (response.status_code === 200) {
-          this.dismiss();
+        this.dismiss();
         swal('Chúc Mừng!', 'Đã tạo thành công!', 'success');
       } else if (response.status_code === 903 && response.message === 'name does not allow null') {
         swal('Thông báo!', 'Tên hoạt động không được để trống!', 'error');
@@ -185,6 +181,6 @@ export class ClubActivityComponent implements OnInit {
         swal('Thông báo!', 'User không tồn tại!', 'error');
       }
     });
-  }
 
+  }
 }
