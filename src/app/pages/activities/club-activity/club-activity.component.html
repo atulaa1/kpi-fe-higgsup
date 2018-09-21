@@ -33,14 +33,14 @@
           <mat-form-field class="example-chip-list">
             <mat-chip-list #chipList>
               <mat-chip
-                *ngFor="let userFullName of userFullNames"
+                *ngFor="let userName of userNames"
                 [selectable]="selectable"
                 [removable]="removable"
-                (removed)="remove(userFullName)">
+                (removed)="remove(userName)">
                 <mat-icon matChipAvatar name="iconAvatar">
                   <img src="{{listUser[1].avatar}}" name="iconMem">  <!--Ảnh vẫn đang fix cứng, no solution :( -->
                 </mat-icon>
-                {{userFullName}}
+                {{userName}}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
               </mat-chip>
               <input

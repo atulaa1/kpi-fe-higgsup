@@ -45,7 +45,7 @@ export class ClubActivityComponent implements OnInit {
   separatorKeysCodes: Array<number> = [ENTER, COMMA];
   userCtrl = new FormControl();
   filteredUsers: Observable<Array<string>>;
-  userFullNames: Array<string> = [];
+  userNames: Array<string> = [];
 
   listEventUser: Array<EventUser> = [];
 
@@ -62,9 +62,9 @@ export class ClubActivityComponent implements OnInit {
       const input = event.input;
       const value = event.value;
 
-      // Add userFullName
+      // Add userName
       if ((value || '').trim()) {
-        this.userFullNames.push(value.trim());
+        this.userNames.push(value.trim());
       }
     console.info(value)
       // Reset the input value
@@ -76,15 +76,15 @@ export class ClubActivityComponent implements OnInit {
     }*/
 
   remove(user: string): void {
-    const index = this.userFullNames.indexOf(user);
+    const index = this.userNames.indexOf(user);
 
     if (index >= 0) {
-      this.userFullNames.splice(index, 1);
+      this.userNames.splice(index, 1);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.userFullNames.push(event.option.viewValue);
+    this.userNames.push(event.option.viewValue);
     this.userInput.nativeElement.value = '';
     this.userCtrl.setValue(null);
   }
@@ -124,7 +124,7 @@ export class ClubActivityComponent implements OnInit {
       if (response.status_code === 200) {
         this.listUser = response.data;
         for (let i = 0; i < this.listUser.length; i++) {
-          this.listUserName.push(this.listUser[i].fullName);
+          this.listUserName.push(this.listUser[i].username);
         }
       }
     });
@@ -142,11 +142,11 @@ export class ClubActivityComponent implements OnInit {
 
 
 
-    // Lấy tên trong array đã chọn ở mục chọn người tham gia gán vào username
-    for (let i = 0; i < this.userFullNames.length; i++) {
+    // Lấy username trong array đã chọn ở mục chọn người tham gia gán vào username
+    for (let i = 0; i < this.userNames.length; i++) {
       const userMem: User = new User();
       const eventUser: EventUser = new EventUser();
-      userMem.username = this.userFullNames[i];
+      userMem.username = this.userNames[i];
       if (userMem.username === this.eventClubInfo.additionalConfig.host) {
         eventUser.user = userMem;
         eventUser.type = 1;
