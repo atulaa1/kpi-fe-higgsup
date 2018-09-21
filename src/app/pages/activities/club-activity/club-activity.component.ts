@@ -45,7 +45,7 @@ export class ClubActivityComponent implements OnInit {
   separatorKeysCodes: Array<number> = [ENTER, COMMA];
   userCtrl = new FormControl();
   filteredUsers: Observable<Array<string>>;
-  usernames: Array<string> = [];
+  userFullNames: Array<string> = [];
 
   listEventUser: Array<EventUser> = [];
 
@@ -62,9 +62,9 @@ export class ClubActivityComponent implements OnInit {
       const input = event.input;
       const value = event.value;
 
-      // Add username
+      // Add userFullName
       if ((value || '').trim()) {
-        this.usernames.push(value.trim());
+        this.userFullNames.push(value.trim());
       }
     console.info(value)
       // Reset the input value
@@ -76,15 +76,15 @@ export class ClubActivityComponent implements OnInit {
     }*/
 
   remove(user: string): void {
-    const index = this.usernames.indexOf(user);
+    const index = this.userFullNames.indexOf(user);
 
     if (index >= 0) {
-      this.usernames.splice(index, 1);
+      this.userFullNames.splice(index, 1);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.usernames.push(event.option.viewValue);
+    this.userFullNames.push(event.option.viewValue);
     this.userInput.nativeElement.value = '';
     this.userCtrl.setValue(null);
   }
@@ -141,10 +141,12 @@ export class ClubActivityComponent implements OnInit {
       + ' ' + this.convertNgbtimeStructToString(this.endTime);
 
 
-    for (let i = 0; i < this.usernames.length; i++) {
+
+    // Lấy tên trong array đã chọn ở mục chọn người tham gia gán vào username
+    for (let i = 0; i < this.userFullNames.length; i++) {
       const userMem: User = new User();
       const eventUser: EventUser = new EventUser();
-      userMem.username = this.usernames[i];
+      userMem.username = this.userFullNames[i];
       if (userMem.username === this.eventClubInfo.additionalConfig.host) {
         eventUser.user = userMem;
         eventUser.type = 1;
@@ -163,7 +165,7 @@ export class ClubActivityComponent implements OnInit {
       if (response.status_code === 200) {
           this.dismiss();
         swal('Chúc Mừng!', 'Đã tạo thành công!', 'success');
-      } else if (response.status_code === 903 && response.message === 'user type can not null') {
+      } else if (response.status_code === 903 && response.message === 'name does not allow null') {
         swal('Thông báo!', 'Tên hoạt động không được để trống!', 'error');
       } else if (response.status_code === 903 && response.message === 'begin date cannot null') {
         swal('Thông báo!', 'Ngày bắt đầu không được để trống!', 'error');
