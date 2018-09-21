@@ -14,6 +14,7 @@ export class AccManagementComponent implements OnInit {
   editingUsername: string = null;
   showMsg: boolean = false;
   listUser: Array<User>;
+  listUserClone: Array<User>
   editedUser: User;
   beforeEditedUser: User;
   nameSearch: string;
@@ -25,6 +26,7 @@ export class AccManagementComponent implements OnInit {
   ngOnInit() {
     this.managementUsersService.getUser().subscribe(res => {
       this.listUser = <Array<User>>res.data;
+      this.listUserClone = Object.assign(this.listUser);
       // add isEdited for all item
       this.loadUsers();
     });
@@ -52,29 +54,17 @@ export class AccManagementComponent implements OnInit {
     }
   }
 
+  searchFunction(userInfo) {
+    return userInfo.fullName.toUpperCase().indexOf(this.nameSearch.toUpperCase()) >= 0;
+  }
   mySearchFunction() {
-    if (this.editingUsername === null) {
+    this.showMsg = false;
+    this.listUser = Object.assign(this.listUserClone)
+    this.listUser = this.listUser.filter(value => this.searchFunction(value))
+    if (this.listUser.length === 0) {
       this.showMsg = true;
-
-      let input, filter, table, tr, td, i;
-      input = document.getElementById('myInput');
-      filter = input.value.toUpperCase();
-      table = document.getElementById('myTable');
-      tr = table.getElementsByTagName('tr');
-      for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName('td')[0];
-        if (td) {
-          if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = '';
-            this.showMsg = false;
-          } else {
-            tr[i].style.display = 'none';
-          }
-        }
-      }
     }
   }
-
   updateRole(userInfo: User) {
     if (this.editingUsername === null) {
       userInfo.isEdited = true;
