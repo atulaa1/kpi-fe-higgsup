@@ -10,11 +10,18 @@ import {KpiDateFormatter} from '../../../modals/personal-info/kpi-date-formatter
 })
 export class SupportActivityComponent implements OnInit {
   @Input() dismiss;
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
+
   closeModal() {
     this.dismiss();
+  }
+
+  onSubmit() {
+
   }
 }

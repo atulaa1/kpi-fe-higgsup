@@ -11,19 +11,24 @@
       <input type="text" class="col-md-8 form-control" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()">
     </div>
     <div class="row mt-2" name="supportActivities">
-      <div class="col-md-12">
+      <div class="col-md-12 position-relative">
         <nb-checkbox>Dọn dẹp</nb-checkbox>
+        <div class="next-number-picker">
+          <a href="" class="next-number-picker-handler-down"></a>
+          <a href="" class="next-number-picker-handler-up"></a>
+
+        </div>
       </div>
-      <div class="col-md-12">
+      <div class="col-md-12 position-relative">
         <nb-checkbox>Mua đồ</nb-checkbox>
       </div>
-      <div class="col-md-12">
+      <div class="col-md-12 position-relative">
         <nb-checkbox>Support hội thảo</nb-checkbox>
       </div>
-      <div class="col-md-12">
+      <div class="col-md-12 position-relative">
         <nb-checkbox>Vệ sinh hàng tuần</nb-checkbox>
       </div>
-      <div class="col-md-12">
+      <div class="col-md-12 position-relative">
         <nb-checkbox>Training</nb-checkbox>
       </div>
     </div>
