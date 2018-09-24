@@ -10,6 +10,7 @@ export class Event {
   address: string;
   beginDate: string;
   endDate: string;
+  createdDate: string;
   group: Group<Activity>;
   eventUserList: Array<UserType>;
   additionalConfig: CreatedActivity;

@@ -31,6 +31,9 @@ export class ClubService {
     return this.http.put(`${this.createdClubUrl}/${id}`, club, this.httpOptions);
   }
   addEventClub(clubEvent): Observable<any> {
-    return this.http.post(this.createdClubUrl, clubEvent, this.httpOptions);
+    return this.http.post(this.clubEventUrl, clubEvent, this.httpOptions);
+  }
+  updateEventClub(clubEvent, id): Observable<any> {
+    return this.http.put(`${this.clubEventUrl}/${id}`, clubEvent, this.httpOptions);
   }
 }
