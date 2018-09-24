@@ -48,19 +48,19 @@ export class AccManagementComponent implements OnInit {
 
   handleKeyDown(event: any) {
     if (event.keyCode === 13) {
-      this.mySearchFunction();
+      this.searchUserInfo();
     } else if (this.nameSearch === '') {
-      this.mySearchFunction();
+      this.searchUserInfo();
     }
   }
 
-  searchFunction(userInfo) {
+  searchName(userInfo) {
     return userInfo.fullName.toUpperCase().indexOf(this.nameSearch.toUpperCase()) >= 0;
   }
-  mySearchFunction() {
+  searchUserInfo() {
     this.showMsg = false;
     this.listUser = Object.assign(this.listUserClone)
-    this.listUser = this.listUser.filter(value => this.searchFunction(value))
+    this.listUser = this.listUser.filter(value => this.searchName(value))
     if (this.listUser.length === 0) {
       this.showMsg = true;
     }

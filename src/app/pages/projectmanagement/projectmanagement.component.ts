@@ -81,8 +81,8 @@ export class ProjectmanagementComponent implements OnInit {
 
   getListProject() {
     this.projectService.getAllProject().subscribe((response: ResponseProjectDTO) => {
-      this.projectsClone = response.data;
-      this.projects = Object.assign(this.projectsClone)
+      this.projects = response.data;
+      this.projectsClone = Object.assign(this.projects)
       this.sortProjectArrayByActive();
     });
   }
@@ -165,20 +165,20 @@ export class ProjectmanagementComponent implements OnInit {
 
   handleKeyDown(event: any) {
     if (event.keyCode === 13) {
-      this.mySearchFunction();
+      this.searchPrject();
     } else if (this.nameSearch === '') {
-      this.mySearchFunction();
+      this.searchPrject();
     }
   }
 
-  searchFunction(projectInfo) {
+  searchName(projectInfo) {
     return projectInfo.name.toUpperCase().indexOf(this.nameSearch.toUpperCase()) >= 0
   }
 
-  mySearchFunction() {
+  searchPrject() {
     this.showMsg = false;
     this.projects = Object.assign(this.projectsClone);
-    this.projects = this.projects.filter(project => this.searchFunction(project))
+    this.projects = this.projects.filter(project => this.searchName(project))
     if (this.projects.length === 0) {
       this.showMsg = true;
     }

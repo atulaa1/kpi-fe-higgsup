@@ -24,14 +24,14 @@ export class AccManagementLateComponent implements OnInit {
     );
   }
 
-  mysearch(lateInfo) {
+  searchName(lateInfo) {
     return lateInfo.user.fullName.toUpperCase().indexOf(this.word.toUpperCase()) >= 0;
   }
 
-  search() {
+  searchInfo() {
     this.showMsg = false;
     this.listLate = Object.assign(this.listLateClone);
-    this.listLate = this.listLate.filter(late => this.mysearch(late));
+    this.listLate = this.listLate.filter(late => this.searchName(late));
     if (this.listLate.length === 0) {
       this.showMsg = true;
     }
@@ -39,9 +39,9 @@ export class AccManagementLateComponent implements OnInit {
 
   handleKeyDown(event: any) {
     if (event.keyCode === 13) {
-      this.search();
+      this.searchInfo();
     } else if (this.word === '') {
-      this.search();
+      this.searchInfo();
     }
   }
 }

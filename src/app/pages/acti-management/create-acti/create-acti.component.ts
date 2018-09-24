@@ -76,18 +76,18 @@ export class CreateActiComponent implements OnInit {
 
   handleKeyDown(event: any) {
     if (event.keyCode === 13) {
-      this.mySearchFunction();
+      this.searchActivities();
     } else if (this.nameSearch === '') {
-      this.mySearchFunction();
+      this.searchActivities();
     }
   }
-  mysearch(activities) {
+  searchName(activities) {
     return activities.name.toUpperCase().indexOf(this.nameSearch.toUpperCase()) >= 0;
   }
-  mySearchFunction() {
+  searchActivities() {
     this.showMsg = false;
     this.groupList = Object.assign(this.groupListClone)
-    this.groupList = this.groupList.filter(activitie => this.mysearch(activitie))
+    this.groupList = this.groupList.filter(activitie => this.searchName(activitie))
      if (this.groupList.length === 0){
        this.showMsg = true;
      }
