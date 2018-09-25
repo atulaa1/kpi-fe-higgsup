@@ -10,6 +10,7 @@ import {KpiDateFormatter} from '../../../modals/personal-info/kpi-date-formatter
 })
 export class SupportActivityComponent implements OnInit {
   @Input() dismiss;
+  showInput: boolean = false;
 
   constructor() {
   }
@@ -24,4 +25,9 @@ export class SupportActivityComponent implements OnInit {
   onSubmit() {
 
   }
+
+  openInputNumber() {
+    this.showInput = !this.showInput;
+  }
+
 }
