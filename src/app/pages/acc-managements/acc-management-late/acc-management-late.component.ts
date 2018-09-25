@@ -74,10 +74,10 @@ export class AccManagementLateComponent implements OnInit {
 
   openConfirmUpdateLateComingData(content, lateInfo: LateInfo, updatedLateComingTime) {
     this.lateInfoToEdit = lateInfo;
-    console.log('abc:', updatedLateComingTime);
-    this.newLateComingTime = updatedLateComingTime === ' ' ? 0 : updatedLateComingTime;
+    if (updatedLateComingTime === '') {}
+    this.newLateComingTime = (updatedLateComingTime === '') ? 0 : updatedLateComingTime;
     this.msgConfirmUpdate = 'Bạn có chắc chắn muốn sửa ' + lateInfo.lateTimes + ' buổi đi muộn của ' + lateInfo.user.fullName +
-      ' thành ' + updatedLateComingTime + ' không?';
+      ' thành ' + this.newLateComingTime + ' không?';
     this.bsModal.open(content, {backdrop: 'static', centered: true});
   }
 
