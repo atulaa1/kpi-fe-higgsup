@@ -69,8 +69,10 @@ textarea {
 }
 .support-number{
   position: absolute;
-  max-width: 40px;
-  top:3px;
+  max-width: 50px;
+  top: 3px;
+  padding-left: 10px;
+  right: 200px;
 }
 .checkbox[name$='check']{
   display: block;
