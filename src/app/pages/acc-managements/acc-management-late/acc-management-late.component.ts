@@ -30,7 +30,7 @@ export class AccManagementLateComponent implements OnInit {
   ngOnInit() {
     this.managementLateService.getListLate().subscribe(value => {
         this.listLateComing = value.data;
-        this.listLateClone =  Object.assign(this.listLateComing);
+        this.listLateClone =  Object.assign([], this.listLateComing);
       },
     );
   }
@@ -39,7 +39,7 @@ export class AccManagementLateComponent implements OnInit {
     this.managementLateService.importFileLateComingUser(fileList[0]).subscribe((response: ResponDTOLateInfo<Array<LateInfo>>) => {
       if (response.status_code === 200) {
         this.listLateComing = response.data;
-        this.listLateClone = Object.assign(this.listLateComing);
+        this.listLateClone = Object.assign([], this.listLateComing);
       } else {
         if (response.errors) {
           let msg = '';
@@ -91,9 +91,10 @@ export class AccManagementLateComponent implements OnInit {
         (response: ResponDTOLateInfo<LateInfo>) => {
           if (response.status_code === 200) {
             let updatedLateInfo = response.data;
-            let indexToUpdate = this.listLateComing.findIndex(lateItem => lateItem.id === updatedLateInfo.id)
+            let indexToUpdate = this.listLateComing.findIndex(lateItem => lateItem.id === updatedLateInfo.id);
+            let indexCloneToUpdate = this.listLateClone.findIndex(lateItem => lateItem.id === updatedLateInfo.id);
             this.listLateComing.splice(indexToUpdate, 1, updatedLateInfo);
-            this.listLateClone.splice(indexToUpdate, 1, updatedLateInfo);
+            this.listLateClone.splice(indexCloneToUpdate, 1, updatedLateInfo);
             this.isEditLateComing = false;
             this.idLateInfoEdit = null;
           }
@@ -104,7 +105,10 @@ export class AccManagementLateComponent implements OnInit {
     }
   }
 
-  blockInputNagativeNumber(event) {
+  blockInputNagativeNumber(event, content, lateInfo: LateInfo, updatedLateComingTime) {
+    if (event.keyCode === 13) {
+      this.openConfirmUpdateLateComingData(content, lateInfo, updatedLateComingTime);
+    }
     return event.charCode >= 48 && event.charCode <= 57
   }
 
@@ -114,7 +118,7 @@ export class AccManagementLateComponent implements OnInit {
 
   searchInfo() {
     this.showMsg = false;
-    this.listLateClone = Object.assign(this.listLateComing);
+    this.listLateClone = Object.assign([], this.listLateComing);
     this.listLateClone = this.listLateClone.filter(late => this.searchName(late));
     if (this.listLateClone.length === 0) {
       this.showMsg = true;
@@ -123,8 +127,6 @@ export class AccManagementLateComponent implements OnInit {
 
   handleKeyDown(event: any) {
     if (event.keyCode === 13) {
-      this.searchInfo();
-    } else if (this.word === '') {
       this.searchInfo();
     }
   }
