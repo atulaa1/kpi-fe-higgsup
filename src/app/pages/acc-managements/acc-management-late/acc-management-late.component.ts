@@ -11,6 +11,10 @@ import swal from 'sweetalert';
   styleUrls: ['./acc-management-late.component.scss'],
 })
 export class AccManagementLateComponent implements OnInit {
+  listLateClone: Array<LateInfo>;
+  listLate: Array<LateInfo>;
+  showMsg: boolean = false;
+  word: string = '';
 
   listLateComing: Array<LateInfo>;
   isEditLateComing: boolean = false;
@@ -28,6 +32,7 @@ export class AccManagementLateComponent implements OnInit {
   ngOnInit() {
     this.managementLateService.getListLate().subscribe(value => {
         this.listLateComing = value.data;
+        this.listLateClone =  Object.assign(this.listLate);
       },
     );
   }
@@ -101,5 +106,26 @@ export class AccManagementLateComponent implements OnInit {
 
   blockInputNagativeNumber(event) {
     return event.charCode >= 48 && event.charCode <= 57
+  }
+
+  searchName(lateInfo) {
+    return lateInfo.user.fullName.toUpperCase().indexOf(this.word.toUpperCase()) >= 0;
+  }
+
+  searchInfo() {
+    this.showMsg = false;
+    this.listLate = Object.assign(this.listLateClone);
+    this.listLate = this.listLate.filter(late => this.searchName(late));
+    if (this.listLate.length === 0) {
+      this.showMsg = true;
+    }
+  }
+
+  handleKeyDown(event: any) {
+    if (event.keyCode === 13) {
+      this.searchInfo();
+    } else if (this.word === '') {
+      this.searchInfo();
+    }
   }
 }
