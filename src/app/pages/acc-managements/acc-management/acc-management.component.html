@@ -5,7 +5,7 @@
         <input normalCharacterOnly oncopy='return false' onpaste='return false' [(ngModel)]="nameSearch"
                class="form-control search-inp" type="text" id="myInput" (keyup)='handleKeyDown($event)'
                placeholder="Tìm kiếm tài khoản:" title="Type in a name" [disabled]="editingUsername !== null"/>
-        <span class="fas fa-search searchIcon" (click)='mySearchFunction()'></span>
+        <span class="fas fa-search searchIcon" (click)='searchUserInfo()'></span>
       </div>
     </div>
   </div>
