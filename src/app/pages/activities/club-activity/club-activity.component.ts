@@ -239,7 +239,6 @@ export class ClubActivityComponent implements OnInit {
         eventUser.type = 2;
         this.listEventUser.push(eventUser);
       }
-      this.listEventUser.push(eventUser);
     }
     this.eventClub.eventUserList = this.listEventUser;
     this.clubService.updateEventClub(this.eventClub, this.eventClubInfoCreated.id).subscribe((response: ResponseUserDTO) => {
