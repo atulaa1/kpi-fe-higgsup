@@ -7,10 +7,10 @@
       </div>
     </div>
     <div class="col-md-6">
-      <input normalCharacterOnly
+      <input normalCharacterOnly name="word" [(ngModel)]="word" (keyup)='handleKeyDown($event)'
              class="form-control search-inp" type="text" id="myInput"
              placeholder="Tìm kiếm Nhân Viên:" title="Type in a name"/>
-      <span class="fas fa-search searchIcon"></span>
+      <span class="fas fa-search searchIcon" (click)="searchInfo()"></span>
     </div>
   </div>
   <div class="row mt-5 ml-5 mr-5">
@@ -25,7 +25,7 @@
       </thead>
     </table>
   </div>
-  <div class="row ml-5 mr-5 tableScroll">
+  <div  class="row ml-5 mr-5 tableScroll">
     <table class="table table-hover" id="myTable">
       <tbody>
         <tr *ngFor="let late of listLate, let i = index">
@@ -42,6 +42,7 @@
       </tbody>
     </table>
   </div>
+  <p *ngIf='showMsg' class="text-center" name='notFoundMsg'>Không tìm thấy kết quả phù hợp!</p>
   <div class="text-center">
     <div class="paging">
       <i class="fas fa-chevron-left"></i>

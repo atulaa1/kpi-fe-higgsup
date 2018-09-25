@@ -14,6 +14,7 @@ export class ProjectmanagementComponent implements OnInit {
   isAdding: boolean = false;
   isEditing: boolean = false;
   projects: Project[];
+  projectsClone: Project[];
   newProject: Project;
   projectToEdit: Project;
   statusCode: number;
@@ -81,6 +82,7 @@ export class ProjectmanagementComponent implements OnInit {
   getListProject() {
     this.projectService.getAllProject().subscribe((response: ResponseProjectDTO) => {
       this.projects = response.data;
+      this.projectsClone = Object.assign(this.projects)
       this.sortProjectArrayByActive();
     });
   }
@@ -163,31 +165,22 @@ export class ProjectmanagementComponent implements OnInit {
 
   handleKeyDown(event: any) {
     if (event.keyCode === 13) {
-      this.mySearchFunction();
+      this.searchPrject();
     } else if (this.nameSearch === '') {
-      this.mySearchFunction();
+      this.searchPrject();
     }
   }
 
-  mySearchFunction() {
-    if (this.isEditing === false) {
+  searchName(projectInfo) {
+    return projectInfo.name.toUpperCase().indexOf(this.nameSearch.toUpperCase()) >= 0
+  }
+
+  searchPrject() {
+    this.showMsg = false;
+    this.projects = Object.assign(this.projectsClone);
+    this.projects = this.projects.filter(project => this.searchName(project))
+    if (this.projects.length === 0) {
       this.showMsg = true;
-      let input, filter, table, tr, td, i;
-      input = document.getElementById('myInput');
-      filter = input.value.toUpperCase();
-      table = document.getElementById('myTable');
-      tr = table.getElementsByTagName('tr');
-      for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName('td')[0];
-        if (td) {
-          if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = '';
-            this.showMsg = false;
-          } else {
-            tr[i].style.display = 'none';
-          }
-        }
-      }
     }
   }
 }
