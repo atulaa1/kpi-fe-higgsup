@@ -8,7 +8,10 @@ import {LateInfo} from '../../../@core/models/lateInfo.model';
   styleUrls: ['./acc-management-late.component.scss'],
 })
 export class AccManagementLateComponent implements OnInit {
+  listLateClone: Array<LateInfo>;
   listLate: Array<LateInfo>;
+  showMsg: boolean = false;
+  word: string = '';
 
   constructor(private managementTolateService: ManagementTolateService) {
   }
@@ -16,7 +19,29 @@ export class AccManagementLateComponent implements OnInit {
   ngOnInit() {
     this.managementTolateService.getListLate().subscribe(value => {
         this.listLate = value.data;
+        this.listLateClone =  Object.assign(this.listLate);
       },
     );
+  }
+
+  searchName(lateInfo) {
+    return lateInfo.user.fullName.toUpperCase().indexOf(this.word.toUpperCase()) >= 0;
+  }
+
+  searchInfo() {
+    this.showMsg = false;
+    this.listLate = Object.assign(this.listLateClone);
+    this.listLate = this.listLate.filter(late => this.searchName(late));
+    if (this.listLate.length === 0) {
+      this.showMsg = true;
+    }
+  }
+
+  handleKeyDown(event: any) {
+    if (event.keyCode === 13) {
+      this.searchInfo();
+    } else if (this.word === '') {
+      this.searchInfo();
+    }
   }
 }
