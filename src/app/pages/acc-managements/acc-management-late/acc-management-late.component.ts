@@ -12,7 +12,6 @@ import swal from 'sweetalert';
 })
 export class AccManagementLateComponent implements OnInit {
   listLateClone: Array<LateInfo>;
-  listLate: Array<LateInfo>;
   showMsg: boolean = false;
   word: string = '';
 
@@ -20,7 +19,6 @@ export class AccManagementLateComponent implements OnInit {
   isEditLateComing: boolean = false;
   idLateInfoEdit: number;
   msgConfirmUpdate: string;
-  closeResult: boolean;
   buttonTitle: string;
   lateInfoToEdit: LateInfo;
   newLateComingTime: number;
@@ -32,7 +30,7 @@ export class AccManagementLateComponent implements OnInit {
   ngOnInit() {
     this.managementLateService.getListLate().subscribe(value => {
         this.listLateComing = value.data;
-        this.listLateClone =  Object.assign(this.listLate);
+        this.listLateClone =  Object.assign(this.listLateComing);
       },
     );
   }
@@ -41,6 +39,7 @@ export class AccManagementLateComponent implements OnInit {
     this.managementLateService.importFileLateComingUser(fileList[0]).subscribe((response: ResponDTOLateInfo<Array<LateInfo>>) => {
       if (response.status_code === 200) {
         this.listLateComing = response.data;
+        this.listLateClone = Object.assign(this.listLateComing);
       } else {
         if (response.errors) {
           let msg = '';
@@ -94,6 +93,7 @@ export class AccManagementLateComponent implements OnInit {
             let updatedLateInfo = response.data;
             let indexToUpdate = this.listLateComing.findIndex(lateItem => lateItem.id === updatedLateInfo.id)
             this.listLateComing.splice(indexToUpdate, 1, updatedLateInfo);
+            this.listLateClone.splice(indexToUpdate, 1, updatedLateInfo);
             this.isEditLateComing = false;
             this.idLateInfoEdit = null;
           }
@@ -114,9 +114,9 @@ export class AccManagementLateComponent implements OnInit {
 
   searchInfo() {
     this.showMsg = false;
-    this.listLate = Object.assign(this.listLateClone);
-    this.listLate = this.listLate.filter(late => this.searchName(late));
-    if (this.listLate.length === 0) {
+    this.listLateClone = Object.assign(this.listLateComing);
+    this.listLateClone = this.listLateClone.filter(late => this.searchName(late));
+    if (this.listLateClone.length === 0) {
       this.showMsg = true;
     }
   }
