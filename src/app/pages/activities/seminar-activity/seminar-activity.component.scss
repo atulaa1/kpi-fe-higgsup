@@ -40,13 +40,15 @@ h5.requiredInput:after {
 }
 
 [name$='host'] {
+  padding: 0;
   min-height: 75px;
   max-height: 130px;
 }
 
 [name$='listener'] {
+  padding: 0;
   min-height: 75px;
-  max-height: 100px;
+  max-height: 130px;
 }
 
 [name$='timeInput'] {
@@ -67,7 +69,7 @@ h5.requiredInput:after {
 }
 
 [name$='participant'] {
-  padding: 0px;
+  padding: 0;
   min-height: 150px;
   max-height: 480px;
 }

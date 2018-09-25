@@ -15,6 +15,9 @@ export class SeminarService {
   private seminarUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
     + BaseConstant.standardServicePort.toString() + '/api/groups/seminar';
 
+  private seminarEventUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
+    + BaseConstant.standardServicePort.toString() + '/api/events/seminar';
+
   private httpOptions = this.httpService.setHeaderToken();
 
   addSeminar(seminar): Observable<any> {
@@ -24,5 +27,15 @@ export class SeminarService {
 
   updateSeminar(id, seminar): Observable<any> {
     return this.http.put(`${this.seminarUrl}/${id}`, seminar, this.httpOptions);
+  }
+
+  addSeminarEvent(seminar): Observable<any> {
+
+    return this.http.post(this.seminarEventUrl, seminar, this.httpOptions);
+  }
+
+  updateSeminarEvent(seminar, id): Observable<any> {
+
+    return this.http.put(`${this.seminarEventUrl}/${id}`, seminar, this.httpOptions);
   }
 }
