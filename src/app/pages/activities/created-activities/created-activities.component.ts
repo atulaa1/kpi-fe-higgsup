@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivitiesService} from '../../../@core/services/activities.service';
+import {Event} from '../../../@core/models/event.model';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'ngx-created-activities',
@@ -8,10 +11,19 @@ import { Component, OnInit } from '@angular/core';
 export class CreatedActivitiesComponent implements OnInit {
   showMsg: boolean = false;
   nameSearch: string;
-  constructor() { }
+  eventList: Array<Event> = new Array<Event>();
+
+  constructor(private activitiesService: ActivitiesService, private modalService: NgbModal) {
+  }
 
   ngOnInit() {
+    this.activitiesService.getCreatedEventUrl().subscribe(response => {
+      if (response.status_code === 200) {
+        this.eventList = response.data;
+      }
+    });
   }
+
   handleKeyDown(event: any) {
     if (event.keyCode === 13) {
       this.mySearchFunction();
@@ -38,5 +50,16 @@ export class CreatedActivitiesComponent implements OnInit {
         }
       }
     }
+  }
+
+  open(content) {
+    this.modalService.open(content, {backdrop: 'static', centered: true, size: 'lg'});
+  }
+  onChange(change: any) {
+    this.activitiesService.getCreatedEventUrl().subscribe(response => {
+      if (response.status_code === 200) {
+        this.eventList = response.data;
+      }
+    })
   }
 }
