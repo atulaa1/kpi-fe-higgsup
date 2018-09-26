@@ -1,17 +1,17 @@
-import {EventAdditionalConfig} from './eventAdditionalConfig.model';
 import {Group} from './group.model';
+import {Activity} from './activity.model';
+import {UserType} from './userType.model';
+import {CreatedActivity} from './createdActivity.model';
 
-export class Event<T> {
-  id: number;
+export class Event {
+
   name: string;
   description: string;
-  status: string;
   address: string;
-  createdDate: string;
-  updatedDate: string;
   beginDate: string;
   endDate: string;
-  group: Group<T>;
-  eventUserList: T;
-  additionalConfig: Array<EventAdditionalConfig>;
+  createdDate: string;
+  group: Group<Activity>;
+  eventUserList: Array<UserType>;
+  additionalConfig: CreatedActivity;
 }

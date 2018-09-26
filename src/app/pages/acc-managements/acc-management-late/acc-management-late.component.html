@@ -1,47 +1,55 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <div class="upload-btn-wrapper">
-        <button class="butn">Import a file</button>
-        <input type="file" name="myfile"/>
-      </div>
+      <button class="butn" (click)="lateFileImport.click()">Import a file</button>
+      <input type="file" name="myfile" (change)="uploadImportFile(lateFileImport.files)"
+             accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+             #lateFileImport hidden="true">
     </div>
     <div class="col-md-6">
-      <input normalCharacterOnly
+      <input normalCharacterOnly name="word" [(ngModel)]="word" (keyup)='handleKeyDown($event)'
              class="form-control search-inp" type="text" id="myInput"
              placeholder="Tìm kiếm Nhân Viên:" title="Type in a name"/>
-      <span class="fas fa-search searchIcon"></span>
+      <span class="fas fa-search searchIcon" (click)="searchInfo()"></span>
     </div>
   </div>
   <div class="row mt-5 ml-5 mr-5">
     <table class='table titleTable'>
       <thead>
       <tr>
-        <th class="titleField">STT</th>
-        <th class="titleField">Nhân Viên</th>
-        <th class="titleField">Email</th>
-        <th class="titleField">Số buổi đi muộn</th>
+        <th width="10%" class="text-right">STT</th>
+        <th width="30%">Nhân Viên</th>
+        <th width="30%">Email</th>
+        <th width="20%" class="text-center">Số buổi đi muộn</th>
+        <th width="10%">Thao tác</th>
       </tr>
       </thead>
     </table>
   </div>
-  <div class="row ml-5 mr-5 tableScroll">
+  <div  class="row ml-5 mr-5 tableScroll">
     <table class="table table-hover" id="myTable">
       <tbody>
-        <tr *ngFor="let late of listLate, let i = index">
-          <td class="infoUser">{{i +1}}</td>
-          <td class="infoUser">{{late.user.fullName}}</td>
-          <td class="infoUser">{{late.user.email}}</td>
-          <td class="infoUser">
-            <span>
-              {{late.lateTimes}}
-            </span>
-            <i class="fas fa-pencil-alt"></i>
-          </td>
-        </tr>
+      <tr *ngFor="let late of listLateClone, let i = index">
+        <td class="text-right sttTitle">{{i + 1}}</td>
+        <td class="nameTitle">{{late.user.fullName}}</td>
+        <td class="emailTitle">{{late.user.email}}</td>
+        <td class="text-center lateTitle">
+          <span [hidden]="late.id === this.idLateInfoEdit">{{late.lateTimes}}</span>
+          <input type="number" class="lateComingTimeBox" [hidden]="late.id !== this.idLateInfoEdit"
+                 [value]="newLateComingTime" min="0" (keypress)="blockInputNagativeNumber($event, content, late, updateLateComingTime.value)" #updateLateComingTime>
+
+        </td>
+        <td class="manipulationTitle">
+          <i class="fas fa-save fa-2x editIcon" *ngIf="late.id === this.idLateInfoEdit"
+             (click)="openConfirmUpdateLateComingData(content, late, updateLateComingTime.value)"></i>
+          <i class="fas fa-pencil-alt fa-2x editIcon" *ngIf="late.id !== this.idLateInfoEdit"
+             (click)="openEditBoxLateComing(late)"></i>
+        </td>
+      </tr>
       </tbody>
     </table>
   </div>
+  <p *ngIf='showMsg' class="text-center" name='notFoundMsg'>Không tìm thấy kết quả phù hợp!</p>
   <div class="text-center">
     <div class="paging">
       <i class="fas fa-chevron-left"></i>
@@ -50,3 +58,6 @@
     </div>
   </div>
 </div>
+<ng-template let-c="close" let-d="dismiss" #content>
+  <notice-box [dismiss]="d" (confirmation)="updateLateComingData($event)" [msg]="msgConfirmUpdate"></notice-box>
+</ng-template>

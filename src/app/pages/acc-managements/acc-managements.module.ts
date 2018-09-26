@@ -9,6 +9,7 @@ import {AccManagementLateComponent} from './acc-management-late/acc-management-l
 import {NormalCharacterOnlyDirective} from '../../@core/directives/normal-character-only.directive';
 import {AccInfoComponent} from './acc-management/acc-info/acc-info.component';
 import {ThemeModule} from '../../@theme/theme.module';
+import { NoticeBoxComponent } from './acc-management-late/notice-box/notice-box.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import {ThemeModule} from '../../@theme/theme.module';
     RouterModule,
   ],
   declarations: [AccManagementsComponent, AccManagementComponent, AskSaveComponent,
-    AccManagementLateComponent, NormalCharacterOnlyDirective, AccInfoComponent],
+    AccManagementLateComponent, NormalCharacterOnlyDirective, AccInfoComponent, NoticeBoxComponent],
   entryComponents: [AccManagementsComponent],
 })
 export class AccManagementsModule {

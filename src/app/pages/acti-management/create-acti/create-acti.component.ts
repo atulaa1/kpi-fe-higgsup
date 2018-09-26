@@ -20,6 +20,7 @@ export class CreateActiComponent implements OnInit {
   listActivities: Array<Activity>;
   group = new Group<CreatedActivity>();
   groupList: Array<Group<CreatedActivity>>;
+  groupListClone: Array<Group<CreatedActivity>>;
   message: string;
   showMsg: boolean = false;
   nameSearch: string;
@@ -35,6 +36,7 @@ export class CreateActiComponent implements OnInit {
     this.activitiesService.getCreatedActivity().subscribe(response => {
       if (response.status_code === 200) {
         this.groupList = response.data;
+        this.groupListClone = Object.assign(this.groupList)
       }
     });
     this.data.currentMessage.subscribe(message => {
@@ -74,29 +76,20 @@ export class CreateActiComponent implements OnInit {
 
   handleKeyDown(event: any) {
     if (event.keyCode === 13) {
-      this.mySearchFunction();
+      this.searchActivities();
     } else if (this.nameSearch === '') {
-      this.mySearchFunction();
+      this.searchActivities();
     }
   }
-
-  mySearchFunction() {
-    this.showMsg = true;
-    let input, filter, table, tr, td, i;
-    input = document.getElementById('myInput');
-    filter = input.value.toUpperCase();
-    table = document.getElementById('myTable');
-    tr = table.getElementsByTagName('tr');
-    for (i = 0; i < tr.length; i++) {
-      td = tr[i].getElementsByTagName('td')[0];
-      if (td) {
-        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-          tr[i].style.display = '';
-          this.showMsg = false;
-        } else {
-          tr[i].style.display = 'none';
-        }
-      }
-    }
+  searchName(activities) {
+    return activities.name.toUpperCase().indexOf(this.nameSearch.toUpperCase()) >= 0;
+  }
+  searchActivities() {
+    this.showMsg = false;
+    this.groupList = Object.assign(this.groupListClone)
+    this.groupList = this.groupList.filter(activitie => this.searchName(activitie))
+     if (this.groupList.length === 0){
+       this.showMsg = true;
+     }
   }
 }
