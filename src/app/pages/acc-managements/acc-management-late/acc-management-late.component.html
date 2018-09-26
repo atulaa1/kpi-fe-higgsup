@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row">
+  <div class="row ml-5 mr-5">
     <div class="col-md-6">
       <button class="butn" (click)="lateFileImport.click()">Import a file</button>
       <input type="file" name="myfile" (change)="uploadImportFile(lateFileImport.files)"
@@ -49,14 +49,7 @@
       </tbody>
     </table>
   </div>
-  <p *ngIf='showMsg' class="text-center" name='notFoundMsg'>Không tìm thấy kết quả phù hợp!</p>
-  <div class="text-center">
-    <div class="paging">
-      <i class="fas fa-chevron-left"></i>
-      <span>1/n</span>
-      <i class="fas fa-chevron-right"></i>
-    </div>
-  </div>
+  <p *ngIf='showMsg' class="text-center mt-5" name='notFoundMsg'>Không tìm thấy kết quả phù hợp!</p>
 </div>
 <ng-template let-c="close" let-d="dismiss" #content>
   <notice-box [dismiss]="d" (confirmation)="updateLateComingData($event)" [msg]="msgConfirmUpdate"></notice-box>
