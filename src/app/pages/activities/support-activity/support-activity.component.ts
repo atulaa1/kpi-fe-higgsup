@@ -12,11 +12,11 @@ import {SupportService} from '../../../@core/services/support.service';
 export class SupportActivityComponent implements OnInit {
   @Input() dismiss;
   supportEvents = [
-    {name: 'Dọn dẹp', type: 'cleanUpPoint', checked: false},
-    {name: 'Mua đồ', type: 'buyingStuffPoint', checked: false},
-    {name: 'Support Hội thảo', type: 'supportConferencePoint', checked: false},
-    {name: 'Training', type: 'trainingPoint', checked: false},
-    {name: 'Vệ sinh hàng tuần', type: 'weeklyCleanUpPoint', checked: false}
+    {id: 1, name: 'Dọn dẹp', type: 'cleanUpPoint', status: false, quantity: 1},
+    {id: 2, name: 'Mua đồ', type: 'buyingStuffPoint', status: false, quantity: 1},
+    {id: 3, name: 'Support Hội thảo', type: 'supportConferencePoint', status: false, quantity: 1},
+    {id: 4, name: 'Training', type: 'trainingPoint', status: false, quantity: 1},
+    {id: 5, name: 'Vệ sinh hàng tuần', type: 'weeklyCleanUpPoint', status: false, quantity: 1},
   ];
   selectedSupportEvents = [];
 
@@ -24,6 +24,9 @@ export class SupportActivityComponent implements OnInit {
   }
 
   ngOnInit() {
+    for (let i = 0; i < this.supportEvents.length; i++) {
+      this.supportEvents[i].status = false;
+    }
   }
 
 
@@ -31,16 +34,17 @@ export class SupportActivityComponent implements OnInit {
     this.dismiss();
   }
 
-  change(supportEvent) {
-    supportEvent.checked = !supportEvent.checked;
-    if (supportEvent.checked === true) {
-      this.selectedSupportEvents.push(supportEvent.type);
+  change(supportEvent, event) {
+    if (event.target.checked === true) {
+      supportEvent.status = true;
+      this.selectedSupportEvents.push(supportEvent);
     } else {
       const updateItem = this.selectedSupportEvents.find(this.findIndexToUpdate, supportEvent.type);
 
       const index = this.selectedSupportEvents.indexOf(updateItem);
 
-      this.selectedSupportEvents.splice(index, 1);
+      this.selectedSupportEvents.splice(supportEvent, 1);
+      supportEvent.status = false;
     }
 
   }
@@ -50,7 +54,10 @@ export class SupportActivityComponent implements OnInit {
   }
 
   addSupportEvent() {
-  console.log(this.selectedSupportEvents)
+    // for (let i = 0; i < this.selectedSupportEvents.length; i++) {
+    //
+    // }
+    console.log(this.selectedSupportEvents);
   }
 
 }
