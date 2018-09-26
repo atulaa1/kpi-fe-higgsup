@@ -1,0 +1,28 @@
+.clubButton{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.cancelButton {
+  margin-right: 5%;
+}
+.submitButton {
+  margin-left: 65%;
+  margin-right: 5%;
+}
+h5, h6 {
+  padding-top: 12px;
+}
+h5.requiredInput:after, h6:after {
+  content: " *";
+  color: red;
+}
+.formStruc {
+  margin-left: 4%;
+}
+.titleAlert {
+  nav{
+    margin: auto;
+    color: red;
+  }
+}
