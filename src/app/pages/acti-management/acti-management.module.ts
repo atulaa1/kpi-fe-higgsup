@@ -13,6 +13,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {TwoDigitDecimaNumberDirective} from '../../@core/directives/regex.directive';
 import {ActivitiesModule} from '../activities/activities.module';
 import {ClubActivityComponent} from '../activities/club-activity/club-activity.component';
+import {SupportActivityComponent} from '../activities/support-activity/support-activity.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import {ClubActivityComponent} from '../activities/club-activity/club-activity.c
   ],
   declarations: [ActiManagementComponent, CreateActiComponent, ConfirmActiComponent, SeminarComponent, ClubComponent,
     TeamBuildingComponent, SupportComponent, TwoDigitDecimaNumberDirective],
-  entryComponents: [SeminarComponent, ClubComponent, TeamBuildingComponent, SupportComponent, ClubActivityComponent],
+  entryComponents: [SeminarComponent, ClubComponent, TeamBuildingComponent, SupportComponent, ClubActivityComponent,
+    SupportActivityComponent],
   providers: [NgbActiveModal],
 })
 export class ActiManagementModule {

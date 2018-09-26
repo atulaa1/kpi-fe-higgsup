@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {NgbDateParserFormatter, NgbDateStruct, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 import {KpiDateFormatter} from '../../../modals/personal-info/kpi-date-formatter';
 import {FormControl} from '@angular/forms';

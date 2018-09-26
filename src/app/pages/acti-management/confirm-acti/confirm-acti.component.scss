@@ -1,16 +1,15 @@
 .search-inp {
   font-size: 20px;
-  position: relative;
   line-height: 43px;
   padding: 0px 10px;
   border-radius:10px ;
   max-width: 300px;
-  float: right;
+  margin: auto;
 }
 .searchIcon {
   position: absolute;
   top: 14px;
-  right: 25px;
+  right: 8px;
   color: #bee5eb;
   font-size: 20px;
 }
@@ -28,11 +27,11 @@
   margin-bottom: 0px;
 }
 th.titleField {
-  width: 30%;
+  width: 25%;
   text-align: center;
 }
 .infoUser {
-  width: 30%;
+  width: 25%;
   text-align: center;
   vertical-align: inherit;
   position: relative;
@@ -40,5 +39,10 @@ th.titleField {
 #myTable tr:hover {
   background-color: #bee5eb;
   cursor: pointer;
+}
+.relative{
+  position: relative;
+  max-width: 300px;
+  margin: auto;
 }
 
