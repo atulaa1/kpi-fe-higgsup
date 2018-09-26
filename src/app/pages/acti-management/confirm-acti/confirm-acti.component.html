@@ -23,7 +23,11 @@
       <tbody>
       <tr >
         <td class="infoUser">1</td>
-        <td (click)="open()" class="infoUser">Da bong giao huu</td>
+        <td (click)="open(content)" class="activity-creating">club Event
+          <ng-template let-c="close" let-d="dismiss" #content>
+            <ngx-club-activity [dismiss]="d"></ngx-club-activity>
+          </ng-template>
+        </td>
         <td class="infoUser">24/8/2018</td>
       </tr>
       </tbody>

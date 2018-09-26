@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ClubComponent} from './club/club.component';
+import {SupportComponent} from './confirmSupport/support.component';
+import {ClubActivityComponent} from '../../activities/club-activity/club-activity.component';
+
 
 @Component({
   selector: 'confirm-acti',
@@ -15,6 +17,6 @@ export class ConfirmActiComponent implements OnInit {
   }
 
   open() {
-    this.modalService.open(ClubComponent)
+    this.modalService.open(ClubActivityComponent,{backdrop: 'static', centered: true, size: 'lg'})
   }
 }
