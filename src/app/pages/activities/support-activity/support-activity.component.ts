@@ -2,9 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 import {KpiDateFormatter} from '../../../modals/personal-info/kpi-date-formatter';
 import {SupportService} from '../../../@core/services/support.service';
-import {Event} from '../../../@core/models/event.model';
-import {EventAdditionalConfig} from '../../../@core/models/eventAdditionalConfig.model';
-
 
 @Component({
   selector: 'ngx-support-activity',
@@ -14,39 +11,46 @@ import {EventAdditionalConfig} from '../../../@core/models/eventAdditionalConfig
 })
 export class SupportActivityComponent implements OnInit {
   @Input() dismiss;
-  showInput: boolean = false;
-  supportNumber: number = 0;
-  supportEvent: Event<EventAdditionalConfig>;
-  supportActivity = {
-    clearUp : null,
-    shopping : null,
-    supportSeminor : null,
-    cleaningWeek : null,
-    training : null,
-  }
+  supportEvents = [
+    {name: 'Dọn dẹp', type: 'cleanUpPoint', checked: false},
+    {name: 'Mua đồ', type: 'buyingStuffPoint', checked: false},
+    {name: 'Support Hội thảo', type: 'supportConferencePoint', checked: false},
+    {name: 'Training', type: 'trainingPoint', checked: false},
+    {name: 'Vệ sinh hàng tuần', type: 'weeklyCleanUpPoint', checked: false}
+  ];
+  selectedSupportEvents = [];
+
   constructor(private supportService: SupportService) {
   }
 
   ngOnInit() {
   }
 
+
   closeModal() {
     this.dismiss();
   }
 
-  onSubmit() {
+  change(supportEvent) {
+    supportEvent.checked = !supportEvent.checked;
+    if (supportEvent.checked === true) {
+      this.selectedSupportEvents.push(supportEvent.type);
+    } else {
+      const updateItem = this.selectedSupportEvents.find(this.findIndexToUpdate, supportEvent.type);
+
+      const index = this.selectedSupportEvents.indexOf(updateItem);
+
+      this.selectedSupportEvents.splice(index, 1);
+    }
 
   }
 
-  addSupport() {
-    this.supportService.createEventSupport(this.supportEvent).subscribe(response => {
-      this.supportEvent = response.data;
-    })
+  findIndexToUpdate(supportEvent) {
+    return supportEvent.type === this;
   }
 
-  openInputNumber() {
-    this.showInput = !this.showInput;
-    this.supportNumber = 1;
+  addSupportEvent() {
+  console.log(this.selectedSupportEvents)
   }
 
 }
