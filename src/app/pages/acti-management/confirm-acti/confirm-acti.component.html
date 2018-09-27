@@ -15,7 +15,7 @@
       <tr>
         <th class="titleField">STT</th>
         <th class="titleField text-left">Người tạo hoạt động</th>
-        <th class="titleField" (click)="test()">Ngày tạo hoạt động</th>
+        <th class="titleField" >Ngày tạo hoạt động</th>
         <th class="titleField">Trang thái</th>
       </tr>
       </thead>
@@ -28,7 +28,7 @@
         <td class="infoUser" >{{i+ 1}}</td>
         <td (click)="open(content)"  class="activity-creating">{{activities.name}}
           <ng-template let-c="close" let-d="dismiss" #content>
-            <ngx-club-activity [dismiss]="d" [transmissionActivities]="activities" ></ngx-club-activity>
+            <ngx-club-activity [dismiss]="d" [eventClubInfoCreated]="activities" ></ngx-club-activity>
           </ng-template>
         </td>
         <td class="infoUser">{{activities.createdDate}}</td>

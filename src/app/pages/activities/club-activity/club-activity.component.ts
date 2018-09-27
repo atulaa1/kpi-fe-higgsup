@@ -31,9 +31,6 @@ export class ClubActivityComponent implements OnInit {
   @Output() change = new EventEmitter<any>();
   startTime = {hour: 12, minute: 0o0};
   endTime = {hour: 12, minute: 0o0};
-  @Input() transmissionActivities;
-  startTime = {hour: 12, minute: 0o0, second: 0o0};
-  endTime = {hour: 12, minute: 0o0, second: 0o0};
   spinners: boolean = false;
   startDate;
   endDate;
