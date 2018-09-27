@@ -13,6 +13,7 @@ import {AccManagementsModule} from './acc-managements/acc-managements.module';
 import { ProjectManagementConfirmComponent } from './projectmanagement/project-management-confirm/project-management-confirm.component';
 import {ProjectmanagementModule} from './projectmanagement/projectmanagement.module';
 import {ActivitiesModule} from './activities/activities.module';
+import { UnauthorizationComponent } from './unauthorization/unauthorization.component';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -33,7 +34,7 @@ const PAGES_COMPONENTS = [
   ],
   declarations: [
     ...PAGES_COMPONENTS,
-    ProjectmanagementComponent, DialogConfirmationComponent, ProjectManagementConfirmComponent],
+    ProjectmanagementComponent, DialogConfirmationComponent, ProjectManagementConfirmComponent, UnauthorizationComponent],
   entryComponents: [DialogConfirmationComponent],
 })
 export class PagesModule {

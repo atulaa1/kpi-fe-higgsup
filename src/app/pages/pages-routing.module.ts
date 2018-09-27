@@ -4,15 +4,13 @@ import {NgModule} from '@angular/core';
 import {PagesComponent} from './pages.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {ActiManagementComponent} from './acti-management/acti-management.component';
-import {CreateActiComponent} from './acti-management/create-acti/create-acti.component';
-import {ConfirmActiComponent} from './acti-management/confirm-acti/confirm-acti.component';
 import {ProjectmanagementComponent} from './projectmanagement/projectmanagement.component';
 import {ListOfSurveyComponent} from './list-of-survey/list-of-survey.component';
-import {AccManagementComponent} from './acc-managements/acc-management/acc-management.component';
 import {AccManagementsComponent} from './acc-managements/acc-managements.component';
-import {AccManagementLateComponent} from './acc-managements/acc-management-late/acc-management-late.component';
 import {AuthGuard} from '../@core/services/auth.guard';
 import {ActivitiesComponent} from './activities/activities.component';
+import {AdminGuardService} from '../@core/services/admin.guard.service';
+import {UnauthorizationComponent} from './unauthorization/unauthorization.component';
 
 const routes: Routes = [{
   path: '',
@@ -35,7 +33,7 @@ const routes: Routes = [{
     {
       path: 'acti-management',
       component: ActiManagementComponent,
-      canActivate: [AuthGuard],
+      canActivate: [AuthGuard, AdminGuardService],
     },
     {
       path: 'project-management',
@@ -51,6 +49,10 @@ const routes: Routes = [{
       path: 'creating-activities',
       component: ActivitiesComponent,
       canActivate: [AuthGuard],
+    },
+    {
+      path: 'unauthorized',
+      component: UnauthorizationComponent,
     },
   ],
 }];

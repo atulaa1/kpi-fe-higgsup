@@ -26,6 +26,7 @@ import {FormsModule} from '@angular/forms';
 import {DataService} from './@core/services/data.service';
 import {AccManagementsModule} from './pages/acc-managements/acc-managements.module';
 import {PhoneNumberOnlyDirective} from './@core/directives/number.directive';
+import {NotFoundComponent} from './pages/not-found/not-found.component';
 
 const config: InputFileConfig = {
   sizeLimit: 100,
@@ -34,7 +35,7 @@ const config: InputFileConfig = {
 };
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, LogoutComponent, PersonalInfoComponent, PhoneNumberOnlyDirective],
+  declarations: [AppComponent, LoginComponent, LogoutComponent, PersonalInfoComponent, PhoneNumberOnlyDirective, NotFoundComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
