@@ -9,23 +9,23 @@
     <div class="container">
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Tên hoạt động</h5>
-        <input type="text" class="col-md-8 form-control">
+        <input type="text" class="col-md-8 form-control" [(ngModel)]= "transmissionActivities.name">
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Thời gian bắt đầu</h5>
-        <input type="text" class="col-md-5 form-control" [(ngModel)]="startDate" ngbDatepicker #startDay="ngbDatepicker"
+        <input type="text" class="col-md-5 form-control" [(ngModel)]="transmissionActivities.createdDate" ngbDatepicker #startDay="ngbDatepicker"
                (click)="startDay.toggle()">
         <ngb-timepicker class="col-md-3" [(ngModel)]="startTime" [spinners]="spinners" name="timeInput"></ngb-timepicker>
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Thời gian kết thúc</h5>
-        <input type="text" class="col-md-5 form-control" [(ngModel)]="endDate" ngbDatepicker
+        <input type="text" class="col-md-5 form-control" [(ngModel)]="transmissionActivities.endDate" ngbDatepicker
                #endDay="ngbDatepicker" (click)="endDay.toggle()">
         <ngb-timepicker class="col-md-3" [(ngModel)]="endTime" [spinners]="spinners" name="timeInput"></ngb-timepicker>
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4">Địa điểm</h5>
-        <input type="text" class="col-md-8 form-control">
+        <input type="text" class="col-md-8 form-control" [(ngModel)]="transmissionActivities.address">
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Thành viên tham gia</h5>

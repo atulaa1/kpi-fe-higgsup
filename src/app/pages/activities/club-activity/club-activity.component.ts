@@ -9,6 +9,7 @@ import {map, startWith} from 'rxjs/operators';
 import {UserService} from '../../../@core/services/user.service';
 import {User} from '../../../@core/models/user.model';
 import {ResponseUserDTO} from '../../../@core/models/responseUserDTO.model';
+import {ActivitiesConfirmService} from '../../../@core/services/activities-confirm.service';
 
 
 @Component({
@@ -18,7 +19,9 @@ import {ResponseUserDTO} from '../../../@core/models/responseUserDTO.model';
   providers: [{provide: NgbDateParserFormatter, useClass: KpiDateFormatter}],
 })
 export class ClubActivityComponent implements OnInit {
+
   @Input() dismiss;
+  @Input() transmissionActivities;
   startTime = {hour: 12, minute: 0o0, second: 0o0};
   endTime = {hour: 12, minute: 0o0, second: 0o0};
   spinners: boolean = false;
@@ -37,7 +40,7 @@ export class ClubActivityComponent implements OnInit {
 
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private activitiesConfirm: ActivitiesConfirmService) {
     this.filteredUsers = this.userCtrl.valueChanges.pipe(
       startWith(null),
       map((filteredUser: string | null) => filteredUser ? this._filter(filteredUser) : this.listUserName.slice()));
@@ -114,6 +117,7 @@ export class ClubActivityComponent implements OnInit {
         }
       }
     });
+    /*this.activitiesConfirm.currentMessage.subscribe(message => this.message = message);*/
   }
 
   closeModal() {

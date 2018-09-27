@@ -15,7 +15,7 @@
       <tr>
         <th class="titleField">STT</th>
         <th class="titleField text-left">Người tạo hoạt động</th>
-        <th class="titleField">Ngày tạo hoạt động</th>
+        <th class="titleField" (click)="test()">Ngày tạo hoạt động</th>
         <th class="titleField">Trang thái</th>
       </tr>
       </thead>
@@ -25,10 +25,10 @@
     <table class="table table-hover" id="myTable">
       <tbody>
       <tr *ngFor="let activities of listActivities,let i = index">
-        <td class="infoUser" *ngIf="activities.group.groupType.id != 1">{{i+ 1}}</td>
-        <td (click)="open(content)" *ngIf="activities.groupType.id==2" class="activity-creating">{{activities.name}}
+        <td class="infoUser" >{{i+ 1}}</td>
+        <td (click)="open(content)"  class="activity-creating">{{activities.name}}
           <ng-template let-c="close" let-d="dismiss" #content>
-            <ngx-club-activity [dismiss]="d"></ngx-club-activity>
+            <ngx-club-activity [dismiss]="d" [transmissionActivities]="activities" ></ngx-club-activity>
           </ng-template>
         </td>
         <td class="infoUser">{{activities.createdDate}}</td>

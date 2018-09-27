@@ -18,19 +18,30 @@ import {CreatedActivity} from '../../../@core/models/createdActivity.model';
 export class ConfirmActiComponent implements OnInit {
   listActivities: any;
   @Input() dismiss;
+  message: string;
+
   constructor(private modalService: NgbModal,
               private activitiesConfirm: ActivitiesConfirmService) {
   }
 
   ngOnInit() {
+
     this.activitiesConfirm.getListActivitiesConfirm().subscribe(response => {
       this.listActivities = response.data;
-      console.log(this.listActivities)
+      this.activitiesConfirm.changeMessage(this.listActivities)
+      this.activitiesConfirm.currentMessage.subscribe(message => this.message = message);
+      console.log(this.message)
     })
   }
+
   open(content) {
     this.modalService.open(content, {backdrop: 'static', centered: true, size: 'lg'});
   }
+
+  newMessage() {
+
+  }
+
   closeModal() {
     this.dismiss();
   }
