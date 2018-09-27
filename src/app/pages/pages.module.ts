@@ -28,6 +28,7 @@ const PAGES_COMPONENTS = [
     ListOfSurveyModule,
     AccManagementsModule,
     ProjectmanagementModule,
+    AccManagementsModule,
     ActivitiesModule,
   ],
   declarations: [

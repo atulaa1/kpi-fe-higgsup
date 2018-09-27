@@ -18,6 +18,8 @@ export class ActivitiesService {
 
   private createdActivitesUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
     + BaseConstant.standardServicePort.toString() + '/api/groups';
+  private createdEventUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
+    + BaseConstant.standardServicePort.toString() + '/api/events/employee';
   private httpOptions = this.httpService.setHeaderToken();
 
   getListActivities(): Observable<any> {
@@ -26,5 +28,8 @@ export class ActivitiesService {
   }
   getCreatedActivity(): Observable<any> {
     return this.http.get(this.createdActivitesUrl, this.httpOptions);
+  }
+  getCreatedEventUrl(): Observable<any> {
+    return this.http.get(this.createdEventUrl, this.httpOptions);
   }
 }

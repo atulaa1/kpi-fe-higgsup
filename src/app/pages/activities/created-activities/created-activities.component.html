@@ -7,7 +7,7 @@
             <input normalCharacterOnly oncopy='return false' onpaste='return false' [(ngModel)]="nameSearch"
                    class="form-control search-inp" type="text" id="myInput" (keyup)='handleKeyDown($event)'
                    placeholder="Tìm kiếm hoạt động:" title="Type in a name"/>
-            <span class="fas fa-search searchIcon" (click)='mySearchFunction()'></span>
+            <span class="fas fa-search searchIcon" (click)='searchActivities()'></span>
           </div>
         </div>
       </div>
@@ -25,44 +25,33 @@
       <div class="row ml-5 mr-5 tableScroll">
         <table class="table table-hover" id="myTable">
           <tbody>
-          <tr>
-            <td>1</td>
+          <tr *ngFor="let event of eventList; let i = index">
+            <td *ngIf="event.group.groupType.id !=3" name="numberOrder">{{i + 1}}</td>
 
             <!--Seminar-->
-            <td (click)="open(content)" class="activity-creating">Seminar
+            <td (click)="open(content)" *ngIf="event.group.groupType.id==1" class="activity-creating">{{event.name}}
+              <ng-template let-c="close" let-d="dismiss" #content>
+                <ngx-seminar-activity [dismiss]="d" [eventSeminarInfoCreated]="event" [groupId]="event.group.groupType.id"
+                                      (change)="onChange($event)"></ngx-seminar-activity>
+              </ng-template>
             </td>
-            <!--Type Created Activities-->
-            <td class="dateCreated">17/9/2018</td>
-          </tr>
-
-          <tr>
-            <td>2</td>
 
             <!--Club-->
-            <td (click)="open(content)" class="activity-creating">Câu lạc bộ 1
+            <td (click)="open(content)" *ngIf="event.group.groupType.id==2" class="activity-creating">{{event.name}}
+              <ng-template let-c="close" let-d="dismiss" #content>
+                <ngx-club-activity [dismiss]="d" [eventClubInfoCreated]="event" [groupId]="event.group.groupType.id"
+                                   (change)="onChange($event)"></ngx-club-activity>
+              </ng-template>
             </td>
-            <!--Type Created Activities-->
-            <td class="dateCreated">17/9/2018</td>
-          </tr>
-
-          <tr>
-            <td>3</td>
 
             <!--Support-->
-            <td (click)="open(content)" class="activity-creating">Support chung
+            <td (click)="open(content)" *ngIf="event.group.groupType.id==4" class="activity-creating">{{event.name}}
+              <ng-template let-c="close" let-d="dismiss" #content>
+                <ngx-support-activity [dismiss]="d"></ngx-support-activity>
+              </ng-template>
             </td>
             <!--Type Created Activities-->
-            <td class="dateCreated">17/9/2018</td>
-          </tr>
-
-          <tr>
-            <td>4</td>
-
-            <!--Club-->
-            <td (click)="open(content)" class="activity-creating">Câu lạc bộ 2
-            </td>
-            <!--Type Created Activities-->
-            <td class="dateCreated">17/9/2018</td>
+            <td class="dateCreated">{{event.createdDate}}</td>
           </tr>
           </tbody>
         </table>

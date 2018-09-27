@@ -4,10 +4,10 @@
       <div class="search">
         <div class="form-group row">
           <div class="col-sm-6 search-div">
-            <input normalCharacterOnly oncopy='return false' onpaste='return false' [(ngModel)]="nameSearch"
+            <input normalCharacterOnly oncopy='return false' (keyup)='handleKeyDown($event)' onpaste='return false' [(ngModel)]="nameSearch"
                    class="form-control search-inp" type="text" id="myInput" (keyup)='handleKeyDown($event)'
                    placeholder="Tìm kiếm hoạt động:" title="Type in a name"/>
-            <span class="fas fa-search searchIcon" (click)='mySearchFunction()'></span>
+            <span class="fas fa-search searchIcon" (click)='searchActivities()'></span>
           </div>
         </div>
       </div>
@@ -31,14 +31,14 @@
             <!--Seminar-->
             <td (click)="open(content)" *ngIf="group.groupType.id==1" class="activity-creating">{{group.name}}
               <ng-template let-c="close" let-d="dismiss" #content>
-                <ngx-seminar-activity [dismiss]="d"></ngx-seminar-activity>
+                <ngx-seminar-activity [dismiss]="d" [eventSeminarInfoCreating]="group"></ngx-seminar-activity>
               </ng-template>
             </td>
 
             <!--Club-->
             <td (click)="open(content)" *ngIf="group.groupType.id==2" class="activity-creating">{{group.name}}
               <ng-template let-c="close" let-d="dismiss" #content>
-                <ngx-club-activity [dismiss]="d"></ngx-club-activity>
+                <ngx-club-activity [dismiss]="d" [eventClubInfoCreating]="group"></ngx-club-activity>
               </ng-template>
             </td>
 
