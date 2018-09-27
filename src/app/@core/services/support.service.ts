@@ -24,10 +24,16 @@ export class SupportService {
   createSupport(support): Observable<any> {
     return this.http.post(this.supportUrl, support, this.httpOptions)
   }
+
   uppdateSuport(support): Observable<any> {
     return this.http.put(this.supportUrl, support, this.httpOptions)
   }
+
   createEventSupport(support): Observable<any> {
     return this.http.post(this.supportEventUrl, support, this.httpOptions)
+  }
+
+  updateEventSupport(support, id): Observable<any> {
+    return this.http.put(`${this.supportEventUrl}/${id}`, support, this.httpOptions)
   }
 }
