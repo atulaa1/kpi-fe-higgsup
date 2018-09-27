@@ -45,17 +45,18 @@ export class ClubActivityComponent implements OnInit {
   filteredUsers: Observable<Array<User>>;
   userClone: Array<any> = [];
   separatorKeysCodes: Array<number> = [ENTER, COMMA];
-
+  eventConfirmation = {status: null};
 
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = false;
-
+  isAdmin: boolean = false;
 
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
 
-  constructor(private userService: UserService, private clubService: ClubService, private activitiesService: ActivitiesService) {
+  constructor(private userService: UserService, private clubService: ClubService,
+              private activitiesConfirmService: ActivitiesConfirmService ) {
     this.userCtrl = new FormControl();
     this.filteredUsers = this.userCtrl.valueChanges
       .startWith(null)
@@ -156,10 +157,23 @@ export class ClubActivityComponent implements OnInit {
         this.hostName = this.eventClubInfoCreated.eventUserList[i].user.username;
       }
     }
+    const userRole: any = JSON.parse(localStorage.getItem('currentUser')).userRole.filter(role => role === 'ROLE_ADMIN');
+    if (userRole.length > 0) {
+      this.isAdmin = true;
+    }
   }
 
   closeModal() {
     this.dismiss();
+  }
+
+  onSubmitEvent(value) {
+    this.activitiesConfirmService.confirmEvent(this.eventConfirmation, this.eventClubInfoCreated.id).subscribe(response => {
+      if (response.status_code === 200) {
+        swal('Chúc Mừng!', 'thao tác thành công!', 'success');
+        this.dismiss();
+      }
+    });
   }
 
   onSubmit() {

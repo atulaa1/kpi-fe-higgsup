@@ -43,6 +43,7 @@ export class SupportActivityComponent implements OnInit {
   name: string;
   quantity: number;
   supportEvent: EventSupport = new EventSupport();
+  isAdmin: boolean = false;
 
   constructor(private supportService: SupportService) {
   }
@@ -59,6 +60,11 @@ export class SupportActivityComponent implements OnInit {
     this.dateCreated = this.dateCreated.slice(0, 10);
     const currentEndDate = new Date(this.reverse(this.dateCreated));
     this.startDate = this.convertDatetoNgbDateStruct(currentEndDate);
+
+    const userRole: any = JSON.parse(localStorage.getItem('currentUser')).userRole.filter(role => role === 'ROLE_ADMIN');
+    if (userRole.length > 0) {
+      this.isAdmin = true;
+    }
 
   }
 
@@ -93,6 +99,10 @@ export class SupportActivityComponent implements OnInit {
 
   closeModal() {
     this.dismiss();
+  }
+
+  onSubmitEvent() {
+
   }
 
   changeSelect(supportEvent, event) {

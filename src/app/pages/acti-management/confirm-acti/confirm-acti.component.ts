@@ -25,12 +25,10 @@ export class ConfirmActiComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.activitiesConfirm.getListActivitiesConfirm().subscribe(response => {
       this.listActivities = response.data;
-      this.activitiesConfirm.changeMessage(this.listActivities)
+      this.activitiesConfirm.changeMessage(this.listActivities);
       this.activitiesConfirm.currentMessage.subscribe(message => this.message = message);
-      console.log(this.message)
     })
   }
 

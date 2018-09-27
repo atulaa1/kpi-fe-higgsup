@@ -4,7 +4,7 @@
       <div class="relative">
         <input normalCharacterOnly
                class="form-control search-inp" type="text" id="myInput"
-               placeholder="Tìm kiếm Nhân Viên:" title="Type in a name"/>
+               placeholder="Tìm kiếm Hoạt Động:" title="Type in a name"/>
         <span class="fas fa-search searchIcon"></span>
       </div>
     </div>
@@ -26,9 +26,15 @@
       <tbody>
       <tr *ngFor="let activities of listActivities,let i = index">
         <td class="infoUser" >{{i+ 1}}</td>
-        <td (click)="open(content)"  class="activity-creating">{{activities.name}}
+        <td (click)="open(content)" *ngIf="activities.group.groupType.id==2" class="activity-creating">{{activities.name}}
           <ng-template let-c="close" let-d="dismiss" #content>
             <ngx-club-activity [dismiss]="d" [eventClubInfoCreated]="activities" ></ngx-club-activity>
+          </ng-template>
+        </td>
+        <td (click)="open(content)" *ngIf="activities.group.groupType.id==4" class="activity-creating">{{activities.name}}
+          <ng-template let-c="close" let-d="dismiss" #content>
+            <ngx-support-activity [dismiss]="d" [listSelectedEvent]="activities.additionalConfig" [dateCreated]="activities.beginDate" [eventSupportInfoCreated]="activities" >
+            </ngx-support-activity>
           </ng-template>
         </td>
         <td class="infoUser">{{activities.createdDate}}</td>
