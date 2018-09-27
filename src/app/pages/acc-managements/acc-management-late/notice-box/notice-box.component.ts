@@ -8,6 +8,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class NoticeBoxComponent implements OnInit {
 
   @Input() msg: string;
+  @Input() title: string;
+  @Input() errorContent: string;
   @Input() dismiss;
   @Output() confirmation = new EventEmitter<boolean>();
 

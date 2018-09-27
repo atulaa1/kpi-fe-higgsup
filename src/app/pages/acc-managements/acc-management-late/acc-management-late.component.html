@@ -1,13 +1,13 @@
 <div class="container">
   <div class="row ml-5 mr-5">
     <div class="col-md-6">
-      <button class="butn" (click)="lateFileImport.click()">Import a file</button>
-      <input type="file" name="myfile" (change)="uploadImportFile(lateFileImport.files)"
+      <button class="butn" (click)="lateFileImport.click()">Tải lên</button>
+      <input type="file" name="myfile" (change)="uploadImportFile(lateFileImport.files, content)" [disabled]="isEditLateComing"
              accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
              #lateFileImport hidden="true">
     </div>
     <div class="col-md-6">
-      <input normalCharacterOnly name="word" [(ngModel)]="word" (keyup)='handleKeyDown($event)'
+      <input normalCharacterOnly name="word" [(ngModel)]="word" (keyup)='handleKeyDown($event)' [disabled]="isEditLateComing"
              class="form-control search-inp" type="text" id="myInput"
              placeholder="Tìm kiếm Nhân Viên:" title="Type in a name"/>
       <span class="fas fa-search searchIcon" (click)="searchInfo()"></span>
@@ -35,8 +35,8 @@
         <td class="emailTitle">{{late.user.email}}</td>
         <td class="text-center lateTitle">
           <span [hidden]="late.id === this.idLateInfoEdit">{{late.lateTimes}}</span>
-          <input type="number" class="lateComingTimeBox" [hidden]="late.id !== this.idLateInfoEdit"
-                 [value]="newLateComingTime" min="0" (keypress)="blockInputNagativeNumber($event, content, late, updateLateComingTime.value)" #updateLateComingTime>
+          <input type="number" class="lateComingTimeBox" [hidden]="late.id !== this.idLateInfoEdit" normalCharacterOnly
+                 [value]="newLateComingTime" min="0" (change)="blockInputNagativeNumber($event, content, late, updateLateComingTime.value)" #updateLateComingTime>
 
         </td>
         <td class="manipulationTitle">
@@ -52,5 +52,5 @@
   <p *ngIf='showMsg' class="text-center mt-5" name='notFoundMsg'>Không tìm thấy kết quả phù hợp!</p>
 </div>
 <ng-template let-c="close" let-d="dismiss" #content>
-  <notice-box [dismiss]="d" (confirmation)="updateLateComingData($event)" [msg]="msgConfirmUpdate"></notice-box>
+  <notice-box [dismiss]="d" (confirmation)="updateLateComingData($event)" [msg]="msgConfirmUpdate" [errorContent]="errorContent"></notice-box>
 </ng-template>

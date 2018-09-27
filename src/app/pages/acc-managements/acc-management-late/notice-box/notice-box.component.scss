@@ -6,3 +6,11 @@ h5.text-center {
   padding-top: 20px;
   padding-bottom: 60px;
 }
+
+.warningContent {
+  margin-left: 120px;
+  margin-right: 80px;
+  max-height: 150px;
+  overflow-y: auto;
+  overflow-wrap: break-word;
+}
