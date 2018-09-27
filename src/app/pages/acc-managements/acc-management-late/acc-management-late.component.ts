@@ -128,6 +128,8 @@ export class AccManagementLateComponent implements OnInit {
   handleKeyDown(event: any) {
     if (event.keyCode === 13) {
       this.searchInfo();
+    }else if (this.word === '') {
+      this.searchInfo();
     }
   }
 }

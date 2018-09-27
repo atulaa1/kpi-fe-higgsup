@@ -31,7 +31,7 @@ export class ClubActivityComponent implements OnInit {
   endTime = {hour: 12, minute: 0o0};
   spinners: boolean = false;
   startDate;
-  endDate: NgbDateStruct;
+  endDate;
   listUser: Array<User>;
   listCloneUser: Array<User>;
   eventClub: Event = new Event();

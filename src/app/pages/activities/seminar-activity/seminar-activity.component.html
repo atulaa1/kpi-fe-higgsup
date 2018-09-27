@@ -9,49 +9,52 @@
     <div class="container">
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Tên hoạt động</h5>
-        <input type="text" class="col-md-8 form-control">
+        <input type="text" class="col-md-8 form-control" [(ngModel)]="eventName">
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Thời gian bắt đầu</h5>
-        <input type="text" class="col-md-5 form-control" [(ngModel)]="startDate" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()">
-        <ngb-timepicker class="col-md-3" [(ngModel)]="startTime" [spinners]="spinners" name="timeInput"></ngb-timepicker>
+        <input type="text" class="col-md-5 form-control" [(ngModel)]="startDate" ngbDatepicker #startDay="ngbDatepicker"
+               (click)="startDay.toggle()">
+        <ngb-timepicker class="col-md-3" [(ngModel)]="startTime" [spinners]="spinners"
+                        name="timeInput"></ngb-timepicker>
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Thời gian kết thúc</h5>
-        <input type="text" class="col-md-5 form-control" [(ngModel)]="endDate" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()">
+        <input type="text" class="col-md-5 form-control" [(ngModel)]="endDate" ngbDatepicker #endDay="ngbDatepicker"
+               (click)="endDay.toggle()">
         <ngb-timepicker class="col-md-3" [(ngModel)]="endTime" [spinners]="spinners" name="timeInput"></ngb-timepicker>
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Host</h5>
-        <div class="col-md-8 mat-app-background basic-container form-control"  name="host">
+        <div class="col-md-8 mat-app-background basic-container form-control" name="host">
           <mat-form-field class="example-chip-list">
-            <mat-chip-list #chipList>
+            <mat-chip-list #chipListHost>
               <mat-chip
-                *ngFor="let fruit of fruits"
+                *ngFor="let user of userCloneHost; let i of index"
                 [selectable]="selectable"
                 [removable]="removable"
-                (removed)="remove(fruit)">
+                (removed)="removeHost(user, i)">
                 <mat-icon matChipAvatar name="iconAvatar">
-                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJdtQSpRDlcriWT5zZS-8LR-kSVmxZ3QV-suuM7yn1c5t_2VCU" name="iconMem">
+                  <img src="{{user.avatar}}" name="iconMem">
                 </mat-icon>
-                {{fruit}}
+                {{user.fullName}}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
               </mat-chip>
               <input
-                #fruitInput
-                [formControl]="fruitCtrl"
-                [matAutocomplete]="auto"
-                [matChipInputFor]="chipList"
+                #userHostInput
+                [formControl]="userHostCtrl"
+                [matAutocomplete]="autoHost"
+                [matChipInputFor]="chipListHost"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 [matChipInputAddOnBlur]="addOnBlur"
-                (matChipInputTokenEnd)="add($event)">
+                (matChipInputTokenEnd)="addHost($event)">
             </mat-chip-list>
-            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-autocomplete #autoHost="matAutocomplete" (optionSelected)="selectedHost($event)">
 
-              <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+              <mat-option *ngFor="let user of filteredHostUsers | async;" [value]="user">
 
-                <img name="avatarMem" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJdtQSpRDlcriWT5zZS-8LR-kSVmxZ3QV-suuM7yn1c5t_2VCU">
-                {{fruit}}
+                <img name="avatarMem" src="{{user.avatar}}">
+                {{user.fullName}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
@@ -59,35 +62,35 @@
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Người tham gia</h5>
-        <div class="col-md-8 mat-app-background basic-container form-control"  name="participant">
+        <div class="col-md-8 mat-app-background basic-container form-control" name="participant">
           <mat-form-field class="example-chip-list">
-            <mat-chip-list #chipList>
+            <mat-chip-list #chipListParticipant>
               <mat-chip
-                *ngFor="let fruit of fruits"
+                *ngFor="let user of userCloneParticipant; let i of index"
                 [selectable]="selectable"
                 [removable]="removable"
-                (removed)="remove(fruit)">
+                (removed)="removeParticipant(user, i)">
                 <mat-icon matChipAvatar name="iconAvatar">
-                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJdtQSpRDlcriWT5zZS-8LR-kSVmxZ3QV-suuM7yn1c5t_2VCU" name="iconMem">
+                  <img src="{{user.avatar}}" name="iconMem">
                 </mat-icon>
-                {{fruit}}
+                {{user.fullName}}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
               </mat-chip>
               <input
-                #fruitInput
-                [formControl]="fruitCtrl"
-                [matAutocomplete]="auto"
-                [matChipInputFor]="chipList"
+                #userParticipantInput
+                [formControl]="userParticipantCtrl"
+                [matAutocomplete]="autoParticipant"
+                [matChipInputFor]="chipListParticipant"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 [matChipInputAddOnBlur]="addOnBlur"
-                (matChipInputTokenEnd)="add($event)">
+                (matChipInputTokenEnd)="addParticipant($event)">
             </mat-chip-list>
-            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-autocomplete #autoParticipant="matAutocomplete" (optionSelected)="selectedParticipant($event)">
 
-              <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+              <mat-option *ngFor="let user of filteredParticipantUsers | async;" [value]="user">
 
-                <img name="avatarMem" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJdtQSpRDlcriWT5zZS-8LR-kSVmxZ3QV-suuM7yn1c5t_2VCU">
-                {{fruit}}
+                <img name="avatarMem" src="{{user.avatar}}">
+                {{user.fullName}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
@@ -95,35 +98,35 @@
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4">Dự thính</h5>
-        <div class="col-md-8 mat-app-background basic-container form-control"  name="listener">
+        <div class="col-md-8 mat-app-background basic-container form-control" name="listener">
           <mat-form-field class="example-chip-list">
-            <mat-chip-list #chipList>
+            <mat-chip-list #chipListListener>
               <mat-chip
-                *ngFor="let fruit of fruits"
+                *ngFor="let user of userCloneListener; let i of index"
                 [selectable]="selectable"
                 [removable]="removable"
-                (removed)="remove(fruit)">
+                (removed)="removeListener(user, i)">
                 <mat-icon matChipAvatar name="iconAvatar">
-                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJdtQSpRDlcriWT5zZS-8LR-kSVmxZ3QV-suuM7yn1c5t_2VCU" name="iconMem">
+                  <img src="{{user.avatar}}" name="iconMem">
                 </mat-icon>
-                {{fruit}}
+                {{user.fullName}}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
               </mat-chip>
               <input
-                #fruitInput
-                [formControl]="fruitCtrl"
-                [matAutocomplete]="auto"
-                [matChipInputFor]="chipList"
+                #userListenerInput
+                [formControl]="userListenerCtrl"
+                [matAutocomplete]="autoListener"
+                [matChipInputFor]="chipListListener"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 [matChipInputAddOnBlur]="addOnBlur"
-                (matChipInputTokenEnd)="add($event)">
+                (matChipInputTokenEnd)="addListener($event)">
             </mat-chip-list>
-            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-autocomplete #autoListener="matAutocomplete" (optionSelected)="selectedListener($event)">
 
-              <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+              <mat-option *ngFor="let user of filteredListenerUsers | async;" [value]="user">
 
-                <img name="avatarMem" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJdtQSpRDlcriWT5zZS-8LR-kSVmxZ3QV-suuM7yn1c5t_2VCU">
-                {{fruit}}
+                <img name="avatarMem" src="{{user.avatar}}">
+                {{user.fullName}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
@@ -131,7 +134,8 @@
       </div>
       <div class="row mt-5">
         <div class="groupButton">
-          <button class="btn btn-hero-success saveButton">Lưu</button>
+          <button class="btn btn-hero-success saveButton" *ngIf="groupId === null" (click)="addSeminarEvent()">Lưu</button>
+          <button class="btn btn-hero-success saveButton" *ngIf="groupId != null" (click)="updateSeminarEvent($event)">Lưu</button>
           <button class="btn btn-hero-warning" (click)="closeModal()">Huỷ</button>
         </div>
       </div>
