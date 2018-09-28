@@ -115,7 +115,7 @@ export class AccManagementLateComponent implements OnInit {
     }
   }
 
-  blockInputNagativeNumber(event, content, lateInfo: LateInfo, updatedLateComingTime) {
+  inputLateComingTimes(event, content, lateInfo: LateInfo, updatedLateComingTime) {
     if (event.keyCode === 13) {
       this.openConfirmUpdateLateComingData(content, lateInfo, updatedLateComingTime);
     }

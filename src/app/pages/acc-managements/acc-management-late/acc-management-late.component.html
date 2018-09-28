@@ -36,7 +36,7 @@
         <td class="text-center lateTitle">
           <span [hidden]="late.id === this.idLateInfoEdit">{{late.lateTimes}}</span>
           <input type="number" class="lateComingTimeBox" [hidden]="late.id !== this.idLateInfoEdit" normalCharacterOnly
-                 [value]="newLateComingTime" min="0" (change)="blockInputNagativeNumber($event, content, late, updateLateComingTime.value)" #updateLateComingTime>
+                 [value]="newLateComingTime" min="0" (keypress)="inputLateComingTimes($event, content, late, updateLateComingTime.value)" #updateLateComingTime>
 
         </td>
         <td class="manipulationTitle">
