@@ -45,7 +45,7 @@
             <!--Support-->
             <td (click)="open(content)" *ngIf="group.groupType.id==4" class="activity-creating">{{group.name}}
               <ng-template let-c="close" let-d="dismiss" #content>
-                <ngx-support-activity [dismiss]="d"></ngx-support-activity>
+                <ngx-support-activity [dismiss]="d" [eventSupportInfoCreating]="group"></ngx-support-activity>
               </ng-template>
             </td>
 
