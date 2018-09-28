@@ -31,7 +31,7 @@ export class ConfirmActiComponent implements OnInit {
     this.activitiesConfirm.getListActivitiesConfirm().subscribe(response => {
       this.listActivities = response.data;
       this.activitiesConfirm.changeMessage(this.listActivities);
-      this.listActivitiesClone = Object.assign(this.listActivities)
+      this.listActivitiesClone = Object.assign(this.listActivities);
       this.activitiesConfirm.currentMessage.subscribe(message => this.message = message);
     })
   }

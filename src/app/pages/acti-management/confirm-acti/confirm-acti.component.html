@@ -2,10 +2,10 @@
   <div class="row">
     <div class="col-md-12">
       <div class="relative">
-        <input normalCharacterOnly [(ngModel)]="nameSearch" (click)='searchConfirmActi()'
+        <input normalCharacterOnly [(ngModel)]="nameSearch" (keyup)='handleKeyDown($event)'
                class="form-control search-inp" type="text" id="myInput"
                placeholder="Tìm kiếm Hoạt Động:" title="Type in a name"/>
-        <span class="fas fa-search searchIcon"></span>
+        <span class="fas fa-search searchIcon"  (click)='searchConfirmActi()'></span>
       </div>
     </div>
   </div>
@@ -46,4 +46,5 @@
       </tbody>
     </table>
   </div>
+  <p *ngIf='showMsg' class="text-center mt-5" name='notFoundMsg'>Không tìm thấy kết quả phù hợp!</p>
 </div>
