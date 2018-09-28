@@ -6,6 +6,7 @@ import {Group} from '../../../@core/models/group.model';
 import {Activity} from '../../../@core/models/activity.model';
 import {ResponseEventDTO} from '../../../@core/models/responseEventDTO.model';
 import {EventSupport} from '../../../@core/models/eventSupport.model';
+import {ActivitiesConfirmService} from '../../../@core/services/activities-confirm.service';
 
 @Component({
   selector: 'ngx-support-activity',
@@ -17,10 +18,11 @@ export class SupportActivityComponent implements OnInit {
   @Input() dismiss;
   @Input() eventSupportInfoCreating;
   @Input() eventSupportInfoCreated;
-  @Input() groupId;
+  @Input() groupId: number = null;
   @Input() dateCreated: string = '';
   @Input() listSelectedEvent = [];
   @Output() change = new EventEmitter<any>();
+  eventConfirmation = {status: null};
   supportEvents = [
     {type: 'Dọn dẹp', name: 'cleanUpPoint', status: false, quantity: 1},
     {type: 'Mua đồ', name: 'buyingStuffPoint', status: false, quantity: 1},
@@ -45,9 +47,27 @@ export class SupportActivityComponent implements OnInit {
   supportEvent: EventSupport = new EventSupport();
   isAdmin: boolean = false;
 
-  constructor(private supportService: SupportService) {
+  constructor(private supportService: SupportService, private activitiesConfirmService: ActivitiesConfirmService) {
   }
-
+  onSubmitEvent(value) {
+    this.eventConfirmation.status = value;
+    this.activitiesConfirmService.confirmEvent(this.eventConfirmation, this.eventSupportInfoCreated.id).subscribe(response => {
+      if (response.status_code === 200) {
+        swal('Chúc Mừng!', 'Thao tác thành công!', 'success');
+        this.change.emit(value);
+        this.dismiss();
+      }else if (response.status_code === 903) {
+        swal('Xin lỗi', 'status của event không thể được null!', 'error');
+        this.dismiss();
+      }else if (response.status_code === 900) {
+        swal('Xin lỗi', 'không tìm thấy event bởi id!', 'error')
+      }else if (response.status_code === 907) {
+        swal('Xin lỗi', 'event đã được xác nhận hoặc hủy!', 'error')
+      }else if (response.status_code === 999) {
+        swal('Xin lỗi', 'Lỗi hệ thống , liên hệ admin!', 'error')
+      }
+    });
+  }
   ngOnInit() {
     this.supportEvents.forEach(value => {
       const supportEvents: any = this.listSelectedEvent.filter(value1 => value1.name === value.name);
@@ -60,7 +80,6 @@ export class SupportActivityComponent implements OnInit {
     this.dateCreated = this.dateCreated.slice(0, 10);
     const currentEndDate = new Date(this.reverse(this.dateCreated));
     this.startDate = this.convertDatetoNgbDateStruct(currentEndDate);
-
     const userRole: any = JSON.parse(localStorage.getItem('currentUser')).userRole.filter(role => role === 'ROLE_ADMIN');
     if (userRole.length > 0) {
       this.isAdmin = true;
@@ -101,9 +120,6 @@ export class SupportActivityComponent implements OnInit {
     this.dismiss();
   }
 
-  onSubmitEvent() {
-
-  }
 
   changeSelect(supportEvent, event) {
     if (event.target.checked === true) {

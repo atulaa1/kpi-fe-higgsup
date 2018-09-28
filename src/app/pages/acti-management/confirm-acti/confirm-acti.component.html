@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="relative">
-        <input normalCharacterOnly
+        <input normalCharacterOnly [(ngModel)]="nameSearch" (click)='searchConfirmActi()'
                class="form-control search-inp" type="text" id="myInput"
                placeholder="Tìm kiếm Hoạt Động:" title="Type in a name"/>
         <span class="fas fa-search searchIcon"></span>
@@ -28,12 +28,13 @@
         <td class="infoUser" >{{i+ 1}}</td>
         <td (click)="open(content)" *ngIf="activities.group.groupType.id==2" class="activity-creating">{{activities.name}}
           <ng-template let-c="close" let-d="dismiss" #content>
-            <ngx-club-activity [dismiss]="d" [eventClubInfoCreated]="activities" ></ngx-club-activity>
+            <ngx-club-activity [dismiss]="d" [eventClubInfoCreated]="activities" (change)="onChange($event)"></ngx-club-activity>
           </ng-template>
         </td>
         <td (click)="open(content)" *ngIf="activities.group.groupType.id==4" class="activity-creating">{{activities.name}}
           <ng-template let-c="close" let-d="dismiss" #content>
-            <ngx-support-activity [dismiss]="d" [listSelectedEvent]="activities.additionalConfig" [dateCreated]="activities.beginDate" [eventSupportInfoCreated]="activities" >
+            <ngx-support-activity [dismiss]="d"  [listSelectedEvent]="activities.additionalConfig"
+                                  (change)="onChange($event)" [eventSupportInfoCreated]="activities" [dateCreated]="activities.beginDate">
             </ngx-support-activity>
           </ng-template>
         </td>

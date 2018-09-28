@@ -54,9 +54,8 @@ export class ClubActivityComponent implements OnInit {
   isAdmin: boolean = false;
 
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
-
   constructor(private userService: UserService, private clubService: ClubService,
-              private activitiesConfirmService: ActivitiesConfirmService ) {
+              private activitiesConfirmService: ActivitiesConfirmService) {
     this.userCtrl = new FormControl();
     this.filteredUsers = this.userCtrl.valueChanges
       .startWith(null)
@@ -168,10 +167,21 @@ export class ClubActivityComponent implements OnInit {
   }
 
   onSubmitEvent(value) {
+    this.eventConfirmation.status = value;
     this.activitiesConfirmService.confirmEvent(this.eventConfirmation, this.eventClubInfoCreated.id).subscribe(response => {
       if (response.status_code === 200) {
         swal('Chúc Mừng!', 'thao tác thành công!', 'success');
+        this.change.emit(value);
         this.dismiss();
+      }else if (response.status_code === 903) {
+        swal('Xin lỗi', 'status của event không thể được null!', 'error');
+        this.dismiss();
+      }else if (response.status_code === 900) {
+        swal('Xin lỗi', 'không tìm thấy event bởi id!', 'error')
+      }else if (response.status_code === 907) {
+        swal('Xin lỗi', 'event đã được xác nhận hoặc hủy!', 'error')
+      }else if (response.status_code === 999) {
+        swal('Xin lỗi', 'Lỗi hệ thống , liên hệ admin!', 'error')
       }
     });
   }

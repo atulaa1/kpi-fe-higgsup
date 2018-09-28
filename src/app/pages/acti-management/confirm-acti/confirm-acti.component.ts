@@ -17,8 +17,11 @@ import {CreatedActivity} from '../../../@core/models/createdActivity.model';
 })
 export class ConfirmActiComponent implements OnInit {
   listActivities: any;
+  listActivitiesClone: any;
   @Input() dismiss;
   message: string;
+  nameSearch: string;
+  showMsg: boolean = false;
 
   constructor(private modalService: NgbModal,
               private activitiesConfirm: ActivitiesConfirmService) {
@@ -28,6 +31,7 @@ export class ConfirmActiComponent implements OnInit {
     this.activitiesConfirm.getListActivitiesConfirm().subscribe(response => {
       this.listActivities = response.data;
       this.activitiesConfirm.changeMessage(this.listActivities);
+      this.listActivitiesClone = Object.assign(this.listActivities)
       this.activitiesConfirm.currentMessage.subscribe(message => this.message = message);
     })
   }
@@ -36,8 +40,33 @@ export class ConfirmActiComponent implements OnInit {
     this.modalService.open(content, {backdrop: 'static', centered: true, size: 'lg'});
   }
 
-  newMessage() {
+  onChange($event) {
+    this.activitiesConfirm.getListActivitiesConfirm().subscribe(response => {
+      if (response.status_code === 200) {
+        this.listActivities = response.data;
+      }
+    });
+  }
 
+  handleKeyDown(event: any) {
+    if (event.keyCode === 13) {
+      this.searchConfirmActi();
+    } else if (this.nameSearch === '') {
+      this.searchConfirmActi();
+    }
+  }
+
+  searchName(activities) {
+    return activities.name.toUpperCase().indexOf(this.nameSearch.toUpperCase()) >= 0;
+  }
+
+  searchConfirmActi() {
+    this.showMsg = false;
+    this.listActivities = Object.assign(this.listActivitiesClone);
+    this.listActivities = this.listActivities.filter(activitie => this.searchName(activitie));
+    if (this.listActivities.length === 0) {
+      this.showMsg = true;
+    }
   }
 
   closeModal() {
