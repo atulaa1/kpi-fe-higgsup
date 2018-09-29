@@ -11,12 +11,7 @@ import {ResponseEventDTO} from '../models/responseEventDTO.model';
   providedIn: 'root',
 })
 export class ActivitiesConfirmService {
-  private messageSource = new BehaviorSubject('message 123');
-  currentMessage = this.messageSource.asObservable();
 
-  changeMessage(message: string) {
-    this.messageSource.next(message)
-  }
 
   constructor(private http: HttpClient, private cookieService: CookieService, private httpService: HttpService) {
   }

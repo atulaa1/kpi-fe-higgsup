@@ -170,7 +170,7 @@ export class ClubActivityComponent implements OnInit {
     this.eventConfirmation.status = value;
     this.activitiesConfirmService.confirmEvent(this.eventConfirmation, this.eventClubInfoCreated.id).subscribe(response => {
       if (response.status_code === 200) {
-        swal('Chúc Mừng!', 'thao tác thành công!', 'success');
+        swal('Chúc Mừng!', 'Thao tác thành công!', 'success');
         this.change.emit(value);
         this.dismiss();
       }else if (response.status_code === 903) {
