@@ -19,7 +19,7 @@ export class ActivitiesService {
   private createdActivitesUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
     + BaseConstant.standardServicePort.toString() + '/api/groups';
   private createdEventUrl = BaseConstant.protocol.toString() + BaseConstant.server.toString()
-    + BaseConstant.standardServicePort.toString() + '/api/events/employee';
+    + BaseConstant.standardServicePort.toString() + '/api/events/created-by-user';
   private httpOptions = this.httpService.setHeaderToken();
 
   getListActivities(): Observable<any> {
