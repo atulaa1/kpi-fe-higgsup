@@ -77,7 +77,9 @@ export class AccManagementLateComponent implements OnInit {
         }
       }
       this.errorContent = (msgColumn === '') ? msgData : msgColumn;
-      this.bsModal.open(content, {backdrop: 'static', centered: true});
+      if (this.errorContent !== '' && this.errorContent !== null) {
+        this.bsModal.open(content, {backdrop: 'static', centered: true});
+      }
     })
   }
 
