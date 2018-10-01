@@ -1,5 +1,5 @@
-import {Component, Input, OnInit, ElementRef, ViewChild, Output, EventEmitter} from '@angular/core';
-import {NgbDateParserFormatter, NgbDateStruct, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {KpiDateFormatter} from '../../../modals/personal-info/kpi-date-formatter';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
@@ -15,7 +15,6 @@ import {UserType} from '../../../@core/models/userType.model';
 import {Activity} from '../../../@core/models/activity.model';
 import {Group} from '../../../@core/models/group.model';
 import {ClubService} from '../../../@core/services/club.service';
-import {ActivitiesService} from '../../../@core/services/activities.service';
 
 @Component({
   selector: 'ngx-club-activity',
@@ -54,6 +53,7 @@ export class ClubActivityComponent implements OnInit {
   isAdmin: boolean = false;
 
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
+
   constructor(private userService: UserService, private clubService: ClubService,
               private activitiesConfirmService: ActivitiesConfirmService) {
     this.userCtrl = new FormControl();
@@ -93,13 +93,34 @@ export class ClubActivityComponent implements OnInit {
   }
 
   remove(fullName, i): void {
+    let users: Array<User> = [];
+    this.filteredUsers.subscribe(value => users = value.filter(value1 => value1 ));
+    users.push(Object.assign(this.userClone[i]));
+    this.filteredUsers = this.setFilteredUsers(users);
     this.userClone.splice(i, 1);
+
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.userClone.push(event.option.value);
+    let users: Array<User> = [];
+
+    this.filteredUsers.subscribe(value => users = value.filter(value1 => value1.username !== event.option.value.username));
+    this.filteredUsers = this.setFilteredUsers(users);
+
     this.userInput.nativeElement.value = '';
     this.userCtrl.setValue(null);
+  }
+
+  setFilteredUsers(users: Array<User>) {
+    this.userCtrl = new FormControl();
+    let usersObservable: Observable<Array<User>>;
+    usersObservable = this.userCtrl.valueChanges
+      .startWith(null)
+      .map(user => user && typeof user === 'object' ? user.fullName : user)
+      .map(user => user ? users.filter(user1 => user1.fullName.toLowerCase().indexOf(user.toLowerCase()) === 0)
+        : users);
+    return usersObservable;
   }
 
   private convertDatetoNgbDateStruct(date: Date): NgbDateStruct {
@@ -173,14 +194,14 @@ export class ClubActivityComponent implements OnInit {
         swal('Chúc Mừng!', 'Thao tác thành công!', 'success');
         this.change.emit(value);
         this.dismiss();
-      }else if (response.status_code === 903) {
+      } else if (response.status_code === 903) {
         swal('Xin lỗi', 'status của event không thể được null!', 'error');
         this.dismiss();
-      }else if (response.status_code === 900) {
+      } else if (response.status_code === 900) {
         swal('Xin lỗi', 'không tìm thấy event bởi id!', 'error')
-      }else if (response.status_code === 907) {
+      } else if (response.status_code === 907) {
         swal('Xin lỗi', 'event đã được xác nhận hoặc hủy!', 'error')
-      }else if (response.status_code === 999) {
+      } else if (response.status_code === 999) {
         swal('Xin lỗi', 'Lỗi hệ thống , liên hệ admin!', 'error')
       }
     });
