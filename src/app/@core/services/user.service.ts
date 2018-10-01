@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject} from 'rxjs/Rx';
 import {User} from '../models/user.model';
@@ -29,7 +29,8 @@ export class UserService {
         this.user = response.data;
         this.userSource.next(this.user);
         const user = JSON.stringify(this.user);
-        localStorage.setItem('currentUser', user)
+        localStorage.setItem('currentUser', user);
+        this.user.token = this.cookieService.get('Authorization');
       },
     );
   }
