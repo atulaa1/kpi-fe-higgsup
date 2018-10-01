@@ -31,21 +31,21 @@
             <!--Seminar-->
             <td (click)="open(content)" *ngIf="group.groupType.id==1" class="activity-creating">{{group.name}}
               <ng-template let-c="close" let-d="dismiss" #content>
-                <ngx-seminar-activity [dismiss]="d" [eventSeminarInfoCreating]="group"></ngx-seminar-activity>
+                <ngx-seminar-activity [dismiss]="d" [eventSeminarInfoCreating]="group" [activityName]="group.name"></ngx-seminar-activity>
               </ng-template>
             </td>
 
             <!--Club-->
             <td (click)="open(content)" *ngIf="group.groupType.id==2" class="activity-creating">{{group.name}}
               <ng-template let-c="close" let-d="dismiss" #content>
-                <ngx-club-activity [dismiss]="d" [eventClubInfoCreating]="group"></ngx-club-activity>
+                <ngx-club-activity [dismiss]="d" [eventClubInfoCreating]="group" [activityName]="group.name"></ngx-club-activity>
               </ng-template>
             </td>
 
             <!--Support-->
             <td (click)="open(content)" *ngIf="group.groupType.id==4" class="activity-creating">{{group.name}}
               <ng-template let-c="close" let-d="dismiss" #content>
-                <ngx-support-activity [dismiss]="d" [eventSupportInfoCreating]="group"></ngx-support-activity>
+                <ngx-support-activity [dismiss]="d" [eventSupportInfoCreating]="group" [activityName]="group.name"></ngx-support-activity>
               </ng-template>
             </td>
 

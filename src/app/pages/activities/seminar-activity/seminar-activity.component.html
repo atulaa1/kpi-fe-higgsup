@@ -1,6 +1,6 @@
 <div class="container">
   <div class="modal-header modal-lg">
-    <h4 class="mt-2">SEMINAR</h4>
+    <h4 class="mt-2">{{activityName}}</h4>
     <button type="button" class="close pull-right cus-btn" aria-label="Close" (click)="closeModal()">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -134,7 +134,7 @@
       </div>
       <div class="row mt-5">
         <div class="groupButton">
-          <button class="btn btn-hero-success saveButton" *ngIf="groupId === null" (click)="addSeminarEvent()">Lưu</button>
+          <button class="btn btn-hero-success saveButton" *ngIf="groupId === null" (click)="addSeminarEvent($event)">Lưu</button>
           <button class="btn btn-hero-success saveButton" *ngIf="groupId != null" (click)="updateSeminarEvent($event)">Lưu</button>
           <button class="btn btn-hero-warning" (click)="closeModal()">Huỷ</button>
         </div>
