@@ -8,6 +8,8 @@ import {MatAutocompleteSelectedEvent, MatChipInputEvent} from '@angular/material
 import {UserService} from '../../../@core/services/user.service';
 import {User} from '../../../@core/models/user.model';
 import {ResponseUserDTO} from '../../../@core/models/responseUserDTO.model';
+import {ActivitiesConfirmService} from '../../../@core/services/activities-confirm.service';
+
 import {Event} from '../../../@core/models/event.model';
 import {UserType} from '../../../@core/models/userType.model';
 import {Activity} from '../../../@core/models/activity.model';
@@ -43,17 +45,17 @@ export class ClubActivityComponent implements OnInit {
   filteredUsers: Observable<Array<User>>;
   userClone: Array<any> = [];
   separatorKeysCodes: Array<number> = [ENTER, COMMA];
-
+  eventConfirmation = {status: null};
 
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = false;
-
+  isAdmin: boolean = false;
 
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
-
-  constructor(private userService: UserService, private clubService: ClubService, private activitiesService: ActivitiesService) {
+  constructor(private userService: UserService, private clubService: ClubService,
+              private activitiesConfirmService: ActivitiesConfirmService) {
     this.userCtrl = new FormControl();
     this.filteredUsers = this.userCtrl.valueChanges
       .startWith(null)
@@ -154,10 +156,34 @@ export class ClubActivityComponent implements OnInit {
         this.hostName = this.eventClubInfoCreated.eventUserList[i].user.username;
       }
     }
+    const userRole: any = JSON.parse(localStorage.getItem('currentUser')).userRole.filter(role => role === 'ROLE_ADMIN');
+    if (userRole.length > 0) {
+      this.isAdmin = true;
+    }
   }
 
   closeModal() {
     this.dismiss();
+  }
+
+  onSubmitEvent(value) {
+    this.eventConfirmation.status = value;
+    this.activitiesConfirmService.confirmEvent(this.eventConfirmation, this.eventClubInfoCreated.id).subscribe(response => {
+      if (response.status_code === 200) {
+        swal('Chúc Mừng!', 'Thao tác thành công!', 'success');
+        this.change.emit(value);
+        this.dismiss();
+      }else if (response.status_code === 903) {
+        swal('Xin lỗi', 'status của event không thể được null!', 'error');
+        this.dismiss();
+      }else if (response.status_code === 900) {
+        swal('Xin lỗi', 'không tìm thấy event bởi id!', 'error')
+      }else if (response.status_code === 907) {
+        swal('Xin lỗi', 'event đã được xác nhận hoặc hủy!', 'error')
+      }else if (response.status_code === 999) {
+        swal('Xin lỗi', 'Lỗi hệ thống , liên hệ admin!', 'error')
+      }
+    });
   }
 
   onSubmit() {
@@ -266,7 +292,6 @@ export class ClubActivityComponent implements OnInit {
         swal('Thông báo!', 'User không tồn tại!', 'error');
       }
     });
-
 
   }
 }
