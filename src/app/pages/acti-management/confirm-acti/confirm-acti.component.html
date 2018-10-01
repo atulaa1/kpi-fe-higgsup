@@ -14,9 +14,10 @@
       <thead>
       <tr>
         <th class="titleField">STT</th>
-        <th class="titleField text-left">Người tạo hoạt động</th>
-        <th class="titleField" >Ngày tạo hoạt động</th>
-        <th class="titleField">Trạng thái</th>
+        <th class="titleField text-left">Hoạt Động</th>
+        <th class="titleField" >Người tạo hoạt động</th>
+        <th class="titleField">Ngày tạo hoạt động</th>
+        <th class="titleField">Trang Thái</th>
       </tr>
       </thead>
     </table>
@@ -39,7 +40,7 @@
           </ng-template>
         </td>
         <td class="infoUser">{{activities.createdDate}}</td>
-        <td *ngIf="activities.status === 1 && activities.group.groupType.id != 1" class="infoUser">Chưa xác nhận</td>
+        <td *ngIf="activities.status === 1 && activities.group.groupType.id != 1" class="infoUser red">Chưa xác nhận</td>
         <td *ngIf="activities.status === 2 && activities.group.groupType.id != 1" class="infoUser">Đã xác nhận</td>
         <td *ngIf="activities.status === 3 && activities.group.groupType.id != 1" class="infoUser">Đã hủy</td>
       </tr>
