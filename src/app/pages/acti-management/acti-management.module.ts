@@ -11,16 +11,21 @@ import {TeamBuildingComponent} from './create-acti/team-building/team-building.c
 import {SupportComponent} from './create-acti/support/support.component';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {TwoDigitDecimaNumberDirective} from '../../@core/directives/regex.directive';
+import {ActivitiesModule} from '../activities/activities.module';
+import {ClubActivityComponent} from '../activities/club-activity/club-activity.component';
+import {SupportActivityComponent} from '../activities/support-activity/support-activity.component';
 
 @NgModule({
   imports: [
     CommonModule,
     ActiManagementRoutingModule,
     ThemeModule,
+    ActivitiesModule
   ],
   declarations: [ActiManagementComponent, CreateActiComponent, ConfirmActiComponent, SeminarComponent, ClubComponent,
     TeamBuildingComponent, SupportComponent, TwoDigitDecimaNumberDirective],
-  entryComponents: [SeminarComponent, ClubComponent, TeamBuildingComponent, SupportComponent],
+  entryComponents: [SeminarComponent, ClubComponent, TeamBuildingComponent, SupportComponent, ClubActivityComponent,
+    SupportActivityComponent],
   providers: [NgbActiveModal],
 })
 export class ActiManagementModule {

@@ -1,0 +1,48 @@
+.search-inp {
+  font-size: 20px;
+  line-height: 43px;
+  padding: 0px 10px;
+  border-radius:10px ;
+  max-width: 300px;
+  margin: auto;
+}
+.searchIcon {
+  position: absolute;
+  top: 14px;
+  right: 8px;
+  color: #bee5eb;
+  font-size: 20px;
+}
+.searchIcon:hover {
+  color: #58C3DC;
+}
+
+
+
+.tableScroll {
+  max-height: 400px;
+  overflow: auto;
+}
+.titleTable {
+  margin-bottom: 0px;
+}
+th.titleField {
+  width: 25%;
+  text-align: center;
+}
+.infoUser {
+  width: 25%;
+  text-align: center;
+  vertical-align: inherit;
+  position: relative;
+}
+#myTable tr:hover {
+  background-color: #bee5eb;
+  cursor: pointer;
+}
+.relative{
+  position: relative;
+  max-width: 300px;
+  margin: auto;
+}
+

@@ -14,4 +14,5 @@ export class Event {
   group: Group<Activity>;
   eventUserList: Array<UserType>;
   additionalConfig: CreatedActivity;
+  status: number;
 }

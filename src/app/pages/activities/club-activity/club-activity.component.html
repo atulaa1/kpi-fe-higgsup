@@ -63,11 +63,17 @@
           </mat-form-field>
         </div>
       </div>
-      <div class="row mt-5">
+      <div class="row mt-5" *ngIf="isAdmin === false">
         <div class="groupButton">
           <button class="btn btn-hero-success saveButton" *ngIf = 'groupId == null' (click)="onSubmit()">Lưu</button>
           <button class="btn btn-hero-success saveButton" *ngIf = 'groupId != null' (click)="onUpdate($event)">Lưu</button>
           <button class="btn btn-hero-warning" (click)="closeModal()">Huỷ</button>
+        </div>
+      </div>
+      <div class="row mt-5" *ngIf="isAdmin === true">
+        <div class="groupButton">
+          <button class="btn btn-hero-success saveButton"  (click)="onSubmitEvent(2)">Xác nhận</button>
+          <button class="btn btn-hero-warning" (click)="onSubmitEvent(3)">Huỷ</button>
         </div>
       </div>
     </div>
