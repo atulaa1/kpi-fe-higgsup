@@ -24,6 +24,7 @@ export class CreateActiComponent implements OnInit {
   message: string;
   showMsg: boolean = false;
   nameSearch: string;
+
   constructor(private modalService: NgbModal, private activitiesService: ActivitiesService, private data: DataService) {
   }
 
@@ -63,7 +64,7 @@ export class CreateActiComponent implements OnInit {
   }
 
   open(content) {
-    this.modalService.open(content);
+    this.modalService.open(content, {backdrop: 'static', centered: true});
   }
 
   onChange(change: any) {
@@ -81,15 +82,17 @@ export class CreateActiComponent implements OnInit {
       this.searchActivities();
     }
   }
+
   searchName(activities) {
     return activities.name.toUpperCase().indexOf(this.nameSearch.toUpperCase()) >= 0;
   }
+
   searchActivities() {
     this.showMsg = false;
     this.groupList = Object.assign(this.groupListClone)
     this.groupList = this.groupList.filter(activitie => this.searchName(activitie))
-     if (this.groupList.length === 0){
-       this.showMsg = true;
-     }
+    if (this.groupList.length === 0) {
+      this.showMsg = true;
+    }
   }
 }
