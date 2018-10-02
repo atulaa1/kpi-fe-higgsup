@@ -35,7 +35,7 @@
         <td class="emailTitle">{{late.user.email}}</td>
         <td class="text-center lateTitle">
           <span [hidden]="late.id === this.idLateInfoEdit">{{late.lateTimes}}</span>
-          <input type="number" class="lateComingTimeBox" [hidden]="late.id !== this.idLateInfoEdit" normalCharacterOnly
+          <input type="number" class="lateComingTimeBox" [hidden]="late.id !== this.idLateInfoEdit" positiveNumberOnly
                  [value]="newLateComingTime" min="0" (keypress)="inputLateComingTimes($event, content, late, updateLateComingTime.value)" #updateLateComingTime>
 
         </td>
