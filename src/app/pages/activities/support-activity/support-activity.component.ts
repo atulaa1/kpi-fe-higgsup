@@ -47,6 +47,7 @@ export class SupportActivityComponent implements OnInit {
   quantity: number;
   supportEvent: EventSupport = new EventSupport();
   isAdmin: boolean = false;
+  alert: boolean = false;
 
   constructor(private supportService: SupportService, private activitiesConfirmService: ActivitiesConfirmService) {
   }
@@ -153,8 +154,9 @@ export class SupportActivityComponent implements OnInit {
       .filter((supporEvent) => supporEvent.name !== '');
     if (isNaN(this.startDate.day) === true || isNaN(this.startDate.month) === true ||
       isNaN(this.startDate.year) === true || this.startDate === null) {
-      swal('Thông báo!', 'Thời gian bắt đầu không được để trống', 'error');
+      this.alert = true;
     } else {
+      this.alert = false;
       this.beginDate = this.convertNgbDateStructToString(this.startDate);
       const group: Group<Activity> = new Group();
       group.id = this.eventSupportInfoCreating.id;
