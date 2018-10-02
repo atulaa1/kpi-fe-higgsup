@@ -36,14 +36,16 @@ export class AccManagementLateComponent implements OnInit {
   }
 
   uploadImportFile(fileList, content) {
+    let msgColumn = '';
+    let msgData = '';
     this.managementLateService.importFileLateComingUser(fileList[0]).subscribe((response: ResponDTOLateInfo<Array<LateInfo>>) => {
       if (response.status_code === 200) {
         this.listLateComing = response.data;
         this.listLateClone = Object.assign([], this.listLateComing);
+      } else if (response.status_code === 999) {
+        msgColumn += 'Lỗi hệ thống, liên hệ admin!';
       } else {
         if (response.errors) {
-          let msgColumn = '';
-          let msgData = '';
           if (response.errors.findIndex(lateItem => lateItem.errorCode === 911) !== -1) {
             response.errors.forEach(lateItem => {
               if (lateItem.message === 'invalid member name') {
@@ -72,9 +74,11 @@ export class AccManagementLateComponent implements OnInit {
               }
             });
           }
-          this.errorContent = (msgColumn === '') ? msgData : msgColumn;
-          this.bsModal.open(content, {backdrop: 'static', centered: true});
         }
+      }
+      this.errorContent = (msgColumn === '') ? msgData : msgColumn;
+      if (this.errorContent !== '' && this.errorContent !== null) {
+        this.bsModal.open(content, {backdrop: 'static', centered: true});
       }
     })
   }

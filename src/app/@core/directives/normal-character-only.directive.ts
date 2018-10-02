@@ -5,7 +5,7 @@ import {Directive, ElementRef, HostListener} from '@angular/core';
 })
 export class NormalCharacterOnlyDirective {
   private regex: RegExp = new RegExp(/^[0-9a-zA-Z_\u00C0-\u1EF9 ]+$/);
-  private regexNotSpecialChar = new RegExp(/[^!@#$%^&*()+=`~[{\]}\\|;:'",<.>/?\-_]+/);
+  private regexNotSpecialChar = new RegExp(/[!@#$%^&*()+=`~[{\]}\\|;:'",<>./?\-_]+/);
   private specialKeys: Array<string> = ['Backspace', 'Tab', 'End', 'Home'];
 
   constructor(private el: ElementRef) {
@@ -25,7 +25,7 @@ export class NormalCharacterOnlyDirective {
   }
 
   @HostListener('paste', ['$event']) blockPasteSpecialChar(event: ClipboardEvent) {
-    if (!this.regexNotSpecialChar.test(event.clipboardData.getData('text/plain'))) {
+    if (this.regexNotSpecialChar.test(event.clipboardData.getData('text/plain'))) {
       event.preventDefault();
     }
   }
