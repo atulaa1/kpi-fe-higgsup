@@ -56,6 +56,7 @@ export class SeminarActivityComponent implements OnInit {
   selectable = true;
   removable = true;
   addOnBlur = false;
+  alert: boolean = false;
 
 
   @ViewChild('userHostInput') userHostInput: ElementRef<HTMLInputElement>;
@@ -298,15 +299,14 @@ export class SeminarActivityComponent implements OnInit {
   addSeminarEvent(created: any) {
 
     this.eventSeminar.name = this.eventName;
-    if (this.eventSeminar.name === undefined || this.eventSeminar.name.trim() === '') {
-      swal('Thông báo!', 'Tên hoạt động không được để trống!', 'error');
-    } else if (this.startDate === undefined || this.startDate === null
-      || this.startTime === undefined || this.startTime === null) {
-      swal('Thông báo!', 'Thời gian bắt đầu không được để trống', 'error');
-    } else if (this.endDate === undefined || this.endTime === null
+    if (this.eventSeminar.name === undefined || this.eventSeminar.name.trim() === ''
+      || this.startDate === undefined || this.startDate === null
+      || this.startTime === undefined || this.startTime === null
+      || this.endDate === undefined || this.endTime === null
       || this.endTime === undefined || this.endTime === null) {
-      swal('Thông báo!', 'Thời gian kết thúc không được để trống!', 'error');
+      this.alert = true;
     } else {
+      this.alert = false;
       this.eventSeminar.beginDate = this.convertNgbDateStructToString(this.startDate) + ' '
         + this.convertNgbtimeStructToString(this.startTime);
       this.eventSeminar.endDate = this.convertNgbDateStructToString(this.endDate) + ' '
@@ -393,15 +393,14 @@ export class SeminarActivityComponent implements OnInit {
     group.id = this.eventSeminarInfoCreated.group.id;
     this.eventSeminar.group = group;
     this.eventSeminar.name = this.eventName;
-    if (this.eventSeminar.name === undefined || this.eventSeminar.name.trim() === '') {
-      swal('Thông báo!', 'Tên hoạt động không được để trống!', 'error');
-    } else if (this.startDate === undefined || this.startDate === null
-      || this.startTime === undefined || this.startTime === null) {
-      swal('Thông báo!', 'Thời gian bắt đầu không được để trống', 'error');
-    } else if (this.endDate === undefined || this.endTime === null
+    if (this.eventSeminar.name === undefined || this.eventSeminar.name.trim() === ''
+      || this.startDate === undefined || this.startDate === null
+      || this.startTime === undefined || this.startTime === null
+      || this.endDate === undefined || this.endTime === null
       || this.endTime === undefined || this.endTime === null) {
-      swal('Thông báo!', 'Thời gian kết thúc không được để trống!', 'error');
+      this.alert = true;
     } else {
+      this.alert = false;
       this.eventSeminar.beginDate = this.convertNgbDateStructToString(this.startDate) + ' '
         + this.convertNgbtimeStructToString(this.startTime);
       this.eventSeminar.endDate = this.convertNgbDateStructToString(this.endDate) + ' '

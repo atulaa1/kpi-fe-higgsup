@@ -6,6 +6,9 @@
 </div>
 <div class="modal-body modal-fonts">
   <div class="container">
+    <div class="row mt-1 titleAlert" *ngIf="alert === true">
+      <nav>Vui lòng nhập đầy đủ các thông tin!</nav>
+    </div>
     <div class="row mt-2 ml-3">
       <h5 class="col-md-4 requiredInput">Ngày diễn ra hoạt động</h5>
       <input type="text" class="col-md-6 form-control" placeholder="Ngày/Tháng/Năm" ngbDatepicker #date="ngbDatepicker" [(ngModel)]="startDate" (click)="date.toggle()">

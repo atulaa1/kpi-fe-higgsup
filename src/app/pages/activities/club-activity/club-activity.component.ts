@@ -52,6 +52,7 @@ export class ClubActivityComponent implements OnInit {
   removable = true;
   addOnBlur = false;
   isAdmin: boolean = false;
+  alert: boolean = false;
 
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
 
@@ -210,15 +211,14 @@ export class ClubActivityComponent implements OnInit {
 
   onSubmit(created: any) {
     this.eventClub.name = this.eventName;
-    if (this.eventClub.name === undefined || this.eventClub.name.trim() === '') {
-      swal('Thông báo!', 'Tên hoạt động không được để trống!', 'error');
-    } else if (this.startDate === undefined || this.startDate === null
-      || this.startTime === undefined || this.startTime === null) {
-      swal('Thông báo!', 'Thời gian bắt đầu không được để trống', 'error');
-    } else if (this.endDate === undefined || this.endTime === null
+    if (this.eventClub.name === undefined || this.eventClub.name.trim() === ''
+      || this.startDate === undefined || this.startDate === null
+      || this.startTime === undefined || this.startTime === null
+      || this.endDate === undefined || this.endTime === null
       || this.endTime === undefined || this.endTime === null) {
-      swal('Thông báo!', 'Thời gian kết thúc không được để trống!', 'error');
+      this.alert = true;
     } else {
+      this.alert = false;
       this.eventClub.address = this.eventAddress;
       this.eventClub.beginDate = this.convertNgbDateStructToString(this.startDate) + ' '
         + this.convertNgbtimeStructToString(this.startTime);
@@ -279,15 +279,14 @@ export class ClubActivityComponent implements OnInit {
     group.id = this.eventClubInfoCreated.group.id;
     this.eventClub.group = group;
     this.eventClub.name = this.eventName;
-    if (this.eventClub.name === undefined || this.eventClub.name.trim() === '') {
-      swal('Thông báo!', 'Tên hoạt động không được để trống!', 'error');
-    } else if (this.startDate === undefined || this.startDate === null
-      || this.startTime === undefined || this.startTime === null) {
-      swal('Thông báo!', 'Thời gian bắt đầu không được để trống', 'error');
-    } else if (this.endDate === undefined || this.endTime === null
+    if (this.eventClub.name === undefined || this.eventClub.name.trim() === ''
+      || this.startDate === undefined || this.startDate === null
+      || this.startTime === undefined || this.startTime === null
+      || this.endDate === undefined || this.endTime === null
       || this.endTime === undefined || this.endTime === null) {
-      swal('Thông báo!', 'Thời gian kết thúc không được để trống!', 'error');
+      this.alert = true;
     } else {
+      this.alert = false;
       this.eventClub.address = this.eventAddress;
       this.eventClub.beginDate = this.convertNgbDateStructToString(this.startDate) + ' '
         + this.convertNgbtimeStructToString(this.startTime);

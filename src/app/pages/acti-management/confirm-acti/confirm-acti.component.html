@@ -28,13 +28,15 @@
         <td class="infoUser" >{{i+ 1}}</td>
         <td (click)="open(content)" *ngIf="activities.group.groupType.id==2" class="activity-creating">{{activities.name}}
           <ng-template let-c="close" let-d="dismiss" #content>
-            <ngx-club-activity [dismiss]="d" [eventClubInfoCreated]="activities" (change)="onChange($event)"></ngx-club-activity>
+            <ngx-club-activity [dismiss]="d" [eventClubInfoCreated]="activities"
+                               (change)="onChange($event)" [activityName]="activities.name"></ngx-club-activity>
           </ng-template>
         </td>
         <td (click)="open(content)" *ngIf="activities.group.groupType.id==4" class="activity-creating">{{activities.name}}
           <ng-template let-c="close" let-d="dismiss" #content>
             <ngx-support-activity [dismiss]="d"  [listSelectedEvent]="activities.additionalConfig"
-                                  (change)="onChange($event)" [eventSupportInfoCreated]="activities" [dateCreated]="activities.beginDate">
+                                  (change)="onChange($event)" [eventSupportInfoCreated]="activities"
+                                  [dateCreated]="activities.beginDate" [activityName]="activities.name">
             </ngx-support-activity>
           </ng-template>
         </td>

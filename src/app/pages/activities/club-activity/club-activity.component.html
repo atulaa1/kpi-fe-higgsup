@@ -7,6 +7,9 @@
   </div>
   <div class="modal-body modal-fonts">
     <div class="container">
+      <div class="row mt-1 titleAlert" *ngIf="alert === true">
+        <nav>Vui lòng nhập đầy đủ các thông tin!</nav>
+      </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Tên hoạt động</h5>
         <input type="text" class="col-md-8 form-control" [(ngModel)]="eventName">
