@@ -2,7 +2,7 @@
   <div class="row ml-5 mr-5">
     <div class="col-md-6">
       <button class="butn" (click)="lateFileImport.click()">Tải lên</button>
-      <input type="file" name="myfile" (change)="uploadImportFile(lateFileImport.files, content)" [disabled]="isEditLateComing"
+      <input type="file" name="myfile" (input)="uploadImportFile(lateFileImport.files, content)" [disabled]="isEditLateComing"
              accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
              #lateFileImport hidden="true">
     </div>
