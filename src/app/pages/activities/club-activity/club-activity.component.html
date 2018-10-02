@@ -33,7 +33,7 @@
           <mat-form-field class="example-chip-list">
             <mat-chip-list #chipList>
               <mat-chip
-                *ngFor="let user of userClone; let i of index"
+                *ngFor="let user of userClone; let i = index"
                 [selectable]="selectable"
                 [removable]="removable"
                 (removed)="remove(user, i)">

@@ -40,12 +40,11 @@ export class SeminarActivityComponent implements OnInit {
   eventSeminar: Event = new Event();
   eventName: string = '';
   listEventUser: Array<UserType> = new Array<UserType>();
-  userHostCtrl = new FormControl();
+  userCtrl = new FormControl();
   userParticipantCtrl = new FormControl();
   userListenerCtrl = new FormControl();
   filteredHostUsers: Observable<Array<User>>;
-  filteredParticipantUsers: Observable<Array<User>>;
-  filteredListenerUsers: Observable<Array<User>>;
+
   userClone: Array<any> = [];
   userCloneHost: Array<any> = [];
   userCloneParticipant: Array<any> = [];
@@ -65,25 +64,11 @@ export class SeminarActivityComponent implements OnInit {
 
   constructor(private userService: UserService, private seminarService: SeminarService, private activitiesService: ActivitiesService) {
     // map Object type for Host
-    this.userHostCtrl = new FormControl();
-    this.filteredHostUsers = this.userHostCtrl.valueChanges
+    this.userCtrl = new FormControl();
+    this.filteredHostUsers = this.userCtrl.valueChanges
       .startWith(null)
       .map(user => user && typeof user === 'object' ? user.fullName : user)
       .map(user => this.filterUsersHost(user));
-
-    // map Object type for Participant
-    this.userParticipantCtrl = new FormControl();
-    this.filteredParticipantUsers = this.userParticipantCtrl.valueChanges
-      .startWith(null)
-      .map(user => user && typeof user === 'object' ? user.fullName : user)
-      .map(user => this.filterUsersParticipant(user));
-
-    // map Object type for Listener
-    this.userListenerCtrl = new FormControl();
-    this.filteredListenerUsers = this.userListenerCtrl.valueChanges
-      .startWith(null)
-      .map(user => user && typeof user === 'object' ? user.fullName : user)
-      .map(user => this.filterUsersListener(user));
   }
 
   // Array Host user tags
@@ -114,17 +99,27 @@ export class SeminarActivityComponent implements OnInit {
       input.value = '';
     }
 
-    this.userHostCtrl.setValue(null);
+    this.userCtrl.setValue(null);
   }
 
   removeHost(fullName, i): void {
+    let users: Array<User> = [];
+    this.filteredHostUsers.subscribe(value => users = value.filter(value1 => value1 ));
+    users.push(Object.assign(this.userCloneHost[i]));
+    this.filteredHostUsers = this.setFilteredUsers(users);
     this.userCloneHost.splice(i, 1);
   }
 
   selectedHost(event: MatAutocompleteSelectedEvent): void {
     this.userCloneHost.push(event.option.value);
+
+    let users: Array<User> = [];
+
+    this.filteredHostUsers.subscribe(value => users = value.filter(value1 => value1.username !== event.option.value.username));
+    this.filteredHostUsers = this.setFilteredUsers(users);
+
     this.userHostInput.nativeElement.value = '';
-    this.userHostCtrl.setValue(null);
+    this.userCtrl.setValue(null);
   }
 
   // Array Participant user tags
@@ -159,11 +154,18 @@ export class SeminarActivityComponent implements OnInit {
   }
 
   removeParticipant(fullName, i): void {
+    let users: Array<User> = [];
+    this.filteredHostUsers.subscribe(value => users = value.filter(value1 => value1 ));
+    users.push(Object.assign(this.userCloneParticipant[i]));
+    this.filteredHostUsers = this.setFilteredUsers(users);
     this.userCloneParticipant.splice(i, 1);
   }
 
   selectedParticipant(event: MatAutocompleteSelectedEvent): void {
     this.userCloneParticipant.push(event.option.value);
+    let users: Array<User> = [];
+    this.filteredHostUsers.subscribe(value => users = value.filter(value1 => value1.username !== event.option.value.username));
+    this.filteredHostUsers = this.setFilteredUsers(users);
     this.userParticipantInput.nativeElement.value = '';
     this.userParticipantCtrl.setValue(null);
   }
@@ -200,15 +202,33 @@ export class SeminarActivityComponent implements OnInit {
   }
 
   removeListener(fullName, i): void {
+    let users: Array<User> = [];
+    this.filteredHostUsers.subscribe(value => users = value.filter(value1 => value1 ));
+    users.push(Object.assign(this.userCloneListener[i]));
+    this.filteredHostUsers = this.setFilteredUsers(users);
     this.userCloneListener.splice(i, 1);
   }
 
   selectedListener(event: MatAutocompleteSelectedEvent): void {
     this.userCloneListener.push(event.option.value);
+
+    let users: Array<User> = [];
+    this.filteredHostUsers.subscribe(value => users = value.filter(value1 => value1.username !== event.option.value.username));
+    this.filteredHostUsers = this.setFilteredUsers(users);
     this.userListenerInput.nativeElement.value = '';
     this.userListenerCtrl.setValue(null);
   }
 
+  setFilteredUsers(users: Array<User>) {
+    this.userCtrl = new FormControl();
+    let usersObservable: Observable<Array<User>>;
+    usersObservable = this.userCtrl.valueChanges
+      .startWith(null)
+      .map(user => user && typeof user === 'object' ? user.fullName : user)
+      .map(user => user ? users.filter(user1 => user1.fullName.toLowerCase().indexOf(user.toLowerCase()) === 0)
+        : users);
+    return usersObservable;
+  }
   // Functions
 
   private convertDatetoNgbDateStruct(date: Date): NgbDateStruct {

@@ -30,7 +30,7 @@
           <mat-form-field class="example-chip-list">
             <mat-chip-list #chipListHost>
               <mat-chip
-                *ngFor="let user of userCloneHost; let i of index"
+                *ngFor="let user of userCloneHost; let i = index"
                 [selectable]="selectable"
                 [removable]="removable"
                 (removed)="removeHost(user, i)">
@@ -42,7 +42,7 @@
               </mat-chip>
               <input
                 #userHostInput
-                [formControl]="userHostCtrl"
+                [formControl]="userCtrl"
                 [matAutocomplete]="autoHost"
                 [matChipInputFor]="chipListHost"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -66,7 +66,7 @@
           <mat-form-field class="example-chip-list">
             <mat-chip-list #chipListParticipant>
               <mat-chip
-                *ngFor="let user of userCloneParticipant; let i of index"
+                *ngFor="let user of userCloneParticipant; let i = index"
                 [selectable]="selectable"
                 [removable]="removable"
                 (removed)="removeParticipant(user, i)">
@@ -87,7 +87,7 @@
             </mat-chip-list>
             <mat-autocomplete #autoParticipant="matAutocomplete" (optionSelected)="selectedParticipant($event)">
 
-              <mat-option *ngFor="let user of filteredParticipantUsers | async;" [value]="user">
+              <mat-option *ngFor="let user of filteredHostUsers | async;" [value]="user">
 
                 <img name="avatarMem" src="{{user.avatar}}">
                 {{user.fullName}}
@@ -102,7 +102,7 @@
           <mat-form-field class="example-chip-list">
             <mat-chip-list #chipListListener>
               <mat-chip
-                *ngFor="let user of userCloneListener; let i of index"
+                *ngFor="let user of userCloneListener; let i = index"
                 [selectable]="selectable"
                 [removable]="removable"
                 (removed)="removeListener(user, i)">
@@ -123,7 +123,7 @@
             </mat-chip-list>
             <mat-autocomplete #autoListener="matAutocomplete" (optionSelected)="selectedListener($event)">
 
-              <mat-option *ngFor="let user of filteredListenerUsers | async;" [value]="user">
+              <mat-option *ngFor="let user of filteredHostUsers | async;" [value]="user">
 
                 <img name="avatarMem" src="{{user.avatar}}">
                 {{user.fullName}}
