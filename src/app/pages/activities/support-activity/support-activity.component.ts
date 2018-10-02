@@ -21,6 +21,7 @@ export class SupportActivityComponent implements OnInit {
   @Input() groupId: number = null;
   @Input() dateCreated: string = '';
   @Input() listSelectedEvent = [];
+  @Input() activityName: string = '';
   @Output() change = new EventEmitter<any>();
   eventConfirmation = {status: null};
   supportEvents = [
@@ -39,7 +40,7 @@ export class SupportActivityComponent implements OnInit {
     {name: '', quantity: 1},
   ];
   listFilteredSelectedSupportEvent = [];
-  startDate: NgbDateStruct;
+  startDate;
   beginDate: string;
   startTime = {hour: 7, minute: 0o0};
   name: string;
@@ -49,6 +50,7 @@ export class SupportActivityComponent implements OnInit {
 
   constructor(private supportService: SupportService, private activitiesConfirmService: ActivitiesConfirmService) {
   }
+
   onSubmitEvent(value) {
     this.eventConfirmation.status = value;
     this.activitiesConfirmService.confirmEvent(this.eventConfirmation, this.eventSupportInfoCreated.id).subscribe(response => {
@@ -56,18 +58,19 @@ export class SupportActivityComponent implements OnInit {
         swal('Chúc Mừng!', 'Thao tác thành công!', 'success');
         this.change.emit(value);
         this.dismiss();
-      }else if (response.status_code === 903) {
+      } else if (response.status_code === 903) {
         swal('Xin lỗi', 'status của event không thể được null!', 'error');
         this.dismiss();
-      }else if (response.status_code === 900) {
+      } else if (response.status_code === 900) {
         swal('Xin lỗi', 'không tìm thấy event bởi id!', 'error')
-      }else if (response.status_code === 907) {
+      } else if (response.status_code === 907) {
         swal('Xin lỗi', 'event đã được xác nhận hoặc hủy!', 'error')
-      }else if (response.status_code === 999) {
+      } else if (response.status_code === 999) {
         swal('Xin lỗi', 'Lỗi hệ thống , liên hệ admin!', 'error')
       }
     });
   }
+
   ngOnInit() {
     this.supportEvents.forEach(value => {
       const supportEvents: any = this.listSelectedEvent.filter(value1 => value1.name === value.name);
@@ -148,38 +151,43 @@ export class SupportActivityComponent implements OnInit {
     }
     this.listFilteredSelectedSupportEvent = this.listSelectedSupportEvent
       .filter((supporEvent) => supporEvent.name !== '');
-    this.beginDate = this.convertNgbDateStructToString(this.startDate);
-    const group: Group<Activity> = new Group();
-    group.id = this.eventSupportInfoCreating.id;
-    this.supportEvent.group = group;
-    this.supportEvent.beginDate = this.beginDate + ' ' + this.convertNgbtimeStructToString(this.startTime);
-    this.supportEvent.additionalConfig = this.listFilteredSelectedSupportEvent;
-    this.supportService.createEventSupport(this.supportEvent).subscribe((response: ResponseEventDTO) => {
-      if (response.status_code === 200) {
-        swal('Chúc Mừng!', 'Đã tạo thành công!', 'success');
-        this.dismiss();
-      } else if (response.status_code === 901 && response.message === 'start date cannot null') {
-        swal('Thông báo!', 'Ngày bắt đầu không được để trống!', 'error');
-      } else if (response.status_code === 901 && response.message === 'group cannot null') {
-        swal('Thông báo!', 'Group không được để trống!', 'error');
-      } else if (response.status_code === 901 && response.message === 'group ID can not be null') {
-        swal('Thông báo!', 'ID Group không được để trống!', 'error');
-      } else if (response.status_code === 901 && response.message === 'roup ID not is support') {
-        swal('Thông báo!', 'ID Group không phải là Support!', 'error');
-      } else if (response.status_code === 901 && response.message === 'list support can not empty') {
-        swal('Thông báo!', 'Danh sách support không được rỗng!', 'error');
-      } else if (response.status_code === 901 && response.message === 'name at index {index} can not null') {
-        swal('Thông báo!', 'tên tại 1 không thể rỗng!', 'error');
-      } else if (response.status_code === 901 && response.message === 'ame support at index {index} not incorrect') {
-        swal('Thông báo!', 'tên support tại 1 không chính xác!', 'error');
-      } else if (response.status_code === 901 && response.message === 'quantity at index {index} can not null') {
-        swal('Thông báo!', 'Số lượng tại 1 không thể rỗng!', 'error');
-      } else if (response.status_code === 901 && response.message === 'quantity at index {index} can less one') {
-        swal('Thông báo!', 'Số lượng tại 1 không thể nhỏ hơn 1!', 'error');
-      } else if (response.status_code === 999 && response.message === 'system error') {
-        swal('Thông báo!', 'Lỗi hệ thống, Vui lòng liên hệ Admin!', 'error');
-      }
-    });
+    if (isNaN(this.startDate.day) === true || isNaN(this.startDate.month) === true ||
+      isNaN(this.startDate.year) === true || this.startDate === null) {
+      swal('Thông báo!', 'Thời gian bắt đầu không được để trống', 'error');
+    } else {
+      this.beginDate = this.convertNgbDateStructToString(this.startDate);
+      const group: Group<Activity> = new Group();
+      group.id = this.eventSupportInfoCreating.id;
+      this.supportEvent.group = group;
+      this.supportEvent.beginDate = this.beginDate + ' ' + this.convertNgbtimeStructToString(this.startTime);
+      this.supportEvent.additionalConfig = this.listFilteredSelectedSupportEvent;
+      this.supportService.createEventSupport(this.supportEvent).subscribe((response: ResponseEventDTO) => {
+        if (response.status_code === 200) {
+          swal('Chúc Mừng!', 'Đã tạo thành công!', 'success');
+          this.dismiss();
+        } else if (response.status_code === 901 && response.message === 'start date cannot null') {
+          swal('Thông báo!', 'Ngày bắt đầu không được để trống!', 'error');
+        } else if (response.status_code === 901 && response.message === 'group cannot null') {
+          swal('Thông báo!', 'Group không được để trống!', 'error');
+        } else if (response.status_code === 901 && response.message === 'group ID can not be null') {
+          swal('Thông báo!', 'ID Group không được để trống!', 'error');
+        } else if (response.status_code === 901 && response.message === 'roup ID not is support') {
+          swal('Thông báo!', 'ID Group không phải là Support!', 'error');
+        } else if (response.status_code === 901 && response.message === 'list support can not empty') {
+          swal('Thông báo!', 'Danh sách support không được rỗng!', 'error');
+        } else if (response.status_code === 901 && response.message === 'name at index {index} can not null') {
+          swal('Thông báo!', 'tên tại 1 không thể rỗng!', 'error');
+        } else if (response.status_code === 901 && response.message === 'ame support at index {index} not incorrect') {
+          swal('Thông báo!', 'tên support tại 1 không chính xác!', 'error');
+        } else if (response.status_code === 901 && response.message === 'quantity at index {index} can not null') {
+          swal('Thông báo!', 'Số lượng tại 1 không thể rỗng!', 'error');
+        } else if (response.status_code === 901 && response.message === 'quantity at index {index} can less one') {
+          swal('Thông báo!', 'Số lượng tại 1 không thể nhỏ hơn 1!', 'error');
+        } else if (response.status_code === 999 && response.message === 'system error') {
+          swal('Thông báo!', 'Lỗi hệ thống, Vui lòng liên hệ Admin!', 'error');
+        }
+      });
+    }
   }
 
   updateSupportEvent(update) {
@@ -193,42 +201,46 @@ export class SupportActivityComponent implements OnInit {
 
     this.listFilteredSelectedSupportEvent = this.listSelectedSupportEvent
       .filter((supporEvent) => supporEvent.name !== '');
-    this.beginDate = this.convertNgbDateStructToString(this.startDate);
-    const group: Group<Activity> = new Group();
-    group.id = this.eventSupportInfoCreated.group.id;
-    this.supportEvent.group = group;
-    this.supportEvent.beginDate = this.beginDate + ' ' + this.convertNgbtimeStructToString(this.startTime);
-    this.supportEvent.additionalConfig = this.listFilteredSelectedSupportEvent;
-    this.supportService.updateEventSupport(this.supportEvent, this.eventSupportInfoCreated.id).subscribe((response: ResponseEventDTO) => {
-      if (response.status_code === 200) {
-        this.change.emit(update);
-        swal('Chúc Mừng!', 'Đã sửa thành công!', 'success');
-        this.dismiss();
-      } else if (response.status_code === 901 && response.message === 'start date cannot null') {
-        swal('Thông báo!', 'Ngày bắt đầu không được để trống!', 'error');
-      } else if (response.status_code === 901 && response.message === 'group cannot null') {
-        swal('Thông báo!', 'Group không được để trống!', 'error');
-      } else if (response.status_code === 901 && response.message === 'group ID can not be null') {
-        swal('Thông báo!', 'ID Group không được để trống!', 'error');
-      } else if (response.status_code === 901 && response.message === 'roup ID not is support') {
-        swal('Thông báo!', 'ID Group không phải là Support!', 'error');
-      } else if (response.status_code === 901 && response.message === 'list support can not empty') {
-        swal('Thông báo!', 'Danh sách support không được rỗng!', 'error');
-      } else if (response.status_code === 901 && response.message === 'name at index {index} can not null') {
-        swal('Thông báo!', 'tên tại 1 không thể rỗng!', 'error');
-      } else if (response.status_code === 901 && response.message === 'ame support at index {index} not incorrect') {
-        swal('Thông báo!', 'tên support tại 1 không chính xác!', 'error');
-      } else if (response.status_code === 901 && response.message === 'quantity at index {index} can not null') {
-        swal('Thông báo!', 'Số lượng tại 1 không thể rỗng!', 'error');
-      } else if (response.status_code === 901 && response.message === 'quantity at index {index} can less one') {
-        swal('Thông báo!', 'Số lượng tại 1 không thể nhỏ hơn 1!', 'error');
-      } else if (response.status_code === 999 && response.message === 'system error') {
-        swal('Thông báo!', 'Lỗi hệ thống, Vui lòng liên hệ Admin!', 'error');
-      } else if (response.status_code === 403 && response.message === 'Forbidden') {
-        swal('Thông báo!', 'Bạn không có quyền sửa cho hoạt động này!', 'error');
-      }
-    });
-
+    if (this.startDate === undefined || this.startDate === null
+      || this.startTime === undefined || this.startTime === null) {
+      swal('Thông báo!', 'Thời gian bắt đầu không được để trống', 'error');
+    } else {
+      this.beginDate = this.convertNgbDateStructToString(this.startDate);
+      const group: Group<Activity> = new Group();
+      group.id = this.eventSupportInfoCreated.group.id;
+      this.supportEvent.group = group;
+      this.supportEvent.beginDate = this.beginDate + ' ' + this.convertNgbtimeStructToString(this.startTime);
+      this.supportEvent.additionalConfig = this.listFilteredSelectedSupportEvent;
+      this.supportService.updateEventSupport(this.supportEvent, this.eventSupportInfoCreated.id).subscribe((response: ResponseEventDTO) => {
+        if (response.status_code === 200) {
+          this.change.emit(update);
+          swal('Chúc Mừng!', 'Đã sửa thành công!', 'success');
+          this.dismiss();
+        } else if (response.status_code === 901 && response.message === 'start date cannot null') {
+          swal('Thông báo!', 'Ngày bắt đầu không được để trống!', 'error');
+        } else if (response.status_code === 901 && response.message === 'group cannot null') {
+          swal('Thông báo!', 'Group không được để trống!', 'error');
+        } else if (response.status_code === 901 && response.message === 'group ID can not be null') {
+          swal('Thông báo!', 'ID Group không được để trống!', 'error');
+        } else if (response.status_code === 901 && response.message === 'roup ID not is support') {
+          swal('Thông báo!', 'ID Group không phải là Support!', 'error');
+        } else if (response.status_code === 901 && response.message === 'list support can not empty') {
+          swal('Thông báo!', 'Danh sách support không được rỗng!', 'error');
+        } else if (response.status_code === 901 && response.message === 'name at index {index} can not null') {
+          swal('Thông báo!', 'tên tại 1 không thể rỗng!', 'error');
+        } else if (response.status_code === 901 && response.message === 'ame support at index {index} not incorrect') {
+          swal('Thông báo!', 'tên support tại 1 không chính xác!', 'error');
+        } else if (response.status_code === 901 && response.message === 'quantity at index {index} can not null') {
+          swal('Thông báo!', 'Số lượng tại 1 không thể rỗng!', 'error');
+        } else if (response.status_code === 901 && response.message === 'quantity at index {index} can less one') {
+          swal('Thông báo!', 'Số lượng tại 1 không thể nhỏ hơn 1!', 'error');
+        } else if (response.status_code === 999 && response.message === 'system error') {
+          swal('Thông báo!', 'Lỗi hệ thống, Vui lòng liên hệ Admin!', 'error');
+        } else if (response.status_code === 403 && response.message === 'Forbidden') {
+          swal('Thông báo!', 'Bạn không có quyền sửa cho hoạt động này!', 'error');
+        }
+      });
+    }
   }
 
 }
