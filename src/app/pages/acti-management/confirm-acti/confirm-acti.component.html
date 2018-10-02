@@ -5,7 +5,7 @@
         <input normalCharacterOnly [(ngModel)]="nameSearch" (keyup)='handleKeyDown($event)'
                class="form-control search-inp" type="text" id="myInput"
                placeholder="Tìm kiếm Hoạt Động:" title="Type in a name"/>
-        <span class="fas fa-search searchIcon"  (click)='searchConfirmActi()'></span>
+        <span class="fas fa-search searchIcon" (click)='searchConfirmActi()'></span>
       </div>
     </div>
   </div>
@@ -13,9 +13,10 @@
     <table class='table titleTable'>
       <thead>
       <tr>
-        <th class="titleField">STT</th>
-        <th class="titleField text-left">Người tạo hoạt động</th>
-        <th class="titleField" >Ngày tạo hoạt động</th>
+        <th class="titleField" name="numberOrderField">STT</th>
+        <th class="titleField">Tên hoạt động</th>
+        <th class="titleField">Người tạo hoạt động</th>
+        <th class="titleField">Ngày tạo hoạt động</th>
         <th class="titleField">Trạng thái</th>
       </tr>
       </thead>
@@ -25,21 +26,25 @@
     <table class="table table-hover" id="myTable">
       <tbody>
       <tr *ngFor="let activities of listActivities,let i = index">
-        <td class="infoUser" >{{i+ 1}}</td>
-        <td (click)="open(content)" *ngIf="activities.group.groupType.id==2" class="activity-creating">{{activities.name}}
+        <td class="infoUser" name="numberOrderField">{{i+ 1}}</td>
+        <td class="infoUser" (click)="open(content)" *ngIf="activities.group.groupType.id==2">{{activities.name}}
           <ng-template let-c="close" let-d="dismiss" #content>
-            <ngx-club-activity [dismiss]="d" [eventClubInfoCreated]="activities"
-                               (change)="onChange($event)" [activityName]="activities.name"></ngx-club-activity>
+            <ngx-club-activity [dismiss]="d" [eventClubInfoCreated]="activities" [statusEvent]="activities.status"
+                               (change)="onChange($event)" [activityName]="activities.name"
+                               [creatorName]="activities.creator.fullName"></ngx-club-activity>
           </ng-template>
         </td>
-        <td (click)="open(content)" *ngIf="activities.group.groupType.id==4" class="activity-creating">{{activities.name}}
+        <td class="infoUser" (click)="open(content)" *ngIf="activities.group.groupType.id==4">{{activities.name}}
           <ng-template let-c="close" let-d="dismiss" #content>
-            <ngx-support-activity [dismiss]="d"  [listSelectedEvent]="activities.additionalConfig"
+            <ngx-support-activity [dismiss]="d" [listSelectedEvent]="activities.additionalConfig"
+                                  [statusEvent]="activities.status"
                                   (change)="onChange($event)" [eventSupportInfoCreated]="activities"
-                                  [dateCreated]="activities.beginDate" [activityName]="activities.name">
+                                  [dateCreated]="activities.beginDate" [activityName]="activities.name"
+                                  [creatorName]="activities.creator.fullName">
             </ngx-support-activity>
           </ng-template>
         </td>
+        <td class="infoUser">{{activities.creator.fullName}}</td>
         <td class="infoUser">{{activities.createdDate}}</td>
         <td *ngIf="activities.status === 1 && activities.group.groupType.id != 1" class="infoUser">Chưa xác nhận</td>
         <td *ngIf="activities.status === 2 && activities.group.groupType.id != 1" class="infoUser">Đã xác nhận</td>

@@ -83,3 +83,7 @@ h5.requiredInput:after {
     color: red;
   }
 }
+
+.onlyRead {
+  pointer-events: none;
+}

@@ -10,35 +10,42 @@
       <div class="row mt-1 titleAlert" *ngIf="alert === true">
         <nav>Vui lòng nhập đầy đủ các thông tin!</nav>
       </div>
+      <div class="row mt-2" *ngIf="isAdmin === true">
+        <h5 class="col-md-4">Người tạo hoạt động</h5>
+        <input type="text" class="col-md-8 form-control" [(ngModel)]="creatorName" [disabled]="isAdmin === true">
+      </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Tên hoạt động</h5>
-        <input type="text" class="col-md-8 form-control" [(ngModel)]="eventName">
+        <input type="text" class="col-md-8 form-control" [(ngModel)]="eventName" [disabled]="isAdmin === true">
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Thời gian bắt đầu</h5>
-        <input type="text" class="col-md-5 form-control" placeholder="Ngày/Tháng/Năm" [(ngModel)]="startDate" ngbDatepicker #startDay="ngbDatepicker"
-               (click)="startDay.toggle()">
-        <ngb-timepicker class="col-md-3" [(ngModel)]="startTime" [spinners]="spinners" name="timeInput"></ngb-timepicker>
+        <input type="text" class="col-md-5 form-control" placeholder="Ngày/Tháng/Năm" [(ngModel)]="startDate"
+               ngbDatepicker #startDay="ngbDatepicker"
+               (click)="startDay.toggle()" [disabled]="isAdmin === true">
+        <ngb-timepicker class="col-md-3" [(ngModel)]="startTime" [spinners]="spinners" name="timeInput"
+                        [disabled]="isAdmin === true"></ngb-timepicker>
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Thời gian kết thúc</h5>
-        <input type="text" class="col-md-5 form-control" placeholder="Ngày/Tháng/Năm" [(ngModel)]="endDate" ngbDatepicker
-               #endDay="ngbDatepicker" (click)="endDay.toggle()">
-        <ngb-timepicker class="col-md-3" [(ngModel)]="endTime" [spinners]="spinners" name="timeInput"></ngb-timepicker>
+        <input type="text" class="col-md-5 form-control" placeholder="Ngày/Tháng/Năm" [(ngModel)]="endDate"
+               ngbDatepicker #endDay="ngbDatepicker" (click)="endDay.toggle()" [disabled]="isAdmin === true">
+        <ngb-timepicker class="col-md-3" [(ngModel)]="endTime" [spinners]="spinners" name="timeInput"
+                        [disabled]="isAdmin === true"></ngb-timepicker>
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4">Địa điểm</h5>
-        <input type="text" class="col-md-8 form-control" [(ngModel)]="eventAddress">
+        <input type="text" class="col-md-8 form-control" [(ngModel)]="eventAddress" [disabled]="isAdmin === true">
       </div>
-      <div class="row mt-2">
+      <div class="row mt-2 mb-5">
         <h5 class="col-md-4 requiredInput">Thành viên tham gia</h5>
-        <div class="col-md-8 mat-app-background basic-container form-control"  name="participant">
+        <div class="col-md-8 mat-app-background basic-container form-control" name="participant">
           <mat-form-field class="example-chip-list">
             <mat-chip-list #chipList>
               <mat-chip
                 *ngFor="let user of userClone; let i = index"
                 [selectable]="selectable"
-                [removable]="removable"
+                [removable]="removable && isAdmin === false"
                 (removed)="remove(user, i)">
                 <mat-icon matChipAvatar name="iconAvatar">
                   <img src="{{user.avatar}}" name="iconMem">
@@ -53,7 +60,8 @@
                 [matChipInputFor]="chipList"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 [matChipInputAddOnBlur]="addOnBlur"
-                (matChipInputTokenEnd)="add($event)">
+                (matChipInputTokenEnd)="add($event)"
+                [readonly]="isAdmin === true">
             </mat-chip-list>
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
 
@@ -66,16 +74,18 @@
           </mat-form-field>
         </div>
       </div>
-      <div class="row mt-5" *ngIf="isAdmin === false">
+      <div class="row" *ngIf="isAdmin === false">
         <div class="groupButton">
-          <button class="btn btn-hero-success saveButton" *ngIf = 'groupId == null' (click)="onSubmit($event)">Lưu</button>
-          <button class="btn btn-hero-success saveButton" *ngIf = 'groupId != null' (click)="onUpdate($event)">Lưu</button>
+          <button class="btn btn-hero-success saveButton" *ngIf='groupId == null' (click)="onSubmit($event)">Lưu
+          </button>
+          <button class="btn btn-hero-success saveButton" *ngIf='groupId != null' (click)="onUpdate($event)">Lưu
+          </button>
           <button class="btn btn-hero-warning" (click)="closeModal()">Huỷ</button>
         </div>
       </div>
-      <div class="row mt-5" *ngIf="isAdmin === true">
+      <div class="row" *ngIf="isAdmin === true && statusEvent === 1">
         <div class="groupButton">
-          <button class="btn btn-hero-success saveButton"  (click)="onSubmitEvent(2)">Xác nhận</button>
+          <button class="btn btn-hero-success saveButton" (click)="onSubmitEvent(2)">Xác nhận</button>
           <button class="btn btn-hero-warning" (click)="onSubmitEvent(3)">Huỷ</button>
         </div>
       </div>
