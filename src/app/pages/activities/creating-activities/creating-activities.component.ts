@@ -14,14 +14,17 @@ export class CreatingActivitiesComponent implements OnInit {
   groupListClone: Array<Group<CreatedActivity>>;
   showMsg: boolean = false;
   nameSearch: string;
+  currentUserName: string = '';
 
   constructor(private activitiesService: ActivitiesService, private modalService: NgbModal) {
   }
 
   ngOnInit() {
+    this.currentUserName = JSON.parse(localStorage.getItem('currentUser')).username;
     this.activitiesService.getCreatedActivity().subscribe(response => {
       if (response.status_code === 200) {
-        this.groupList = response.data;
+        this.groupList = response.data.filter(activity =>
+          activity.groupType.id !== 2).concat(response.data.filter(activity => activity.additionalConfig.host === this.currentUserName));
         this.groupListClone = Object.assign(this.groupList);
         this.sortActivityArrayByType();
       }

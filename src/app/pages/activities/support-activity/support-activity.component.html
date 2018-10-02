@@ -1,14 +1,17 @@
 <div class="modal-header modal-lg">
-  <h4 class="mt-2">SUPPORT CHUNG</h4>
+  <h4 class="mt-2">{{activityName}}</h4>
   <button type="button" class="close pull-right cus-btn" aria-label="Close" (click)="closeModal()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body modal-fonts">
   <div class="container">
+    <div class="row mt-1 titleAlert" *ngIf="alert === true">
+      <nav>Vui lòng nhập đầy đủ các thông tin!</nav>
+    </div>
     <div class="row mt-2 ml-3">
       <h5 class="col-md-4 requiredInput">Ngày diễn ra hoạt động</h5>
-      <input type="text" class="col-md-6 form-control" ngbDatepicker #date="ngbDatepicker" [(ngModel)]="startDate" (click)="date.toggle()">
+      <input type="text" class="col-md-6 form-control" placeholder="Ngày/Tháng/Năm" ngbDatepicker #date="ngbDatepicker" [(ngModel)]="startDate" (click)="date.toggle()">
     </div>
     <div class="row mt-3" name="supportActivities" *ngFor="let supportEvent of supportEvents; let $index = index">
       <div class="col-md-4"></div>

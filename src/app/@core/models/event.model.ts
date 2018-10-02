@@ -4,15 +4,15 @@ import {UserType} from './userType.model';
 import {CreatedActivity} from './createdActivity.model';
 
 export class Event {
-
+  id: number;
   name: string;
   description: string;
   address: string;
-  beginDate: string;
-  endDate: string;
+  beginDate: string = '';
+  endDate: string = '';
   createdDate: string;
   group: Group<Activity>;
-  eventUserList: Array<UserType>;
+  eventUserList: Array<UserType> = [];
   additionalConfig: CreatedActivity;
   status: number;
 }

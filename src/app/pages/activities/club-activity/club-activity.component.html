@@ -1,12 +1,15 @@
 <div class="container">
   <div class="modal-header modal-lg">
-    <h4 class="mt-2">CÂU LẠC BỘ</h4>
+    <h4 class="mt-2">{{activityName}}</h4>
     <button type="button" class="close pull-right cus-btn" aria-label="Close" (click)="closeModal()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body modal-fonts">
     <div class="container">
+      <div class="row mt-1 titleAlert" *ngIf="alert === true">
+        <nav>Vui lòng nhập đầy đủ các thông tin!</nav>
+      </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Tên hoạt động</h5>
         <input type="text" class="col-md-8 form-control" [(ngModel)]="eventName">
@@ -33,7 +36,7 @@
           <mat-form-field class="example-chip-list">
             <mat-chip-list #chipList>
               <mat-chip
-                *ngFor="let user of userClone; let i of index"
+                *ngFor="let user of userClone; let i = index"
                 [selectable]="selectable"
                 [removable]="removable"
                 (removed)="remove(user, i)">
@@ -65,7 +68,7 @@
       </div>
       <div class="row mt-5" *ngIf="isAdmin === false">
         <div class="groupButton">
-          <button class="btn btn-hero-success saveButton" *ngIf = 'groupId == null' (click)="onSubmit()">Lưu</button>
+          <button class="btn btn-hero-success saveButton" *ngIf = 'groupId == null' (click)="onSubmit($event)">Lưu</button>
           <button class="btn btn-hero-success saveButton" *ngIf = 'groupId != null' (click)="onUpdate($event)">Lưu</button>
           <button class="btn btn-hero-warning" (click)="closeModal()">Huỷ</button>
         </div>
