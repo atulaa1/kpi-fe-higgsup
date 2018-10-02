@@ -120,6 +120,10 @@ export class AccManagementLateComponent implements OnInit {
   }
 
   inputLateComingTimes(event, content, lateInfo: LateInfo, updatedLateComingTime) {
+    const regexNotSpecialChar = new RegExp(/[!@#$%^&*()+=`~[{\]}\\|;:'",<>./?\-_e]+/);
+    if (regexNotSpecialChar.test(updatedLateComingTime)) {
+      event.preventDefault();
+    }
     if (event.keyCode === 13) {
       this.openConfirmUpdateLateComingData(content, lateInfo, updatedLateComingTime);
     }
