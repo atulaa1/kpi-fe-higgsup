@@ -71,4 +71,6 @@ textarea {
     color: red;
   }
 }
-
+.onlyRead {
+  pointer-events: none;
+}

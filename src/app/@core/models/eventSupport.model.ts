@@ -2,6 +2,7 @@ import {Group} from './group.model';
 import {Activity} from './activity.model';
 import {UserType} from './userType.model';
 import {CreatedActivity} from './createdActivity.model';
+import {User} from './user.model';
 
 export class EventSupport {
 
@@ -14,4 +15,5 @@ export class EventSupport {
   group: Group<Activity>;
   eventUserList: Array<UserType>;
   additionalConfig: Array<any>;
+  creator: User;
 }

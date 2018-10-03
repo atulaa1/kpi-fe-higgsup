@@ -28,6 +28,8 @@ export class ClubActivityComponent implements OnInit {
   @Input() eventClubInfoCreated = new Event();
   @Input() groupId: number = null;
   @Input() activityName: string = '';
+  @Input() statusEvent: number = null;
+  @Input() creatorName: string = '';
   @Output() change = new EventEmitter<any>();
   startTime = {hour: 12, minute: 0o0};
   endTime = {hour: 12, minute: 0o0};
@@ -53,6 +55,7 @@ export class ClubActivityComponent implements OnInit {
   addOnBlur = false;
   isAdmin: boolean = false;
   alert: boolean = false;
+  creator: User = new User();
 
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
 
@@ -183,6 +186,7 @@ export class ClubActivityComponent implements OnInit {
     if (userRole.length > 0) {
       this.isAdmin = true;
     }
+    this.creator.username = JSON.parse(localStorage.getItem('currentUser')).username;
   }
 
   closeModal() {
@@ -220,6 +224,7 @@ export class ClubActivityComponent implements OnInit {
     } else {
       this.alert = false;
       this.eventClub.address = this.eventAddress;
+      this.eventClub.creator = this.creator;
       this.eventClub.beginDate = this.convertNgbDateStructToString(this.startDate) + ' '
         + this.convertNgbtimeStructToString(this.startTime);
       this.eventClub.endDate = this.convertNgbDateStructToString(this.endDate) + ' '
@@ -283,6 +288,7 @@ export class ClubActivityComponent implements OnInit {
     group.id = this.eventClubInfoCreated.group.id;
     this.eventClub.group = group;
     this.eventClub.name = this.eventName;
+    this.eventClub.creator = this.creator;
     if (this.eventClub.name === undefined || this.eventClub.name.trim() === ''
       || this.startDate === undefined || this.startDate === null
       || this.startTime === undefined || this.startTime === null

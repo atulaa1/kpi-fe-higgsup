@@ -39,13 +39,14 @@ export class SeminarActivityComponent implements OnInit {
   listCloneUserListener: Array<User>;
   eventSeminar: Event = new Event();
   eventName: string = '';
+  creator: string = '';
   listEventUser: Array<UserType> = new Array<UserType>();
   userCtrl = new FormControl();
   userParticipantCtrl = new FormControl();
   userListenerCtrl = new FormControl();
   filteredHostUsers: Observable<Array<User>>;
 
-  userClone: Array<any> = [];
+  userDefault: User = new User();
   userCloneHost: Array<any> = [];
   userCloneParticipant: Array<any> = [];
   userCloneListener: Array<any> = [];
@@ -156,7 +157,7 @@ export class SeminarActivityComponent implements OnInit {
 
   removeParticipant(fullName, i): void {
     let users: Array<User> = [];
-    this.filteredHostUsers.subscribe(value => users = value.filter(value1 => value1));
+    this.filteredHostUsers.subscribe(value => users = value.filter(value1 => value1 ));
     users.push(Object.assign(this.userCloneParticipant[i]));
     this.filteredHostUsers = this.setFilteredUsers(users);
     this.userCloneParticipant.splice(i, 1);
@@ -204,7 +205,7 @@ export class SeminarActivityComponent implements OnInit {
 
   removeListener(fullName, i): void {
     let users: Array<User> = [];
-    this.filteredHostUsers.subscribe(value => users = value.filter(value1 => value1));
+    this.filteredHostUsers.subscribe(value => users = value.filter(value1 => value1 ));
     users.push(Object.assign(this.userCloneListener[i]));
     this.filteredHostUsers = this.setFilteredUsers(users);
     this.userCloneListener.splice(i, 1);
@@ -266,6 +267,10 @@ export class SeminarActivityComponent implements OnInit {
   }
 
   ngOnInit() {
+    /*get user login from localStorage*/
+    this.creator = JSON.parse(localStorage.getItem('currentUser')).username;
+    this.userDefault = JSON.parse(localStorage.getItem('currentUser'));
+
     this.eventName = this.eventSeminarInfoCreated.name;
     const currentStartDate = new Date(this.reverse(this.eventSeminarInfoCreated.beginDate.slice(0, 10)));
     this.startDate = this.convertDatetoNgbDateStruct(currentStartDate);
@@ -274,9 +279,13 @@ export class SeminarActivityComponent implements OnInit {
     this.startTime = this.convertTimeStringtoNgbTimeStruct(this.eventSeminarInfoCreated.beginDate);
     this.endTime = this.convertTimeStringtoNgbTimeStruct(this.eventSeminarInfoCreated.endDate);
     const users: Array<User> = [];
+    this.eventSeminarInfoCreated.eventUserList
+      = this.eventSeminarInfoCreated.eventUserList.filter(userInfo => userInfo.user.username !== this.creator);
     for (let i = 0; i < this.eventSeminarInfoCreated.eventUserList.length; i++) {
       if (this.eventSeminarInfoCreated.eventUserList[i].type === 1) {
-        this.userCloneHost.push(this.eventSeminarInfoCreated.eventUserList[i].user);
+        if (this.eventSeminarInfoCreated.eventUserList[i].user.username !== this.creator) {
+          this.userCloneHost.push(this.eventSeminarInfoCreated.eventUserList[i].user);
+        }
       } else if (this.eventSeminarInfoCreated.eventUserList[i].type === 2) {
         this.userCloneParticipant.push(this.eventSeminarInfoCreated.eventUserList[i].user);
       } else {
@@ -285,12 +294,13 @@ export class SeminarActivityComponent implements OnInit {
       users.push(this.eventSeminarInfoCreated.eventUserList[i].user);
     }
 
+    users.push(this.userDefault);
     this.userService.getUsers().subscribe((response: ResponseUserDTO) => {
       if (response.status_code === 200) {
         this.listUser = response.data;
-        this.listCloneUserHost = Object.assign([], this.listUser);
-        this.listCloneUserParticipant = Object.assign([], this.listUser);
-        this.listCloneUserListener = Object.assign([], this.listUser);
+        this.listCloneUserHost = Object.assign([], this.listUser).filter(user => user.username !== this.creator);
+        this.listCloneUserParticipant = Object.assign([], this.listUser).filter(user => user.username !== this.creator);
+        this.listCloneUserListener = Object.assign([], this.listUser).filter(user => user.username !== this.creator);
         users.forEach(value => {
           const index = this.listUser.map(valueMap => valueMap.username).indexOf(value.username);
           if (index >= 0) {
@@ -355,6 +365,12 @@ export class SeminarActivityComponent implements OnInit {
       if (this.userCloneHost.length === 0 || this.userCloneParticipant.length === 0) {
         this.alert = true;
       } else {
+        const userHostDefault: User = new User();
+        const eventUserDefault: UserType = new UserType();
+        userHostDefault.username = this.userDefault.username;
+        eventUserDefault.user = userHostDefault;
+        eventUserDefault.type = 1;
+        this.listEventUser.push(eventUserDefault);
         this.eventSeminar.eventUserList = this.listEventUser;
         const group: Group<Activity> = new Group();
         group.id = this.eventSeminarInfoCreating.id;
