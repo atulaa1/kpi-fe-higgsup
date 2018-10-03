@@ -24,6 +24,6 @@ import {MatOptionModule} from '@angular/material';
   ],
   declarations: [CreatingActivitiesComponent, CreatedActivitiesComponent, ActivitiesComponent, ClubActivityComponent,
     SeminarActivityComponent, SupportActivityComponent],
-  exports: [ClubActivityComponent, SupportActivityComponent]
+  exports: [ClubActivityComponent, SupportActivityComponent],
 })
 export class ActivitiesModule { }

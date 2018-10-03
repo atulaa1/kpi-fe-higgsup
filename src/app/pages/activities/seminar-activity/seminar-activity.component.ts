@@ -14,6 +14,7 @@ import {ResponseUserDTO} from '../../../@core/models/responseUserDTO.model';
 import {Group} from '../../../@core/models/group.model';
 import {Activity} from '../../../@core/models/activity.model';
 import {SeminarService} from '../../../@core/services/seminar.service';
+import {DataTransferService} from '../../../@core/services/dataTransfer.service';
 
 @Component({
   selector: 'ngx-seminar-activity',
@@ -45,6 +46,7 @@ export class SeminarActivityComponent implements OnInit {
   userParticipantCtrl = new FormControl();
   userListenerCtrl = new FormControl();
   filteredHostUsers: Observable<Array<User>>;
+  eventDTO: Event = new Event();
 
   userDefault: User = new User();
   userCloneHost: Array<any> = [];
@@ -64,7 +66,8 @@ export class SeminarActivityComponent implements OnInit {
   @ViewChild('userParticipantInput') userParticipantInput: ElementRef<HTMLInputElement>;
   @ViewChild('userListenerInput') userListenerInput: ElementRef<HTMLInputElement>;
 
-  constructor(private userService: UserService, private seminarService: SeminarService, private activitiesService: ActivitiesService) {
+  constructor(private userService: UserService, private seminarService: SeminarService, private activitiesService: ActivitiesService,
+              private dataTransfer: DataTransferService) {
     // map Object type for Host
     this.userCtrl = new FormControl();
     this.filteredHostUsers = this.userCtrl.valueChanges
@@ -157,7 +160,7 @@ export class SeminarActivityComponent implements OnInit {
 
   removeParticipant(fullName, i): void {
     let users: Array<User> = [];
-    this.filteredHostUsers.subscribe(value => users = value.filter(value1 => value1 ));
+    this.filteredHostUsers.subscribe(value => users = value.filter(value1 => value1));
     users.push(Object.assign(this.userCloneParticipant[i]));
     this.filteredHostUsers = this.setFilteredUsers(users);
     this.userCloneParticipant.splice(i, 1);
@@ -205,7 +208,7 @@ export class SeminarActivityComponent implements OnInit {
 
   removeListener(fullName, i): void {
     let users: Array<User> = [];
-    this.filteredHostUsers.subscribe(value => users = value.filter(value1 => value1 ));
+    this.filteredHostUsers.subscribe(value => users = value.filter(value1 => value1));
     users.push(Object.assign(this.userCloneListener[i]));
     this.filteredHostUsers = this.setFilteredUsers(users);
     this.userCloneListener.splice(i, 1);
@@ -362,7 +365,7 @@ export class SeminarActivityComponent implements OnInit {
         this.listEventUser.push(eventUser);
       }
 
-      if (this.userCloneHost.length === 0 || this.userCloneParticipant.length === 0) {
+      if (this.userCloneParticipant.length === 0) {
         this.alert = true;
       } else {
         const userHostDefault: User = new User();
@@ -377,7 +380,7 @@ export class SeminarActivityComponent implements OnInit {
         this.eventSeminar.group = group;
         this.seminarService.addSeminarEvent(this.eventSeminar).subscribe((response: ResponseUserDTO) => {
           if (response.status_code === 200) {
-            this.change.emit(created);
+            this.dataTransfer.addConfirmation(response.data);
             this.dismiss();
             swal('Chúc Mừng!', 'Đã tạo thành công!', 'success');
           } else if (response.status_code === 903 && response.message === 'event can not be null') {
@@ -419,7 +422,7 @@ export class SeminarActivityComponent implements OnInit {
   }
 
 
-  updateSeminarEvent(update: any) {
+  updateSeminarEvent() {
     const group: Group<Activity> = new Group();
     group.id = this.eventSeminarInfoCreated.group.id;
     this.eventSeminar.group = group;
@@ -468,14 +471,20 @@ export class SeminarActivityComponent implements OnInit {
         this.listEventUser.push(eventUserListener);
       }
 
-      if (this.userCloneHost.length === 0 || this.userCloneParticipant.length === 0) {
+      if (this.userCloneParticipant.length === 0) {
         this.alert = true;
       } else {
+        const userHostDefault: User = new User();
+        const eventUserDefault: UserType = new UserType();
+        userHostDefault.username = this.userDefault.username;
+        eventUserDefault.user = userHostDefault;
+        eventUserDefault.type = 1;
+        this.listEventUser.push(eventUserDefault);
         this.eventSeminar.eventUserList = this.listEventUser;
         this.seminarService.updateSeminarEvent(this.eventSeminar, this.eventSeminarInfoCreated.id).
         subscribe((response: ResponseUserDTO) => {
           if (response.status_code === 200) {
-            this.change.emit(update);
+            this.change.emit(response.data);
             this.dismiss();
             swal('Chúc Mừng!', 'Đã sửa thành công!', 'success');
           } else if (response.status_code === 903 && response.message === 'event can not be null') {

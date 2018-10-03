@@ -26,6 +26,7 @@ import {FormsModule} from '@angular/forms';
 import {DataService} from './@core/services/data.service';
 import {AccManagementsModule} from './pages/acc-managements/acc-managements.module';
 import {PhoneNumberOnlyDirective} from './@core/directives/number.directive';
+import {DataTransferService} from './@core/services/dataTransfer.service';
 
 const config: InputFileConfig = {
   sizeLimit: 100,
@@ -55,6 +56,7 @@ const config: InputFileConfig = {
     {provide: LOCALE_ID, useValue: 'vi'},
     UserService,
     DataService,
+    DataTransferService,
   ],
   entryComponents: [LoginComponent, PersonalInfoComponent, LogoutComponent],
 })

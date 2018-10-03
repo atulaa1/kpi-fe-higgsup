@@ -15,6 +15,7 @@ import {UserType} from '../../../@core/models/userType.model';
 import {Activity} from '../../../@core/models/activity.model';
 import {Group} from '../../../@core/models/group.model';
 import {ClubService} from '../../../@core/services/club.service';
+import {DataTransferService} from '../../../@core/services/dataTransfer.service';
 
 @Component({
   selector: 'ngx-club-activity',
@@ -60,7 +61,8 @@ export class ClubActivityComponent implements OnInit {
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
 
   constructor(private userService: UserService, private clubService: ClubService,
-              private activitiesConfirmService: ActivitiesConfirmService) {
+              private activitiesConfirmService: ActivitiesConfirmService,
+              private dataTransfer: DataTransferService) {
     this.userCtrl = new FormControl();
     this.filteredUsers = this.userCtrl.valueChanges
       .startWith(null)
@@ -99,7 +101,7 @@ export class ClubActivityComponent implements OnInit {
 
   remove(fullName, i): void {
     let users: Array<User> = [];
-    this.filteredUsers.subscribe(value => users = value.filter(value1 => value1 ));
+    this.filteredUsers.subscribe(value => users = value.filter(value1 => value1));
     users.push(Object.assign(this.userClone[i]));
     this.filteredUsers = this.setFilteredUsers(users);
     this.userClone.splice(i, 1);
@@ -254,7 +256,7 @@ export class ClubActivityComponent implements OnInit {
         this.eventClub.group = group;
         this.clubService.addEventClub(this.eventClub).subscribe((response: ResponseUserDTO) => {
           if (response.status_code === 200) {
-            this.change.emit(created);
+            this.dataTransfer.addConfirmation(response.data);
             this.dismiss();
             swal('Chúc Mừng!', 'Đã tạo thành công!', 'success');
           } else if (response.status_code === 903 && response.message === 'name does not allow null') {
@@ -324,7 +326,7 @@ export class ClubActivityComponent implements OnInit {
         this.eventClub.eventUserList = this.listEventUser;
         this.clubService.updateEventClub(this.eventClub, this.eventClubInfoCreated.id).subscribe((response: ResponseUserDTO) => {
           if (response.status_code === 200) {
-            this.change.emit(update);
+            this.change.emit(response.data);
             this.dismiss();
             swal('Chúc Mừng!', 'Đã sửa thành công!', 'success');
           } else if (response.status_code === 903 && response.message === 'name does not allow null') {
