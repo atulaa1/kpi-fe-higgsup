@@ -2,10 +2,11 @@
   font-size: 20px;
   line-height: 43px;
   padding: 0px 10px;
-  border-radius:10px ;
+  border-radius: 10px;
   max-width: 300px;
   margin: auto;
 }
+
 .searchIcon {
   position: absolute;
   top: 14px;
@@ -13,38 +14,59 @@
   color: #bee5eb;
   font-size: 20px;
 }
+
 .searchIcon:hover {
   color: #58C3DC;
 }
-
-
 
 .tableScroll {
   max-height: 400px;
   overflow: auto;
 }
-.titleTable {
-  margin-bottom: 0px;
-}
+
 th.titleField {
   width: 20%;
   text-align: center;
 }
+
 .infoUser {
   width: 20%;
   text-align: center;
   vertical-align: inherit;
   position: relative;
 }
+
 #myTable tr:hover {
   background-color: #bee5eb;
   cursor: pointer;
 }
-.relative{
+
+.relative {
   position: relative;
   max-width: 300px;
   margin: auto;
 }
-.red{
-  color: red;
+
+#btnDropdown {
+  border: solid 2px #5dcfe3;
+  box-shadow: 0 0 20px 0 #5dcfe3;
 }
+
+#btnDropdown:active {
+  background-color: #5dcfe3;
+}
+
+#listDrop {
+  border: solid 2px #5dcfe3;
+}
+
+#listDrop li:hover {
+  background-color: #5dcfe3;
+}
+
+.titleTable {
+  margin-bottom: 0px;
+  background: rgba(242, 245, 245, 0.8);
+  color: #202124;
+}
+

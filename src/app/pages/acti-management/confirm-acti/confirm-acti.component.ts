@@ -47,25 +47,18 @@ export class ConfirmActiComponent implements OnInit {
     });
   }
 
-  handleKeyDown(event: any) {
-    if (event.keyCode === 13) {
-      this.searchConfirmActi();
-    } else if (this.nameSearch === '') {
-      this.searchConfirmActi();
-    }
-  }
-
-  searchName(activities) {
-    return activities.name.toUpperCase().indexOf(this.nameSearch.toUpperCase()) >= 0;
-  }
 
   searchConfirmActi() {
-    this.showMsg = false;
-    this.listActivities = Object.assign(this.listActivitiesClone);
-    this.listActivities = this.listActivities.filter(activitie => this.searchName(activitie));
-    if (this.listActivities.length === 0) {
-      this.showMsg = true;
-    }
+    /*  this.listActivities = Object.assign(this.listActivitiesClone);*/
+    this.listActivities = this.listActivities.forEach(function (value) {
+      if (value.status === 1) {
+        console.log("all");
+      } else if (value.status === 2) {
+        console.log('chưa xác nhận')
+      } else if (value.status === 3) {
+        console.log('đã hủy')
+      }
+    });
   }
 
   closeModal() {
