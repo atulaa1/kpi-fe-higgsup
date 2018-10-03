@@ -2,13 +2,13 @@
   <div class="row mt-5 mb-5">
     <div class="col-md-12">
       <div class="relative">
-        <div class="dropdown ghost-dropdown" ngbDropdown>
-          <button id="btnDropdown" class="btn btn-primary" type="button" ngbDropdownToggle> - - Chọn - -</button>
-          <ul id="listDrop" class="dropdown-menu" ngbDropdownMenu>
-            <li class="dropdown-item" (click)="searchConfirmActi()">Đã xác nhận</li>
-            <li class="dropdown-item" (click)="searchConfirmActi()">Chưa xác nhận</li>
-            <li class="dropdown-item" (click)="searchConfirmActi()">Đã hủy</li>
-          </ul>
+        <div>
+          <select (change)="onChangeFilter($event.target.value)" class="form-control">
+            <option value="0">- - Tất cả - -</option>
+            <option value="1">Chưa xác nhận</option>
+            <option value="2">Đã xác nhận</option>
+            <option value="3">Đã hủy</option>
+          </select>
         </div>
       </div>
     </div>
@@ -21,7 +21,7 @@
         <th class="titleField text-left">Hoạt Động</th>
         <th class="titleField">Người tạo hoạt động</th>
         <th class="titleField">Ngày tạo hoạt động</th>
-        <th class="titleField">Trang Thái</th>
+        <th class="titleField">Trạng Thái</th>
       </tr>
       </thead>
     </table>

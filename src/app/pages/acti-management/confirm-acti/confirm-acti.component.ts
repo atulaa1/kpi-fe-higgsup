@@ -1,13 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ClubActivityComponent} from '../../activities/club-activity/club-activity.component';
 import {ActivitiesConfirmService} from '../../../@core/services/activities-confirm.service';
-import {SeminarComponent} from '../create-acti/seminar/seminar.component';
-import {ClubComponent} from '../create-acti/club/club.component';
-import {TeamBuildingComponent} from '../create-acti/team-building/team-building.component';
-import {SupportComponent} from '../create-acti/support/support.component';
-import {SupportActivityComponent} from '../../activities/support-activity/support-activity.component';
-import {CreatedActivity} from '../../../@core/models/createdActivity.model';
 
 
 @Component({
@@ -16,8 +9,8 @@ import {CreatedActivity} from '../../../@core/models/createdActivity.model';
   styleUrls: ['./confirm-acti.component.scss']
 })
 export class ConfirmActiComponent implements OnInit {
-  listActivities: any;
-  listActivitiesClone: any;
+  listActivities: Array<any>;
+  listActivitiesClone: Array<any>;
   @Input() dismiss;
   message: string;
   nameSearch: string;
@@ -46,19 +39,11 @@ export class ConfirmActiComponent implements OnInit {
       }
     });
   }
-
-
-  searchConfirmActi() {
-    /*  this.listActivities = Object.assign(this.listActivitiesClone);*/
-    this.listActivities = this.listActivities.forEach(function (value) {
-      if (value.status === 1) {
-        console.log("all");
-      } else if (value.status === 2) {
-        console.log('chưa xác nhận')
-      } else if (value.status === 3) {
-        console.log('đã hủy')
-      }
-    });
+  onChangeFilter(value) {
+    this.listActivities = this.listActivitiesClone;
+    const valueNum = parseInt(value);
+    if (valueNum !== 0)
+      this.listActivities = this.listActivities.filter(item => item.status === valueNum);
   }
 
   closeModal() {
