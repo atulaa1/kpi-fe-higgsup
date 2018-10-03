@@ -5,7 +5,7 @@ import {CreatedActivity} from './createdActivity.model';
 import {User} from './user.model';
 
 export class Event {
-  id: number;
+  id: number = null;
   name: string;
   description: string;
   address: string;
@@ -17,4 +17,5 @@ export class Event {
   additionalConfig: CreatedActivity;
   status: number;
   creator: User;
+  updatedDate: string;
 }

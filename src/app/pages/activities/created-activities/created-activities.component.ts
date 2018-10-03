@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivitiesService} from '../../../@core/services/activities.service';
 import {Event} from '../../../@core/models/event.model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {DataTransferService} from '../../../@core/services/dataTransfer.service';
 
 @Component({
   selector: 'ngx-created-activities',
@@ -13,7 +14,10 @@ export class CreatedActivitiesComponent implements OnInit {
   nameSearch: string;
   eventList: Array<Event> = new Array<Event>();
   eventListClone: Array<Event> = new Array<Event>();
-  constructor(private activitiesService: ActivitiesService, private modalService: NgbModal) {
+  event: Event = new Event();
+
+  constructor(private activitiesService: ActivitiesService, private modalService: NgbModal,
+              private dataTransfer: DataTransferService) {
   }
 
   ngOnInit() {
@@ -21,6 +25,11 @@ export class CreatedActivitiesComponent implements OnInit {
       if (response.status_code === 200) {
         this.eventList = response.data;
         this.eventListClone = Object.assign(this.eventList)
+      }
+    });
+    this.dataTransfer.currentEvent.subscribe(event => {
+      if (event.id !== null) {
+        this.eventList.unshift(event);
       }
     });
   }
@@ -50,11 +59,11 @@ export class CreatedActivitiesComponent implements OnInit {
     this.modalService.open(content, {backdrop: 'static', centered: true, size: 'lg'});
   }
 
-  onChange(change: any) {
-    this.activitiesService.getCreatedEventUrl().subscribe(response => {
-      if (response.status_code === 200) {
-        this.eventList = response.data;
-      }
-    })
+  onChange(eventDTO: Event) {
+    const index = this.eventList.map(value => value.id).indexOf(eventDTO.id);
+    if (index >= 0) {
+      this.eventList.splice(index, 1, eventDTO);
+    }
   }
+
 }
