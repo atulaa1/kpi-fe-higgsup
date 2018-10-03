@@ -10,6 +10,7 @@ import {NormalCharacterOnlyDirective} from '../../@core/directives/normal-charac
 import {AccInfoComponent} from './acc-management/acc-info/acc-info.component';
 import {ThemeModule} from '../../@theme/theme.module';
 import { NoticeBoxComponent } from './acc-management-late/notice-box/notice-box.component';
+import {PositiveNumberOnlyDirective} from '../../@core/directives/positive-number-only.directive';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { NoticeBoxComponent } from './acc-management-late/notice-box/notice-box.
     RouterModule,
   ],
   declarations: [AccManagementsComponent, AccManagementComponent, AskSaveComponent,
-    AccManagementLateComponent, NormalCharacterOnlyDirective, AccInfoComponent, NoticeBoxComponent],
+    AccManagementLateComponent, NormalCharacterOnlyDirective, AccInfoComponent, NoticeBoxComponent, PositiveNumberOnlyDirective],
   entryComponents: [AccManagementsComponent],
 })
 export class AccManagementsModule {

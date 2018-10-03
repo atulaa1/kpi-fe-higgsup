@@ -2,7 +2,7 @@
   <div class="row ml-5 mr-5">
     <div class="col-md-6">
       <button class="butn" (click)="lateFileImport.click()">Tải lên</button>
-      <input type="file" name="myfile" (change)="uploadImportFile(lateFileImport.files, content)" [disabled]="isEditLateComing"
+      <input type="file" name="myfile" (input)="uploadImportFile(lateFileImport.files, content)" [disabled]="isEditLateComing"
              accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
              #lateFileImport hidden="true">
     </div>
@@ -35,7 +35,7 @@
         <td class="emailTitle">{{late.user.email}}</td>
         <td class="text-center lateTitle">
           <span [hidden]="late.id === this.idLateInfoEdit">{{late.lateTimes}}</span>
-          <input type="number" class="lateComingTimeBox" [hidden]="late.id !== this.idLateInfoEdit" normalCharacterOnly
+          <input type="number" class="lateComingTimeBox" [hidden]="late.id !== this.idLateInfoEdit" positiveNumberOnly
                  [value]="newLateComingTime" min="0" (keypress)="inputLateComingTimes($event, content, late, updateLateComingTime.value)" #updateLateComingTime>
 
         </td>

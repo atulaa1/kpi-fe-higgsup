@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ManagementLateUsersService} from '../../../@core/services/management-late-users.service';
 import {LateInfo} from '../../../@core/models/lateInfo.model';
 import {ResponDTOLateInfo} from '../../../@core/models/ResponDTOLateInfo';
@@ -22,6 +22,7 @@ export class AccManagementLateComponent implements OnInit {
   lateInfoToEdit: LateInfo;
   newLateComingTime: number;
   errorContent: string;
+  @ViewChild('lateFileImport') lateFileImport: ElementRef;
 
   constructor(private managementLateService: ManagementLateUsersService,
               private bsModal: NgbModal) {
@@ -76,6 +77,7 @@ export class AccManagementLateComponent implements OnInit {
           }
         }
       }
+      this.lateFileImport.nativeElement.value = '';
       this.errorContent = (msgColumn === '') ? msgData : msgColumn;
       if (this.errorContent !== '' && this.errorContent !== null) {
         this.bsModal.open(content, {backdrop: 'static', centered: true});
@@ -120,6 +122,10 @@ export class AccManagementLateComponent implements OnInit {
   }
 
   inputLateComingTimes(event, content, lateInfo: LateInfo, updatedLateComingTime) {
+    const regexNotSpecialChar = new RegExp(/[!@#$%^&*()+=`~[{\]}\\|;:'",<>./?\-_e]+/);
+    if (regexNotSpecialChar.test(updatedLateComingTime)) {
+      event.preventDefault();
+    }
     if (event.keyCode === 13) {
       this.openConfirmUpdateLateComingData(content, lateInfo, updatedLateComingTime);
     }
