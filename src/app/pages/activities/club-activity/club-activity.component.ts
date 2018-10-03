@@ -46,6 +46,8 @@ export class ClubActivityComponent implements OnInit {
   userClone: Array<any> = [];
   separatorKeysCodes: Array<number> = [ENTER, COMMA];
   eventConfirmation = {status: null};
+  startHour: number;
+  startMinute: number;
 
   visible = true;
   selectable = true;
@@ -219,11 +221,12 @@ export class ClubActivityComponent implements OnInit {
       this.alert = true;
     } else {
       this.alert = false;
-      this.eventClub.address = this.eventAddress;
+      this.eventClub.address = '';
       this.eventClub.beginDate = this.convertNgbDateStructToString(this.startDate) + ' '
         + this.convertNgbtimeStructToString(this.startTime);
       this.eventClub.endDate = this.convertNgbDateStructToString(this.endDate) + ' '
         + this.convertNgbtimeStructToString(this.endTime);
+      this.eventClub.beginDate = this.convertNgbDateStructToString(this.startDate) + ' ' + this.startHour + ':' + this.startMinute;
 
       // Lấy username trong array đã chọn ở mục chọn người tham gia gán vào username
       for (let i = 0; i < this.userClone.length; i++) {

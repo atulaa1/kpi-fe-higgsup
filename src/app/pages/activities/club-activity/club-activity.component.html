@@ -18,6 +18,11 @@
         <h5 class="col-md-4 requiredInput">Thời gian bắt đầu</h5>
         <input type="text" class="col-md-5 form-control" placeholder="Ngày/Tháng/Năm" [(ngModel)]="startDate" ngbDatepicker #startDay="ngbDatepicker"
                (click)="startDay.toggle()">
+        <div class="timeGroup">
+          <input type="text" [(ngModel)]="startHour" class="timeInput form-control text-center" placeholder="HH">
+          <div class="timeSeparate">:</div>
+          <input type="text" [(ngModel)]="startMinute" class="timeInput form-control text-center" placeholder="MM">
+        </div>
         <ngb-timepicker class="col-md-3" [(ngModel)]="startTime" [spinners]="spinners" name="timeInput"></ngb-timepicker>
       </div>
       <div class="row mt-2">

@@ -83,3 +83,17 @@ h5.requiredInput:after {
     color: red;
   }
 }
+
+.timeInput {
+  border: 2px solid #dadfe6;
+  width: 68.5px;
+}
+
+.timeSeparate {
+  margin-top: 12px;
+}
+
+.timeGroup {
+  display: flex;
+  margin-left: 42px;
+}
