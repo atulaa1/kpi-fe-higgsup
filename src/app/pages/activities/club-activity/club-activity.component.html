@@ -22,14 +22,14 @@
         <h5 class="col-md-4 requiredInput">Thời gian bắt đầu</h5>
         <input type="text" class="col-md-5 form-control" placeholder="Ngày/Tháng/Năm" [(ngModel)]="startDate"
                ngbDatepicker #startDay="ngbDatepicker"
-               (click)="startDay.toggle()" [disabled]="isAdmin === true">
+               [readonly]="true" (click)="startDay.toggle()" [disabled]="isAdmin === true">
         <ngb-timepicker class="col-md-3" [(ngModel)]="startTime" [spinners]="spinners" name="timeInput"
                         [disabled]="isAdmin === true"></ngb-timepicker>
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Thời gian kết thúc</h5>
         <input type="text" class="col-md-5 form-control" placeholder="Ngày/Tháng/Năm" [(ngModel)]="endDate"
-               ngbDatepicker #endDay="ngbDatepicker" (click)="endDay.toggle()" [disabled]="isAdmin === true">
+               ngbDatepicker #endDay="ngbDatepicker" [readonly]="true" (click)="endDay.toggle()" [disabled]="isAdmin === true">
         <ngb-timepicker class="col-md-3" [(ngModel)]="endTime" [spinners]="spinners" name="timeInput"
                         [disabled]="isAdmin === true"></ngb-timepicker>
       </div>
