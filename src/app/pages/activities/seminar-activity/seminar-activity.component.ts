@@ -267,6 +267,10 @@ export class SeminarActivityComponent implements OnInit {
   }
 
   ngOnInit() {
+    /*get user login from localStorage*/
+    this.creator = JSON.parse(localStorage.getItem('currentUser')).username;
+    this.userDefault = JSON.parse(localStorage.getItem('currentUser'));
+
     this.eventName = this.eventSeminarInfoCreated.name;
     const currentStartDate = new Date(this.reverse(this.eventSeminarInfoCreated.beginDate.slice(0, 10)));
     this.startDate = this.convertDatetoNgbDateStruct(currentStartDate);
@@ -279,7 +283,9 @@ export class SeminarActivityComponent implements OnInit {
       = this.eventSeminarInfoCreated.eventUserList.filter(userInfo => userInfo.user.username !== this.creator);
     for (let i = 0; i < this.eventSeminarInfoCreated.eventUserList.length; i++) {
       if (this.eventSeminarInfoCreated.eventUserList[i].type === 1) {
-        this.userCloneHost.push(this.eventSeminarInfoCreated.eventUserList[i].user);
+        if (this.eventSeminarInfoCreated.eventUserList[i].user.username !== this.creator) {
+          this.userCloneHost.push(this.eventSeminarInfoCreated.eventUserList[i].user);
+        }
       } else if (this.eventSeminarInfoCreated.eventUserList[i].type === 2) {
         this.userCloneParticipant.push(this.eventSeminarInfoCreated.eventUserList[i].user);
       } else {
@@ -287,8 +293,8 @@ export class SeminarActivityComponent implements OnInit {
       }
       users.push(this.eventSeminarInfoCreated.eventUserList[i].user);
     }
-    this.creator = JSON.parse(localStorage.getItem('currentUser')).username;
-    this.userDefault = JSON.parse(localStorage.getItem('currentUser'));
+
+    users.push(this.userDefault);
     this.userService.getUsers().subscribe((response: ResponseUserDTO) => {
       if (response.status_code === 200) {
         this.listUser = response.data;
