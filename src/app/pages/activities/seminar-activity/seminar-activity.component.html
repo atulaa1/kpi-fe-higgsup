@@ -17,14 +17,14 @@
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Thời gian bắt đầu</h5>
         <input type="text" class="col-md-5 form-control" [(ngModel)]="startDate" ngbDatepicker #startDay="ngbDatepicker"
-               (click)="startDay.toggle()">
+               (click)="startDay.toggle()" [readonly]="true">
         <ngb-timepicker class="col-md-3" [(ngModel)]="startTime" [spinners]="spinners"
                         name="timeInput"></ngb-timepicker>
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Thời gian kết thúc</h5>
         <input type="text" class="col-md-5 form-control" [(ngModel)]="endDate" ngbDatepicker #endDay="ngbDatepicker"
-               (click)="endDay.toggle()">
+               (click)="endDay.toggle()" [readonly]="true">
         <ngb-timepicker class="col-md-3" [(ngModel)]="endTime" [spinners]="spinners" name="timeInput"></ngb-timepicker>
       </div>
       <div class="row mt-2">
