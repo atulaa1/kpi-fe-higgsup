@@ -2,10 +2,14 @@
   <div class="row">
     <div class="col-md-12">
       <div class="relative">
-        <input normalCharacterOnly [(ngModel)]="nameSearch" (keyup)='handleKeyDown($event)'
-               class="form-control search-inp" type="text" id="myInput"
-               placeholder="Tìm kiếm Hoạt Động:" title="Type in a name"/>
-        <span class="fas fa-search searchIcon" (click)='searchConfirmActi()'></span>
+        <div>
+          <select (change)="onChangeFilter($event.target.value)" class="form-control">
+            <option value="0">- - Tất cả - -</option>
+            <option value="1">Chưa xác nhận</option>
+            <option value="2">Đã xác nhận</option>
+            <option value="3">Đã hủy</option>
+          </select>
+        </div>
       </div>
     </div>
   </div>
@@ -46,7 +50,7 @@
         </td>
         <td class="infoUser">{{activities.creator.fullName}}</td>
         <td class="infoUser">{{activities.createdDate}}</td>
-        <td *ngIf="activities.status === 1 && activities.group.groupType.id != 1" class="infoUser">Chưa xác nhận</td>
+        <td *ngIf="activities.status === 1 && activities.group.groupType.id != 1" class="infoUser text-danger">Chưa xác nhận</td>
         <td *ngIf="activities.status === 2 && activities.group.groupType.id != 1" class="infoUser">Đã xác nhận</td>
         <td *ngIf="activities.status === 3 && activities.group.groupType.id != 1" class="infoUser">Đã hủy</td>
       </tr>
