@@ -7,6 +7,7 @@ import {Activity} from '../../../@core/models/activity.model';
 import {ResponseEventDTO} from '../../../@core/models/responseEventDTO.model';
 import {EventSupport} from '../../../@core/models/eventSupport.model';
 import {ActivitiesConfirmService} from '../../../@core/services/activities-confirm.service';
+import {User} from '../../../@core/models/user.model';
 
 @Component({
   selector: 'ngx-support-activity',
@@ -22,6 +23,8 @@ export class SupportActivityComponent implements OnInit {
   @Input() dateCreated: string = '';
   @Input() listSelectedEvent = [];
   @Input() activityName: string = '';
+  @Input() statusEvent: number = null;
+  @Input() creatorName: string = '';
   @Output() change = new EventEmitter<any>();
   eventConfirmation = {status: null};
   supportEvents = [
@@ -44,6 +47,7 @@ export class SupportActivityComponent implements OnInit {
   beginDate: string;
   startTime = {hour: 7, minute: 0o0};
   name: string;
+  creator: User = new User();
   quantity: number;
   supportEvent: EventSupport = new EventSupport();
   isAdmin: boolean = false;
@@ -88,7 +92,7 @@ export class SupportActivityComponent implements OnInit {
     if (userRole.length > 0) {
       this.isAdmin = true;
     }
-
+    this.creator.username = JSON.parse(localStorage.getItem('currentUser')).username;
   }
 
   private convertDatetoNgbDateStruct(date: Date): NgbDateStruct {
@@ -127,21 +131,13 @@ export class SupportActivityComponent implements OnInit {
 
   changeSelect(supportEvent, event) {
     if (event.target.checked === true) {
-      supportEvent.status = true;
       this.selectedSupportEvents.push(supportEvent);
     } else {
-      const updateItem = this.selectedSupportEvents.find(this.findIndexToUpdate, supportEvent.name);
-
-      const index = this.selectedSupportEvents.indexOf(updateItem);
-
-      this.selectedSupportEvents.splice(supportEvent, 1);
-      supportEvent.status = false;
+      const indexSelect = this.selectedSupportEvents.indexOf(supportEvent);
+      this.selectedSupportEvents.splice(indexSelect, 1);
     }
+    supportEvent.status = !supportEvent.status;
 
-  }
-
-  findIndexToUpdate(supportEvent) {
-    return supportEvent.name === this;
   }
 
   addSupportEvent() {
@@ -161,6 +157,7 @@ export class SupportActivityComponent implements OnInit {
       const group: Group<Activity> = new Group();
       group.id = this.eventSupportInfoCreating.id;
       this.supportEvent.group = group;
+      this.supportEvent.creator = this.creator;
       this.supportEvent.beginDate = this.beginDate + ' ' + this.convertNgbtimeStructToString(this.startTime);
       this.supportEvent.additionalConfig = this.listFilteredSelectedSupportEvent;
       this.supportService.createEventSupport(this.supportEvent).subscribe((response: ResponseEventDTO) => {
@@ -176,15 +173,15 @@ export class SupportActivityComponent implements OnInit {
         } else if (response.status_code === 901 && response.message === 'roup ID not is support') {
           swal('Thông báo!', 'ID Group không phải là Support!', 'error');
         } else if (response.status_code === 901 && response.message === 'list support can not empty') {
-          swal('Thông báo!', 'Danh sách support không được rỗng!', 'error');
+          swal('Thông báo!', 'Danh sách hoạt động support không được bỏ trống!', 'error');
         } else if (response.status_code === 901 && response.message === 'name at index {index} can not null') {
-          swal('Thông báo!', 'tên tại 1 không thể rỗng!', 'error');
-        } else if (response.status_code === 901 && response.message === 'ame support at index {index} not incorrect') {
-          swal('Thông báo!', 'tên support tại 1 không chính xác!', 'error');
+          swal('Thông báo!', 'Tên tại 1 không được bỏ trống!', 'error');
+        } else if (response.status_code === 901 && response.message === 'name support at index {index} not incorrect') {
+          swal('Thông báo!', 'Tên support không chính xác!', 'error');
         } else if (response.status_code === 901 && response.message === 'quantity at index {index} can not null') {
-          swal('Thông báo!', 'Số lượng tại 1 không thể rỗng!', 'error');
+          swal('Thông báo!', 'Số lượng không được bỏ trống!', 'error');
         } else if (response.status_code === 901 && response.message === 'quantity at index {index} can less one') {
-          swal('Thông báo!', 'Số lượng tại 1 không thể nhỏ hơn 1!', 'error');
+          swal('Thông báo!', 'Số lượng không thể nhỏ hơn 1!', 'error');
         } else if (response.status_code === 999 && response.message === 'system error') {
           swal('Thông báo!', 'Lỗi hệ thống, Vui lòng liên hệ Admin!', 'error');
         }
@@ -211,6 +208,7 @@ export class SupportActivityComponent implements OnInit {
       const group: Group<Activity> = new Group();
       group.id = this.eventSupportInfoCreated.group.id;
       this.supportEvent.group = group;
+      this.supportEvent.creator = this.creator;
       this.supportEvent.beginDate = this.beginDate + ' ' + this.convertNgbtimeStructToString(this.startTime);
       this.supportEvent.additionalConfig = this.listFilteredSelectedSupportEvent;
       this.supportService.updateEventSupport(this.supportEvent, this.eventSupportInfoCreated.id).subscribe((response: ResponseEventDTO) => {
@@ -227,15 +225,15 @@ export class SupportActivityComponent implements OnInit {
         } else if (response.status_code === 901 && response.message === 'roup ID not is support') {
           swal('Thông báo!', 'ID Group không phải là Support!', 'error');
         } else if (response.status_code === 901 && response.message === 'list support can not empty') {
-          swal('Thông báo!', 'Danh sách support không được rỗng!', 'error');
+          swal('Thông báo!', 'Danh sách hoạt động support không được bỏ trống!', 'error');
         } else if (response.status_code === 901 && response.message === 'name at index {index} can not null') {
-          swal('Thông báo!', 'tên tại 1 không thể rỗng!', 'error');
-        } else if (response.status_code === 901 && response.message === 'ame support at index {index} not incorrect') {
-          swal('Thông báo!', 'tên support tại 1 không chính xác!', 'error');
+          swal('Thông báo!', 'tên tại 1 không được bỏ trống!', 'error');
+        } else if (response.status_code === 901 && response.message === 'name support at index {index} not incorrect') {
+          swal('Thông báo!', 'tên support không chính xác!', 'error');
         } else if (response.status_code === 901 && response.message === 'quantity at index {index} can not null') {
-          swal('Thông báo!', 'Số lượng tại 1 không thể rỗng!', 'error');
+          swal('Thông báo!', 'Số lượng không được bỏ trống!', 'error');
         } else if (response.status_code === 901 && response.message === 'quantity at index {index} can less one') {
-          swal('Thông báo!', 'Số lượng tại 1 không thể nhỏ hơn 1!', 'error');
+          swal('Thông báo!', 'Số lượng không thể nhỏ hơn 1!', 'error');
         } else if (response.status_code === 999 && response.message === 'system error') {
           swal('Thông báo!', 'Lỗi hệ thống, Vui lòng liên hệ Admin!', 'error');
         } else if (response.status_code === 403 && response.message === 'Forbidden') {

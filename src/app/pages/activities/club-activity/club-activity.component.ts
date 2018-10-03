@@ -28,6 +28,8 @@ export class ClubActivityComponent implements OnInit {
   @Input() eventClubInfoCreated = new Event();
   @Input() groupId: number = null;
   @Input() activityName: string = '';
+  @Input() statusEvent: number = null;
+  @Input() creatorName: string = '';
   @Output() change = new EventEmitter<any>();
   startTime = {hour: 12, minute: 0o0};
   endTime = {hour: 12, minute: 0o0};
@@ -55,6 +57,7 @@ export class ClubActivityComponent implements OnInit {
   addOnBlur = false;
   isAdmin: boolean = false;
   alert: boolean = false;
+  creator: User = new User();
 
   @ViewChild('userInput') userInput: ElementRef<HTMLInputElement>;
 
@@ -185,6 +188,7 @@ export class ClubActivityComponent implements OnInit {
     if (userRole.length > 0) {
       this.isAdmin = true;
     }
+    this.creator.username = JSON.parse(localStorage.getItem('currentUser')).username;
   }
 
   closeModal() {
@@ -221,7 +225,8 @@ export class ClubActivityComponent implements OnInit {
       this.alert = true;
     } else {
       this.alert = false;
-      this.eventClub.address = '';
+      this.eventClub.address = this.eventAddress;
+      this.eventClub.creator = this.creator;
       this.eventClub.beginDate = this.convertNgbDateStructToString(this.startDate) + ' '
         + this.convertNgbtimeStructToString(this.startTime);
       this.eventClub.endDate = this.convertNgbDateStructToString(this.endDate) + ' '
@@ -243,35 +248,39 @@ export class ClubActivityComponent implements OnInit {
           this.listEventUser.push(eventUser);
         }
       }
-      this.eventClub.eventUserList = this.listEventUser;
-      const group: Group<Activity> = new Group();
-      group.id = this.eventClubInfoCreating.id;
-      this.eventClub.group = group;
-      this.clubService.addEventClub(this.eventClub).subscribe((response: ResponseUserDTO) => {
-        if (response.status_code === 200) {
-          this.change.emit(created);
-          this.dismiss();
-          swal('Chúc Mừng!', 'Đã tạo thành công!', 'success');
-        } else if (response.status_code === 903 && response.message === 'name does not allow null') {
-          swal('Thông báo!', 'Tên hoạt động không được để trống!', 'error');
-        } else if (response.status_code === 903 && response.message === 'begin date cannot null') {
-          swal('Thông báo!', 'Ngày bắt đầu không được để trống!', 'error');
-        } else if (response.status_code === 903 && response.message === 'end date cannot null') {
-          swal('Thông báo!', 'Ngày kết thúc không được để trống!', 'error');
-        } else if (response.status_code === 903 && response.message === 'list of participants cannot null') {
-          swal('Thông báo!', 'Danh sách người tham gia không được để trống!', 'error');
-        } else if (response.status_code === 932 && response.message === 'begin date is not after end date') {
-          swal('Thông báo!', 'Vui lòng chọn thời gian bắt đầu nhỏ hơn thời gian kết thúc!', 'error');
-        } else if (response.status_code === 900 && response.message === 'not find group') {
-          swal('Thông báo!', 'Hoạt động không tồn tại!', 'error');
-        } else if (response.status_code === 903 && response.message === 'user type cannot null') {
-          swal('Thông báo!', 'Loại user không được để trống!', 'error');
-        } else if (response.status_code === 900 && response.message === 'member type does not exist') {
-          swal('Thông báo!', 'Loại member không tồn tại!', 'error');
-        } else if (response.status_code === 900 && response.message === 'user does not exist') {
-          swal('Thông báo!', 'User không tồn tại!', 'error');
-        }
-      });
+      if (this.listEventUser.length === 0) {
+        this.alert = true;
+      } else {
+        this.eventClub.eventUserList = this.listEventUser;
+        const group: Group<Activity> = new Group();
+        group.id = this.eventClubInfoCreating.id;
+        this.eventClub.group = group;
+        this.clubService.addEventClub(this.eventClub).subscribe((response: ResponseUserDTO) => {
+          if (response.status_code === 200) {
+            this.change.emit(created);
+            this.dismiss();
+            swal('Chúc Mừng!', 'Đã tạo thành công!', 'success');
+          } else if (response.status_code === 903 && response.message === 'name does not allow null') {
+            swal('Thông báo!', 'Tên hoạt động không được để trống!', 'error');
+          } else if (response.status_code === 903 && response.message === 'begin date cannot null') {
+            swal('Thông báo!', 'Ngày bắt đầu không được để trống!', 'error');
+          } else if (response.status_code === 903 && response.message === 'end date cannot null') {
+            swal('Thông báo!', 'Ngày kết thúc không được để trống!', 'error');
+          } else if (response.status_code === 903 && response.message === 'list of participants cannot null') {
+            swal('Thông báo!', 'Danh sách người tham gia không được để trống!', 'error');
+          } else if (response.status_code === 932 && response.message === 'begin date is not after end date') {
+            swal('Thông báo!', 'Vui lòng chọn thời gian bắt đầu nhỏ hơn thời gian kết thúc!', 'error');
+          } else if (response.status_code === 900 && response.message === 'not find group') {
+            swal('Thông báo!', 'Hoạt động không tồn tại!', 'error');
+          } else if (response.status_code === 903 && response.message === 'user type cannot null') {
+            swal('Thông báo!', 'Loại user không được để trống!', 'error');
+          } else if (response.status_code === 900 && response.message === 'member type does not exist') {
+            swal('Thông báo!', 'Loại member không tồn tại!', 'error');
+          } else if (response.status_code === 900 && response.message === 'user does not exist') {
+            swal('Thông báo!', 'User không tồn tại!', 'error');
+          }
+        });
+      }
     }
 
 
@@ -282,6 +291,7 @@ export class ClubActivityComponent implements OnInit {
     group.id = this.eventClubInfoCreated.group.id;
     this.eventClub.group = group;
     this.eventClub.name = this.eventName;
+    this.eventClub.creator = this.creator;
     if (this.eventClub.name === undefined || this.eventClub.name.trim() === ''
       || this.startDate === undefined || this.startDate === null
       || this.startTime === undefined || this.startTime === null
@@ -311,32 +321,36 @@ export class ClubActivityComponent implements OnInit {
           this.listEventUser.push(eventUser);
         }
       }
-      this.eventClub.eventUserList = this.listEventUser;
-      this.clubService.updateEventClub(this.eventClub, this.eventClubInfoCreated.id).subscribe((response: ResponseUserDTO) => {
-        if (response.status_code === 200) {
-          this.change.emit(update);
-          this.dismiss();
-          swal('Chúc Mừng!', 'Đã sửa thành công!', 'success');
-        } else if (response.status_code === 903 && response.message === 'name does not allow null') {
-          swal('Thông báo!', 'Tên hoạt động không được để trống!', 'error');
-        } else if (response.status_code === 903 && response.message === 'begin date cannot null') {
-          swal('Thông báo!', 'Ngày bắt đầu không được để trống!', 'error');
-        } else if (response.status_code === 903 && response.message === 'end date cannot null') {
-          swal('Thông báo!', 'Ngày kết thúc không được để trống!', 'error');
-        } else if (response.status_code === 903 && response.message === 'list of participants cannot null') {
-          swal('Thông báo!', 'Danh sách người tham gia không được để trống!', 'error');
-        } else if (response.status_code === 932 && response.message === 'begin date is not after end date') {
-          swal('Thông báo!', 'Vui lòng chọn thời gian bắt đầu nhỏ hơn thời gian kết thúc!', 'error');
-        } else if (response.status_code === 900 && response.message === 'not find group') {
-          swal('Thông báo!', 'Hoạt động không tồn tại!', 'error');
-        } else if (response.status_code === 903 && response.message === 'user type cannot null') {
-          swal('Thông báo!', 'Loại user không được để trống!', 'error');
-        } else if (response.status_code === 900 && response.message === 'member type does not exist') {
-          swal('Thông báo!', 'Loại member không tồn tại!', 'error');
-        } else if (response.status_code === 900 && response.message === 'user does not exist') {
-          swal('Thông báo!', 'User không tồn tại!', 'error');
-        }
-      });
+      if (this.listEventUser.length === 0) {
+        this.alert = true;
+      } else {
+        this.eventClub.eventUserList = this.listEventUser;
+        this.clubService.updateEventClub(this.eventClub, this.eventClubInfoCreated.id).subscribe((response: ResponseUserDTO) => {
+          if (response.status_code === 200) {
+            this.change.emit(update);
+            this.dismiss();
+            swal('Chúc Mừng!', 'Đã sửa thành công!', 'success');
+          } else if (response.status_code === 903 && response.message === 'name does not allow null') {
+            swal('Thông báo!', 'Tên hoạt động không được để trống!', 'error');
+          } else if (response.status_code === 903 && response.message === 'begin date cannot null') {
+            swal('Thông báo!', 'Ngày bắt đầu không được để trống!', 'error');
+          } else if (response.status_code === 903 && response.message === 'end date cannot null') {
+            swal('Thông báo!', 'Ngày kết thúc không được để trống!', 'error');
+          } else if (response.status_code === 903 && response.message === 'list of participants cannot null') {
+            swal('Thông báo!', 'Danh sách người tham gia không được để trống!', 'error');
+          } else if (response.status_code === 932 && response.message === 'begin date is not after end date') {
+            swal('Thông báo!', 'Vui lòng chọn thời gian bắt đầu nhỏ hơn thời gian kết thúc!', 'error');
+          } else if (response.status_code === 900 && response.message === 'not find group') {
+            swal('Thông báo!', 'Hoạt động không tồn tại!', 'error');
+          } else if (response.status_code === 903 && response.message === 'user type cannot null') {
+            swal('Thông báo!', 'Loại user không được để trống!', 'error');
+          } else if (response.status_code === 900 && response.message === 'member type does not exist') {
+            swal('Thông báo!', 'Loại member không tồn tại!', 'error');
+          } else if (response.status_code === 900 && response.message === 'user does not exist') {
+            swal('Thông báo!', 'User không tồn tại!', 'error');
+          }
+        });
+      }
     }
   }
 }

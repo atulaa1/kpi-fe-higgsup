@@ -17,14 +17,14 @@
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Thời gian bắt đầu</h5>
         <input type="text" class="col-md-5 form-control" [(ngModel)]="startDate" ngbDatepicker #startDay="ngbDatepicker"
-               (click)="startDay.toggle()">
+               (click)="startDay.toggle()" [readonly]="true">
         <ngb-timepicker class="col-md-3" [(ngModel)]="startTime" [spinners]="spinners"
                         name="timeInput"></ngb-timepicker>
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Thời gian kết thúc</h5>
         <input type="text" class="col-md-5 form-control" [(ngModel)]="endDate" ngbDatepicker #endDay="ngbDatepicker"
-               (click)="endDay.toggle()">
+               (click)="endDay.toggle()" [readonly]="true">
         <ngb-timepicker class="col-md-3" [(ngModel)]="endTime" [spinners]="spinners" name="timeInput"></ngb-timepicker>
       </div>
       <div class="row mt-2">
@@ -32,6 +32,12 @@
         <div class="col-md-8 mat-app-background basic-container form-control" name="host">
           <mat-form-field class="example-chip-list">
             <mat-chip-list #chipListHost>
+              <mat-chip>
+                <mat-icon matChipAvatar name="iconAvatar">
+                  <img src="{{userDefault.avatar}}" name="iconMem">
+                </mat-icon>
+                {{userDefault.fullName}}
+              </mat-chip>
               <mat-chip
                 *ngFor="let user of userCloneHost; let i = index"
                 [selectable]="selectable"
