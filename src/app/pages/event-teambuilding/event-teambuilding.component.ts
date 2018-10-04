@@ -18,4 +18,5 @@ export class EventTeambuildingComponent implements OnInit {
   open(content) {
     this.modalService.open(TeambuildingActivityComponent, {backdrop: 'static', centered: true, size: 'lg'})
   }
+
 }
