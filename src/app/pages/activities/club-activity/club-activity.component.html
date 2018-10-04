@@ -24,9 +24,9 @@
                ngbDatepicker #startDay="ngbDatepicker"
                [readonly]="true" (click)="startDay.toggle()" [disabled]="isAdmin === true">
         <div class="timeGroup">
-          <input type="text" [(ngModel)]="startHour" class="timeInput form-control text-center" placeholder="HH">
+          <input type="text" [(ngModel)]="startHour" class="timeInput form-control text-center" placeholder="HH" [pattern]="regexNotSpecialCharNorExponent">
           <div class="timeSeparate">:</div>
-          <input type="text" [(ngModel)]="startMinute" class="timeInput form-control text-center" placeholder="MM">
+          <input type="text" [(ngModel)]="startMinute" class="timeInput form-control text-center" placeholder="MM" positiveNumberOnly>
         </div>
         <ngb-timepicker class="col-md-3" [(ngModel)]="startTime" [spinners]="spinners" name="timeInput"
                         [disabled]="isAdmin === true"></ngb-timepicker>
@@ -35,6 +35,11 @@
         <h5 class="col-md-4 requiredInput">Thời gian kết thúc</h5>
         <input type="text" class="col-md-5 form-control" placeholder="Ngày/Tháng/Năm" [(ngModel)]="endDate"
                ngbDatepicker #endDay="ngbDatepicker" [readonly]="true" (click)="endDay.toggle()" [disabled]="isAdmin === true">
+        <div class="timeGroup">
+          <input type="text" [(ngModel)]="endHour" class="timeInput form-control text-center" placeholder="HH">
+          <div class="timeSeparate">:</div>
+          <input type="text" [(ngModel)]="endMinute" class="timeInput form-control text-center" placeholder="MM">
+        </div>
         <ngb-timepicker class="col-md-3" [(ngModel)]="endTime" [spinners]="spinners" name="timeInput"
                         [disabled]="isAdmin === true"></ngb-timepicker>
       </div>
