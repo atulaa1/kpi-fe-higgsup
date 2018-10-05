@@ -34,6 +34,7 @@ export class TeambuildingActivityComponent implements OnInit {
   userThirdPrizeCtrl = new FormControl();
   filteredUsers: Observable<Array<User>>;
   filteredHostUsers: Observable<Array<User>>;
+  listEventUser: Array<UserType> = new Array<UserType>();
 
   userDefault: User = new User();
   userCloneHost: Array<any> = [];
@@ -60,8 +61,8 @@ export class TeambuildingActivityComponent implements OnInit {
     this.userCtrl = new FormControl();
     this.filteredUsers = this.userCtrl.valueChanges
       .startWith(null)
-      .map(user => user && typeof user === 'object' ? user.fullName : user)
-      .map(user => this.filterUsersHost(user));
+      .map(user => user && typeof user === 'object' ? user.fullName : user);
+      // .map(user => this.filterUsersHost(user));
   }
 
   ngOnInit() {
@@ -87,7 +88,16 @@ export class TeambuildingActivityComponent implements OnInit {
 
   onAddEventTeamBuilding() {
     this.actionDay = this.convertNgbDateStructToString(this.actionDate) + ' ' + this.convertNgbtimeStructToString(this.actionTime);
-    
+    // this.userCloneHost.forEach(user => this.)
+    for (let i = 0; i < this.userCloneHost.length; i++) {
+      const userMem: User = new User();
+      const eventUser: UserType = new UserType();
+      userMem.username = this.userCloneHost[i].username;
+
+        eventUser.user = userMem;
+        eventUser.type = 1;
+        this.listEventUser.push(eventUser);
+    }
   }
 
   closeModal() {

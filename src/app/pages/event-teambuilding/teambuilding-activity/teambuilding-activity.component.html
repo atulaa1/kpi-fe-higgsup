@@ -54,7 +54,7 @@
             </mat-chip-list>
             <mat-autocomplete #autoHost="matAutocomplete" (optionSelected)="selectedHost($event)">
 
-              <mat-option *ngFor="let user of filteredUsers | async;" [value]="user">
+              <mat-option *ngFor="let user of filteredHostUsers | async;" [value]="user">
 
                 <img name="avatarMem" src="{{user.avatar}}">
                 {{user.fullName}}
