@@ -42,13 +42,13 @@ h5.requiredInput:after {
 [name$='host'] {
   padding: 0;
   min-height: 75px;
-  max-height: 130px;
+  max-height: 140px;
 }
 
-[name$='listener'] {
+.joining {
   padding: 0;
   min-height: 75px;
-  max-height: 130px;
+  max-height: 350px;
 }
 
 [name$='timeInput'] {
@@ -66,12 +66,6 @@ h5.requiredInput:after {
 
 /deep/ .cdk-overlay-container {
   z-index: 9999;
-}
-
-[name$='participant'] {
-  padding: 0;
-  min-height: 150px;
-  max-height: 480px;
 }
 
 [name$='iconAvatar'] {
