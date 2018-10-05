@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="row justify-content-center"><label class="font-weight-bold ">Khảo sát tháng 9/2018</label></div>
+  <div class="zui-wrapper">
+    <div class="zui-scroller">
+      <table class='zui-table'>
+        <thead>
+        <tr >
+              <th class="zui-sticky-col"><span>Câu hỏi đánh giá</span></th>
+              <th *ngFor="let employee of employeeList,let i = index" [ngClass]="{'text-danger': employee.isRated === true}">{{employee.fullname}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr >
+              <td class="zui-sticky-col row-padding-bottom clipText" tooltip="Nhân viên này có hoàn thành tốt công việc hàng ngày? (Khung
+                1)"><span class="text-danger">*</span><span>Nhân viên này có hoàn thành tốt công việc hàng ngày? (Khung
+                1)</span></td>
+              <td *ngFor="let employee of employeeList,let i = index">
+                <ngb-rating [(rate)]="employee.rate" max="10">
+                  <ng-template let-fill="fill">
+                    <span class="star fill" [class.filled]="fill === 100">
+                      <i class="ion-android-star" *ngIf="fill === 100"></i>
+                      <i class="ion-android-star-outline" *ngIf="fill !== 100"></i>
+                    </span>
+                  </ng-template>
+                </ngb-rating>
+              </td>
+        </tr>
+        <tr>
+          <td class="zui-sticky-col row-padding-bottom clipText" tooltip="Thái độ chung trong công việc của nhân viên này? (Khung
+            1)"><span class="text-danger">*</span><span>Thái độ chung trong công việc của nhân viên này? (Khung
+            1)</span></td>
+          <td *ngFor="let employee of employeeList,let i = index">
+            <ngb-rating [(rate)]="employee.rate" max="10">
+              <ng-template let-fill="fill">
+                    <span class="star fill" [class.filled]="fill === 100">
+                      <i class="ion-android-star" *ngIf="fill === 100"></i>
+                      <i class="ion-android-star-outline" *ngIf="fill !== 100"></i>
+                    </span>
+              </ng-template>
+            </ngb-rating>
+          </td>
+        </tr>
+        <tr>
+          <td class="zui-sticky-col row-padding-bottom clipText" tooltip="Nhân viên này có quan tâm hoặc giúp đỡ đồng nghiệp? (Khung
+            1)"><span class="text-danger">*</span><span>Nhân viên này có quan tâm hoặc giúp đỡ đồng nghiệp? (Khung
+            1)</span></td>
+          <td *ngFor="let employee of employeeList,let i = index">
+            <ngb-rating [(rate)]="employee.rate" max="10">
+              <ng-template let-fill="fill">
+                    <span class="star fill" [class.filled]="fill === 100">
+                      <i class="ion-android-star" *ngIf="fill === 100"></i>
+                      <i class="ion-android-star-outline" *ngIf="fill !== 100"></i>
+                    </span>
+              </ng-template>
+            </ngb-rating>
+          </td>
+        </tr>
+        <tr>
+          <td class="zui-sticky-col row-padding-bottom clipText" tooltip="Ngoài công việc đang làm, nhân viên này có hoàn thành tốt
+            những công việc được giao thêm?(Khung 2)"><span>Ngoài công việc đang làm, nhân viên này có hoàn thành tốt
+            những công việc được giao thêm?(Khung 2)</span></td>
+          <td *ngFor="let employee of employeeList,let i = index">
+            <ngb-rating [(rate)]="employee.rate" max="10">
+              <ng-template let-fill="fill">
+                    <span class="star fill" [class.filled]="fill === 100">
+                      <i class="ion-android-star" *ngIf="fill === 100"></i>
+                      <i class="ion-android-star-outline" *ngIf="fill !== 100"></i>
+                    </span>
+              </ng-template>
+            </ngb-rating>
+          </td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row justify-content-start">
+    <button class="btn btn-hero-success">Gửi đánh giá</button>
+  </div>
+</div>

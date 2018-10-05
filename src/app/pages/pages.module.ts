@@ -13,6 +13,7 @@ import {AccManagementsModule} from './acc-managements/acc-managements.module';
 import { ProjectManagementConfirmComponent } from './projectmanagement/project-management-confirm/project-management-confirm.component';
 import {ProjectmanagementModule} from './projectmanagement/projectmanagement.module';
 import {ActivitiesModule} from './activities/activities.module';
+import {ManSurveyModule} from './man-survey/man-survey.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -30,6 +31,7 @@ const PAGES_COMPONENTS = [
     ProjectmanagementModule,
     AccManagementsModule,
     ActivitiesModule,
+    ManSurveyModule,
   ],
   declarations: [
     ...PAGES_COMPONENTS,
