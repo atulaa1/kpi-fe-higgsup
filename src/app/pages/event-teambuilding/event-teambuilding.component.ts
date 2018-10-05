@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {TeambuildingActivityComponent} from './teambuilding-activity/teambuilding-activity.component';
 
 @Component({
   selector: 'event-teambuilding',
@@ -8,13 +9,14 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class EventTeambuildingComponent implements OnInit {
 
-  constructor(private bsModal: NgbModal) {
+  constructor(private modalService: NgbModal) {
   }
 
   ngOnInit() {
   }
 
-  openModalAddNewTBD() {
-    this.bsModal.open('<h1>abcxyz</h1>', {centered: true});
+  open(content) {
+    this.modalService.open(TeambuildingActivityComponent, {backdrop: 'static', centered: true, size: 'lg'})
   }
+
 }

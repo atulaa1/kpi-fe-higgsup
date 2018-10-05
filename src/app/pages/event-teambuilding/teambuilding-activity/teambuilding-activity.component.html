@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="modal-header modal-lg">
+    <h4 class="mt-2">TEAMBUILDING</h4>
+    <button type="button" class="close pull-right cus-btn" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body modal-fonts">
+    <div class="container">
+      <div class="row mt-1 titleAlert" >
+        <nav>Vui lòng nhập đầy đủ các thông tin!</nav>
+      </div>
+      <div class="row mt-2">
+        <h5 class="col-md-4 requiredInput">Tên hoạt động</h5>
+        <input type="text" class="col-md-8 form-control" >
+      </div>
+      <div class="row mt-2">
+        <h5 class="col-md-4 requiredInput">Thời gian bắt đầu</h5>
+        <input type="text" class="col-md-5 form-control">
+        <div class="col-md-3"></div>
+      </div>
+      <div class="row mt-2">
+        <h5 class="col-md-4 requiredInput">Thời gian kết thúc</h5>
+        <input type="text" class="col-md-5 form-control"  ngbDatepicker>
+        <div class="col-md-3"></div>
+      </div>
+      <div class="row mt-2">
+        <h5 class="col-md-4 requiredInput">Host</h5>
+        <div class="col-md-8 mat-app-background basic-container form-control" name="host"></div>
+      </div>
+      <div class="row mt-2">
+        <h5 class="col-md-4 requiredInput">Người tham gia</h5>
+        <div class="col-md-8 mat-app-background basic-container form-control" name="participant">
+        </div>
+      </div>
+      <div class="row mt-2">
+        <h5 class="col-md-4">Dự thính</h5>
+        <div class="col-md-8 mat-app-background basic-container form-control" name="listener">
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="groupButton">
+          <button class="btn btn-hero-success saveButton" >Lưu</button>
+          <button class="btn btn-hero-warning" (click)="closeModal()">Huỷ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
