@@ -4,6 +4,7 @@ import {CreatingSurveySeminarComponent} from './creating-survey-seminar/creating
 import {SeminarService} from '../../../@core/services/seminar.service';
 import {Event} from '../../../@core/models/event.model';
 import {ResponseListEventDTO} from '../../../@core/models/responseListEventDTO.model';
+import {User} from '../../../@core/models/user.model';
 
 @Component({
   selector: 'survey-seminar',

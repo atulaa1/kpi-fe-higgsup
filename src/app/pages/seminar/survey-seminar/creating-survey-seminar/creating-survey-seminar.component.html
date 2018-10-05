@@ -9,57 +9,40 @@
       <p>Tên hoạt động</p>
     </div>
     <div class="col-md-9">
-      <p class="seminar-title pl-5">Seminar SRS</p>
+      <p class="seminar-title pl-5">{{seminarEvent.name}}</p>
     </div>
   </div>
   <div class="row ml-5 mr-5">
     <div class="col-md-3">Thời gian diễn ra</div>
     <div class="col-md-9">
-      <p class="seminar-date pl-5">09/09/2018 14:00:00 - 09/09/2018 16:00:00</p>
+      <p class="seminar-date pl-5">{{seminarEvent.beginDate}} - {{seminarEvent.endDate}}</p>
     </div>
   </div>
   <div class="survey-seminar">
-    <div class="row mt-5 ml-5 mr-5">
+    <div class="row mt-5 ml-5 mr-5" *ngFor="let host of eventUserList; let i = index">
       <div class="col-md-3 text-center">
-        <span class="seminar-host">host</span>
+        <span class="seminar-host">Host</span>
       </div>
       <div class="col-md-9">
-        <h5 class="name-title pl-5">Phạm Xuân Dũng</h5>
+        <h5 class="name-title pl-5">{{host.user.fullName}}</h5>
         <div class="mt-3 pl-5">
-          <div class="w-100">
+          <div class="w-100" *ngFor="let question of listQuestion">
             <label class="custom-control custom-radio">
-              <input type="radio" class="custom-control-input" name="customRadio">
+              <input type="radio" class="custom-control-input"
+                     (change)="changeSelect(host.user.username, question)" name="hostNumber{{i}}"
+                     [(value)]="question.rating">
               <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">A. Chuẩn bị tốt và rất dễ hiểu</span>
-            </label>
-            <label class="custom-control custom-radio">
-              <input type="radio" class="custom-control-input" name="customRadio" checked>
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">B. Chuẩn bị tốt và rất dễ hiểu</span>
-            </label>
-            <label class="custom-control custom-radio">
-              <input type="radio" class="custom-control-input" name="customRadio">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">C. Chuẩn bị tốt và rất dễ hiểu</span>
-            </label>
-            <label class="custom-control custom-radio">
-              <input type="radio" class="custom-control-input" name="customRadio">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">D. Chuẩn bị tốt và rất dễ hiểu</span>
-            </label>
-            <label class="custom-control custom-radio">
-              <input type="radio" class="custom-control-input" name="customRadio">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">E. Chuẩn bị tốt và rất dễ hiểu</span>
+              <span class="custom-control-description">{{question.content}}</span>
             </label>
           </div>
         </div>
       </div>
     </div>
+
   </div>
   <div class="mt-5 s-btn">
-    <button class="btn btn-hero-success">Lưu</button>
-    <button class="btn btn-hero-warning pull-right">Hủy</button>
+    <button class="btn btn-hero-warning pull-right" (click)="closeModal()">Hủy</button>
+    <button class="btn btn-hero-success" (click)="createSeminarSurvey()">Lưu</button>
   </div>
 
 </div>

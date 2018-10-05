@@ -65,7 +65,7 @@
       <tbody>
       <tr *ngFor="let seminarEvent of listSeminarEvent" (click)="open(content)">
         <ng-template let-c="close" let-d="dismiss" #content>
-          <creating-survey-seminar [dismiss]="d"></creating-survey-seminar>
+          <creating-survey-seminar [dismiss]="d" [seminarEvent]="seminarEvent" [eventUserList]="seminarEvent.eventUserList"></creating-survey-seminar>
         </ng-template>
         <td class="infoUser">{{seminarEvent.name}}</td>
         <td class="infoUser">{{seminarEvent.createdDate}}</td>
