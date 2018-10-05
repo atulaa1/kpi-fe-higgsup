@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Employee} from '../../@core/models/employee.model';
 import {Project} from '../../@core/models/project.model';
+import {Rating} from '../../@core/models/Rating';
 
 @Component({
   selector: 'personal-survey',
@@ -17,9 +18,11 @@ export class PersonalSurveyComponent implements OnInit {
   thirdQuestionList: Array<Employee> = new Array();
   fourthQuestionList: Array<Employee> = new Array();
   projectList: Array<Project> = new Array();
+  ratingList: Array<Rating> = new Array();
   ngOnInit() {
     // fake data
     this.fakeData();
+    this.createRatingStructure();
 
   }
 
@@ -27,52 +30,52 @@ export class PersonalSurveyComponent implements OnInit {
     const employee1 = new Employee();
     employee1.fullname = 'Bui Cong Thanh';
     employee1.isRated = true;
-    employee1.rate = 0;
+    employee1.rating = 0;
     this.employeeList.push(employee1);
 
     const employee2 = new Employee();
     employee2.fullname = 'Nguyen Hai Anh';
     employee2.isRated = false;
-    employee2.rate = 0;
+    employee2.rating = 0;
     this.employeeList.push(employee2);
 
     const employee3 = new Employee();
     employee3.fullname = 'Dao Tung';
     employee3.isRated = false;
-    employee3.rate = 0;
+    employee3.rating = 0;
     this.employeeList.push(employee3);
 
 
     const employee4 = new Employee();
     employee4.fullname = 'Giang Ham';
     employee4.isRated = false;
-    employee4.rate = 0;
+    employee4.rating = 0;
     this.employeeList.push(employee4);
 
 
     const employee5 = new Employee();
     employee5.fullname = 'Duong Hap';
     employee5.isRated = true;
-    employee5.rate = 0;
+    employee5.rating = 0;
     this.employeeList.push(employee5);
 
 
     const employee6 = new Employee();
     employee6.fullname = 'Nguyen Manh Tiep';
     employee6.isRated = true;
-    employee6.rate = 0;
+    employee6.rating = 0;
     this.employeeList.push(employee6);
 
     const employee7 = new Employee();
     employee7.fullname = 'Nguyen Manh Tiep';
     employee7.isRated = true;
-    employee7.rate = 0;
+    employee7.rating = 0;
     this.employeeList.push(employee7);
 
     const employee8 = new Employee();
     employee8.fullname = 'Nguyen Manh Tiep';
     employee8.isRated = true;
-    employee8.rate = 0;
+    employee8.rating = 0;
     this.employeeList.push(employee8);
 
     // fake date for first question
@@ -93,18 +96,27 @@ export class PersonalSurveyComponent implements OnInit {
     const project1 = new Project();
     project1.name = 'A day roi';
     project1.isRated = true;
+    project1.rating = 4;
     this.projectList.push(project1);
 
     const project2 = new Project();
     project2.name = 'GMS';
     project2.isRated = true;
+    project2.rating = 1;
     this.projectList.push(project2);
 
 
     const project3 = new Project();
     project3.name = 'Famo';
     project3.isRated = false;
+    project3.rating = 0;
     this.projectList.push(project3);
+
+    const project4 = new Project();
+    project4.name = 'KPI';
+    project4.isRated = false;
+    project4.rating = 10;
+    this.projectList.push(project4);
 
   }
 
@@ -113,6 +125,22 @@ export class PersonalSurveyComponent implements OnInit {
   }
 
   validateRating() {
+
+  }
+
+  createRatingStructure() {
+    const zeroStar = new Rating(0, 0, 0, 0);
+    const oneStar = new Rating(1, -10, -4, -15);
+    const twoStar = new Rating(2, -5, -2, -5);
+    const threeStar = new Rating(3, -5, -2, -5);
+    const fourStar = new Rating(4, -5, -2, -5);
+    const fiveStar = new Rating(5, -5, -2, -5);
+    const sixStar = new Rating(6, -5, -2, -5);
+    const sevenStar = new Rating(7, -5, -2, -5);
+    const eightStar = new Rating(8, -5, -2, -5);
+    const nineStar = new Rating(9, -5, -2, -5);
+    const tenStar = new Rating(10, -5, -2, -5);
+    this.ratingList = [zeroStar, oneStar, twoStar, threeStar, fourStar, fiveStar, sixStar, sevenStar, eightStar, nineStar, tenStar];
 
   }
 

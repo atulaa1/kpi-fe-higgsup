@@ -75,7 +75,76 @@
       </table>
     </div>
   </div>
+  <div class="row mt-5">
+    <div class="col-6">
+      <div class="row justify-content-start"><h5 >Đánh giá điểm cho các dự án</h5></div>
+      <div class="zui-wrapper">
+        <div class="zui-table-vertical">
+          <table class='zui-table'>
+            <thead>
+            <tr>
+              <th class="first-col"><span>Tên dự án (Khung 3)</span></th>
+              <th ><span>Điểm</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let project of projectList">
+              <td class="first-col">{{project.name}}</td>
+              <td>
+                <ngb-rating [(rate)]="project.rating" max="10">
+                  <ng-template let-fill="fill">
+                    <span class="star fill" [class.filled]="fill === 100">
+                      <i class="ion-android-star" *ngIf="fill === 100"></i>
+                      <i class="ion-android-star-outline" *ngIf="fill !== 100"></i>
+                    </span>
+                  </ng-template>
+                </ngb-rating>
+              </td>
+            </tr>
+
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="row justify-content-start"><h5 >Khung điểm đánh giá</h5></div>
+      <div class="zui-wrapper">
+        <div class="zui-table-vertical">
+          <table class='zui-table'>
+            <thead>
+            <tr>
+              <th class="first-col" ><span>Số sao tương ứng</span></th>
+              <th ><span>Khung 1</span></th>
+              <th ><span>Khung 2</span></th>
+              <th ><span>Khung 3</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let rating of ratingList">
+              <td class="first-col">
+                <ngb-rating [(rate)]="rating.rating" max="10">
+                  <ng-template let-fill="fill">
+                    <span class="star fill" [class.filled]="fill === 100">
+                      <i class="ion-android-star" *ngIf="fill === 100"></i>
+                      <i class="ion-android-star-outline" *ngIf="fill !== 100"></i>
+                    </span>
+                  </ng-template>
+                </ngb-rating>
+              </td>
+              <td>{{rating.pointStructure1}}</td>
+              <td>{{rating.pointStructure2}}</td>
+              <td>{{rating.pointStructure3}}</td>
+            </tr>
+
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row justify-content-start">
     <button class="btn btn-hero-success" (click)="sendSurvey()">Gửi đánh giá</button>
   </div>
+
+
 </div>

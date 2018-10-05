@@ -5,6 +5,7 @@ export class Project {
   createdDate: string;
   updatedDate: string;
   isRated: boolean;
+  rating: number;
 
   constructor() {
     this.active = 1;
