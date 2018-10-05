@@ -12,6 +12,10 @@ export class PersonalSurveyComponent implements OnInit {
   constructor() { }
 
   employeeList: Array<Employee> = new Array();
+  firstQuestionList: Array<Employee> = new Array();
+  secondQuestionList: Array<Employee> = new Array();
+  thirdQuestionList: Array<Employee> = new Array();
+  fourthQuestionList: Array<Employee> = new Array();
   projectList: Array<Project> = new Array();
   ngOnInit() {
     // fake data
@@ -71,6 +75,21 @@ export class PersonalSurveyComponent implements OnInit {
     employee8.rate = 0;
     this.employeeList.push(employee8);
 
+    // fake date for first question
+    this.employeeList.forEach(employee => {
+      let question1 = Object.assign({}, employee);
+      this.firstQuestionList.push(question1);
+
+      let question2 = Object.assign({}, employee);
+      this.secondQuestionList.push(question2);
+
+      let question3 = Object.assign({}, employee);
+      this.thirdQuestionList.push(question3);
+
+      let question4 = Object.assign({}, employee);
+      this.fourthQuestionList.push(question4);
+    });
+
     const project1 = new Project();
     project1.name = 'A day roi';
     project1.isRated = true;
@@ -86,6 +105,14 @@ export class PersonalSurveyComponent implements OnInit {
     project3.name = 'Famo';
     project3.isRated = false;
     this.projectList.push(project3);
+
+  }
+
+  sendSurvey() {
+    console.log(this.firstQuestionList);
+  }
+
+  validateRating() {
 
   }
 
