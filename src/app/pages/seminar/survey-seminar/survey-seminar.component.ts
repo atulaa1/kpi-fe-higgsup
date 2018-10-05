@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {CreatingSurveySeminarComponent} from './creating-survey-seminar/creating-survey-seminar.component';
 
 @Component({
   selector: 'survey-seminar',
@@ -8,9 +9,13 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class SurveySeminarComponent implements OnInit {
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal) {
+  }
 
   ngOnInit() {
   }
 
+  open() {
+    this.modalService.open(CreatingSurveySeminarComponent, {backdrop: 'static', centered: true, size: 'lg'})
+  }
 }
