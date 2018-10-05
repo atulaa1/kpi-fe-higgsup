@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TeambuildingActivityComponent} from './teambuilding-activity/teambuilding-activity.component';
+import {EventTeambuildingService} from '../../@core/services/event-teambuilding.service';
+import {ResponseEventTeambuildingDTO} from '../../@core/models/response-event-teambuilding-dto.model';
+import {Event} from '../../@core/models/event.model';
 
 @Component({
   selector: 'event-teambuilding',
@@ -9,13 +12,23 @@ import {TeambuildingActivityComponent} from './teambuilding-activity/teambuildin
 })
 export class EventTeambuildingComponent implements OnInit {
 
-  constructor(private modalService: NgbModal) {
+  listEventTeambuilding: Array<Event> = new Array<Event>();
+
+  constructor(private modalService: NgbModal,
+              private eventTeambuildingService: EventTeambuildingService) {
   }
 
   ngOnInit() {
+    this.eventTeambuildingService.getAllEventTeambuilding().subscribe((response: ResponseEventTeambuildingDTO) => {
+      this.listEventTeambuilding = response.data;
+    })
   }
 
-  open(content) {
+  getAllEventTeambuilding() {
+
+  }
+
+  openModalAddNewTBD() {
     this.modalService.open(TeambuildingActivityComponent, {backdrop: 'static', centered: true, size: 'lg'})
   }
 

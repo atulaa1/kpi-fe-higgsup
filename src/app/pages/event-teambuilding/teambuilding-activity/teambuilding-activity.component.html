@@ -52,7 +52,7 @@
                 [matChipInputAddOnBlur]="addOnBlur"
                 (matChipInputTokenEnd)="addHost($event)">
             </mat-chip-list>
-            <mat-autocomplete #autoHost="matAutocomplete" (optionSelected)="selectedHost($event)">
+            <mat-autocomplete #autoHost="matAutocomplete" (optionSelected)="selectedParticipant($event, userTypeMap.get('ORGANIZER'))">
 
               <mat-option *ngFor="let user of filteredHostUsers | async;" [value]="user">
 

@@ -10,6 +10,7 @@ import {ResponseUserDTO} from '../../../@core/models/responseUserDTO.model';
 import {Event} from '../../../@core/models/event.model';
 import {UserType} from '../../../@core/models/userType.model';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {Common} from "../../../@core/glossary/common.constant";
 
 @Component({
   selector: 'ngx-teambuilding-activity',
@@ -35,6 +36,7 @@ export class TeambuildingActivityComponent implements OnInit {
   filteredUsers: Observable<Array<User>>;
   filteredHostUsers: Observable<Array<User>>;
   listEventUser: Array<UserType> = new Array<UserType>();
+  userTypeMap: Map<string, number> = new Map<string, number>();
 
   userDefault: User = new User();
   userCloneHost: Array<any> = [];
@@ -62,11 +64,18 @@ export class TeambuildingActivityComponent implements OnInit {
     this.filteredUsers = this.userCtrl.valueChanges
       .startWith(null)
       .map(user => user && typeof user === 'object' ? user.fullName : user);
-      // .map(user => this.filterUsersHost(user));
+    // .map(user => this.filterUsersHost(user));
   }
 
   ngOnInit() {
     const users: Array<User> = [];
+    this.userTypeMap.set('HOST', Common.HOST);
+    this.userTypeMap.set('PARTICIPANT', Common.PARTICIPANT);
+    this.userTypeMap.set('LISTENER', Common.LISTENER);
+    this.userTypeMap.set('ORGANIZER', Common.ORGANIZER);
+    this.userTypeMap.set('FIRST_PRIZE', Common.FIRST_PRIZE);
+    this.userTypeMap.set('SECOND_PRIZE', Common.SECOND_PRIZE);
+    this.userTypeMap.set('THIRD_PRIZE', Common.THIRD_PRIZE);
     this.userService.getUsers().subscribe((response: ResponseUserDTO) => {
       if (response.status_code === 200) {
         this.listUser = response.data;
@@ -94,10 +103,11 @@ export class TeambuildingActivityComponent implements OnInit {
       const eventUser: UserType = new UserType();
       userMem.username = this.userCloneHost[i].username;
 
-        eventUser.user = userMem;
-        eventUser.type = 1;
-        this.listEventUser.push(eventUser);
+      eventUser.user = userMem;
+      eventUser.type = 1;
+      this.listEventUser.push(eventUser);
     }
+    console.log(this.listEventUser);
   }
 
   closeModal() {
@@ -116,23 +126,6 @@ export class TeambuildingActivityComponent implements OnInit {
   }
 
   addHost(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add user
-    if ((value || '').trim()) {
-      this.userCloneHost.push({
-        fullname: value,
-        username: value,
-      });
-    }
-
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
-
-    this.userCtrl.setValue(null);
   }
 
   removeHost(fullName, i): void {
@@ -144,6 +137,18 @@ export class TeambuildingActivityComponent implements OnInit {
   }
 
   selectedHost(event: MatAutocompleteSelectedEvent): void {
+    this.userCloneHost.push(event.option.value);
+
+    let users: Array<User> = [];
+
+    this.filteredHostUsers.subscribe(value => users = value.filter(value1 => value1.username !== event.option.value.username));
+    this.filteredHostUsers = this.setFilteredUsers(users);
+
+    this.userHostInput.nativeElement.value = '';
+    this.userCtrl.setValue(null);
+  }
+
+  selectedParticipant(event: MatAutocompleteSelectedEvent, participantType): void {
     this.userCloneHost.push(event.option.value);
 
     let users: Array<User> = [];

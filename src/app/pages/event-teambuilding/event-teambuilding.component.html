@@ -23,9 +23,9 @@
   <div class="row ml-5 mr-5 tableScroll">
     <table class="table table-hover" id="myTable">
       <tbody>
-      <tr >
-        <td class="infoUser" (click)="open()">Sinh nhật công ty</td>
-        <td class="infoUser">18:00 09/09/2018</td>
+      <tr *ngFor="let teambuilding of listEventTeambuilding">
+        <td class="infoUser" (click)="open()">{{teambuilding.name}}</td>
+        <td class="infoUser">{{teambuilding.createdDate}}</td>
       </tr>
       </tbody>
     </table>
