@@ -4,22 +4,28 @@
   </button>
 </div>
 <div class="modal-body modal-fonts">
-  <div class="row ">
-    <div class="col-md-3">Tên hoạt động</div>
-    <div class="col-md-9">Seminar SRS</div>
+  <div class="row ml-5 mr-5">
+    <div class="col-md-3">
+      <p>Tên hoạt động</p>
+    </div>
+    <div class="col-md-9">
+      <p class="seminar-title pl-5">Seminar SRS</p>
+    </div>
   </div>
-  <div class="row">
+  <div class="row ml-5 mr-5">
     <div class="col-md-3">Thời gian diễn ra</div>
-    <div class="col-md-9">09/09/2018 14:00:00 - 09/09/2018 16:00:00</div>
+    <div class="col-md-9">
+      <p class="seminar-date pl-5">09/09/2018 14:00:00 - 09/09/2018 16:00:00</p>
+    </div>
   </div>
   <div class="survey-seminar">
-    <div class="row mt-5">
-      <div class="col-md-2 text-center">
-        <span>host</span>
+    <div class="row mt-5 ml-5 mr-5">
+      <div class="col-md-3 text-center">
+        <span class="seminar-host">host</span>
       </div>
-      <div class="col-md-10">
-        <h5 class="name-title">Phạm Xuân Dũng</h5>
-        <div class="mt-3">
+      <div class="col-md-9">
+        <h5 class="name-title pl-5">Phạm Xuân Dũng</h5>
+        <div class="mt-3 pl-5">
           <div class="w-100">
             <label class="custom-control custom-radio">
               <input type="radio" class="custom-control-input" name="customRadio">
@@ -53,7 +59,7 @@
   </div>
   <div class="mt-5 s-btn">
     <button class="btn btn-hero-success">Lưu</button>
-    <button class="btn btn-hero-warning pull-right">Hủy</button>
+    <button (click)="closeModal()" class="btn btn-hero-warning pull-right">Hủy</button>
   </div>
 
 </div>
