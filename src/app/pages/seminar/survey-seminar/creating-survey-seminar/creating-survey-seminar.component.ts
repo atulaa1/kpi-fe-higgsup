@@ -1,17 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'creating-survey-seminar',
   templateUrl: './creating-survey-seminar.component.html',
-  styleUrls: ['./creating-survey-seminar.component.scss']
+  styleUrls: ['./creating-survey-seminar.component.scss'],
 })
 export class CreatingSurveySeminarComponent implements OnInit {
-  constructor(private activeModal: NgbActiveModal) { }
+  @Input() dismiss;
+
+  constructor(private activeModal: NgbActiveModal) {
+  }
 
   ngOnInit() {
   }
+
   closeModal() {
-    this.activeModal.close();
+    this.dismiss();
   }
 }

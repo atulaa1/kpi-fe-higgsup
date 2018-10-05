@@ -53,7 +53,7 @@
     <table class='table titleTable'>
       <thead>
       <tr>
-        <th class="titleField">Tê khảo sát</th>
+        <th class="titleField">Tên khảo sát</th>
         <th class="titleField">Thời gian tạo</th>
         <th class="titleField">Trạng Thái</th>
       </tr>
@@ -63,10 +63,14 @@
   <div class="row ml-5 mr-5 tableScroll">
     <table class="table table-hover" id="myTable">
       <tbody>
-      <tr>
-        <td class="infoUser" (click)="open()">Seminar Thứ 7</td>
-        <td class="infoUser">16:00 8/8/2018</td>
-        <td class="infoUser">Chưa hoàn thành</td>
+      <tr *ngFor="let seminarEvent of listSeminarEvent" (click)="open(content)">
+        <ng-template let-c="close" let-d="dismiss" #content>
+          <creating-survey-seminar [dismiss]="d"></creating-survey-seminar>
+        </ng-template>
+        <td class="infoUser">{{seminarEvent.name}}</td>
+        <td class="infoUser">{{seminarEvent.createdDate}}</td>
+        <td class="infoUser" *ngIf="seminarEvent.status === 1">Chưa hoàn thành</td>
+        <td class="infoUser" *ngIf="seminarEvent.status !== 1">Hoàn thành</td>
       </tr>
       </tbody>
     </table>
