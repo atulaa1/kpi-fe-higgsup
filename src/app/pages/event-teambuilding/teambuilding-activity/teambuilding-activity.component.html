@@ -12,7 +12,7 @@
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Tên hoạt động</h5>
-        <input type="text" class="col-md-8 form-control">
+        <input type="text" class="col-md-8 form-control" [(ngModel)]="teambuildingName">
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Thời gian diễn ra</h5>
@@ -24,7 +24,7 @@
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4">Địa điểm</h5>
-        <input type="text" class="col-md-8 form-control">
+        <input type="text" class="col-md-8 form-control" [(ngModel)]="teambuildingAddress">
         <div class="col-md-3"></div>
       </div>
       <div class="row mt-2">
@@ -52,7 +52,9 @@
                 [matChipInputAddOnBlur]="addOnBlur"
                 (matChipInputTokenEnd)="addHost($event)">
             </mat-chip-list>
-            <mat-autocomplete #autoHost="matAutocomplete" (optionSelected)="selectedParticipant($event, userTypeMap.get('ORGANIZER'))">
+            <mat-autocomplete #autoHost="matAutocomplete"
+                              (optionSelected)="selectedHost($event)"
+                              [autoActiveFirstOption]="true">
 
               <mat-option *ngFor="let user of filteredHostUsers | async;" [value]="user">
 
@@ -176,7 +178,7 @@
       </div>
       <div class="row mt-5">
         <div class="groupButton">
-          <button class="btn btn-hero-success saveButton" (click)="onAddEventTeamBuilding()">Lưu</button>
+          <button class="btn btn-hero-success saveButton" (click)="addEventTeamBuilding()">Lưu</button>
           <button class="btn btn-hero-warning" (click)="closeModal()">Huỷ</button>
         </div>
       </div>

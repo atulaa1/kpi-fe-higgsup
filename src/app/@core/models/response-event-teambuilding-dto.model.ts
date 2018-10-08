@@ -1,7 +1,5 @@
-import {Event} from './event.model';
-
-export class ResponseEventTeambuildingDTO {
-  data: Array<Event>;
+export class ResponseEventTeambuildingDTO<T> {
+  data: T;
   status_code: number;
   message: string;
 }

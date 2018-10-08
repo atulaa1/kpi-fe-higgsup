@@ -2,12 +2,12 @@ import {Injectable} from '@angular/core';
 import {BaseConstant} from '../glossary/base.constant';
 import {HttpClient} from '@angular/common/http';
 import {HttpService} from './http.service';
-import {EventTeambuilding} from '../models/event-teambuilding.model';
 import {Observable} from 'rxjs';
 import {ResponseEventTeambuildingDTO} from '../models/response-event-teambuilding-dto.model';
+import {Event} from '../models/event.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EventTeambuildingService {
 
@@ -20,12 +20,12 @@ export class EventTeambuildingService {
               private httpService: HttpService) {
   }
 
-  addEventTeambuilding(eventTeambuildingDTO: EventTeambuilding<null>): Observable<ResponseEventTeambuildingDTO> {
-    const jsonEventDTO = JSON.stringify(eventTeambuildingDTO);
-    return this.httpClient.post<ResponseEventTeambuildingDTO>(this.eventTeambuildingUrl, jsonEventDTO, this.httpOptions);
+  addEventTeambuilding(eventTeambuilding: Event): Observable<ResponseEventTeambuildingDTO<Event>> {
+    const jsonEventDTO = JSON.stringify(eventTeambuilding);
+    return this.httpClient.post<ResponseEventTeambuildingDTO<Event>>(this.eventTeambuildingUrl, jsonEventDTO, this.httpOptions);
   }
 
-  getAllEventTeambuilding(): Observable<ResponseEventTeambuildingDTO> {
-    return this.httpClient.get<ResponseEventTeambuildingDTO>(this.eventTeambuildingUrl, this.httpOptions)
+  getAllEventTeambuilding(): Observable<ResponseEventTeambuildingDTO<Array<Event>>> {
+    return this.httpClient.get<ResponseEventTeambuildingDTO<Array<Event>>>(this.eventTeambuildingUrl, this.httpOptions)
   }
 }

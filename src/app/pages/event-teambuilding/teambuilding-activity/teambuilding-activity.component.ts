@@ -1,5 +1,5 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {NgbActiveModal, NgbDateParserFormatter, NgbDateStruct, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {KpiDateFormatter} from '../../../modals/personal-info/kpi-date-formatter';
 import {MatAutocompleteSelectedEvent, MatChipInputEvent} from '@angular/material';
 import {User} from '../../../@core/models/user.model';
@@ -7,10 +7,10 @@ import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {UserService} from '../../../@core/services/user.service';
 import {ResponseUserDTO} from '../../../@core/models/responseUserDTO.model';
-import {Event} from '../../../@core/models/event.model';
 import {UserType} from '../../../@core/models/userType.model';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {Common} from "../../../@core/glossary/common.constant";
+import {EventTeambuilding} from '../../../@core/models/event-teambuilding.model';
+import {Event} from '../../../@core/models/event.model';
 
 @Component({
   selector: 'ngx-teambuilding-activity',
@@ -23,12 +23,14 @@ export class TeambuildingActivityComponent implements OnInit {
   actionDate;
   actionTime;
   actionDay;
+  teambuildingAddress: string;
   listUser: Array<User>;
   listCloneUserHost: Array<User>;
   listCloneUserFirstPrize: Array<User>;
   listCloneUserSecondPrize: Array<User>;
   listCloneUserThirdPrize: Array<User>;
   creator: string = '';
+  teambuildingName: string = '';
   userCtrl = new FormControl();
   userFirstPrizeCtrl = new FormControl();
   userSecondPrizeCtrl = new FormControl();
@@ -36,17 +38,17 @@ export class TeambuildingActivityComponent implements OnInit {
   filteredUsers: Observable<Array<User>>;
   filteredHostUsers: Observable<Array<User>>;
   listEventUser: Array<UserType> = new Array<UserType>();
-  userTypeMap: Map<string, number> = new Map<string, number>();
 
-  userDefault: User = new User();
   userCloneHost: Array<any> = [];
   userCloneFirstPrize: Array<any> = [];
   userCloneSecondPrize: Array<any> = [];
   userCloneThirdPrize: Array<any> = [];
   separatorKeysCodes: Array<number> = [ENTER, COMMA];
 
+  @Output() addedTeambuilding = new EventEmitter<EventTeambuilding<null>>();
+  @Input() dismiss;
+  @Input() teambuildingView: Event = null;
 
-  visible = true;
   selectable = true;
   removable = true;
   addOnBlur = false;
@@ -69,13 +71,6 @@ export class TeambuildingActivityComponent implements OnInit {
 
   ngOnInit() {
     const users: Array<User> = [];
-    this.userTypeMap.set('HOST', Common.HOST);
-    this.userTypeMap.set('PARTICIPANT', Common.PARTICIPANT);
-    this.userTypeMap.set('LISTENER', Common.LISTENER);
-    this.userTypeMap.set('ORGANIZER', Common.ORGANIZER);
-    this.userTypeMap.set('FIRST_PRIZE', Common.FIRST_PRIZE);
-    this.userTypeMap.set('SECOND_PRIZE', Common.SECOND_PRIZE);
-    this.userTypeMap.set('THIRD_PRIZE', Common.THIRD_PRIZE);
     this.userService.getUsers().subscribe((response: ResponseUserDTO) => {
       if (response.status_code === 200) {
         this.listUser = response.data;
@@ -89,40 +84,88 @@ export class TeambuildingActivityComponent implements OnInit {
             this.listUser.splice(index, 1);
           }
         });
+        if (this.teambuildingView !== undefined && this.teambuildingView !== null) {
+          this.teambuildingName = this.teambuildingView.name;
+          const arrDate = this.teambuildingView.beginDate.split(' ');
+          this.actionDate = this.convertDatetoNgbDateStruct(new Date(this.reverse(arrDate[0])));
+          this.actionTime = this.convertTimeStringtoNgbTimeStruct(arrDate[1]);
+          this.teambuildingAddress = this.teambuildingView.address;
+          for (let i = 0; i < this.teambuildingView.eventUserList.length; i++) {
+            if (this.teambuildingView.eventUserList[i].type === 4) {
+              const arrUser = this.listUser.filter(user => user.username === this.teambuildingView.eventUserList[i].user.username);
+              this.userCloneHost.push(arrUser[0]);
+            } else if (this.teambuildingView.eventUserList[i].type === 5) {
+              const arrUser = this.listUser.filter(user => user.username === this.teambuildingView.eventUserList[i].user.username);
+              this.userCloneFirstPrize.push(arrUser[0]);
+            } else if (this.teambuildingView.eventUserList[i].type === 6) {
+              const arrUser = this.listUser.filter(user => user.username === this.teambuildingView.eventUserList[i].user.username);
+              this.userCloneSecondPrize.push(arrUser[0]);
+            } else if (this.teambuildingView.eventUserList[i].type === 7) {
+              const arrUser = this.listUser.filter(user => user.username === this.teambuildingView.eventUserList[i].user.username);
+              this.userCloneThirdPrize.push(arrUser[0]);
+            }
+          }
+        }
         this.filteredUsers = this.setFilteredUsers(this.listUser);
         this.filteredHostUsers = this.setFilteredUsers(this.listUser);
       }
     });
   }
 
-  onAddEventTeamBuilding() {
+  addEventTeamBuilding() {
+    const teambuilding = new EventTeambuilding<null>();
     this.actionDay = this.convertNgbDateStructToString(this.actionDate) + ' ' + this.convertNgbtimeStructToString(this.actionTime);
-    // this.userCloneHost.forEach(user => this.)
+
     for (let i = 0; i < this.userCloneHost.length; i++) {
       const userMem: User = new User();
       const eventUser: UserType = new UserType();
       userMem.username = this.userCloneHost[i].username;
 
       eventUser.user = userMem;
-      eventUser.type = 1;
+      eventUser.type = 4;
       this.listEventUser.push(eventUser);
     }
-    console.log(this.listEventUser);
+
+    for (let i = 0; i < this.userCloneFirstPrize.length; i++) {
+      const userMem: User = new User();
+      const eventUser: UserType = new UserType();
+      userMem.username = this.userCloneFirstPrize[i].username;
+
+      eventUser.user = userMem;
+      eventUser.type = 5;
+      this.listEventUser.push(eventUser);
+    }
+
+    for (let i = 0; i < this.userCloneSecondPrize.length; i++) {
+      const userMem: User = new User();
+      const eventUser: UserType = new UserType();
+      userMem.username = this.userCloneSecondPrize[i].username;
+
+      eventUser.user = userMem;
+      eventUser.type = 6;
+      this.listEventUser.push(eventUser);
+    }
+
+    for (let i = 0; i < this.userCloneThirdPrize.length; i++) {
+      const userMem: User = new User();
+      const eventUser: UserType = new UserType();
+      userMem.username = this.userCloneThirdPrize[i].username;
+
+      eventUser.user = userMem;
+      eventUser.type = 7;
+      this.listEventUser.push(eventUser);
+    }
+
+    teambuilding.name = this.teambuildingName;
+    teambuilding.beginDate = this.actionDay;
+    teambuilding.eventUserList = this.listEventUser;
+    this.addedTeambuilding.emit(teambuilding);
+    this.dismiss();
   }
 
   closeModal() {
-    this.activeModal.close();
-  }
-
-  // Array Host user tags
-
-  filterUsersHost(val) {
-    return val ? this.listCloneUserHost.filter(user => user.fullName.toLowerCase().indexOf(val.toLowerCase()) === 0)
-      : this.listCloneUserHost;
-  }
-
-  displayHostFn(user): string {
-    return user ? user.fullName : user;
+    this.teambuildingView = null;
+    this.dismiss();
   }
 
   addHost(event: MatChipInputEvent): void {
@@ -148,47 +191,7 @@ export class TeambuildingActivityComponent implements OnInit {
     this.userCtrl.setValue(null);
   }
 
-  selectedParticipant(event: MatAutocompleteSelectedEvent, participantType): void {
-    this.userCloneHost.push(event.option.value);
-
-    let users: Array<User> = [];
-
-    this.filteredHostUsers.subscribe(value => users = value.filter(value1 => value1.username !== event.option.value.username));
-    this.filteredHostUsers = this.setFilteredUsers(users);
-
-    this.userHostInput.nativeElement.value = '';
-    this.userCtrl.setValue(null);
-  }
-
-  // Array FirstPrize user tags
-
-  filterUsersFirstPrize(val) {
-    return val ? this.listCloneUserFirstPrize.filter(user => user.fullName.toLowerCase().indexOf(val.toLowerCase()) === 0)
-      : this.listCloneUserFirstPrize;
-  }
-
-  displayFirstPrizeFn(user): string {
-    return user ? user.fullName : user;
-  }
-
   addFirstPrize(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add user
-    if ((value || '').trim()) {
-      this.userCloneFirstPrize.push({
-        fullname: value,
-        username: value,
-      });
-    }
-
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
-
-    this.userFirstPrizeCtrl.setValue(null);
   }
 
   removeFirstPrize(fullName, i): void {
@@ -208,35 +211,7 @@ export class TeambuildingActivityComponent implements OnInit {
     this.userFirstPrizeCtrl.setValue(null);
   }
 
-  // Array SecondPrize user tags
-
-  filterUsersSecondPrize(val) {
-    return val ? this.listCloneUserSecondPrize.filter(user => user.fullName.toLowerCase().indexOf(val.toLowerCase()) === 0)
-      : this.listCloneUserSecondPrize;
-  }
-
-  displaySecondPrizeFn(user): string {
-    return user ? user.fullName : user;
-  }
-
   addSecondPrize(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add user
-    if ((value || '').trim()) {
-      this.userCloneSecondPrize.push({
-        fullname: value,
-        username: value,
-      });
-    }
-
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
-
-    this.userSecondPrizeCtrl.setValue(null);
   }
 
   removeSecondPrize(fullName, i): void {
@@ -257,35 +232,7 @@ export class TeambuildingActivityComponent implements OnInit {
     this.userSecondPrizeCtrl.setValue(null);
   }
 
-  // Array ThirdPrize user tags
-
-  filterUsersThirdPrize(val) {
-    return val ? this.listCloneUserThirdPrize.filter(user => user.fullName.toLowerCase().indexOf(val.toLowerCase()) === 0)
-      : this.listCloneUserThirdPrize;
-  }
-
-  displayThirdPrizeFn(user): string {
-    return user ? user.fullName : user;
-  }
-
   addThirdPrize(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add user
-    if ((value || '').trim()) {
-      this.userCloneThirdPrize.push({
-        fullname: value,
-        username: value,
-      });
-    }
-
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
-
-    this.userThirdPrizeCtrl.setValue(null);
   }
 
   removeThirdPrize(fullName, i): void {
@@ -330,7 +277,7 @@ export class TeambuildingActivityComponent implements OnInit {
   }
 
   private convertTimeStringtoNgbTimeStruct(time: string) {
-    return time ? {hour: parseInt(time.slice(11, 13), 10), minute: parseInt(time.slice(14, 16), 10)} : null;
+    return time ? {hour: parseInt(time.slice(0, 2), 10), minute: parseInt(time.slice(3, 5), 10)} : null;
   }
 
   private reverse(string) {
