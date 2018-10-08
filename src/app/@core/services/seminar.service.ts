@@ -43,4 +43,8 @@ export class SeminarService {
   getAllSeminarEvent(): Observable<ResponseListEventDTO> {
     return this.http.get<ResponseListEventDTO>(this.seminarEventUrl, this.httpOptions);
   }
+
+  evaluateSeminarEvent(seminarEvaluation): Observable<ResponseListEventDTO> {
+    return this.http.post<ResponseListEventDTO>(this.seminarEventUrl + '/survey', seminarEvaluation, this.httpOptions);
+  }
 }

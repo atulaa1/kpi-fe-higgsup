@@ -63,14 +63,23 @@
   <div class="row ml-5 mr-5 tableScroll">
     <table class="table table-hover" id="myTable">
       <tbody>
-      <tr *ngFor="let seminarEvent of listSeminarEvent" (click)="open(content)">
+      <tr *ngFor="let seminarEventWaiting of listSeminarEventWaiting" (click)="open(content)">
         <ng-template let-c="close" let-d="dismiss" #content>
-          <creating-survey-seminar [dismiss]="d" [seminarEvent]="seminarEvent" [eventUserList]="seminarEvent.eventUserList"></creating-survey-seminar>
+          <creating-survey-seminar [dismiss]="d" [surveyFinishing]='false' [seminarEvent]="seminarEventWaiting" [eventUserList]="seminarEventWaiting.eventUserList"
+          (changeEvent)="onUpdateListSeminarEvent($event)"></creating-survey-seminar>
         </ng-template>
-        <td class="infoUser">{{seminarEvent.name}}</td>
-        <td class="infoUser">{{seminarEvent.createdDate}}</td>
-        <td class="infoUser" *ngIf="seminarEvent.status === 1">Chưa hoàn thành</td>
-        <td class="infoUser" *ngIf="seminarEvent.status !== 1">Hoàn thành</td>
+        <td class="infoUser">{{seminarEventWaiting.name}}</td>
+        <td class="infoUser">{{seminarEventWaiting.createdDate}}</td>
+        <td class="infoUser">Chưa hoàn thành</td>
+      </tr>
+      <tr *ngFor="let seminarEventDone of listSeminarEventDone" (click)="open(content)">
+        <ng-template let-c="close" let-d="dismiss" #content>
+          <creating-survey-seminar [dismiss]="d" [surveyFinishing]='true' [seminarEvent]="seminarEventDone" [eventUserList]="seminarEventDone.eventUserList"
+                                   (changeEvent)="onUpdateListSeminarEvent($event)"></creating-survey-seminar>
+        </ng-template>
+        <td class="infoUser">{{seminarEventDone.name}}</td>
+        <td class="infoUser">{{seminarEventDone.createdDate}}</td>
+        <td class="infoUser">Đã hoàn thành</td>
       </tr>
       </tbody>
     </table>

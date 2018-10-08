@@ -4,6 +4,9 @@
   </button>
 </div>
 <div class="modal-body modal-fonts">
+  <div class="row mt-1 titleAlert" *ngIf="alert === true">
+    <nav>Bạn chưa hoàn thành khảo sát này!</nav>
+  </div>
   <div class="row ml-5 mr-5">
     <div class="col-md-3">
       <p>Tên hoạt động</p>
@@ -19,7 +22,7 @@
     </div>
   </div>
   <div class="survey-seminar">
-    <div class="row mt-5 ml-5 mr-5" *ngFor="let host of eventUserList; let i = index">
+    <div class="row mt-5 ml-5 mr-5" *ngFor="let host of eventUserListFiltered; let i = index">
       <div class="col-md-3 text-center">
         <span class="seminar-host">Host</span>
       </div>
@@ -30,7 +33,7 @@
             <label class="custom-control custom-radio">
               <input type="radio" class="custom-control-input"
                      (change)="changeSelect(host.user.username, question)" name="hostNumber{{i}}"
-                     [(value)]="question.rating">
+                     value="{{question.rating}}" checked="{{question.checked}}">
               <span class="custom-control-indicator"></span>
               <span class="custom-control-description">{{question.content}}</span>
             </label>
@@ -40,9 +43,9 @@
     </div>
 
   </div>
-  <div class="mt-5 s-btn">
+  <div class="mt-5 s-btn" *ngIf="surveyFinishing == false">
+    <button class="btn btn-hero-success" (click)="createSeminarSurvey()">Gửi</button>
     <button class="btn btn-hero-warning pull-right" (click)="closeModal()">Hủy</button>
-    <button class="btn btn-hero-success" (click)="createSeminarSurvey()">Lưu</button>
   </div>
 
 </div>
