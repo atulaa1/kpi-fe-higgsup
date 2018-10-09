@@ -15,7 +15,7 @@
     </div>
 
     <div class="col-3 pt-3"><span class="mr-2 pl-3">Thành viên tham gia</span><i class="fas fa-asterisk icon-abs"></i></div>
-    <div class="col-9 form-control">
+    <div class="col-9 ">
       <mat-form-field class="w-100">
         <mat-chip-list  #chipList>
           <mat-chip  *ngFor="let user of listUserSelect; let i = index"
@@ -51,7 +51,7 @@
       </mat-form-field>
     </div>
   </div>
-  <div class="pb-5">
+  <div class="pb-5 mt-5">
     <button class="btn btn-hero-success pull-to-right" (click)="confirmAdd()">Lưu</button>
     <button class='btn btn-hero-warning pull-to-right' (click)="closeModal()">Hủy</button>
   </div>

@@ -58,7 +58,7 @@ export class ProjectmanagementComponent implements OnInit {
   }
 
   open(content) {
-    this.bsModal.open(content, {backdrop: 'static', centered: true});
+    this.bsModal.open(content, {backdrop: 'static', centered: true, size: 'lg'});
   }
 
 
