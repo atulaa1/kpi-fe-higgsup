@@ -59,7 +59,10 @@ export class ProjectManagementConfirmComponent implements OnInit {
         if (this.typeAction === 'edit') {
           this.project.projectUserList.forEach(value => {
             const indexUserInList = this.listUser.map(value1 => value1.username).indexOf(value.projectUser.username);
-            value.projectUser = Object.assign(this.listUser.splice(indexUserInList));
+            if (indexUserInList >= 0) {
+              this.listUserSelect.push(Object.assign(this.listUser[indexUserInList]));
+              this.listUser.splice(indexUserInList, 1);
+            }
           })
         }
         this.filteredUsers = this.setFilteredUsers(this.listUser);
@@ -117,7 +120,6 @@ export class ProjectManagementConfirmComponent implements OnInit {
           this.projectOutPut.emit(response.data);
           swal('Chúc Mừng!', MessageConstant.MSG_SUCCESS.CREATE_SUCCESS, 'success');
           this.dismiss();
-          this.isDuplicateName = false;
         } else if (response.status_code === 932) {
           this.isDuplicateName = true;
           this.isValidate = true;

@@ -9,7 +9,7 @@
               dự án
             </button>
             <ng-template let-c="close" let-d="dismiss" #content>
-              <project-management-confirm [dismiss]="d" (addEvent)="onAddProject($event)"></project-management-confirm>
+              <project-management-confirm [dismiss]="d" (projectOutPut)='updateAndCreateProject($event)'></project-management-confirm>
             </ng-template>
           </div>
         </div>
@@ -40,13 +40,10 @@
             <tbody>
 
             <!--Tên Dự án-->
-            <tr *ngFor="let project of projects">
+            <tr *ngFor="let project of projects" (click)="open(contentEdit)">
 
               <td name="projectTitle">
-                <p (click)="open(contentEdit)" [hidden]="project.id == projectIdEdit">{{project.name}}</p>
-                <input type="text" class="form-control" [hidden]="project.id != projectIdEdit"
-                       [value]="project.name" #editName
-                       (keyup.enter)="updateProjectName(project, editName.value, content)">
+                <p>{{project.name}}</p>
               </td>
 
               <td class="projectDetail">{{project.createdDate}}</td>
@@ -56,21 +53,22 @@
               </td>
 
               <!--Tools config-->
-              <td class="projectDetail">
+              <td class="projectDetail" (click)="$event.stopPropagation()">
 
-                <i class="fas fa-sync fa-2x swapIcon" (click)="changeStatus(project, content)"></i>
+                <i class="fas fa-sync fa-2x swapIcon" (click)="changeStatus(project, contentConfirmation)"></i>
 
                 <i class="fas fa-pencil-alt fa-2x editIcon" *ngIf="project.id !== projectIdEdit"
                    (click)="open(contentEdit)"></i>
 
-                <ng-template let-c="close" let-d="dismiss" #contentEdit>
-                  <project-management-confirm [dismiss]="d" [projectEdit]='project'
-                                              (projectOutPut)='updateAndCreateProject($event)'></project-management-confirm>
-                </ng-template>
+                <i class="fas fa-trash-alt fa-2x deleteIcon" (click)="deleteProject(project, contentConfirmation)"></i>
 
-                <i class="fas fa-trash-alt fa-2x deleteIcon" (click)="deleteProject(project, content)"></i>
                 <div>
-                  <ng-template let-c="close" let-d="dismiss" #content>
+                  <ng-template let-c="close" let-d="dismiss" #contentEdit>
+                    <project-management-confirm [dismiss]="d" [projectEdit]='project'
+                                                (projectOutPut)='updateAndCreateProject($event)'></project-management-confirm>
+                  </ng-template>
+
+                  <ng-template let-c="close" let-d="dismiss" #contentConfirmation>
                     <dialog-confirmation [dismiss]="d" [choosedProjectId]="project.id"
                                          (confirmation)="receiveConfirmation($event)" [msg]="msg"
                                          [buttonTitle]="buttonTitle"></dialog-confirmation>
