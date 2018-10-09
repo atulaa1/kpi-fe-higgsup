@@ -56,10 +56,15 @@
               <!--Tools config-->
               <td class="projectDetail">
                 <i class="fas fa-sync fa-2x swapIcon" (click)="changeStatus(project, content)"></i>
+
                 <i class="fas fa-pencil-alt fa-2x editIcon" *ngIf="project.id !== projectIdEdit"
-                   (click)="showEditBox(project)"></i>
-                <i class="fas fa-save fa-2x editIcon" *ngIf="project.id == projectIdEdit"
-                   (click)="updateProjectName(project, editName.value, content)"></i>
+                   (click)="open(contentEdit)"></i>
+
+                <ng-template let-c="close" let-d="dismiss" #contentEdit>
+                  <project-management-confirm [dismiss]="d" [projectEdit]='project'
+                                              (projectOutPut)='updateAndCreateProject($event)'></project-management-confirm>
+                </ng-template>
+
                 <i class="fas fa-trash-alt fa-2x deleteIcon" (click)="deleteProject(project, content)"></i>
                 <div>
                   <ng-template let-c="close" let-d="dismiss" #content>

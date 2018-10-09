@@ -163,6 +163,17 @@ export class ProjectmanagementComponent implements OnInit {
     this.getListProject();
   }
 
+  updateAndCreateProject($event: Project) {
+    const index = this.projects.map(value => value.id).indexOf($event.id);
+    if (index > -1) {
+      this.projects.push($event)
+    } else {
+      this.projects.splice(index, 1, $event);
+    }
+    this.projectsClone = Object.assign(this.projects);
+    this.sortProjectArrayByActive();
+  }
+
   handleKeyDown(event: any) {
     if (event.keyCode === 13) {
       this.searchPrject();
