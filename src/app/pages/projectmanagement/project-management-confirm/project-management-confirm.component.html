@@ -8,9 +8,47 @@
   <p class="text-center" name="modalHandle-style" *ngIf="isDuplicateName">Dự án này đã tồn tại!</p>
   <p class="text-center" name="modalHandle-style" *ngIf="!isValidate">Tên dự án không được để trống</p>
   <div class="row">
+
     <div class="col-3 pt-3"><span class="mr-2 pl-3">Tên dự án</span><i class="fas fa-asterisk icon-abs"></i></div>
     <div class="col-9">
       <input  type="text" class="form-control mb-5" #projectName [(ngModel)]="newProject.name">
+    </div>
+
+    <div class="col-3 pt-3"><span class="mr-2 pl-3">Thành viên tham gia</span><i class="fas fa-asterisk icon-abs"></i></div>
+    <div class="col-9 form-control">
+      <mat-form-field class="w-100">
+        <mat-chip-list  #chipList>
+          <mat-chip  *ngFor="let user of listUserSelect; let i = index"
+                     (removed)="removeItemSelect(i)"
+          >
+            <mat-icon matChipAvatar name="iconAvatar">
+              <img src="{{user.avatar}}" name="iconMem">
+            </mat-icon>
+            {{user.fullName}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+
+          <input
+            #userInput
+            [formControl]="userCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+         >
+
+        </mat-chip-list>
+
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+
+          <mat-option *ngFor="let user of filteredUsers | async;" [value]="user">
+
+            <img name="avatarMem" src="{{user.avatar}}">
+            {{user.fullName}}
+          </mat-option>
+        </mat-autocomplete>
+
+      </mat-form-field>
     </div>
   </div>
   <div class="pb-5">
