@@ -41,8 +41,9 @@
 
             <!--Tên Dự án-->
             <tr *ngFor="let project of projects">
+
               <td name="projectTitle">
-                <p [hidden]="project.id == projectIdEdit">{{project.name}}</p>
+                <p (click)="open(contentEdit)" [hidden]="project.id == projectIdEdit">{{project.name}}</p>
                 <input type="text" class="form-control" [hidden]="project.id != projectIdEdit"
                        [value]="project.name" #editName
                        (keyup.enter)="updateProjectName(project, editName.value, content)">
@@ -53,8 +54,10 @@
                 <i class="far fa-check-circle fa-2x" name="activeIcon" *ngIf="project.active == 1"></i>
                 <i class="fas fa-ban fa-2x" *ngIf="project.active == 0"></i>
               </td>
+
               <!--Tools config-->
               <td class="projectDetail">
+
                 <i class="fas fa-sync fa-2x swapIcon" (click)="changeStatus(project, content)"></i>
 
                 <i class="fas fa-pencil-alt fa-2x editIcon" *ngIf="project.id !== projectIdEdit"

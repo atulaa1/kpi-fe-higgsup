@@ -19,16 +19,18 @@ import {MessageConstant} from '../../../@core/glossary/message.constant';
   styleUrls: ['./project-management-confirm.component.scss']
 })
 export class ProjectManagementConfirmComponent implements OnInit {
-  newProject: Project;
+  project: Project;
   isDuplicateName;
   isValidate: boolean = true;
   @Input() dismiss;
+  @Input() projectEdit;
   @Output()
   @Output() projectOutPut = new EventEmitter();
   userCtrl = new FormControl();
   addEvent = new EventEmitter<String>();
   listUser: Array<User>;
 
+  typeAction: string = 'add';
 
   listUserSelect: Array<User> = [];
 
@@ -39,11 +41,17 @@ export class ProjectManagementConfirmComponent implements OnInit {
 
   constructor(private modalService: NgbModal,
               private userService: UserService,
-              private projectService: ProjectService) {
+              private projectService: ProjectService,
+              private bsModal: NgbModal) {
   }
 
   ngOnInit() {
-    this.newProject = new Project();
+    this.project = new Project();
+    // check is edit
+    if (this.projectEdit) {
+      this.project = Object.assign({}, this.projectEdit);
+      this.typeAction = 'edit';
+    }
     this.userService.getUsers().subscribe((response: ResponseUserDTO) => {
       if (response.status_code === 200) {
         this.listUser = response.data;
@@ -93,7 +101,7 @@ export class ProjectManagementConfirmComponent implements OnInit {
   }
 
   confirmAdd() {
-    if (this.newProject.name == null || this.newProject.name === undefined || this.newProject.name === '') {
+    if (this.project.name == null || this.project.name === undefined || this.project.name === '') {
       this.isValidate = false;
       this.isDuplicateName = false;
     } else {
@@ -103,8 +111,8 @@ export class ProjectManagementConfirmComponent implements OnInit {
         projectUser.projectUser = value;
         projectUsers.push(projectUser);
       });
-      this.newProject.projectUserList = projectUsers;
-      this.projectService.addNewProject(this.newProject).subscribe((response: ResponseProjectDTO) => {
+      this.project.projectUserList = projectUsers;
+      this.projectService.addNewProject(this.project).subscribe((response: ResponseProjectDTO) => {
         if (response.status_code === 200) {
           this.projectOutPut.emit(response.data);
           swal('Chúc Mừng!', MessageConstant.MSG_SUCCESS.CREATE_SUCCESS, 'success');
@@ -113,6 +121,35 @@ export class ProjectManagementConfirmComponent implements OnInit {
         } else if (response.status_code === 932) {
           this.isDuplicateName = true;
           this.isValidate = true;
+        }
+      }, error1 => {
+        swal('Xin lỗi', MessageConstant.MSG_ERROR.SYSTEM_ERROR.toString(), 'error')
+      });
+    }
+  }
+
+  updateProject() {
+    if (this.project.name == null || this.project.name === undefined || this.project.name === '') {
+      this.isValidate = false;
+      this.isDuplicateName = false;
+    } else {
+      const projectUsers: Array<ProjectUser> = [];
+      this.listUserSelect.forEach(value => {
+        const projectUser: ProjectUser = new ProjectUser();
+        projectUser.projectUser = value;
+        projectUsers.push(projectUser);
+      });
+      this.project.projectUserList = projectUsers;
+      this.projectService.updateProject(this.project).subscribe((response: ResponseProjectDTO) => {
+        if (response.status_code === 200) {
+          this.projectOutPut.emit(response.data);
+          swal('Chúc Mừng!', MessageConstant.MSG_SUCCESS.UPDATE_SUCCESS, 'success');
+          this.dismiss();
+        } else if (response.status_code === 901) {
+          if (response.message === 'parameters name project exist') {
+            this.isDuplicateName = true;
+            this.isValidate = true;
+          }
         }
       }, error1 => {
         swal('Xin lỗi', MessageConstant.MSG_ERROR.SYSTEM_ERROR.toString(), 'error')
