@@ -32,9 +32,8 @@ const PAGES_COMPONENTS = [
     ActivitiesModule,
   ],
   declarations: [
-    ...PAGES_COMPONENTS,
-    ProjectmanagementComponent, DialogConfirmationComponent, ProjectManagementConfirmComponent],
-  entryComponents: [DialogConfirmationComponent],
+    ...PAGES_COMPONENTS],
+  entryComponents: [],
 })
 export class PagesModule {
 }

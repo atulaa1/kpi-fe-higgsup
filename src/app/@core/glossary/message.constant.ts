@@ -4,6 +4,13 @@ export class MessageConstant {
   static MSG_SAVE_SUCCESSFUL: string = 'Hệ thống đã lưu lại các thông tin của bạn!';
   static MSG_INVALID_EMAIL: string = 'Email không hợp lệ, vui lòng nhập lại!';
   static MSG_ACCOUNT_PASSWORD_BLANK: string = 'Vui lòng nhập tài khoản/mật khẩu';
+  static MSG_ERROR = {
+    SYSTEM_ERROR: 'Lỗi không xác định, vui lòng liên hệ quản trị viên',
+  };
+  static MSG_SUCCESS = {
+    UPDATE_SUCCESS: 'Đã cập nhật thành công',
+    CREATE_SUCCESS: 'Đã tạo thành công',
+  };
   constructor() {
   }
 }
