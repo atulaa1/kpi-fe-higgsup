@@ -88,6 +88,21 @@ export class SurveySeminarComponent implements OnInit {
       }
     } else {
       this.keepOrigin();
+      if (parseInt(this.yearStatus, 10) !== 0) {
+        this.keepOrigin();
+        this.filterYear();
+        if (parseInt(this.confirmationStatus, 10) !== 0) {
+          this.keepOrigin();
+          this.filterYear();
+          this.filterStatus();
+        }
+      } else {
+        this.keepOrigin();
+        if (parseInt(this.confirmationStatus, 10) !== 0) {
+          this.keepOrigin();
+          this.filterStatus();
+        }
+      }
     }
   }
 
