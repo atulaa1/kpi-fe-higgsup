@@ -8,23 +8,23 @@
   <div class="modal-body modal-fonts">
     <div class="container">
       <div class="row mt-1 titleAlert" >
-      <nav>Vui lòng nhập đầy đủ các thông tin!</nav>
+      <nav *ngIf="alert">Vui lòng nhập đầy đủ các thông tin!</nav>
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Tên hoạt động</h5>
-        <input type="text" class="col-md-8 form-control" [(ngModel)]="teambuildingName">
+        <input type="text" class="col-md-8 form-control" [(ngModel)]="teambuildingName" [readonly]="teambuildingView !== null">
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Thời gian diễn ra</h5>
         <input type="text" class="col-md-5 form-control" placeholder="Ngày/Tháng/Năm" [(ngModel)]="actionDate"
-               ngbDatepicker #actionDay="ngbDatepicker"
+               ngbDatepicker #actionDay="ngbDatepicker" [disabled]="teambuildingView !== null"
                [readonly]="true" (click)="actionDay.toggle()">
-        <ngb-timepicker class="col-md-3" [(ngModel)]="actionTime" [spinners]="spinners"
+        <ngb-timepicker class="col-md-3" [(ngModel)]="actionTime" [spinners]="spinners" [readonlyInputs]="teambuildingView !== null"
                         name="timeInput"></ngb-timepicker>
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4">Địa điểm</h5>
-        <input type="text" class="col-md-8 form-control" [(ngModel)]="teambuildingAddress">
+        <input type="text" class="col-md-8 form-control" [(ngModel)]="teambuildingAddress" [readonly]="teambuildingView !== null">
         <div class="col-md-3"></div>
       </div>
       <div class="row mt-2">
@@ -41,7 +41,7 @@
                   <img src="{{user.avatar}}" name="iconMem">
                 </mat-icon>
                 {{user.fullName}}
-                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                <mat-icon matChipRemove *ngIf="removable && teambuildingView === null">cancel</mat-icon>
               </mat-chip>
               <input
                 #userHostInput
@@ -49,7 +49,7 @@
                 [matAutocomplete]="autoHost"
                 [matChipInputFor]="chipListHost"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
+                [matChipInputAddOnBlur]="addOnBlur" [readonly]="teambuildingView !== null"
                 (matChipInputTokenEnd)="addHost($event)">
             </mat-chip-list>
             <mat-autocomplete #autoHost="matAutocomplete"
@@ -79,7 +79,7 @@
                   <img src="{{user.avatar}}" name="iconMem">
                 </mat-icon>
                 {{user.fullName}}
-                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                <mat-icon matChipRemove *ngIf="removable && teambuildingView === null">cancel</mat-icon>
               </mat-chip>
               <input
                 #userFirstPrizeInput
@@ -87,7 +87,7 @@
                 [matAutocomplete]="autoFirstPrize"
                 [matChipInputFor]="chipListFirstPrize"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
+                [matChipInputAddOnBlur]="addOnBlur" [readonly]="teambuildingView !== null"
                 (matChipInputTokenEnd)="addFirstPrize($event)">
             </mat-chip-list>
             <mat-autocomplete #autoFirstPrize="matAutocomplete" (optionSelected)="selectedFirstPrize($event)">
@@ -115,7 +115,7 @@
                   <img src="{{user.avatar}}" name="iconMem">
                 </mat-icon>
                 {{user.fullName}}
-                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                <mat-icon matChipRemove *ngIf="removable && teambuildingView === null">cancel</mat-icon>
               </mat-chip>
               <input
                 #userSecondPrizeInput
@@ -123,7 +123,7 @@
                 [matAutocomplete]="autoSecondPrize"
                 [matChipInputFor]="chipListSecondPrize"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
+                [matChipInputAddOnBlur]="addOnBlur" [readonly]="teambuildingView !== null"
                 (matChipInputTokenEnd)="addSecondPrize($event)">
             </mat-chip-list>
             <mat-autocomplete #autoSecondPrize="matAutocomplete" (optionSelected)="selectedSecondPrize($event)">
@@ -151,7 +151,7 @@
                   <img src="{{user.avatar}}" name="iconMem">
                 </mat-icon>
                 {{user.fullName}}
-                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                <mat-icon matChipRemove *ngIf="removable && teambuildingView === null">cancel</mat-icon>
               </mat-chip>
               <input
                 #userThirdPrizeInput
@@ -159,7 +159,7 @@
                 [matAutocomplete]="autoThirdPrize"
                 [matChipInputFor]="chipListThirdPrize"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur"
+                [matChipInputAddOnBlur]="addOnBlur" [readonly]="teambuildingView !== null"
                 (matChipInputTokenEnd)="addThirdPrize($event)">
             </mat-chip-list>
             <mat-autocomplete #autoThirdPrize="matAutocomplete" (optionSelected)="selectedThirdPrize($event)">

@@ -20,9 +20,9 @@ import {Event} from '../../../@core/models/event.model';
 })
 export class TeambuildingActivityComponent implements OnInit {
   spinners: boolean = false;
-  actionDate;
-  actionTime;
-  actionDay;
+  actionDate = null;
+  actionTime = null;
+  actionDay = null;
   teambuildingAddress: string;
   listUser: Array<User>;
   listCloneUserHost: Array<User>;
@@ -30,7 +30,7 @@ export class TeambuildingActivityComponent implements OnInit {
   listCloneUserSecondPrize: Array<User>;
   listCloneUserThirdPrize: Array<User>;
   creator: string = '';
-  teambuildingName: string = '';
+  teambuildingName: string = null;
   userCtrl = new FormControl();
   userFirstPrizeCtrl = new FormControl();
   userSecondPrizeCtrl = new FormControl();
@@ -45,7 +45,7 @@ export class TeambuildingActivityComponent implements OnInit {
   userCloneThirdPrize: Array<any> = [];
   separatorKeysCodes: Array<number> = [ENTER, COMMA];
 
-  @Output() addedTeambuilding = new EventEmitter<EventTeambuilding<null>>();
+  @Output() addedTeambuilding = new EventEmitter<Event>();
   @Input() dismiss;
   @Input() teambuildingView: Event = null;
 
@@ -113,54 +113,60 @@ export class TeambuildingActivityComponent implements OnInit {
   }
 
   addEventTeamBuilding() {
-    const teambuilding = new EventTeambuilding<null>();
-    this.actionDay = this.convertNgbDateStructToString(this.actionDate) + ' ' + this.convertNgbtimeStructToString(this.actionTime);
+    if (this.teambuildingName !== null && this.teambuildingName !== '' && this.actionDate !== null && this.actionDate !== '' &&
+      this.actionTime !== '' && this.userCloneHost.length !== 0 && this.userCloneFirstPrize.length !== 0 &&
+      this.userCloneSecondPrize.length !== 0 && this.userCloneThirdPrize.length !== 0) {
+      const teambuilding = new Event();
+      this.actionDay = this.convertNgbDateStructToString(this.actionDate) + ' ' + this.convertNgbtimeStructToString(this.actionTime);
 
-    for (let i = 0; i < this.userCloneHost.length; i++) {
-      const userMem: User = new User();
-      const eventUser: UserType = new UserType();
-      userMem.username = this.userCloneHost[i].username;
+      for (let i = 0; i < this.userCloneHost.length; i++) {
+        const userMem: User = new User();
+        const eventUser: UserType = new UserType();
+        userMem.username = this.userCloneHost[i].username;
 
-      eventUser.user = userMem;
-      eventUser.type = 4;
-      this.listEventUser.push(eventUser);
+        eventUser.user = userMem;
+        eventUser.type = 4;
+        this.listEventUser.push(eventUser);
+      }
+
+      for (let i = 0; i < this.userCloneFirstPrize.length; i++) {
+        const userMem: User = new User();
+        const eventUser: UserType = new UserType();
+        userMem.username = this.userCloneFirstPrize[i].username;
+
+        eventUser.user = userMem;
+        eventUser.type = 5;
+        this.listEventUser.push(eventUser);
+      }
+
+      for (let i = 0; i < this.userCloneSecondPrize.length; i++) {
+        const userMem: User = new User();
+        const eventUser: UserType = new UserType();
+        userMem.username = this.userCloneSecondPrize[i].username;
+
+        eventUser.user = userMem;
+        eventUser.type = 6;
+        this.listEventUser.push(eventUser);
+      }
+
+      for (let i = 0; i < this.userCloneThirdPrize.length; i++) {
+        const userMem: User = new User();
+        const eventUser: UserType = new UserType();
+        userMem.username = this.userCloneThirdPrize[i].username;
+
+        eventUser.user = userMem;
+        eventUser.type = 7;
+        this.listEventUser.push(eventUser);
+      }
+
+      teambuilding.name = this.teambuildingName;
+      teambuilding.beginDate = this.actionDay;
+      teambuilding.eventUserList = this.listEventUser;
+      this.addedTeambuilding.emit(teambuilding);
+      this.dismiss();
+    } else {
+      this.alert = true;
     }
-
-    for (let i = 0; i < this.userCloneFirstPrize.length; i++) {
-      const userMem: User = new User();
-      const eventUser: UserType = new UserType();
-      userMem.username = this.userCloneFirstPrize[i].username;
-
-      eventUser.user = userMem;
-      eventUser.type = 5;
-      this.listEventUser.push(eventUser);
-    }
-
-    for (let i = 0; i < this.userCloneSecondPrize.length; i++) {
-      const userMem: User = new User();
-      const eventUser: UserType = new UserType();
-      userMem.username = this.userCloneSecondPrize[i].username;
-
-      eventUser.user = userMem;
-      eventUser.type = 6;
-      this.listEventUser.push(eventUser);
-    }
-
-    for (let i = 0; i < this.userCloneThirdPrize.length; i++) {
-      const userMem: User = new User();
-      const eventUser: UserType = new UserType();
-      userMem.username = this.userCloneThirdPrize[i].username;
-
-      eventUser.user = userMem;
-      eventUser.type = 7;
-      this.listEventUser.push(eventUser);
-    }
-
-    teambuilding.name = this.teambuildingName;
-    teambuilding.beginDate = this.actionDay;
-    teambuilding.eventUserList = this.listEventUser;
-    this.addedTeambuilding.emit(teambuilding);
-    this.dismiss();
   }
 
   closeModal() {
