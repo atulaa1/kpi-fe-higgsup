@@ -45,7 +45,6 @@ export class EventTeambuildingComponent implements OnInit {
     this.addedEventTeambuilding.group.id = 7;
     this.eventTeambuildingService.addEventTeambuilding($event).subscribe((response: ResponseEventTeambuildingDTO<Event>) => {
       if (response.status_code === 200) {
-        this.listEventTeambuildingData.unshift(response.data);
         this.listEventTeambuilding.unshift(response.data);
       }
     });

@@ -173,10 +173,10 @@
           </mat-form-field>
         </div>
       </div>
-      <div class="row mt-1 titleAlert">
+      <div class="row mt-2 titleAlert">
         <nav>Hoạt động Teambuilding đã lưu sẽ không được sửa!</nav>
       </div>
-      <div class="row mt-5">
+      <div class="row mt-5" *ngIf="teambuildingView === null">
         <div class="groupButton">
           <button class="btn btn-hero-success saveButton" (click)="addEventTeamBuilding()">Lưu</button>
           <button class="btn btn-hero-warning" (click)="closeModal()">Huỷ</button>
