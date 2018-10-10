@@ -4,11 +4,9 @@
       <div class="row">
         <div class="col-md-4 mt-3 text-right">Tháng</div>
         <div class="col-md-8">
-          <select class="form-control custom-select">
+          <select class="form-control custom-select" [(ngModel)]="monthStatus">
             <option value="0">- - Tất cả - -</option>
-            <option value="1">Tháng 10</option>
-            <option value="2">Tháng 09</option>
-            <option value="3">Tháng 08</option>
+            <option value="{{i}}" *ngFor="let i of listMonth">Tháng {{i}}</option>
           </select>
         </div>
       </div>
@@ -17,11 +15,10 @@
       <div class="row">
         <div class="col-md-4 mt-3 text-center">Năm</div>
         <div class="col-md-8">
-          <select class="form-control custom-select">
+          <select class="form-control custom-select" [(ngModel)]="yearStatus">
             <option value="0">- - Tất cả - -</option>
-            <option value="1">2018</option>
-            <option value="2">2017</option>
-            <option value="3">2016</option>
+            <option value="2017">2017</option>
+            <option value="{{i}}" *ngFor="let i of listYear">{{i}}</option>
           </select>
         </div>
       </div>
@@ -30,11 +27,10 @@
       <div class="row">
         <div class="col-md-4 mt-3 text-right">Trạng thái</div>
         <div class="col-md-8">
-          <select class="form-control custom-select">
+          <select class="form-control custom-select" [(ngModel)]="confirmationStatus">
             <option value="0">- - Tất cả - -</option>
-            <option value="1">Chưa xác nhận</option>
-            <option value="2">Đã xác nhận</option>
-            <option value="3">Đã hủy</option>
+            <option value="1">Chưa hoàn thành</option>
+            <option value="2">Đã hoàn thành</option>
           </select>
         </div>
       </div>
@@ -42,7 +38,7 @@
     <div class="col-md-3">
       <div class="row">
         <div class="col md-12 text-center">
-          <button class="btn btn-hero-success custom-btn mb-5 mr-5">
+          <button class="btn btn-hero-success custom-btn mb-5 mr-5" (click)="onFilterSurvey()">
             Lọc
           </button>
         </div>
@@ -70,7 +66,7 @@
         </ng-template>
         <td class="infoUser">{{seminarEventWaiting.name}}</td>
         <td class="infoUser">{{seminarEventWaiting.createdDate}}</td>
-        <td class="infoUser">Chưa hoàn thành</td>
+        <td class="infoUser text-danger">Chưa hoàn thành</td>
       </tr>
       <tr *ngFor="let seminarEventDone of listSeminarEventDone" (click)="open(content)">
         <ng-template let-c="close" let-d="dismiss" #content>
