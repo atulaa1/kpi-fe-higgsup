@@ -17,7 +17,6 @@
         <div class="col-md-8">
           <select class="form-control custom-select" [(ngModel)]="yearStatus">
             <option value="0">- - Tất cả - -</option>
-            <option value="2017">2017</option>
             <option value="{{i}}" *ngFor="let i of listYear">{{i}}</option>
           </select>
         </div>
@@ -80,4 +79,5 @@
       </tbody>
     </table>
   </div>
+  <p *ngIf='showMsg' name='notFoundMsg'>Không tìm thấy kết quả phù hợp!</p>
 </div>

@@ -23,6 +23,7 @@ export class SurveySeminarComponent implements OnInit {
   yearStatus: string = '0';
   listMonth = [];
   listYear = [];
+  showMsg: boolean = false;
 
   constructor(private modalService: NgbModal, private seminarService: SeminarService) {
   }
