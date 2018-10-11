@@ -12,6 +12,7 @@ import {MatAutocompleteSelectedEvent} from '@angular/material';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {ProjectUser} from '../../../@core/models/ProjectUser';
 import {MessageConstant} from '../../../@core/glossary/message.constant';
+import {t} from '@angular/core/src/render3';
 
 @Component({
   selector: 'project-management-confirm',
@@ -22,6 +23,7 @@ export class ProjectManagementConfirmComponent implements OnInit {
   project: Project;
   isDuplicateName;
   isValidate: boolean = true;
+  isValidateUserIsBlank: boolean = false;
   @Input() dismiss;
   @Input() projectEdit;
   @Output()
@@ -107,6 +109,8 @@ export class ProjectManagementConfirmComponent implements OnInit {
     if (this.project.name == null || this.project.name === undefined || this.project.name === '') {
       this.isValidate = false;
       this.isDuplicateName = false;
+    } else if (this.listUserSelect.length <= 0) {
+      this.isValidateUserIsBlank = true;
     } else {
       const projectUsers: Array<ProjectUser> = [];
       this.listUserSelect.forEach(value => {
@@ -134,6 +138,8 @@ export class ProjectManagementConfirmComponent implements OnInit {
     if (this.project.name == null || this.project.name === undefined || this.project.name === '') {
       this.isValidate = false;
       this.isDuplicateName = false;
+    } else if (this.listUserSelect.length <= 0) {
+      this.isValidateUserIsBlank = true;
     } else {
       const projectUsers: Array<ProjectUser> = [];
       this.listUserSelect.forEach(value => {
