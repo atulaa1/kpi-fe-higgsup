@@ -64,7 +64,7 @@ export class EventTeambuildingComponent implements OnInit {
 
   searchByKeyword() {
     this.listEventTeambuilding = this.listEventTeambuildingData.filter(
-      teambuilding => teambuilding.name.toLowerCase().includes(this.keyword.toLowerCase()));
+      teambuilding => teambuilding.name.trim().toLowerCase().includes(this.keyword.trim().toLowerCase()));
   }
 
 }
