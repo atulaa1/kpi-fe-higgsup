@@ -15,6 +15,7 @@ import {AuthGuard} from '../@core/services/auth.guard';
 import {ActivitiesComponent} from './activities/activities.component';
 import {SeminarComponent} from './seminar/seminar.component';
 import {EventTeambuildingComponent} from './event-teambuilding/event-teambuilding.component';
+import {PointForUsersComponent} from './point-for-users/point-for-users.component';
 
 const routes: Routes = [{
   path: '',
@@ -62,8 +63,13 @@ const routes: Routes = [{
     {
       path: 'event-teambuilding',
       component: EventTeambuildingComponent,
-      canActivate: [AuthGuard]
-    }
+      canActivate: [AuthGuard],
+    },
+    {
+      path: 'point-for-user',
+      component: PointForUsersComponent,
+      canActivate: [AuthGuard],
+    },
   ],
 }];
 
