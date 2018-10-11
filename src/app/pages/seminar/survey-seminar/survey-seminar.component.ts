@@ -13,6 +13,7 @@ import {User} from '../../../@core/models/user.model';
 })
 export class SurveySeminarComponent implements OnInit {
   listSeminarEvent: Array<Event> = new Array<Event>();
+  listSeminarEventClone: Array<Event> = new Array<Event>();
   listSeminarEventWaiting: Array<Event> = new Array<Event>();
   listSeminarEventWaitingClone: Array<Event> = new Array<Event>();
   listSeminarEventDone: Array<Event> = new Array<Event>();
@@ -43,25 +44,35 @@ export class SurveySeminarComponent implements OnInit {
     this.seminarService.getAllSeminarEvent().subscribe((response: ResponseListEventDTO) => {
       if (response.status_code === 200) {
         this.listSeminarEvent = response.data;
-
         // Lọc các phần tử có hoặc không có username là currentUsername và không phải là host
         this.listSeminarEvent = this.listSeminarEvent.filter(seminarEvent =>
           seminarEvent.eventUserList.filter(userJoin =>
             userJoin.user.username === this.currentUsername && userJoin.type === 1).length === 0);
+        this.sortList(this.listSeminarEvent);
+        this.listSeminarEventClone = Object.assign(this.listSeminarEvent);
 
-        // Các phần tử cần làm khảo sát
-        this.listSeminarEventWaiting = this.listSeminarEvent.filter(seminarEvent =>
-          seminarEvent.eventUserList.filter(userJoin =>
-            userJoin.user.username === this.currentUsername && userJoin.status !== 0).length === 0);
-        this.listSeminarEventWaitingClone = Object.assign(this.listSeminarEventWaiting);
-
-        // Các phần tử đã làm khảo sát
-        this.listSeminarEventDone = this.listSeminarEvent.filter(seminarEvent =>
-          seminarEvent.eventUserList.filter(userJoin =>
-            userJoin.user.username === this.currentUsername && userJoin.status !== 0).length > 0)
-        this.listSeminarEventDoneClone = Object.assign(this.listSeminarEventDone);
       }
     });
+  }
+
+  sortList(list: Array<Event>) {
+    let all: Array<Event> = new Array<Event>();
+
+    // Các phần tử cần làm khảo sát
+    this.listSeminarEventWaiting = list.filter(seminarEvent =>
+      seminarEvent.eventUserList.filter(userJoin =>
+        userJoin.user.username === this.currentUsername && userJoin.status !== 0).length === 0);
+    this.listSeminarEventWaitingClone = Object.assign(this.listSeminarEventWaiting);
+
+    // Các phần tử đã làm khảo sát
+    this.listSeminarEventDone = list.filter(seminarEvent =>
+      seminarEvent.eventUserList.filter(userJoin =>
+        userJoin.user.username === this.currentUsername && userJoin.status !== 0).length > 0);
+    this.listSeminarEventDoneClone = Object.assign(this.listSeminarEventDone);
+
+    all = all.concat(this.listSeminarEventWaitingClone);
+    all = all.concat(this.listSeminarEventDoneClone);
+    this.listSeminarEvent = all;
   }
 
   onUpdateListSeminarEvent() {
@@ -73,69 +84,54 @@ export class SurveySeminarComponent implements OnInit {
   }
 
   onFilterSurvey() {
-    if (parseInt(this.monthStatus, 10) !== 0) {
-      this.keepOrigin();
-      this.filterMonth();
-      if (parseInt(this.yearStatus, 10) !== 0) {
-        this.keepOrigin();
-        this.filterMonth();
-        this.filterYear();
-        if (parseInt(this.confirmationStatus, 10) !== 0) {
-          this.keepOrigin();
-          this.filterMonth();
-          this.filterYear();
-          this.filterStatus();
-        }
-      }
-    } else {
-      this.keepOrigin();
-      if (parseInt(this.yearStatus, 10) !== 0) {
-        this.keepOrigin();
-        this.filterYear();
-        if (parseInt(this.confirmationStatus, 10) !== 0) {
-          this.keepOrigin();
-          this.filterYear();
-          this.filterStatus();
-        }
-      } else {
-        this.keepOrigin();
-        if (parseInt(this.confirmationStatus, 10) !== 0) {
-          this.keepOrigin();
-          this.filterStatus();
-        }
-      }
-    }
+    this.listSeminarEvent = Object.assign(this.listSeminarEventClone);
+    this.filterMonth();
+    this.filterYear();
+    this.filterStatus();
   }
 
   // Filter with month
   filterMonth() {
-    this.listSeminarEventWaiting = this.listSeminarEventWaiting.filter(event =>
-      parseInt(event.createdDate.slice(3, 5), 10) === parseInt(this.monthStatus, 10));
-    this.listSeminarEventDone = this.listSeminarEventDone.filter(event =>
-      parseInt(event.createdDate.slice(3, 5), 10) === parseInt(this.monthStatus, 10));
+    if (parseInt(this.monthStatus, 10) !== 0) {
+      this.listSeminarEvent = this.listSeminarEvent.filter(event =>
+        parseInt(event.createdDate.slice(3, 5), 10) === parseInt(this.monthStatus, 10));
+    }
+    this.sortList(this.listSeminarEvent);
   }
 
   // filter with year
   filterYear() {
-    this.listSeminarEventWaiting = this.listSeminarEventWaiting.filter(event =>
-      parseInt(event.createdDate.slice(6, 10), 10) === parseInt(this.yearStatus, 10));
-    this.listSeminarEventDone = this.listSeminarEventDone.filter(event =>
-      parseInt(event.createdDate.slice(6, 10), 10) === parseInt(this.yearStatus, 10));
+    if (parseInt(this.yearStatus, 10) !== 0) {
+      this.listSeminarEvent = this.listSeminarEvent.filter(event =>
+        parseInt(event.createdDate.slice(6, 10), 10) === parseInt(this.yearStatus, 10));
+    }
+    this.sortList(this.listSeminarEvent);
   }
 
   // filter with status
   filterStatus() {
     if (parseInt(this.confirmationStatus, 10) === 1) {
-      this.listSeminarEventDone = [];
-    } else if (parseInt(this.confirmationStatus, 10) === 2) {
-      this.listSeminarEventWaiting = [];
+      this.listSeminarEvent = this.filterByStatus(0);
     }
+    if (parseInt(this.confirmationStatus, 10) === 2) {
+      this.listSeminarEvent = this.filterByStatus(1);
+    }
+    this.sortList(this.listSeminarEvent);
   }
 
-  // keep Original
-  keepOrigin() {
-    this.listSeminarEventDone = this.listSeminarEventDoneClone;
-    this.listSeminarEventWaiting = this.listSeminarEventWaitingClone;
+  filterByStatus(status) {
+    return this.listSeminarEvent.filter(event => {
+      let isHas: boolean = false;
+      event.eventUserList.forEach(value => {
+        if (value.user.username === this.currentUsername) {
+          if (value.status === status) {
+            isHas = true;
+            return;
+          }
+        }
+      });
+      return isHas;
+    });
   }
 
 }

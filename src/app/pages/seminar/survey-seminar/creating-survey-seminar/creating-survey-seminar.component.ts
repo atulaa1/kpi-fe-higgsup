@@ -20,6 +20,7 @@ export class CreatingSurveySeminarComponent implements OnInit {
   listSeminarSurvey: Array<SeminarSurvey> = new Array<SeminarSurvey>();
   eventUserListFiltered: Array<UserType> = new Array<UserType>();
   alert: boolean = false;
+  currentUsername: string = '';
 
   listQuestion = [
     {content: 'Chuẩn bị tốt và rất dễ hiểu (+5)', rating: 5, checked: null},
@@ -31,10 +32,18 @@ export class CreatingSurveySeminarComponent implements OnInit {
   seminarEvaluation: EventSeminar = new EventSeminar();
 
   constructor(private seminarSevice: SeminarService) {
+    this.currentUsername = JSON.parse(localStorage.getItem('currentUser')).username;
   }
 
   ngOnInit() {
     this.eventUserListFiltered = this.eventUserList.filter(user => user.type === 1);
+    const userSelect: UserType = this.eventUserList.filter(user => user.user.username === this.currentUsername)[0];
+    if (userSelect.status === 0) {
+      this.surveyFinishing = false;
+    } else {
+      this.surveyFinishing = true;
+
+    }
   }
 
   changeSelect(username, question) {
