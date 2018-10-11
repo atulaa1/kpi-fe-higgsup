@@ -54,7 +54,7 @@ export class EventTeambuildingComponent implements OnInit {
     });
   }
 
-  handleKeyPress($event) {
+  handleKeyDown($event) {
     if ($event.keyCode === 13) {
       this.searchByKeyword();
     } else if (this.keyword === '') {
