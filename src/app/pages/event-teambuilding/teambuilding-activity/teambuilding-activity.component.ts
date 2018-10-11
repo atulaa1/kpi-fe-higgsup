@@ -9,8 +9,8 @@ import {UserService} from '../../../@core/services/user.service';
 import {ResponseUserDTO} from '../../../@core/models/responseUserDTO.model';
 import {UserType} from '../../../@core/models/userType.model';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {EventTeambuilding} from '../../../@core/models/event-teambuilding.model';
 import {Event} from '../../../@core/models/event.model';
+import {Common} from '../../../@core/glossary/common.constant';
 
 @Component({
   selector: 'ngx-teambuilding-activity',
@@ -91,16 +91,16 @@ export class TeambuildingActivityComponent implements OnInit {
           this.actionTime = this.convertTimeStringtoNgbTimeStruct(arrDate[1]);
           this.teambuildingAddress = this.teambuildingView.address;
           for (let i = 0; i < this.teambuildingView.eventUserList.length; i++) {
-            if (this.teambuildingView.eventUserList[i].type === 4) {
+            if (this.teambuildingView.eventUserList[i].type === Common.HOST) {
               const arrUser = this.listUser.filter(user => user.username === this.teambuildingView.eventUserList[i].user.username);
               this.userCloneHost.push(arrUser[0]);
-            } else if (this.teambuildingView.eventUserList[i].type === 5) {
+            } else if (this.teambuildingView.eventUserList[i].type === Common.FIRST_PRIZE) {
               const arrUser = this.listUser.filter(user => user.username === this.teambuildingView.eventUserList[i].user.username);
               this.userCloneFirstPrize.push(arrUser[0]);
-            } else if (this.teambuildingView.eventUserList[i].type === 6) {
+            } else if (this.teambuildingView.eventUserList[i].type === Common.SECOND_PRIZE) {
               const arrUser = this.listUser.filter(user => user.username === this.teambuildingView.eventUserList[i].user.username);
               this.userCloneSecondPrize.push(arrUser[0]);
-            } else if (this.teambuildingView.eventUserList[i].type === 7) {
+            } else if (this.teambuildingView.eventUserList[i].type === Common.THIRD_PRIZE) {
               const arrUser = this.listUser.filter(user => user.username === this.teambuildingView.eventUserList[i].user.username);
               this.userCloneThirdPrize.push(arrUser[0]);
             }
@@ -125,7 +125,7 @@ export class TeambuildingActivityComponent implements OnInit {
         userMem.username = this.userCloneHost[i].username;
 
         eventUser.user = userMem;
-        eventUser.type = 4;
+        eventUser.type = Common.HOST;
         this.listEventUser.push(eventUser);
       }
 
@@ -135,7 +135,7 @@ export class TeambuildingActivityComponent implements OnInit {
         userMem.username = this.userCloneFirstPrize[i].username;
 
         eventUser.user = userMem;
-        eventUser.type = 5;
+        eventUser.type = Common.FIRST_PRIZE;
         this.listEventUser.push(eventUser);
       }
 
@@ -145,7 +145,7 @@ export class TeambuildingActivityComponent implements OnInit {
         userMem.username = this.userCloneSecondPrize[i].username;
 
         eventUser.user = userMem;
-        eventUser.type = 6;
+        eventUser.type = Common.SECOND_PRIZE;
         this.listEventUser.push(eventUser);
       }
 
@@ -155,7 +155,7 @@ export class TeambuildingActivityComponent implements OnInit {
         userMem.username = this.userCloneThirdPrize[i].username;
 
         eventUser.user = userMem;
-        eventUser.type = 7;
+        eventUser.type = Common.THIRD_PRIZE;
         this.listEventUser.push(eventUser);
       }
 
