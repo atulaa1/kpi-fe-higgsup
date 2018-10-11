@@ -1,0 +1,93 @@
+@import '../../../@theme/styles/themes';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
+
+h4 {
+  text-align: center;
+}
+
+h5 {
+  margin: 0 auto;
+}
+
+.zui-table {
+  border: none;
+  border-right: solid 1px #DDEFEF;
+  border-collapse: separate;
+  border-spacing: 0;
+  font: normal 13px Arial, sans-serif;
+}
+
+.zui-table thead th {
+  background-color: #DDEFEF;
+  border: none;
+  color: #336B6B;
+  padding: 10px;
+  text-align: left;
+  text-shadow: 1px 1px 1px #fff;
+  white-space: nowrap;
+}
+
+.zui-table tbody td {
+  border-bottom: solid 1px #DDEFEF;
+  color: #333;
+  padding: 10px;
+  text-shadow: 1px 1px 1px #fff;
+  white-space: nowrap;
+}
+
+.zui-wrapper {
+  position: relative;
+}
+
+.zui-scroller {
+  margin-left: 420px;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding-bottom: 5px;
+  width: 310px;
+}
+
+.zui-table .zui-sticky-col {
+  border-left: solid 1px #DDEFEF;
+  border-right: solid 1px #DDEFEF;
+  left: 0;
+  position: absolute;
+  top: auto;
+  width: 420px;
+}
+
+.zui-table .first-col {
+  border-left: solid 1px #DDEFEF;
+}
+
+.zui-table-vertical {
+  margin-left: 10px;
+  overflow-x: auto;
+  overflow-y: auto;
+  padding-bottom: 5px;
+  height: 217px;
+  width: 378px;
+}
+
+.clipText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.zui-table-custom-vertical {
+  width: 500px;
+}
+
+.zui-table-custom {
+  width: 100%;
+}
+
+.zui-wrapper-custom {
+  margin-left: 115px;
+}
+
+.point-user {
+  text-align: center;
+}

@@ -1,0 +1,102 @@
+<div class="modal-header modal-lg">
+  <div class="col-md-12">
+    <div class="row ml-2">
+      <div class="col-md-11">
+        <h4>Khảo sát tháng 9/2018</h4>
+      </div>
+      <div class="col-md-1">
+        <button type="button" class="close pull-right cus-btn" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-body modal-fonts">
+  <div class="container">
+
+
+    <div class="zui-wrapper">
+      <div class="zui-scroller">
+        <table class='zui-table'>
+          <thead>
+          <tr>
+            <th class="zui-sticky-col"><span>Câu hỏi đánh giá</span></th>
+            <th *ngFor="let employee of employeeList,let i = index"
+                [ngClass]="{'text-danger': employee.isRated === true}">{{employee.fullname}}
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td class="zui-sticky-col row-padding-bottom clipText" tooltip="Nhân viên này có hoàn thành tốt công việc hàng ngày? (Khung
+    1)"><span class="text-danger">*</span><span>Nhân viên này có hoàn thành tốt công việc hàng ngày? (Khung
+    1)</span></td>
+            <td *ngFor="let question of firstQuestionList,let i = index" class="point-user">
+
+              {{question.rating}}
+
+            </td>
+          </tr>
+          <tr>
+            <td class="zui-sticky-col row-padding-bottom clipText" tooltip="Thái độ chung trong công việc của nhân viên này? (Khung
+    1)"><span class="text-danger">*</span><span>Thái độ chung trong công việc của nhân viên này? (Khung
+    1)</span></td>
+            <td *ngFor="let question of secondQuestionList,let i = index" class="point-user">
+
+              {{question.rating}}
+
+            </td>
+          </tr>
+          <tr>
+            <td class="zui-sticky-col row-padding-bottom clipText" tooltip="Nhân viên này có quan tâm hoặc giúp đỡ đồng nghiệp? (Khung
+    1)"><span class="text-danger">*</span><span>Nhân viên này có quan tâm hoặc giúp đỡ đồng nghiệp? (Khung
+    1)</span></td>
+            <td *ngFor="let question of thirdQuestionList,let i = index" class="point-user">
+
+              {{question.rating}}
+
+            </td>
+          </tr>
+          <tr>
+            <td class="zui-sticky-col row-padding-bottom clipText" tooltip="Ngoài công việc đang làm, nhân viên này có hoàn thành tốt
+    những công việc được giao thêm?(Khung 2)"><span>Ngoài công việc đang làm, nhân viên này có hoàn thành tốt
+    những công việc được giao thêm?(Khung 2)</span></td>
+            <td *ngFor="let question of fourthQuestionList,let i = index" class="point-user">
+
+              {{question.rating}}
+
+            </td>
+          </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-12">
+        <div class="row mb-2"><h5>Đánh giá điểm cho các dự án</h5></div>
+        <div class="zui-wrapper-custom">
+          <div class="zui-table-vertical zui-table-custom-vertical">
+            <table class='zui-table zui-table-custom'>
+              <thead>
+              <tr>
+                <th class="first-col"><span>Tên dự án (Khung 3)</span></th>
+                <th><span>Điểm</span></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let project of projectList">
+                <td class="first-col">{{project.name}}
+                </td>
+                <td>{{project.rating}}
+                </td>
+              </tr>
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
