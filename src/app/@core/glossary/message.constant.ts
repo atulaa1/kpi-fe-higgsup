@@ -6,6 +6,7 @@ export class MessageConstant {
   static MSG_ACCOUNT_PASSWORD_BLANK: string = 'Vui lòng nhập tài khoản/mật khẩu';
   static MSG_ERROR = {
     SYSTEM_ERROR: 'Lỗi không xác định, vui lòng liên hệ quản trị viên',
+    USER_NOTFOUND_ERROR: 'Không tìm thấy người dùng',
   };
   static MSG_SUCCESS = {
     UPDATE_SUCCESS: 'Đã cập nhật thành công',
