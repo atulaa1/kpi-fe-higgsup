@@ -3,6 +3,7 @@ import {Observable} from 'rxjs/Rx';
 import {HttpClient} from '@angular/common/http';
 import {HttpService} from './http.service';
 import {BaseConstant} from '../glossary/base.constant';
+import {ResponseListEventDTO} from '../models/responseListEventDTO.model';
 
 @Injectable({
   providedIn: 'root',
@@ -37,5 +38,13 @@ export class SeminarService {
   updateSeminarEvent(seminar, id): Observable<any> {
 
     return this.http.put(`${this.seminarEventUrl}/${id}`, seminar, this.httpOptions);
+  }
+
+  getAllSeminarEvent(): Observable<ResponseListEventDTO> {
+    return this.http.get<ResponseListEventDTO>(this.seminarEventUrl, this.httpOptions);
+  }
+
+  evaluateSeminarEvent(seminarEvaluation): Observable<ResponseListEventDTO> {
+    return this.http.post<ResponseListEventDTO>(this.seminarEventUrl + '/survey', seminarEvaluation, this.httpOptions);
   }
 }
