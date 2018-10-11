@@ -4,9 +4,9 @@
         <button class="btn btn-hero-success mb-5" (click)="openModalAddNewTBD(content)">Thêm hoạt động</button>
       </div>
       <div class="col-md-6">
-        <input normalCharacterOnly name="word"
-               class="form-control search-inp" type="text"
-               placeholder="Tìm kiếm hoạt động:" title="Type in a name" [(ngModel)]="keyword" (keypress)="handleKeyPress($event)"/>
+        <input normalCharacterOnly name="word" [(ngModel)]="keyword" (keyup)="handleKeyDown($event)"
+               class="form-control search-inp" type="text" id="myInput"
+               placeholder="Tìm kiếm hoạt động:" title="Type in a name"/>
         <span class="fas fa-search searchIcon" (click)="searchByKeyword()"></span>
       </div>
     </div>

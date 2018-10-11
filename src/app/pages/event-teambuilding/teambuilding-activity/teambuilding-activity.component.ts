@@ -114,7 +114,7 @@ export class TeambuildingActivityComponent implements OnInit {
 
   addEventTeamBuilding() {
     if (this.teambuildingName !== null && this.teambuildingName !== '' && this.actionDate !== null && this.actionDate !== '' &&
-      this.actionTime !== '' && this.userCloneHost.length !== 0 && this.userCloneFirstPrize.length !== 0 &&
+      this.actionTime && this.userCloneHost.length !== 0 && this.userCloneFirstPrize.length !== 0 &&
       this.userCloneSecondPrize.length !== 0 && this.userCloneThirdPrize.length !== 0) {
       const teambuilding = new Event();
       this.actionDay = this.convertNgbDateStructToString(this.actionDate) + ' ' + this.convertNgbtimeStructToString(this.actionTime);
@@ -161,6 +161,7 @@ export class TeambuildingActivityComponent implements OnInit {
 
       teambuilding.name = this.teambuildingName;
       teambuilding.beginDate = this.actionDay;
+      teambuilding.address = this.teambuildingAddress;
       teambuilding.eventUserList = this.listEventUser;
       this.addedTeambuilding.emit(teambuilding);
       this.dismiss();
