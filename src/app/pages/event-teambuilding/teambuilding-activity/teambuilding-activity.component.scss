@@ -1,0 +1,91 @@
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 800px;
+  }
+}
+
+.modal-header h4 {
+  max-width: 200px;
+  margin: auto;
+}
+
+.cus-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+}
+
+.modal-fonts {
+  font-size: 17px;
+}
+
+.groupButton {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.saveButton {
+  margin-left: 40%;
+  margin-right: 5%;
+}
+
+h5 {
+  padding-top: 12px;
+}
+
+h5.requiredInput:after {
+  content: " *";
+  color: red;
+}
+
+[name$='host'] {
+  padding: 0;
+  min-height: 75px;
+  max-height: 140px;
+}
+
+.joining {
+  padding: 0;
+  min-height: 75px;
+  max-height: 350px;
+}
+
+[name$='timeInput'] {
+  padding-left: 42px;
+}
+
+.example-chip-list {
+  width: 100%;
+  padding-left: 5px;
+}
+
+/deep/ .mat-form-field-underline {
+  display: none;
+}
+
+/deep/ .cdk-overlay-container {
+  z-index: 9999;
+}
+
+[name$='iconAvatar'] {
+  position: relative;
+}
+
+[name$='iconMem'] {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+}
+
+[name$='avatarMem'] {
+  width: 40px;
+  height: 40px;
+}
+
+.titleAlert {
+  nav {
+    margin: auto;
+    color: red;
+  }
+}
