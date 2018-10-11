@@ -13,6 +13,7 @@ import {AccManagementsComponent} from './acc-managements/acc-managements.compone
 import {AccManagementLateComponent} from './acc-managements/acc-management-late/acc-management-late.component';
 import {AuthGuard} from '../@core/services/auth.guard';
 import {ActivitiesComponent} from './activities/activities.component';
+import {SeminarComponent} from './seminar/seminar.component';
 
 const routes: Routes = [{
   path: '',
@@ -52,6 +53,11 @@ const routes: Routes = [{
       component: ActivitiesComponent,
       canActivate: [AuthGuard],
     },
+    {
+      path: 'seminar',
+      component: SeminarComponent,
+      canActivate: [AuthGuard],
+    }
   ],
 }];
 
