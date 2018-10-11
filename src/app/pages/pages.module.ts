@@ -6,15 +6,13 @@ import {PagesRoutingModule} from './pages-routing.module';
 import {ThemeModule} from '../@theme/theme.module';
 import {MiscellaneousModule} from './miscellaneous/miscellaneous.module';
 import {ActiManagementModule} from './acti-management/acti-management.module';
-import {ProjectmanagementComponent} from './projectmanagement/projectmanagement.component';
 import {ListOfSurveyModule} from './list-of-survey/list-of-survey.module';
-import {DialogConfirmationComponent} from '../modals/dialog-confirmation/dialog-confirmation.component';
 import {AccManagementsModule} from './acc-managements/acc-managements.module';
-import {ProjectManagementConfirmComponent} from './projectmanagement/project-management-confirm/project-management-confirm.component';
 import {ProjectmanagementModule} from './projectmanagement/projectmanagement.module';
 import {ActivitiesModule} from './activities/activities.module';
 import {SeminarModule} from './seminar/seminar.module';
 import {EventTeambuildingModule} from './event-teambuilding/event-teambuilding.module';
+import {HistoryModule} from './history/history.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -34,6 +32,7 @@ const PAGES_COMPONENTS = [
     ActivitiesModule,
     SeminarModule,
     EventTeambuildingModule,
+    HistoryModule,
 
   ],
   declarations: [

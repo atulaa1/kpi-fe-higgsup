@@ -7,6 +7,8 @@ export class Project {
   createdDate: string;
   updatedDate: string;
   projectUserList: Array<ProjectUser>;
+  isRated: boolean;
+  rating: number;
 
   constructor() {
     this.active = 1;
