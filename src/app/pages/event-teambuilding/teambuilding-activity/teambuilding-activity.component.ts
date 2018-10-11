@@ -91,7 +91,7 @@ export class TeambuildingActivityComponent implements OnInit {
           this.actionTime = this.convertTimeStringtoNgbTimeStruct(arrDate[1]);
           this.teambuildingAddress = this.teambuildingView.address;
           for (let i = 0; i < this.teambuildingView.eventUserList.length; i++) {
-            if (this.teambuildingView.eventUserList[i].type === Common.HOST) {
+            if (this.teambuildingView.eventUserList[i].type === Common.ORGANIZER) {
               const arrUser = this.listUser.filter(user => user.username === this.teambuildingView.eventUserList[i].user.username);
               this.userCloneHost.push(arrUser[0]);
             } else if (this.teambuildingView.eventUserList[i].type === Common.FIRST_PRIZE) {
@@ -125,7 +125,7 @@ export class TeambuildingActivityComponent implements OnInit {
         userMem.username = this.userCloneHost[i].username;
 
         eventUser.user = userMem;
-        eventUser.type = Common.HOST;
+        eventUser.type = Common.ORGANIZER;
         this.listEventUser.push(eventUser);
       }
 

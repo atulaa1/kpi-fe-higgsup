@@ -4,6 +4,7 @@ import {EventTeambuildingService} from '../../@core/services/event-teambuilding.
 import {ResponseEventTeambuildingDTO} from '../../@core/models/response-event-teambuilding-dto.model';
 import {Group} from '../../@core/models/group.model';
 import {Event} from '../../@core/models/event.model';
+import {MessageConstant} from '../../@core/glossary/message.constant';
 
 @Component({
   selector: 'event-teambuilding',
@@ -45,7 +46,10 @@ export class EventTeambuildingComponent implements OnInit {
     this.addedEventTeambuilding.group.id = 7;
     this.eventTeambuildingService.addEventTeambuilding($event).subscribe((response: ResponseEventTeambuildingDTO<Event>) => {
       if (response.status_code === 200) {
+        swal('Chúc mừng', MessageConstant.MSG_SUCCESS.CREATE_SUCCESS, 'success');
         this.listEventTeambuilding.unshift(response.data);
+      } else if (response.status_code === 900 && response.message === 'not find user') {
+        swal('Thông báo!', MessageConstant.MSG_ERROR.USER_NOTFOUND_ERROR, 'error');
       }
     });
   }
