@@ -29,10 +29,10 @@ export class ProjectService {
 
   updateProject(project: Project): Observable<ResponseProjectDTO> {
     let projectJson = JSON.stringify(project);
-    return this.http.put<ResponseProjectDTO>(this.url + '/api/projects/' + project.id.toString(), projectJson, this.httpOptions);
+    return this.http.put<ResponseProjectDTO>(this.url + '/api/projects/' + project.id, projectJson, this.httpOptions);
   }
 
   deleteProject(project: Project): Observable<ResponseProjectDTO> {
-    return this.http.delete<ResponseProjectDTO>(this.url + '/api/projects/' + project.id.toString(), this.httpOptions);
+    return this.http.delete<ResponseProjectDTO>(this.url + '/api/projects/' + project.id, this.httpOptions);
   }
 }

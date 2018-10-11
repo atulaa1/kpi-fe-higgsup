@@ -34,9 +34,8 @@ const PAGES_COMPONENTS = [
     SeminarModule,
   ],
   declarations: [
-    ...PAGES_COMPONENTS,
-    ProjectmanagementComponent, DialogConfirmationComponent, ProjectManagementConfirmComponent],
-  entryComponents: [DialogConfirmationComponent],
+    ...PAGES_COMPONENTS],
+  entryComponents: [],
 })
 export class PagesModule {
 }
