@@ -58,7 +58,7 @@ const routes: Routes = [{
       path: 'seminar',
       component: SeminarComponent,
       canActivate: [AuthGuard],
-    }
+    },
     {
       path: 'event-teambuilding',
       component: EventTeambuildingComponent,
