@@ -12,6 +12,7 @@ export class MessageConstant {
     UPDATE_SUCCESS: 'Đã cập nhật thành công',
     CREATE_SUCCESS: 'Đã tạo thành công',
   };
+  static MSG_NOTFINISHING: string = 'Bạn chưa hoàn thành';
   constructor() {
   }
 }
