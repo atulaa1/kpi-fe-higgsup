@@ -81,7 +81,7 @@
           </li>
 
           <li *ngIf="user.userRole.indexOf('ROLE_ADMIN') < 0" class="text-center font-weight-600">
-            <a title="Khảo sát" href="#/pages/dashboard">
+            <a title="Khảo sát" href="#/pages/seminar">
               <i  class="fas fa-pencil-alt mt-2 iconStyle"></i>
               <span class="menu-title">Khảo sát</span>
             </a>
@@ -116,6 +116,13 @@
             </a>
           </li>
 
+          <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" class="text-center font-weight-600">
+            <a title="Quản lý dự án"
+               href="#/pages/event-teambuilding">
+              <i class="fas fa-gift mt-2 iconStyle"></i>
+              <span class="menu-title">Điểm thưởng</span>
+            </a>
+          </li>
           <li class="text-center font-weight-600">
             <a title="Đăng xuất" (click)="openLogoutModal()"
                href="javascript:">

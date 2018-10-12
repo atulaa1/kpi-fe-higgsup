@@ -1,0 +1,67 @@
+* {
+  color: #000
+}
+.search {
+  font-size: 25px;
+  width: 50%;
+  margin: auto;
+  .search-div {
+    margin: auto;
+    .search-inp {
+      font-size: 20px;
+      position: relative;
+      line-height: 43px;
+      padding: 0px 10px;
+      border-radius:10px ;
+    }
+  }
+}
+[name$='notFoundMsg'] {
+  font-size: 14px;
+  text-align: center;
+}
+.fix {
+  position: fixed;
+  top: 0;
+}
+.tableScroll {
+  max-height: 400px;
+  overflow: auto;
+}
+.titleTable {
+  margin-bottom: 0px;
+}
+th.titleField {
+  width: 33%;
+  text-align: center;
+}
+.infoUser {
+  width: 33%;
+  text-align: center;
+  vertical-align: inherit;
+}
+#myTable tr:hover {
+  background-color: #bee5eb;
+  cursor: pointer;
+}
+
+.search-inp {
+  font-size: 20px;
+  position: relative;
+  line-height: 43px;
+  padding: 0px 10px;
+  border-radius:10px ;
+  max-width: 300px;
+  float: right;
+}
+.searchIcon {
+  position: absolute;
+  top: 14px;
+  right: 25px;
+  color: #bee5eb;
+  font-size: 20px;
+}
+.searchIcon:hover {
+  color: #58C3DC;
+}
+

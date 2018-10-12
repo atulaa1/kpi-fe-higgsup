@@ -42,6 +42,7 @@
         <div class="col-md-8 mat-app-background basic-container form-control" name="participant">
           <mat-form-field class="example-chip-list">
             <mat-chip-list #chipList>
+
               <mat-chip
                 *ngFor="let user of userClone; let i = index"
                 [selectable]="selectable"
@@ -53,6 +54,7 @@
                 {{user.fullName}}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
               </mat-chip>
+
               <input
                 #userInput
                 [formControl]="userCtrl"
@@ -62,6 +64,7 @@
                 [matChipInputAddOnBlur]="addOnBlur"
                 (matChipInputTokenEnd)="add($event)"
                 [readonly]="isAdmin === true">
+
             </mat-chip-list>
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
 

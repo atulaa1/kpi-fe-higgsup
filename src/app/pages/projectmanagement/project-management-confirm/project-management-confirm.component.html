@@ -1,5 +1,6 @@
 <div  class="modal-header modal-lg">
-  <h4 class="mt-2">THÊM DỰ ÁN</h4>
+  <h4 *ngIf="typeAction=='add'" class="mt-2">THÊM DỰ ÁN</h4>
+  <h4 *ngIf="typeAction=='edit'" class="mt-2">CHỈNH SỬA DỰ ÁN</h4>
   <button type="button" class="close pull-right cus-btn" aria-label="Close" (click)="closeModal()">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -7,14 +8,54 @@
 <div name="modal-relative" class="modal-body modal-fonts">
   <p class="text-center" name="modalHandle-style" *ngIf="isDuplicateName">Dự án này đã tồn tại!</p>
   <p class="text-center" name="modalHandle-style" *ngIf="!isValidate">Tên dự án không được để trống</p>
+  <p class="text-center" name="modalHandle-style" *ngIf="isValidateUserIsBlank">Vui lòng nhập người dùng</p>
   <div class="row">
+
     <div class="col-3 pt-3"><span class="mr-2 pl-3">Tên dự án</span><i class="fas fa-asterisk icon-abs"></i></div>
     <div class="col-9">
-      <input  type="text" class="form-control mb-5" #projectName [(ngModel)]="newProject.name">
+      <input  type="text" class="form-control mb-5" #projectName [(ngModel)]="project.name">
+    </div>
+
+    <div class="col-3 pt-3"><span class="mr-2 pl-3">Thành viên tham gia</span><i class="fas fa-asterisk icon-abs"></i></div>
+    <div class="col-9 ">
+      <mat-form-field class="w-100">
+        <mat-chip-list  #chipList>
+          <mat-chip  *ngFor="let user of listUserSelect; let i = index"
+                     (removed)="removeItemSelect(i)"
+          >
+            <mat-icon matChipAvatar name="iconAvatar">
+              <img src="{{user.avatar}}" name="iconMem">
+            </mat-icon>
+            {{user.fullName}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+
+          <input
+            #userInput
+            [formControl]="userCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+         >
+
+        </mat-chip-list>
+
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+
+          <mat-option *ngFor="let user of filteredUsers | async;" [value]="user">
+
+            <img name="avatarMem" src="{{user.avatar}}">
+            {{user.fullName}}
+          </mat-option>
+        </mat-autocomplete>
+
+      </mat-form-field>
     </div>
   </div>
-  <div class="pb-5">
-    <button class="btn btn-hero-success pull-to-right" (click)="confirmAdd()">Lưu</button>
+  <div class="pb-5 mt-5">
+    <button *ngIf="typeAction=='add'" class="btn btn-hero-success pull-to-right" (click)="confirmAdd()">Lưu</button>
+    <button *ngIf="typeAction=='edit'" class="btn btn-hero-success pull-to-right" (click)="updateProject()">Cập nhật</button>
     <button class='btn btn-hero-warning pull-to-right' (click)="closeModal()">Hủy</button>
   </div>
 </div>

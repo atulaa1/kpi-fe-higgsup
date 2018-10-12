@@ -1,0 +1,188 @@
+<div class="container">
+  <div class="modal-header modal-lg">
+    <h4 class="mt-2">TEAMBUILDING</h4>
+    <button type="button" class="close pull-right cus-btn" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body modal-fonts">
+    <div class="container">
+      <div class="row mt-1 titleAlert" >
+      <nav *ngIf="alert">Vui lòng nhập đầy đủ các thông tin!</nav>
+      </div>
+      <div class="row mt-2">
+        <h5 class="col-md-4 requiredInput">Tên hoạt động</h5>
+        <input type="text" class="col-md-8 form-control" [(ngModel)]="teambuildingName" [readonly]="teambuildingView !== null">
+      </div>
+      <div class="row mt-2">
+        <h5 class="col-md-4 requiredInput">Thời gian diễn ra</h5>
+        <input type="text" class="col-md-5 form-control" placeholder="Ngày/Tháng/Năm" [(ngModel)]="actionDate"
+               ngbDatepicker #actionDay="ngbDatepicker" [disabled]="teambuildingView !== null"
+               [readonly]="true" (click)="actionDay.toggle()">
+        <ngb-timepicker class="col-md-3" [(ngModel)]="actionTime" [spinners]="spinners" [readonlyInputs]="teambuildingView !== null"
+                        name="timeInput"></ngb-timepicker>
+      </div>
+      <div class="row mt-2">
+        <h5 class="col-md-4">Địa điểm</h5>
+        <input type="text" class="col-md-8 form-control" [(ngModel)]="teambuildingAddress" [readonly]="teambuildingView !== null">
+        <div class="col-md-3"></div>
+      </div>
+      <div class="row mt-2">
+        <h5 class="col-md-4 requiredInput">Ban tổ chức</h5>
+        <div class="col-md-8 mat-app-background basic-container form-control" name="host">
+          <mat-form-field class="example-chip-list">
+            <mat-chip-list #chipListHost>
+              <mat-chip
+                *ngFor="let user of userCloneHost; let i = index"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="removeHost(user, i)">
+                <mat-icon matChipAvatar name="iconAvatar">
+                  <img src="{{user.avatar}}" name="iconMem">
+                </mat-icon>
+                {{user.fullName}}
+                <mat-icon matChipRemove *ngIf="removable && teambuildingView === null">cancel</mat-icon>
+              </mat-chip>
+              <input
+                #userHostInput
+                [formControl]="userCtrl"
+                [matAutocomplete]="autoHost"
+                [matChipInputFor]="chipListHost"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur" [readonly]="teambuildingView !== null"
+                (matChipInputTokenEnd)="addHost($event)">
+            </mat-chip-list>
+            <mat-autocomplete #autoHost="matAutocomplete"
+                              (optionSelected)="selectedHost($event)"
+                              [autoActiveFirstOption]="true">
+
+              <mat-option *ngFor="let user of filteredHostUsers | async;" [value]="user">
+
+                <img name="avatarMem" src="{{user.avatar}}">
+                {{user.fullName}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <h5 class="col-md-4 requiredInput">Giải Nhất</h5>
+        <div class="col-md-8 mat-app-background basic-container form-control joining">
+          <mat-form-field class="example-chip-list">
+            <mat-chip-list #chipListFirstPrize>
+              <mat-chip
+                *ngFor="let user of userCloneFirstPrize; let i = index"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="removeFirstPrize(user, i)">
+                <mat-icon matChipAvatar name="iconAvatar">
+                  <img src="{{user.avatar}}" name="iconMem">
+                </mat-icon>
+                {{user.fullName}}
+                <mat-icon matChipRemove *ngIf="removable && teambuildingView === null">cancel</mat-icon>
+              </mat-chip>
+              <input
+                #userFirstPrizeInput
+                [formControl]="userFirstPrizeCtrl"
+                [matAutocomplete]="autoFirstPrize"
+                [matChipInputFor]="chipListFirstPrize"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur" [readonly]="teambuildingView !== null"
+                (matChipInputTokenEnd)="addFirstPrize($event)">
+            </mat-chip-list>
+            <mat-autocomplete #autoFirstPrize="matAutocomplete" (optionSelected)="selectedFirstPrize($event)">
+
+              <mat-option *ngFor="let user of filteredUsers | async;" [value]="user">
+
+                <img name="avatarMem" src="{{user.avatar}}">
+                {{user.fullName}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <h5 class="col-md-4 requiredInput">Giải Nhì</h5>
+        <div class="col-md-8 mat-app-background basic-container form-control joining">
+          <mat-form-field class="example-chip-list">
+            <mat-chip-list #chipListSecondPrize>
+              <mat-chip
+                *ngFor="let user of userCloneSecondPrize; let i = index"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="removeSecondPrize(user, i)">
+                <mat-icon matChipAvatar name="iconAvatar">
+                  <img src="{{user.avatar}}" name="iconMem">
+                </mat-icon>
+                {{user.fullName}}
+                <mat-icon matChipRemove *ngIf="removable && teambuildingView === null">cancel</mat-icon>
+              </mat-chip>
+              <input
+                #userSecondPrizeInput
+                [formControl]="userSecondPrizeCtrl"
+                [matAutocomplete]="autoSecondPrize"
+                [matChipInputFor]="chipListSecondPrize"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur" [readonly]="teambuildingView !== null"
+                (matChipInputTokenEnd)="addSecondPrize($event)">
+            </mat-chip-list>
+            <mat-autocomplete #autoSecondPrize="matAutocomplete" (optionSelected)="selectedSecondPrize($event)">
+
+              <mat-option *ngFor="let user of filteredUsers | async;" [value]="user">
+
+                <img name="avatarMem" src="{{user.avatar}}">
+                {{user.fullName}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <h5 class="col-md-4 requiredInput">Giải Ba</h5>
+        <div class="col-md-8 mat-app-background basic-container form-control joining">
+          <mat-form-field class="example-chip-list">
+            <mat-chip-list #chipListThirdPrize>
+              <mat-chip
+                *ngFor="let user of userCloneThirdPrize; let i = index"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="removeThirdPrize(user, i)">
+                <mat-icon matChipAvatar name="iconAvatar">
+                  <img src="{{user.avatar}}" name="iconMem">
+                </mat-icon>
+                {{user.fullName}}
+                <mat-icon matChipRemove *ngIf="removable && teambuildingView === null">cancel</mat-icon>
+              </mat-chip>
+              <input
+                #userThirdPrizeInput
+                [formControl]="userThirdPrizeCtrl"
+                [matAutocomplete]="autoThirdPrize"
+                [matChipInputFor]="chipListThirdPrize"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur" [readonly]="teambuildingView !== null"
+                (matChipInputTokenEnd)="addThirdPrize($event)">
+            </mat-chip-list>
+            <mat-autocomplete #autoThirdPrize="matAutocomplete" (optionSelected)="selectedThirdPrize($event)">
+
+              <mat-option *ngFor="let user of filteredUsers | async;" [value]="user">
+
+                <img name="avatarMem" src="{{user.avatar}}">
+                {{user.fullName}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+      </div>
+      <div *ngIf="teambuildingView === null" class="row mt-2 titleAlert">
+        <nav>Hoạt động Teambuilding đã lưu sẽ không được sửa!</nav>
+      </div>
+      <div class="row mt-5" *ngIf="teambuildingView === null">
+        <div class="groupButton">
+          <button class="btn btn-hero-success saveButton" (click)="addEventTeamBuilding()">Lưu</button>
+          <button class="btn btn-hero-warning" (click)="closeModal()">Huỷ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

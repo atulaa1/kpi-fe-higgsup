@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="row mt-5 ml-5 mr-5">
+    <div class="col-md-3">
+      <div class="row">
+        <div class="col-md-4 mt-3 text-right">Tháng</div>
+        <div class="col-md-8">
+          <select class="form-control custom-select" [(ngModel)]="monthStatus">
+            <option value="0">- - Tất cả - -</option>
+            <option value="{{i}}" *ngFor="let i of listMonth">Tháng {{i}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="row">
+        <div class="col-md-4 mt-3 text-center">Năm</div>
+        <div class="col-md-8">
+          <select class="form-control custom-select" [(ngModel)]="yearStatus">
+            <option value="0">- - Tất cả - -</option>
+            <option value="{{i}}" *ngFor="let i of listYear">{{i}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="row">
+        <div class="col-md-4 mt-3 text-right">Trạng thái</div>
+        <div class="col-md-8">
+          <select class="form-control custom-select" [(ngModel)]="confirmationStatus">
+            <option value="0">- - Tất cả - -</option>
+            <option value="1">Chưa hoàn thành</option>
+            <option value="2">Đã hoàn thành</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="row">
+        <div class="col md-12 text-center">
+          <button class="btn btn-hero-success custom-btn mb-5 mr-5" (click)="onFilterSurvey()">
+            Lọc
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-5 ml-5 mr-5">
+    <table class='table titleTable'>
+      <thead>
+      <tr>
+        <th class="titleField">Tên khảo sát</th>
+        <th class="titleField">Thời gian tạo</th>
+        <th class="titleField">Trạng Thái</th>
+      </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="row ml-5 mr-5 tableScroll">
+    <table class="table table-hover" id="myTable">
+
+      <tbody>
+
+      <tr *ngFor="let seminarEvent of listSeminarEvent" (click)="open(content)">
+        <ng-template let-c="close" let-d="dismiss" #content>
+          <creating-survey-seminar [dismiss]="d" [seminarEvent]="seminarEvent"
+                                   [eventUserList]="seminarEvent.eventUserList"
+                                   (changeEvent)="onUpdateListSeminarEvent($event)"></creating-survey-seminar>
+        </ng-template>
+        <td class="infoUser">{{seminarEvent.name}}</td>
+        <td class="infoUser">{{seminarEvent.createdDate}}</td>
+
+        <td class="infoUser" *ngFor="let user of seminarEvent.eventUserList"
+            [hidden]="user.user.username !== currentUsername">
+          <span *ngIf="user.user.username === currentUsername && user.status===0" class="text-danger">
+            Chưa hoàn thành
+          </span>
+          <span *ngIf="user.user.username === currentUsername && user.status!==0">
+            Đã hoàn thành</span>
+        </td>
+
+      </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>

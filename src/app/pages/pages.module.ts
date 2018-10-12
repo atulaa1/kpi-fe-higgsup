@@ -14,6 +14,8 @@ import { ProjectManagementConfirmComponent } from './projectmanagement/project-m
 import {ProjectmanagementModule} from './projectmanagement/projectmanagement.module';
 import {ActivitiesModule} from './activities/activities.module';
 import {ManSurveyModule} from './man-survey/man-survey.module';
+import {SeminarModule} from './seminar/seminar.module';
+import {EventTeambuildingModule} from './event-teambuilding/event-teambuilding.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -32,11 +34,13 @@ const PAGES_COMPONENTS = [
     AccManagementsModule,
     ActivitiesModule,
     ManSurveyModule,
+    SeminarModule,
+    EventTeambuildingModule,
+
   ],
   declarations: [
-    ...PAGES_COMPONENTS,
-    ProjectmanagementComponent, DialogConfirmationComponent, ProjectManagementConfirmComponent],
-  entryComponents: [DialogConfirmationComponent],
+    ...PAGES_COMPONENTS],
+  entryComponents: [],
 })
 export class PagesModule {
 }

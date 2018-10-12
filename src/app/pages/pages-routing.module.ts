@@ -13,6 +13,8 @@ import {AccManagementsComponent} from './acc-managements/acc-managements.compone
 import {AccManagementLateComponent} from './acc-managements/acc-management-late/acc-management-late.component';
 import {AuthGuard} from '../@core/services/auth.guard';
 import {ActivitiesComponent} from './activities/activities.component';
+import {SeminarComponent} from './seminar/seminar.component';
+import {EventTeambuildingComponent} from './event-teambuilding/event-teambuilding.component';
 import {ManSurveyComponent} from './man-survey/man-survey.component';
 
 const routes: Routes = [{
@@ -58,6 +60,16 @@ const routes: Routes = [{
       component: ManSurveyComponent,
       canActivate: [AuthGuard],
     },
+    {
+      path: 'seminar',
+      component: SeminarComponent,
+      canActivate: [AuthGuard],
+    },
+    {
+      path: 'event-teambuilding',
+      component: EventTeambuildingComponent,
+      canActivate: [AuthGuard]
+    }
   ],
 }];
 

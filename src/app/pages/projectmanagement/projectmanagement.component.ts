@@ -58,7 +58,7 @@ export class ProjectmanagementComponent implements OnInit {
   }
 
   open(content) {
-    this.bsModal.open(content, {backdrop: 'static', centered: true});
+    this.bsModal.open(content, {backdrop: 'static', centered: true, size: 'lg'});
   }
 
 
@@ -71,7 +71,7 @@ export class ProjectmanagementComponent implements OnInit {
           this.newProject = new Project();
           this.isAdding = false;
         } else if (response.status_code === 932) {
-          let dialog = this.bsModal.open(DialogConfirmationComponent, {backdrop: 'static', centered: true});
+          const dialog = this.bsModal.open(DialogConfirmationComponent, {backdrop: 'static', centered: true});
           dialog.componentInstance.msg = 'Dự án này đã tồn tại!';
           dialog.componentInstance.buttonTitle = 'Xác nhận';
         }
@@ -136,7 +136,7 @@ export class ProjectmanagementComponent implements OnInit {
             this.actionType = null;
             this.getListProject();
           } else if (response.status_code === 901) {
-            let dialog = this.bsModal.open(DialogConfirmationComponent, {backdrop: 'static', centered: true});
+            const dialog = this.bsModal.open(DialogConfirmationComponent, {backdrop: 'static', centered: true});
             dialog.componentInstance.msg = 'Dự án này đã tồn tại!';
             dialog.componentInstance.buttonTitle = 'Xác nhận';
           }
@@ -161,6 +161,17 @@ export class ProjectmanagementComponent implements OnInit {
 
   onAddProject($event) {
     this.getListProject();
+  }
+
+  updateAndCreateProject($event) {
+    const index = this.projects.map(value => value.id).indexOf($event.id);
+    if (index === -1) {
+      this.projects.push($event)
+    } else {
+      this.projects.splice(index, 1, $event);
+    }
+    this.projectsClone = Object.assign(this.projects);
+    this.sortProjectArrayByActive();
   }
 
   handleKeyDown(event: any) {
