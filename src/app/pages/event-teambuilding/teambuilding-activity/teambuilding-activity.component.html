@@ -12,7 +12,8 @@
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Tên hoạt động</h5>
-        <input type="text" class="col-md-8 form-control" [(ngModel)]="teambuildingName" [readonly]="teambuildingView !== null">
+        <input type="text" class="col-md-8 form-control" [(ngModel)]="teambuildingName" maxlength="350"
+               [readonly]="teambuildingView !== null">
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Thời gian diễn ra</h5>

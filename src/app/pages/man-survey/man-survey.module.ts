@@ -4,12 +4,14 @@ import { ManSurveyComponent } from './man-survey.component';
 import {ThemeModule} from '../../@theme/theme.module';
 import { PersonalSurveyComponent } from './personal-survey.component';
 import {TooltipModule} from 'ngx-bootstrap';
+import {EmployeeSeminarSurveyModule} from '../employee-seminar-survey/employee-seminar-survey.module';
 
 @NgModule({
   imports: [
     CommonModule,
     ThemeModule,
     TooltipModule.forRoot(),
+    EmployeeSeminarSurveyModule,
   ],
   declarations: [ManSurveyComponent, PersonalSurveyComponent],
 })
