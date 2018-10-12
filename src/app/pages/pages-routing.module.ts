@@ -4,16 +4,12 @@ import {NgModule} from '@angular/core';
 import {PagesComponent} from './pages.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {ActiManagementComponent} from './acti-management/acti-management.component';
-import {CreateActiComponent} from './acti-management/create-acti/create-acti.component';
-import {ConfirmActiComponent} from './acti-management/confirm-acti/confirm-acti.component';
 import {ProjectmanagementComponent} from './projectmanagement/projectmanagement.component';
 import {ListOfSurveyComponent} from './list-of-survey/list-of-survey.component';
-import {AccManagementComponent} from './acc-managements/acc-management/acc-management.component';
 import {AccManagementsComponent} from './acc-managements/acc-managements.component';
-import {AccManagementLateComponent} from './acc-managements/acc-management-late/acc-management-late.component';
 import {AuthGuard} from '../@core/services/auth.guard';
 import {ActivitiesComponent} from './activities/activities.component';
-import {SeminarComponent} from './seminar/seminar.component';
+import {EmployeeSeminarSurveyComponent} from './employee-seminar-survey/employee-seminar-survey.component';
 import {EventTeambuildingComponent} from './event-teambuilding/event-teambuilding.component';
 import {ManSurveyComponent} from './man-survey/man-survey.component';
 
@@ -61,15 +57,15 @@ const routes: Routes = [{
       canActivate: [AuthGuard],
     },
     {
-      path: 'seminar',
-      component: SeminarComponent,
+      path: 'employee-seminar-survey',
+      component: EmployeeSeminarSurveyComponent,
       canActivate: [AuthGuard],
     },
     {
       path: 'event-teambuilding',
       component: EventTeambuildingComponent,
-      canActivate: [AuthGuard]
-    }
+      canActivate: [AuthGuard],
+    },
   ],
 }];
 

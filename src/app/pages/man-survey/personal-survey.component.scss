@@ -37,7 +37,7 @@
   overflow-x: auto;
   overflow-y: visible;
   padding-bottom: 5px;
-  width: 990px;
+  width: 975px;
 }
 
 .zui-table .zui-sticky-col {
@@ -59,7 +59,7 @@
   overflow-y: auto;
   padding-bottom: 5px;
   height: 217px;
-  width: 378px;
+  width: 377px;
 }
 
 .row-padding-bottom {
@@ -86,4 +86,12 @@ ngb-rating i {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.margin-auto {
+  margin: 0 auto;
+}
+
+[name$='evaluation-table'] {
+  width: 375px;
 }
