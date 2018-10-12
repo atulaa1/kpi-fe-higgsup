@@ -16,10 +16,13 @@
       </div>
       <div class="row mt-2">
         <h5 class="col-md-4 requiredInput">Thời gian diễn ra</h5>
-        <input type="text" class="col-md-5 form-control" placeholder="Ngày/Tháng/Năm" [(ngModel)]="actionDate"
+        <input type="text" class="col-md-5 form-control" placeholder="Ngày/Tháng/Năm" [(ngModel)]="actionDate" name="datepicker"
                ngbDatepicker #actionDay="ngbDatepicker" [disabled]="teambuildingView !== null"
-               [readonly]="true" (click)="actionDay.toggle()">
-        <ngb-timepicker class="col-md-3" [(ngModel)]="actionTime" [spinners]="spinners" [readonlyInputs]="teambuildingView !== null"
+               [readonly]="true" (click)="actionDay.toggle(); openDatepicker(actionDay)">
+        <div class="input-group-append calendarInput">
+          <button class="input-group-text" (click)="actionDay.toggle(); openDatepicker(actionDay)"><i class="far fa-calendar-alt"></i></button>
+        </div>
+        <ngb-timepicker class="col-md-2 pl-2" [(ngModel)]="actionTime" [spinners]="spinners" [readonlyInputs]="teambuildingView !== null"
                         name="timeInput"></ngb-timepicker>
       </div>
       <div class="row mt-2">

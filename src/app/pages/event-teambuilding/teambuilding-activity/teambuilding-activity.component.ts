@@ -14,6 +14,9 @@ import {Common} from '../../../@core/glossary/common.constant';
 
 @Component({
   selector: 'ngx-teambuilding-activity',
+  host: {
+    '(document:click)': 'onClick($event)',
+  },
   templateUrl: './teambuilding-activity.component.html',
   styleUrls: ['./teambuilding-activity.component.scss'],
   providers: [{provide: NgbDateParserFormatter, useClass: KpiDateFormatter}],
@@ -53,6 +56,7 @@ export class TeambuildingActivityComponent implements OnInit {
   removable = true;
   addOnBlur = false;
   alert: boolean = false;
+  dpId;
 
 
   @ViewChild('userHostInput') userHostInput: ElementRef<HTMLInputElement>;
@@ -60,7 +64,8 @@ export class TeambuildingActivityComponent implements OnInit {
   @ViewChild('userSecondPrizeInput') userSecondPrizeInput: ElementRef<HTMLInputElement>;
   @ViewChild('userThirdPrizeInput') userThirdPrizeInput: ElementRef<HTMLInputElement>;
 
-  constructor(private activeModal: NgbActiveModal, private userService: UserService) {
+  constructor(private activeModal: NgbActiveModal, private userService: UserService,
+              private el: ElementRef) {
     // map Object type for Host
     this.userCtrl = new FormControl();
     this.filteredUsers = this.userCtrl.valueChanges
@@ -301,5 +306,18 @@ export class TeambuildingActivityComponent implements OnInit {
     } else {
       return '';
     }
+  }
+
+  onClick(event) {
+    if (this.dpId !== undefined && (event.target.tagName !== 'INPUT' || event.target.name !== 'datepicker' ||
+      event.target.className !== 'col-md-5 form-control ng-pristine ng-valid ng-touched') &&
+      (event.target.tagName !== 'BUTTON' || event.target.className !== 'input-group-text') &&
+      (event.target.tagName !== 'I' || event.target.className !== 'far fa-calendar-alt')) {
+      this.dpId.close();
+    }
+  }
+
+  openDatepicker(dpId) {
+    this.dpId = dpId
   }
 }
