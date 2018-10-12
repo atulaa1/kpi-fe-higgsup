@@ -15,6 +15,7 @@ import {AuthGuard} from '../@core/services/auth.guard';
 import {ActivitiesComponent} from './activities/activities.component';
 import {SeminarComponent} from './seminar/seminar.component';
 import {EventTeambuildingComponent} from './event-teambuilding/event-teambuilding.component';
+import {ManSurveyComponent} from './man-survey/man-survey.component';
 
 const routes: Routes = [{
   path: '',
@@ -52,6 +53,11 @@ const routes: Routes = [{
     {
       path: 'creating-activities',
       component: ActivitiesComponent,
+      canActivate: [AuthGuard],
+    },
+    {
+      path: 'man-survey',
+      component: ManSurveyComponent,
       canActivate: [AuthGuard],
     },
     {

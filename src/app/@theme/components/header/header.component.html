@@ -93,6 +93,12 @@
               <span class="menu-title">Xem lịch sử</span>
             </a>
           </li>
+          <li *ngIf="user.userRole.indexOf('ROLE_MAN')>=0" class="text-center font-weight-600">
+            <a title="Làm khảo sát" href="#/pages/man-survey">
+              <i class="fas fa-history mt-2 iconStyle"></i>
+              <span class="menu-title">Làm khảo sát</span>
+            </a>
+          </li>
 
 
           <li *ngIf="user.userRole.indexOf('ROLE_ADMIN') < 0" class="text-center font-weight-600">
