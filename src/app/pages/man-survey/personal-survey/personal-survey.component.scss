@@ -1,6 +1,6 @@
-@import '../../@theme/styles/themes';
-@import '~bootstrap/scss/mixins/breakpoints';
-@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
+@import '../../../@theme/styles/themes';
+@import '../../../../../node_modules/bootstrap/scss/mixins/breakpoints';
+@import '../../../../../node_modules/@nebular/theme/styles/global/bootstrap/breakpoints';
 
 .zui-table {
   border: none;
@@ -94,4 +94,32 @@ ngb-rating i {
 
 [name$='evaluation-table'] {
   width: 375px;
+}
+
+.tableScroll {
+  max-height: 400px;
+  overflow: auto;
+}
+
+.myTable tr:hover {
+  background-color: #bee5eb;
+  cursor: pointer;
+}
+
+.titleTable {
+  margin-bottom: 0px;
+}
+
+[name$='question-button'] {
+  width: 20%;
+  margin-right: 5%;
+}
+
+[name$='column-title'] {
+  width: 50%;
+  text-align: center;
+}
+
+[name$='table-evaluation'] {
+  width: 1280px;
 }

@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {NgbActiveModal, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {KpiDateFormatter} from '../../../modals/personal-info/kpi-date-formatter';
 import {MatAutocompleteSelectedEvent, MatChipInputEvent} from '@angular/material';
@@ -17,6 +17,9 @@ import {Common} from '../../../@core/glossary/common.constant';
   templateUrl: './teambuilding-activity.component.html',
   styleUrls: ['./teambuilding-activity.component.scss'],
   providers: [{provide: NgbDateParserFormatter, useClass: KpiDateFormatter}],
+  host: {
+    '(document:click)': 'onClick($event)',
+  },
 })
 export class TeambuildingActivityComponent implements OnInit {
   spinners: boolean = false;
@@ -48,6 +51,9 @@ export class TeambuildingActivityComponent implements OnInit {
   @Output() addedTeambuilding = new EventEmitter<Event>();
   @Input() dismiss;
   @Input() teambuildingView: Event = null;
+  @HostListener('document:click', ['$event', '$event.target'])
+  @Output()
+  public clickOutside = new EventEmitter<MouseEvent>();
 
   selectable = true;
   removable = true;
@@ -60,7 +66,7 @@ export class TeambuildingActivityComponent implements OnInit {
   @ViewChild('userSecondPrizeInput') userSecondPrizeInput: ElementRef<HTMLInputElement>;
   @ViewChild('userThirdPrizeInput') userThirdPrizeInput: ElementRef<HTMLInputElement>;
 
-  constructor(private activeModal: NgbActiveModal, private userService: UserService) {
+  constructor(private activeModal: NgbActiveModal, private userService: UserService, private _elementRef: ElementRef) {
     // map Object type for Host
     this.userCtrl = new FormControl();
     this.filteredUsers = this.userCtrl.valueChanges
@@ -300,6 +306,17 @@ export class TeambuildingActivityComponent implements OnInit {
       return `0${value}`.slice(-2);
     } else {
       return '';
+    }
+  }
+
+  public onClick(event: MouseEvent, targetElement: HTMLElement): void {
+    if (!targetElement) {
+      return;
+    }
+
+    const clickedInside = this._elementRef.nativeElement.contains(targetElement);
+    if (!clickedInside) {
+      this.clickOutside.emit(event);
     }
   }
 }
