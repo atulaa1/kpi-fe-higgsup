@@ -95,3 +95,21 @@ ngb-rating i {
 [name$='evaluation-table'] {
   width: 375px;
 }
+
+.column-rating {
+  width: 20%;
+}
+
+.tableScroll {
+  max-height: 300px;
+  overflow: auto;
+}
+
+.titleTable {
+  margin-bottom: 0px;
+}
+
+table td {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
