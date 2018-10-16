@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Point} from '../../../@core/models/point.model';
 
 @Component({
@@ -8,6 +8,7 @@ import {Point} from '../../../@core/models/point.model';
 })
 export class UsualPointComponent implements OnInit {
   listPoint: Array<Point> = new Array<Point>();
+  isCollapsed: boolean = false;
 
   constructor() {
     // fake Listpoint
@@ -47,6 +48,7 @@ export class UsualPointComponent implements OnInit {
     this.listPoint.push(activity6);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
 }
