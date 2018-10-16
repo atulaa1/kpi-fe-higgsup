@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {Employee} from '../../@core/models/employee.model';
-import {Project} from '../../@core/models/project.model';
-import {Rating} from '../../@core/models/Rating';
+import {Component, OnInit} from '@angular/core';
+import {Employee} from '../../../@core/models/employee.model';
+import {Project} from '../../../@core/models/project.model';
+import {Rating} from '../../../@core/models/Rating';
+import {Question} from '../../../@core/models/question.model';
+
 
 @Component({
   selector: 'personal-survey',
@@ -10,7 +12,8 @@ import {Rating} from '../../@core/models/Rating';
 })
 export class PersonalSurveyComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   employeeList: Array<Employee> = new Array();
   firstQuestionList: Array<Employee> = new Array();
@@ -19,10 +22,52 @@ export class PersonalSurveyComponent implements OnInit {
   fourthQuestionList: Array<Employee> = new Array();
   projectList: Array<Project> = new Array();
   ratingList: Array<Rating> = new Array();
+  listQuestion: Array<Question> = new Array<Question>();
+
   ngOnInit() {
     // fake data
     this.fakeData();
     this.createRatingStructure();
+    this.fakeQuestion();
+
+  }
+
+  fakeQuestion() {
+    const question1 = new Question();
+    question1.id = 1;
+    question1.number = 1;
+    question1.question = 'Nhân viên này như nào?';
+    question1.isCollapsed = false;
+    question1.userList = this.firstQuestionList;
+    this.listQuestion.push(question1);
+
+
+    const question2 = new Question();
+    question2.id = 2;
+    question2.number = 2;
+    question2.question = 'Nhân viên này ra làm sao?';
+    question2.isCollapsed = false;
+    question2.userList = this.secondQuestionList;
+    this.listQuestion.push(question2);
+
+
+    const question3 = new Question();
+    question3.id = 3;
+    question3.number = 3;
+    question3.question = 'Nhân viên này làm việc ok không?';
+    question3.isCollapsed = false;
+    question3.userList = this.thirdQuestionList;
+    this.listQuestion.push(question3);
+
+
+    const question4 = new Question();
+    question4.id = 4;
+    question4.number = 4;
+    question4.question = 'Nhân viên này có triển vọng không?';
+    question4.isCollapsed = false;
+    question4.userList = this.fourthQuestionList;
+    this.listQuestion.push(question4);
+
 
   }
 
@@ -78,19 +123,19 @@ export class PersonalSurveyComponent implements OnInit {
     employee8.rating = 0;
     this.employeeList.push(employee8);
 
-    // fake date for first question
+    // fake date for list question
     this.employeeList.forEach(employee => {
-      let question1 = Object.assign({}, employee);
-      this.firstQuestionList.push(question1);
+      const employeeList1 = Object.assign({}, employee);
+      this.firstQuestionList.push(employeeList1);
 
-      let question2 = Object.assign({}, employee);
-      this.secondQuestionList.push(question2);
+      const employeeList2 = Object.assign({}, employee);
+      this.secondQuestionList.push(employeeList2);
 
-      let question3 = Object.assign({}, employee);
-      this.thirdQuestionList.push(question3);
+      const employeeList3 = Object.assign({}, employee);
+      this.thirdQuestionList.push(employeeList3);
 
-      let question4 = Object.assign({}, employee);
-      this.fourthQuestionList.push(question4);
+      const employeeList4 = Object.assign({}, employee);
+      this.fourthQuestionList.push(employeeList4);
     });
 
     const project1 = new Project();
@@ -121,7 +166,7 @@ export class PersonalSurveyComponent implements OnInit {
   }
 
   sendSurvey() {
-    console.log(this.firstQuestionList);
+    console.info(this.listQuestion);
   }
 
   validateRating() {
@@ -143,5 +188,6 @@ export class PersonalSurveyComponent implements OnInit {
     this.ratingList = [zeroStar, oneStar, twoStar, threeStar, fourStar, fiveStar, sixStar, sevenStar, eightStar, nineStar, tenStar];
 
   }
+
 
 }

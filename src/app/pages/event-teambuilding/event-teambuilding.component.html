@@ -32,5 +32,6 @@
   </div>
 </div>
 <ng-template let-c="close" let-d="dismiss" #content>
-  <ngx-teambuilding-activity [dismiss]="d" [teambuildingView]="teambuildingView" (addedTeambuilding)="addEventTeambuilding($event)"></ngx-teambuilding-activity>
+  <ngx-teambuilding-activity  (clickOutside)="close($event)" [dismiss]="d" [teambuildingView]="teambuildingView"
+                              (addedTeambuilding)="addEventTeambuilding($event)"></ngx-teambuilding-activity>
 </ng-template>

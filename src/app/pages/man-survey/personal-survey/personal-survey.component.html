@@ -1,0 +1,146 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-12">
+      <div class="row mb-2 ml-5">
+
+        <button *ngFor="let question of listQuestion" type="button" class="btn btn-hero-success" name="question-button"
+                (click)="question.isCollapsed = !question.isCollapsed"
+                [attr.aria-expanded]="!question.isCollapsed"
+                attr.aria-controls="question{{question.id}}"
+                nbPopover="{{question.question}}" nbPopoverMode="hint" nbPopoverPlacement="top">
+          Câu hỏi {{question.number}}
+        </button>
+
+      </div>
+
+
+    </div>
+
+    <div class="col-md-12">
+
+
+      <!--Câu hỏi -->
+
+      <div *ngFor="let question of listQuestion" id="question{{question.id}}" [ngbCollapse]="!question.isCollapsed" class="mb-5">
+        <div class="row mt-5 justify-content-center">
+          <table class="table titleTable" name="table-evaluation">
+            <thead>
+            <tr>
+              <th name="column-title">Nhân viên</th>
+              <th name="column-title">Đánh giá</th>
+            </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="row tableScroll justify-content-center">
+          <table class="table table-hover myTable" name="table-evaluation">
+            <tbody>
+
+            <tr *ngFor="let employee of question.userList">
+
+              <td [ngClass]="{'text-danger': employee.isRated === true}" name="column-title">
+                {{employee.fullname}}
+              </td>
+
+              <td name="column-title">
+
+                <ngb-rating [(rate)]="employee.rating" max="10">
+                  <ng-template let-fill="fill">
+                    <span class="star fill" [class.filled]="fill === 100">
+                      <i class="ion-android-star" *ngIf="fill === 100"></i>
+                      <i class="ion-android-star-outline" *ngIf="fill !== 100"></i>
+                    </span>
+                  </ng-template>
+                </ngb-rating>
+
+              </td>
+
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-6">
+      <div class="row"><h5 class="margin-auto">Đánh giá điểm cho các dự án</h5></div>
+      <div class="row mt-2">
+        <div class="zui-wrapper margin-auto">
+          <div class="zui-table-vertical">
+            <table class='zui-table' name="evaluation-table">
+              <thead>
+              <tr>
+                <th class="first-col"><span>Tên dự án (Khung 3)</span></th>
+                <th><span>Điểm</span></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let project of projectList">
+                <td class="first-col">{{project.name}}</td>
+                <td>
+                  <ngb-rating [(rate)]="project.rating" max="10">
+                    <ng-template let-fill="fill">
+                    <span class="star fill" [class.filled]="fill === 100">
+                      <i class="ion-android-star" *ngIf="fill === 100"></i>
+                      <i class="ion-android-star-outline" *ngIf="fill !== 100"></i>
+                    </span>
+                    </ng-template>
+                  </ngb-rating>
+                </td>
+              </tr>
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="row"><h5 class="margin-auto">Khung điểm đánh giá</h5></div>
+      <div class="row mt-2">
+        <div class="zui-wrapper margin-auto">
+          <div class="zui-table-vertical">
+            <table class='zui-table'>
+              <thead>
+              <tr>
+                <th class="first-col"><span>Số sao tương ứng</span></th>
+                <th><span>Khung 1</span></th>
+                <th><span>Khung 2</span></th>
+                <th><span>Khung 3</span></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let rating of ratingList">
+                <td class="first-col">
+                  <ngb-rating [(rate)]="rating.rating" max="10">
+                    <ng-template let-fill="fill">
+                    <span class="star fill" [class.filled]="fill === 100">
+                      <i class="ion-android-star" *ngIf="fill === 100"></i>
+                      <i class="ion-android-star-outline" *ngIf="fill !== 100"></i>
+                    </span>
+                    </ng-template>
+                  </ngb-rating>
+                </td>
+                <td>{{rating.pointStructure1}}</td>
+                <td>{{rating.pointStructure2}}</td>
+                <td>{{rating.pointStructure3}}</td>
+              </tr>
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mb-5">
+    <button class="btn btn-hero-success" (click)="sendSurvey()">Gửi đánh giá</button>
+  </div>
+
+
+</div>
