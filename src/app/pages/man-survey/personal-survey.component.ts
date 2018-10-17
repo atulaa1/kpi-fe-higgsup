@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Employee} from '../../@core/models/employee.model';
 import {Project} from '../../@core/models/project.model';
 import {Rating} from '../../@core/models/Rating';
+import {Question} from '../../@core/models/question.model';
 
 @Component({
   selector: 'personal-survey',
@@ -19,10 +20,43 @@ export class PersonalSurveyComponent implements OnInit {
   fourthQuestionList: Array<Employee> = new Array();
   projectList: Array<Project> = new Array();
   ratingList: Array<Rating> = new Array();
+  listQuestion: Array<Question> = new Array<Question>();
   ngOnInit() {
     // fake data
     this.fakeData();
     this.createRatingStructure();
+    this.fakeQuestion();
+
+  }
+
+  fakeQuestion() {
+    const question1 = new Question();
+    question1.id = 1;
+    question1.number = 1;
+    question1.question = 'Nhân viên này như nào?';
+    this.listQuestion.push(question1);
+
+
+    const question2 = new Question();
+    question2.id = 2;
+    question2.number = 2;
+    question2.question = 'Nhân viên này ra làm sao?';
+    this.listQuestion.push(question2);
+
+
+    const question3 = new Question();
+    question3.id = 3;
+    question3.number = 3;
+    question3.question = 'Nhân viên này làm việc ok không?';
+    this.listQuestion.push(question3);
+
+
+    const question4 = new Question();
+    question4.id = 4;
+    question4.number = 4;
+    question4.question = 'Nhân viên này có triển vọng không?';
+    this.listQuestion.push(question4);
+
 
   }
 
@@ -121,7 +155,7 @@ export class PersonalSurveyComponent implements OnInit {
   }
 
   sendSurvey() {
-    console.log(this.firstQuestionList);
+    console.log(this.employeeList);
   }
 
   validateRating() {
