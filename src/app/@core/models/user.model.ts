@@ -1,3 +1,5 @@
+import {Question} from './question.model';
+
 export class User {
   username: string;
   lastName: string;
@@ -18,4 +20,6 @@ export class User {
   isEdited: boolean = false;
   mainRole: string;
   index: number;
+  evaluateStatus: number;
+  evaluateQuestion: Array<Question>;
 }

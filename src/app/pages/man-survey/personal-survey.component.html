@@ -8,7 +8,7 @@
           <thead>
           <tr>
             <th class="column-rating">Câu hỏi khảo sát</th>
-            <th class="column-rating text-center" *ngFor="let question of listQuestion; let i = index" ngbTooltip="{{question.question}}">Câu hỏi {{i + 1}}</th>
+            <th class="column-rating text-center" *ngFor="let question of listEvaluateInfo.questionList; let i = index" ngbTooltip="{{question.question}}">Câu hỏi {{i + 1}}</th>
           </tr>
           </thead>
         </table>
@@ -16,14 +16,14 @@
       <div class="row tableScroll">
         <table class="table table-hover">
           <tbody>
-          <tr *ngFor="let employee of employeeList">
+          <tr *ngFor="let employee of listEvaluateInfo.employeeList">
 
-            <td class="column-rating" [ngClass]="{'text-danger': employee.isRated === true}">
-              {{employee.fullname}}
+            <td class="column-rating">
+              {{employee.fullName}}
             </td>
 
-            <td class="column-rating text-center" *ngFor="let question of listQuestion; let i= index">
-              <ngb-rating [(rate)]="employee.listRating[i]" max="10">
+            <td class="column-rating text-center" *ngFor="let question of employee.evaluateQuestion; let i = index">
+              <ngb-rating [(rate)]="question.point" max="10">
                 <ng-template let-fill="fill">
                     <span class="star fill" [class.filled]="fill === 100">
                       <i class="ion-android-star" *ngIf="fill === 100"></i>
@@ -45,8 +45,8 @@
       <div class="row"><h5 class="margin-auto">Đánh giá điểm cho các dự án</h5></div>
       <div class="row mt-2">
         <div class="zui-wrapper margin-auto">
-          <div class="zui-table-vertical">
-            <table class='zui-table' name="evaluation-table">
+          <div class="zui-table-vertical" name="evaluation-table">
+            <table class='zui-table'>
               <thead>
               <tr>
                 <th class="first-col"><span>Tên dự án (Khung 3)</span></th>
@@ -90,7 +90,7 @@
               <tbody>
               <tr *ngFor="let rating of ratingList">
                 <td class="first-col">
-                  <ngb-rating [(rate)]="rating.rating" max="10">
+                  <ngb-rating [(rate)]="rating.rating" max="10" [readonly]="readonly">
                     <ng-template let-fill="fill">
                     <span class="star fill" [class.filled]="fill === 100">
                       <i class="ion-android-star" *ngIf="fill === 100"></i>

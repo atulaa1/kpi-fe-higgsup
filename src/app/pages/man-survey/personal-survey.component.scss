@@ -51,6 +51,9 @@
 
 .zui-table .first-col {
   border-left: solid 1px #DDEFEF;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  width: 240px !important;
 }
 
 .zui-table-vertical {
@@ -93,7 +96,7 @@ ngb-rating i {
 }
 
 [name$='evaluation-table'] {
-  width: 375px;
+  width: 409px !important;
 }
 
 .column-rating {
