@@ -5,6 +5,7 @@ import {User} from '../../../../@core/models/user.model';
 import {EventSeminar} from '../../../../@core/models/eventSeminar.model';
 import {SeminarService} from '../../../../@core/services/seminar.service';
 import {ResponseListEventDTO} from '../../../../@core/models/responseListEventDTO.model';
+import {MessageConstant} from '../../../../@core/glossary/message.constant';
 
 @Component({
   selector: 'creating-survey-seminar',
@@ -19,7 +20,6 @@ export class CreatingSurveySeminarComponent implements OnInit {
   @Output() changeEvent = new EventEmitter<any>();
   listSeminarSurvey: Array<SeminarSurvey> = new Array<SeminarSurvey>();
   eventUserListFiltered: Array<UserType> = new Array<UserType>();
-  alert: boolean = false;
   currentUsername: string = '';
 
   listQuestion = [
@@ -68,9 +68,8 @@ export class CreatingSurveySeminarComponent implements OnInit {
     this.seminarEvaluation.id = this.seminarEvent.id;
     this.seminarEvaluation.additionalConfig = this.listSeminarSurvey;
     if (this.seminarEvaluation.additionalConfig.length === 0) {
-      this.alert = true;
+      swal('Thông báo!', MessageConstant.MSG_NOTFINISHING + ' khảo sát này!', 'error');
     } else {
-      this.alert = false;
       this.seminarSevice.evaluateSeminarEvent(this.seminarEvaluation).subscribe((response: ResponseListEventDTO) => {
         if (response.status_code === 200) {
           this.changeEvent.emit(response.data);

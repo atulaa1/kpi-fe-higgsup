@@ -7,7 +7,8 @@
 </div>
 <div name="modal-relative" class="modal-body modal-fonts">
   <p class="text-center" name="modalHandle-style" *ngIf="isDuplicateName">Dự án này đã tồn tại!</p>
-  <p class="text-center" name="modalHandle-style" *ngIf="!isValidate">Tên dự án không được để trống</p>
+  <p class="text-center" name="modalHandle-style" *ngIf="!isValidate">Tên dự án không được để trống!</p>
+  <p class="text-center" name="modalHandle-style" *ngIf="isValidateUserIsBlank">Vui lòng nhập tên thành viên tham gia dự án!</p>
   <div class="row">
 
     <div class="col-3 pt-3"><span class="mr-2 pl-3">Tên dự án</span><i class="fas fa-asterisk icon-abs"></i></div>

@@ -6,6 +6,8 @@ export class Project {
   active: number;
   createdDate: string;
   updatedDate: string;
+  isRated: boolean;
+  rating: number;
   projectUserList: Array<ProjectUser>;
 
   constructor() {

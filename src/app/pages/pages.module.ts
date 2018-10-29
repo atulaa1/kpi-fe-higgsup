@@ -1,16 +1,17 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 
-import {PagesComponent} from './pages.component';
-import {DashboardModule} from './dashboard/dashboard.module';
-import {PagesRoutingModule} from './pages-routing.module';
-import {ThemeModule} from '../@theme/theme.module';
-import {MiscellaneousModule} from './miscellaneous/miscellaneous.module';
+import { PagesComponent } from './pages.component';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { PagesRoutingModule } from './pages-routing.module';
+import { ThemeModule } from '../@theme/theme.module';
+import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import {ActiManagementModule} from './acti-management/acti-management.module';
 import {ListOfSurveyModule} from './list-of-survey/list-of-survey.module';
 import {AccManagementsModule} from './acc-managements/acc-managements.module';
 import {ProjectmanagementModule} from './projectmanagement/projectmanagement.module';
 import {ActivitiesModule} from './activities/activities.module';
-import {SeminarModule} from './seminar/seminar.module';
+import {ManSurveyModule} from './man-survey/man-survey.module';
+import {EmployeeSeminarSurveyModule} from './employee-seminar-survey/employee-seminar-survey.module';
 import {EventTeambuildingModule} from './event-teambuilding/event-teambuilding.module';
 import {PointForUsersModule} from './point-for-users/point-for-users.module';
 
@@ -30,7 +31,8 @@ const PAGES_COMPONENTS = [
     ProjectmanagementModule,
     AccManagementsModule,
     ActivitiesModule,
-    SeminarModule,
+    ManSurveyModule,
+    EmployeeSeminarSurveyModule,
     EventTeambuildingModule,
     PointForUsersModule,
 

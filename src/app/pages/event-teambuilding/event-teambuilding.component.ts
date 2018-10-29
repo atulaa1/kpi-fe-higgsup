@@ -54,7 +54,7 @@ export class EventTeambuildingComponent implements OnInit {
     });
   }
 
-  handleKeyPress($event) {
+  handleKeyDown($event) {
     if ($event.keyCode === 13) {
       this.searchByKeyword();
     } else if (this.keyword === '') {
@@ -64,7 +64,7 @@ export class EventTeambuildingComponent implements OnInit {
 
   searchByKeyword() {
     this.listEventTeambuilding = this.listEventTeambuildingData.filter(
-      teambuilding => teambuilding.name.toLowerCase().includes(this.keyword.toLowerCase()));
+      teambuilding => teambuilding.name.trim().toLowerCase().includes(this.keyword.trim().toLowerCase()));
   }
 
 }

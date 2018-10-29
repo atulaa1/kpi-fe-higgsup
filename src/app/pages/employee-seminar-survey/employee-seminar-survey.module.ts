@@ -1,8 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {SeminarComponent} from './seminar.component';
+import {EmployeeSeminarSurveyComponent} from './employee-seminar-survey.component';
 import {ThemeModule} from '../../@theme/theme.module';
-import {PersonalSeminarComponent} from './personal-seminar/personal-seminar.component';
 import {SurveySeminarComponent} from './survey-seminar/survey-seminar.component';
 import {CreatingSurveySeminarComponent} from './survey-seminar/creating-survey-seminar/creating-survey-seminar.component';
 
@@ -12,7 +11,8 @@ import {CreatingSurveySeminarComponent} from './survey-seminar/creating-survey-s
     CommonModule,
     ThemeModule,
   ],
-  declarations: [SeminarComponent, PersonalSeminarComponent, SurveySeminarComponent, CreatingSurveySeminarComponent],
-  entryComponents: [CreatingSurveySeminarComponent]
+  declarations: [EmployeeSeminarSurveyComponent, SurveySeminarComponent, CreatingSurveySeminarComponent],
+  entryComponents: [CreatingSurveySeminarComponent],
+  exports: [SurveySeminarComponent, CreatingSurveySeminarComponent],
 })
-export class SeminarModule { }
+export class EmployeeSeminarSurveyModule { }

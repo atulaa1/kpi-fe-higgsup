@@ -5,6 +5,8 @@ import {SeminarService} from '../../../@core/services/seminar.service';
 import {Event} from '../../../@core/models/event.model';
 import {ResponseListEventDTO} from '../../../@core/models/responseListEventDTO.model';
 import {User} from '../../../@core/models/user.model';
+import {getMonth} from 'ngx-bootstrap/chronos';
+import {getFullYear} from 'ngx-bootstrap/chronos/utils/date-getters';
 
 @Component({
   selector: 'survey-seminar',
@@ -25,6 +27,7 @@ export class SurveySeminarComponent implements OnInit {
   listMonth = [];
   listYear = [];
   showMsg: boolean = false;
+  selected: string = '';
 
   constructor(private modalService: NgbModal, private seminarService: SeminarService) {
   }
@@ -33,10 +36,19 @@ export class SurveySeminarComponent implements OnInit {
     this.currentUsername = JSON.parse(localStorage.getItem('currentUser')).username;
     this.getSeminarEvaluationList();
     for (let i = 2018; i <= (new Date()).getFullYear(); i++) {
+      const currentYear = getFullYear(new Date());
       this.listYear.push(i);
+      if (currentYear === i) {
+        this.yearStatus = i.toString();
+      }
+
     }
     for (let i = 1; i <= 12; i++) {
+      const currentMonth = getMonth(new Date()) + 1;
       this.listMonth.push(i);
+      if (currentMonth === i) {
+        this.monthStatus = i.toString();
+      }
     }
   }
 
@@ -50,8 +62,8 @@ export class SurveySeminarComponent implements OnInit {
             userJoin.user.username === this.currentUsername && userJoin.type === 1).length === 0);
         this.sortList(this.listSeminarEvent);
         this.listSeminarEventClone = Object.assign(this.listSeminarEvent);
-
       }
+      this.onFilterSurvey();
     });
   }
 

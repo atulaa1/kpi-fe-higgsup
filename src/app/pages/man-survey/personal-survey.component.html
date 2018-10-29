@@ -1,0 +1,158 @@
+<div class="container">
+  <div class="row justify-content-center"><h4>Khảo sát tháng 9/2018</h4></div>
+  <div class="row ml-2">
+    <div class="zui-wrapper">
+      <div class="zui-scroller">
+        <table class='zui-table'>
+          <thead>
+          <tr>
+            <th class="zui-sticky-col"><span>Câu hỏi đánh giá</span></th>
+            <th *ngFor="let employee of employeeList,let i = index"
+                [ngClass]="{'text-danger': employee.isRated === true}">{{employee.fullname}}
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td class="zui-sticky-col row-padding-bottom clipText" tooltip="Nhân viên này có hoàn thành tốt công việc hàng ngày? (Khung
+                1)"><span class="text-danger">*</span><span>Nhân viên này có hoàn thành tốt công việc hàng ngày? (Khung
+                1)</span></td>
+            <td *ngFor="let question of firstQuestionList,let i = index">
+              <ngb-rating [(rate)]="question.rate" max="10">
+                <ng-template let-fill="fill">
+                    <span class="star fill" [class.filled]="fill === 100">
+                      <i class="ion-android-star" *ngIf="fill === 100"></i>
+                      <i class="ion-android-star-outline" *ngIf="fill !== 100"></i>
+                    </span>
+                </ng-template>
+              </ngb-rating>
+            </td>
+          </tr>
+          <tr>
+            <td class="zui-sticky-col row-padding-bottom clipText" tooltip="Thái độ chung trong công việc của nhân viên này? (Khung
+            1)"><span class="text-danger">*</span><span>Thái độ chung trong công việc của nhân viên này? (Khung
+            1)</span></td>
+            <td *ngFor="let question of secondQuestionList,let i = index">
+              <ngb-rating [(rate)]="question.rate" max="10">
+                <ng-template let-fill="fill">
+                    <span class="star fill" [class.filled]="fill === 100">
+                      <i class="ion-android-star" *ngIf="fill === 100"></i>
+                      <i class="ion-android-star-outline" *ngIf="fill !== 100"></i>
+                    </span>
+                </ng-template>
+              </ngb-rating>
+            </td>
+          </tr>
+          <tr>
+            <td class="zui-sticky-col row-padding-bottom clipText" tooltip="Nhân viên này có quan tâm hoặc giúp đỡ đồng nghiệp? (Khung
+            1)"><span class="text-danger">*</span><span>Nhân viên này có quan tâm hoặc giúp đỡ đồng nghiệp? (Khung
+            1)</span></td>
+            <td *ngFor="let question of thirdQuestionList,let i = index">
+              <ngb-rating [(rate)]="question.rate" max="10">
+                <ng-template let-fill="fill">
+                    <span class="star fill" [class.filled]="fill === 100">
+                      <i class="ion-android-star" *ngIf="fill === 100"></i>
+                      <i class="ion-android-star-outline" *ngIf="fill !== 100"></i>
+                    </span>
+                </ng-template>
+              </ngb-rating>
+            </td>
+          </tr>
+          <tr>
+            <td class="zui-sticky-col row-padding-bottom clipText" tooltip="Ngoài công việc đang làm, nhân viên này có hoàn thành tốt
+            những công việc được giao thêm?(Khung 2)"><span>Ngoài công việc đang làm, nhân viên này có hoàn thành tốt
+            những công việc được giao thêm?(Khung 2)</span></td>
+            <td *ngFor="let question of fourthQuestionList,let i = index">
+              <ngb-rating [(rate)]="question.rate" max="10">
+                <ng-template let-fill="fill">
+                    <span class="star fill" [class.filled]="fill === 100">
+                      <i class="ion-android-star" *ngIf="fill === 100"></i>
+                      <i class="ion-android-star-outline" *ngIf="fill !== 100"></i>
+                    </span>
+                </ng-template>
+              </ngb-rating>
+            </td>
+          </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-6">
+      <div class="row"><h5 class="margin-auto">Đánh giá điểm cho các dự án</h5></div>
+      <div class="row mt-2">
+        <div class="zui-wrapper margin-auto">
+          <div class="zui-table-vertical">
+            <table class='zui-table' name="evaluation-table">
+              <thead>
+              <tr>
+                <th class="first-col"><span>Tên dự án (Khung 3)</span></th>
+                <th><span>Điểm</span></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let project of projectList">
+                <td class="first-col">{{project.name}}</td>
+                <td>
+                  <ngb-rating [(rate)]="project.rating" max="10">
+                    <ng-template let-fill="fill">
+                    <span class="star fill" [class.filled]="fill === 100">
+                      <i class="ion-android-star" *ngIf="fill === 100"></i>
+                      <i class="ion-android-star-outline" *ngIf="fill !== 100"></i>
+                    </span>
+                    </ng-template>
+                  </ngb-rating>
+                </td>
+              </tr>
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="row"><h5 class="margin-auto">Khung điểm đánh giá</h5></div>
+      <div class="row mt-2">
+        <div class="zui-wrapper margin-auto">
+          <div class="zui-table-vertical">
+            <table class='zui-table'>
+              <thead>
+              <tr>
+                <th class="first-col"><span>Số sao tương ứng</span></th>
+                <th><span>Khung 1</span></th>
+                <th><span>Khung 2</span></th>
+                <th><span>Khung 3</span></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let rating of ratingList">
+                <td class="first-col">
+                  <ngb-rating [(rate)]="rating.rating" max="10">
+                    <ng-template let-fill="fill">
+                    <span class="star fill" [class.filled]="fill === 100">
+                      <i class="ion-android-star" *ngIf="fill === 100"></i>
+                      <i class="ion-android-star-outline" *ngIf="fill !== 100"></i>
+                    </span>
+                    </ng-template>
+                  </ngb-rating>
+                </td>
+                <td>{{rating.pointStructure1}}</td>
+                <td>{{rating.pointStructure2}}</td>
+                <td>{{rating.pointStructure3}}</td>
+              </tr>
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-start">
+    <button class="btn btn-hero-success" (click)="sendSurvey()">Gửi đánh giá</button>
+  </div>
+
+
+</div>
