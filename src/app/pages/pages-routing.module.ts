@@ -12,6 +12,7 @@ import {ActivitiesComponent} from './activities/activities.component';
 import {EmployeeSeminarSurveyComponent} from './employee-seminar-survey/employee-seminar-survey.component';
 import {EventTeambuildingComponent} from './event-teambuilding/event-teambuilding.component';
 import {ManSurveyComponent} from './man-survey/man-survey.component';
+import {PointForUsersComponent} from './point-for-users/point-for-users.component';
 
 const routes: Routes = [{
   path: '',
