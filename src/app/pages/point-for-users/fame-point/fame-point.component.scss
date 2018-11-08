@@ -1,0 +1,21 @@
+[name$='title-fame-point'] {
+  display: inline;
+}
+
+[name$='fame-content'] {
+  height: 300px;
+}
+
+.tableScroll {
+  max-height: 470px;
+  overflow: auto;
+}
+
+.titleTable {
+  margin-bottom: 0px;
+}
+
+table td {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}

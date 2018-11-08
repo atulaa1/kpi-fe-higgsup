@@ -13,6 +13,7 @@ import {ActivitiesModule} from './activities/activities.module';
 import {ManSurveyModule} from './man-survey/man-survey.module';
 import {EmployeeSeminarSurveyModule} from './employee-seminar-survey/employee-seminar-survey.module';
 import {EventTeambuildingModule} from './event-teambuilding/event-teambuilding.module';
+import {PointForUsersModule} from './point-for-users/point-for-users.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -33,6 +34,7 @@ const PAGES_COMPONENTS = [
     ManSurveyModule,
     EmployeeSeminarSurveyModule,
     EventTeambuildingModule,
+    PointForUsersModule,
 
   ],
   declarations: [

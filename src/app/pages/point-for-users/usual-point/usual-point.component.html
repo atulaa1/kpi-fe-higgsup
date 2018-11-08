@@ -1,0 +1,60 @@
+<div class="container mt-3 mb-3">
+  <div class="row ml-5 mr-3">
+    <div class="col-md-3">
+      <h5 name="title-usual-point">
+
+        <button type="button" class="btn btn-hero-success" (click)="isCollapsed = !isCollapsed"
+                [attr.aria-expanded]="!isCollapsed" aria-controls="collapsePointTable">
+          Tháng 10/2018
+        </button>
+
+      </h5>
+    </div>
+
+    <div class="col-md-3 text-center"><h5 name="title-usual-point">Tổng điểm:</h5> &nbsp;
+      <h5 class="text-danger" name="title-usual-point">200</h5></div>
+    <div class="col-md-6 text-center"><h5 name="title-usual-point">Danh hiệu:</h5> &nbsp;
+      <h5 class="text-danger" name="title-usual-point">Unbreakable !!!</h5></div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-12" id="collapsePointTable" [ngbCollapse]="!isCollapsed">
+
+      <div class="row ml-5 mr-5 mt-5">
+        <table class="table titleTable">
+          <thead>
+          <tr>
+            <th class="point-type">Loại điểm</th>
+            <th class="point-quantity">Số điểm</th>
+            <th class="point-detail">Hoạt động</th>
+          </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="row ml-5 mr-5 tableScroll">
+        <table class="table table-hover" id="myTable">
+          <tbody>
+          <tr *ngFor="let userPoint of listPoint">
+            <td class="point-type">
+              <div>{{userPoint.type}}</div>
+            </td>
+
+            <td class="point-quantity">
+              {{userPoint.point}}
+            </td>
+
+            <td class="point-detail"> Hệ thống đã cộng
+              {{userPoint.point}} {{userPoint.type}}
+            </td>
+
+          </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
