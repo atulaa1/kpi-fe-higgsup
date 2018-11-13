@@ -19,7 +19,7 @@
     </a>
   </nb-action>
   <nb-action class="higgigup-nb-action nav-list" name="navList" *ngIf="user.username && user.token">
-    <div class="btn-group" dropdown>
+    <div class="btn-group" role="menuitem" dropdown triggers="mouseover" [autoClose]="true" >
       <div dropdownToggle class="nav-list" aria-controls="dropdown-basic">
         <a>{{user.fullName}}</a>
       </div>
