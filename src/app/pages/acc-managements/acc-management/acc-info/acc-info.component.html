@@ -9,7 +9,7 @@
     </div>
       <div class="row">
         <div class="col-md-5">
-          <img class="avatarUser" src="{{userInfo.avatar}}" alt="">
+          <img class="avatarUser" src="{{userInfo.avatar ? userInfo.avatar : 'assets/images/no-avatar.png'}}" alt="">
         </div>
         <div class="col-md-7">
           <div class="userName">
@@ -29,27 +29,27 @@
       <div class="mt-5 userInfo">
         <div class="row mt-3">
           <h6 class="col-md-4 userInfo">Ngày sinh:</h6>
-          <div class="col-md-8">{{userInfo.birthday}}</div>
+          <div class="col-md-8">{{(userInfo.birthday) ? userInfo.birthday: 'Chưa cập nhật thông tin'}}</div>
         </div>
         <div class="row mt-3">
           <h6 class="col-md-4 userInfo">Số điện thoại:</h6>
-          <div class="col-md-8">{{userInfo.numberPhone}}</div>
+          <div class="col-md-8">{{userInfo.numberPhone ? userInfo.numberPhone: 'Chưa cập nhật thông tin'}}</div>
         </div>
         <div class="row mt-3">
           <h6 class="col-md-4 userInfo">Địa chỉ:</h6>
-          <div class="col-md-8">{{userInfo.address}}</div>
+          <div class="col-md-8">{{userInfo.address ? userInfo.address: 'Chưa cập nhật thông tin'}}</div>
         </div>
         <div class="row mt-3">
           <h6 class="col-md-4 userInfo">Gmail:</h6>
-          <div class="col-md-8">{{userInfo.gmail}}</div>
+          <div class="col-md-8">{{userInfo.gmail ? userInfo.gmail: 'Chưa cập nhật thông tin'}}</div>
         </div>
         <div class="row mt-3">
           <h6 class="col-md-4 userInfo">Skype:</h6>
-          <div class="col-md-8">{{userInfo.skype}}</div>
+          <div class="col-md-8">{{userInfo.skype ? userInfo.skype: 'Chưa cập nhật thông tin'}}</div>
         </div>
         <div class="row mt-3">
           <h6 class="col-md-4 userInfo">Thời gian làm việc:</h6>
-          <div class="col-md-8" *ngIf="userInfo.dateStartWork">{{numberMonthOfWork}}</div>
+          <div class="col-md-8">{{numberMonthOfWork ? numberMonthOfWork: 'Chưa cập nhật thông tin'}}</div>
         </div>
       </div>
   </div>
