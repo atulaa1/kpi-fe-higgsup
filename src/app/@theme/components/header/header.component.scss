@@ -266,12 +266,27 @@ nb-action[name$="notification"]{
   .nav-list {
     padding: 2rem 1rem;
   }
+  .menuUser{
+    height: 250px;
+  }
+}
+
+@media (min-width: 792px) {
+  .nav-list {
+    padding: 0em 2rem;
+  }
+  .menuUser{
+    height: 200px;
+  }
 }
 
 @media (min-width: 1200px) {
   .nav-list {
     padding: 2rem 2rem;
     font-size: 17px;
+  }
+  .menuUser{
+    height: auto;
   }
 }
 
