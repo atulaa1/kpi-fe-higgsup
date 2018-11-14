@@ -27,7 +27,7 @@
         <div style="min-height: 170px" class="row">
           <div class="col-6 col-md-6 ">
             <img style="float: left;height: 150px;margin-left: 10px"
-                 src="{{user.avatar}}"
+                 src="{{(user.avatar )? user.avatar : 'assets/images/no-avatar.png'}}"
                  class="img-fluid" alt="Responsive image">
           </div>
           <div style="margin-top: 50px" class="col-6 col-md-6 ">
