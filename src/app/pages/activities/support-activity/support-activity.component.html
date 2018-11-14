@@ -24,7 +24,7 @@
         <nb-checkbox class="support-checkbox" [(value)]="supportEvent.status"
          (change)='changeSelect(supportEvent, $event)' [ngClass]="{'onlyRead': isAdmin === true}">{{supportEvent.type}}
         </nb-checkbox>
-        <input class="support-number form-control" type="number" [(ngModel)]="supportEvent.quantity"
+        <input class="support-number form-control" type="number" [(ngModel)]="supportEvent.quantity" min="1"
                *ngIf="supportEvent.status === true" [disabled]="isAdmin === true">
       </div>
     </div>
