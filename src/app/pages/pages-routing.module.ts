@@ -13,6 +13,7 @@ import {EmployeeSeminarSurveyComponent} from './employee-seminar-survey/employee
 import {EventTeambuildingComponent} from './event-teambuilding/event-teambuilding.component';
 import {ManSurveyComponent} from './man-survey/man-survey.component';
 import {PointForUsersComponent} from './point-for-users/point-for-users.component';
+import {AdminGuard} from '../@core/security/AdminGuard';
 
 const routes: Routes = [{
   path: '',
@@ -30,22 +31,22 @@ const routes: Routes = [{
     {
       path: 'acc-managements',
       component: AccManagementsComponent,
-      canActivate: [AuthGuard],
+      canActivate: [AuthGuard, AdminGuard],
     },
     {
       path: 'acti-management',
       component: ActiManagementComponent,
-      canActivate: [AuthGuard],
+      canActivate: [AuthGuard, AdminGuard],
     },
     {
       path: 'project-management',
       component: ProjectmanagementComponent,
-      canActivate: [AuthGuard],
+      canActivate: [AuthGuard , AdminGuard],
     },
     {
       path: 'listofsurvey',
       component: ListOfSurveyComponent,
-      canActivate: [AuthGuard],
+      canActivate: [AuthGuard, AdminGuard],
     },
     {
       path: 'creating-activities',
@@ -65,7 +66,7 @@ const routes: Routes = [{
     {
       path: 'event-teambuilding',
       component: EventTeambuildingComponent,
-      canActivate: [AuthGuard],
+      canActivate: [AuthGuard, AdminGuard],
     },
     {
       path: 'point-for-user',
