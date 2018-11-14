@@ -9,7 +9,7 @@
     </div>
       <div class="row">
         <div class="col-md-5">
-          <img class="avatarUser" src="{{userInfo.avatar ? user.avatar : 'assets/images/no-avatar.png'}}" alt="">
+          <img class="avatarUser" src="{{userInfo.avatar ? userInfo.avatar : 'assets/images/no-avatar.png'}}" alt="">
         </div>
         <div class="col-md-7">
           <div class="userName">
@@ -29,7 +29,7 @@
       <div class="mt-5 userInfo">
         <div class="row mt-3">
           <h6 class="col-md-4 userInfo">Ngày sinh:</h6>
-          <div class="col-md-8">{{userInfo.birthday ? userInfo.birthday: 'Chưa cập nhật thông tin'}}</div>
+          <div class="col-md-8">{{(userInfo.birthday) ? userInfo.birthday: 'Chưa cập nhật thông tin'}}</div>
         </div>
         <div class="row mt-3">
           <h6 class="col-md-4 userInfo">Số điện thoại:</h6>
