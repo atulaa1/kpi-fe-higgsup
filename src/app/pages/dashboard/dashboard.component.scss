@@ -1,0 +1,78 @@
+[name$='usual-rank-tab'] {
+  overflow: hidden;
+}
+
+[name$='fame-rank-tab'] {
+  overflow: hidden;
+}
+
+[name$='rank-number'] {
+  width: 30%;
+}
+
+[name$='rank-employee'] {
+  width: 50%;
+}
+
+[name$='rank-summary-point'] {
+  width: 20%;
+}
+
+[name$='recently-action-board'] {
+  max-height: 543px;
+  overflow-y: scroll;
+}
+
+[name$='announcement-board'] {
+  overflow-y: scroll;
+  max-height: 390px;
+
+}
+
+.tableScroll {
+  max-height: 695px;
+  overflow: auto;
+}
+
+.titleTable {
+  margin-bottom: 0px;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+table td {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.search {
+  font-size: 25px;
+  width: 50%;
+  margin: auto;
+  .search-div {
+    margin: auto;
+    .search-inp {
+      font-size: 20px;
+      position: relative;
+      line-height: 43px;
+      padding: 0px 10px;
+      border-radius: 10px;
+    }
+  }
+}
+
+.searchIcon {
+  position: absolute;
+  top: 14px;
+  right: 25px;
+  color: #bee5eb;
+  font-size: 20px;
+}
+
+.searchIcon:hover {
+  color: #58C3DC;
+}
+

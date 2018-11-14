@@ -1,68 +1,235 @@
 <div class="container">
-  <div class="row">
-    <div class="col-7 col-md-7">
-      <nb-card>
-        <nb-card-header>Hoạt động gần đây</nb-card-header>
-        <nb-badge text="99+" status="danger" position="top left"></nb-badge>
-        <nb-card-body style="overflow-y: scroll;max-height: 250px">
 
-          <nb-card *ngFor="let data of [1,2,3,4,5,6,7,8,9,0]">
-            <nb-card-body>data</nb-card-body>
-          </nb-card>
-
-        </nb-card-body>
-      </nb-card>
-    </div>
-    <div class="col-5 col-md-5">
-      <nb-card>
-        <nb-card-header style="position: relative">Thông báo</nb-card-header>
-        <nb-badge text="99+" status="danger" position="top left"></nb-badge>
-
-        <nb-card-body style="overflow-y: scroll;max-height: 250px">
-
-          <nb-card *ngFor="let data of [1,2,3,4,5,6,7,8,9,0]">
-            <nb-card-body>data</nb-card-body>
-          </nb-card>
-
-        </nb-card-body>
-
-      </nb-card>
-    </div>
-  </div>
   <div class="row">
     <div class="col-12 col-md-12">
       <nb-card>
-        <nb-card-header>Danh sách thứ hạng</nb-card-header>
-        <nb-card-body>
-          <nb-tabset fullWidth>
-
-            <nb-tab style="overflow-y: scroll;max-height:800px" tabTitle="Top của tháng">
-
-              <nb-card
-                *ngFor="let dataOfMonth of ['Lê Văn Tuấn','Lê Văn hải','Lê Văn Nam','Nguyễn Văn Hải','Nguyễn Văn Nam'] index as i">
-                <nb-user size="large" style="font-weight: bold;" badgeText="{{i+1}}"
-                         picture="https://images.all-free-download.com/images/graphiclarge/harry_potter_icon_6825007.jpg"
-                         name="{{dataOfMonth}}"></nb-user>
-
+        <nb-card-header class="text-center">
+          <div>HIGGSUP KPI {{currentYear}}</div>
+          <div>Nhân viên xuất sắc nhất tháng</div>
+        </nb-card-header>
+        <nb-card-body name="rank-user-board">
+          <div class="row">
+            <div class="col-6 col-md-6">
+              <nb-card *ngFor="let month of listMonth.slice(0,6)">
+                <nb-card-body>Tháng {{month}}:</nb-card-body>
               </nb-card>
-
-            </nb-tab>
-
-            <nb-tab style="overflow-y: scroll;max-height:800px" tabTitle="Top của năm">
-
-              <nb-card
-                *ngFor="let dataOfYear of ['Lê Văn hải','Nguyễn Văn Nam','Lê Văn Nam','Nguyễn Văn Hải','Hoàng Văn Nam','Nguyễn Văn Thuận','Hoàng Văn Sơn','Nguyễn Văn Hải','Hoàng Văn Nam','Nguyễn Văn Thuận','Hoàng Văn Sơn','Nguyễn Văn Hải','Hoàng Văn Nam','Nguyễn Văn Thuận','Hoàng Văn Sơn']  index as i">
-                <nb-user size="large" style="font-weight: bold;" badgeText="{{i+1}}"
-                         picture="https://images.all-free-download.com/images/graphiclarge/harry_potter_icon_6825007.jpg"
-                         name="{{dataOfYear}}"></nb-user>
+            </div>
+            <div class="col-6 col-md-6">
+              <nb-card *ngFor="let month of listMonth.slice(6,13)">
+                <nb-card-body>Tháng {{month}}:</nb-card-body>
               </nb-card>
-
-            </nb-tab>
-
-          </nb-tabset>
-
+            </div>
+          </div>
         </nb-card-body>
       </nb-card>
     </div>
   </div>
+
+  <div class="row">
+
+    <div class="col-8 col-md-8">
+
+      <nb-card>
+        <nb-card-header>
+          <div class="row mt-3">
+            <div class="col-md col-md-6">
+              BẢNG XẾP HẠNG
+            </div>
+            <div class="col-md col-md-6">
+              <div class="search">
+                <div class="form-group row">
+                  <div class="col-sm-12 search-div">
+                    <input normalCharacterOnly oncopy='return false' onpaste='return false' [(ngModel)]="nameSearch"
+                           class="form-control search-inp" type="text" id="myInput" (keyup)='handleKeyDown($event)'
+                           placeholder="Tìm kiếm nhân viên:" title="Type in a name"/>
+                    <span class="fas fa-search searchIcon" (click)='searchEmployee()'></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nb-card-header>
+        <nb-card-body name="rank-user-board">
+          <div class="container">
+            <nb-tabset fullWidth>
+
+              <nb-tab tabTitle="Điểm thường" name="usual-rank-tab">
+                <div class="row mt-5">
+                  <div class="col-md-5">
+                    <div class="row">
+                      <div class="col-md-4 mt-3 text-right">Tháng</div>
+                      <div class="col-md-8">
+                        <select class="form-control custom-select" [(ngModel)]="monthStatus">
+                          <option value="0">- - Tất cả - -</option>
+                          <option value="{{month}}" *ngFor="let month of listMonth">Tháng {{month}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="row">
+                      <div class="col-md-4 mt-3 text-center">Năm</div>
+                      <div class="col-md-8">
+                        <select class="form-control custom-select" [(ngModel)]="yearStatus">
+                          <option value="0">- - Tất cả - -</option>
+                          <option value="{{year}}" *ngFor="let year of listYear">{{year}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="row">
+                      <div class="col md-12 text-center">
+                        <button class="btn btn-hero-success custom-btn mb-5 mr-5" (click)="onFilterEmployee()">
+                          Lọc
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row ml-2 mr-2">
+                  <table class="table titleTable">
+                    <thead>
+                    <tr>
+                      <th class="text-center" name="rank-number">THỨ HẠNG</th>
+                      <th name="rank-employee">NHÂN VIÊN</th>
+                      <th class="text-center" name="rank-summary-point">TỔNG ĐIỂM</th>
+                    </tr>
+                    </thead>
+                  </table>
+                </div>
+
+                <div class="row ml-2 mr-2 tableScroll">
+                  <table class="table table-hover" name="usual-rank-table">
+                    <tbody>
+                    <tr
+                      *ngFor="let dataOfMonth of ['Lê Văn Tuấn','Lê Văn hải','Lê Văn Nam','Nguyễn Văn Hải','Nguyễn Văn Nam','Lê Văn Nam','Lê Văn Nam'
+                      ,'Nguyễn Văn Nam','Nguyễn Văn Nam','Nguyễn Văn Nam'] index as i">
+
+                      <td class="text-center" name="rank-number">{{i + 1}}</td>
+                      <td class="text-center" name="rank-employee">
+                        <nb-user size="large" style="font-weight: bold;" badgeText="{{i+1}}"
+                                 picture="https://images.all-free-download.com/images/graphiclarge/harry_potter_icon_6825007.jpg"
+                                 name="{{dataOfMonth}}"></nb-user>
+                      </td>
+                      <td class="text-center" name="rank-summary-point">{{i}}</td>
+
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row ml-2 mr-2 justify-content-center">
+                  <a href="javascript:" (click)="watchMore()">Xem thêm</a>
+                </div>
+
+              </nb-tab>
+
+              <nb-tab tabTitle="Điểm danh vọng" name="fame-rank-tab">
+
+                <div class="row mt-5">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-4 mt-3 text-center">Năm</div>
+                      <div class="col-md-8">
+                        <select class="form-control custom-select" [(ngModel)]="yearStatus">
+                          <option value="0">- - Tất cả - -</option>
+                          <option value="{{year}}" *ngFor="let year of listYear">{{year}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col md-12 text-center">
+                        <button class="btn btn-hero-success custom-btn mb-5 mr-5" (click)="onFilterEmployee()">
+                          Lọc
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row ml-2 mr-2">
+                  <table class="table titleTable">
+                    <thead>
+                    <tr>
+                      <th class="text-center" name="rank-number">THỨ HẠNG</th>
+                      <th name="rank-employee">NHÂN VIÊN</th>
+                      <th class="text-center" name="rank-summary-point">TỔNG ĐIỂM</th>
+                    </tr>
+                    </thead>
+                  </table>
+                </div>
+
+                <div class="row ml-2 mr-2 tableScroll" >
+                  <table class="table table-hover">
+                    <tbody>
+                    <tr
+                      *ngFor="let dataOfYear of ['Lê Văn hải','Nguyễn Văn Nam','Lê Văn Nam','Nguyễn Văn Hải','Hoàng Văn Nam'
+                      ,'Nguyễn Văn Thuận','Hoàng Văn Sơn','Nguyễn Văn Hải','Hoàng Văn Nam','Nguyễn Văn Thuận','Hoàng Văn Sơn'
+                      ,'Nguyễn Văn Hải','Hoàng Văn Nam','Nguyễn Văn Thuận','Hoàng Văn Sơn']  index as i">
+
+                      <td class="text-center" name="rank-number">{{i + 1}}</td>
+                      <td class="text-center" name="rank-employee">
+                        <nb-user size="large" style="font-weight: bold;" badgeText="{{i+1}}"
+                                 picture="https://images.all-free-download.com/images/graphiclarge/harry_potter_icon_6825007.jpg"
+                                 name="{{dataOfYear}}"></nb-user>
+                      </td>
+                      <td class="text-center" name="rank-summary-point">{{i}}</td>
+
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row ml-2 mr-2 justify-content-center">
+                  <a href="javascript:" (click)="watchMore()">Xem thêm</a>
+                </div>
+
+              </nb-tab>
+
+            </nb-tabset>
+          </div>
+        </nb-card-body>
+      </nb-card>
+
+    </div>
+
+    <div class="col-4 col-md-4">
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <nb-card>
+            <nb-card-header>Hoạt động gần đây</nb-card-header>
+            <nb-card-body name="recently-action-board">
+
+              <nb-card *ngFor="let data of [1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0]">
+                <nb-card-body>data</nb-card-body>
+              </nb-card>
+
+            </nb-card-body>
+          </nb-card>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <nb-card>
+            <nb-card-header>Thông báo</nb-card-header>
+
+            <nb-card-body name="announcement-board">
+
+              <nb-card *ngFor="let data of [1,2,3,4,5,6,7,8,9,0]">
+                <nb-card-body>data</nb-card-body>
+              </nb-card>
+
+            </nb-card-body>
+
+          </nb-card>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 </div>
