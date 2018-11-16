@@ -14,6 +14,9 @@ import {EventTeambuildingComponent} from './event-teambuilding/event-teambuildin
 import {ManSurveyComponent} from './man-survey/man-survey.component';
 import {PointForUsersComponent} from './point-for-users/point-for-users.component';
 import {AdminGuard} from '../@core/security/AdminGuard';
+import {ManGuard} from '../@core/security/ManGuard';
+import {MemberGuard} from '../@core/security/MemberGuard';
+import {AuthorizationGuard} from '../@core/security/AuthorizationGuard';
 
 const routes: Routes = [{
   path: '',
@@ -31,47 +34,56 @@ const routes: Routes = [{
     {
       path: 'acc-managements',
       component: AccManagementsComponent,
-      canActivate: [AuthGuard, AdminGuard],
+      canActivate: [AuthGuard, AuthorizationGuard],
+      data: {roles: ['ADMIN']},
     },
     {
       path: 'acti-management',
       component: ActiManagementComponent,
-      canActivate: [AuthGuard, AdminGuard],
+      canActivate: [AuthGuard, AuthorizationGuard],
+      data: {roles: ['ADMIN']},
     },
     {
       path: 'project-management',
       component: ProjectmanagementComponent,
-      canActivate: [AuthGuard , AdminGuard],
+      canActivate: [AuthGuard, AuthorizationGuard],
+      data: {roles: ['ADMIN']},
     },
     {
       path: 'listofsurvey',
       component: ListOfSurveyComponent,
-      canActivate: [AuthGuard, AdminGuard],
+      canActivate: [AuthGuard, AuthorizationGuard],
+      data: {roles: ['ADMIN']},
     },
     {
       path: 'creating-activities',
       component: ActivitiesComponent,
-      canActivate: [AuthGuard],
+      canActivate: [AuthGuard, AuthorizationGuard],
+      data: {roles: ['MAN', 'EMPLOYEE']},
     },
     {
       path: 'man-survey',
       component: ManSurveyComponent,
-      canActivate: [AuthGuard],
+      canActivate: [AuthGuard, AuthorizationGuard],
+      data: {roles: ['MAN']},
     },
     {
       path: 'employee-seminar-survey',
       component: EmployeeSeminarSurveyComponent,
-      canActivate: [AuthGuard],
+      canActivate: [AuthGuard, AuthorizationGuard],
+      data: {roles: ['EMPLOYEE']},
     },
     {
       path: 'event-teambuilding',
       component: EventTeambuildingComponent,
-      canActivate: [AuthGuard, AdminGuard],
+      canActivate: [AuthGuard, AuthorizationGuard],
+      data: {roles: ['ADMIN']},
     },
     {
       path: 'point-for-user',
       component: PointForUsersComponent,
-      canActivate: [AuthGuard],
+      canActivate: [AuthGuard, AuthorizationGuard],
+      data: {roles: ['EMPLOYEE']},
     },
   ],
 }];
