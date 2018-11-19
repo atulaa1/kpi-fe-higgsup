@@ -49,7 +49,7 @@
                 [removable]="removable && isAdmin === false"
                 (removed)="remove(user, i)">
                 <mat-icon matChipAvatar name="iconAvatar">
-                  <img src="{{user.avatar}}" name="iconMem">
+                  <img src="{{(user.avatar) ? user.avatar : 'assets/images/no-avatar.png'}}" name="iconMem">
                 </mat-icon>
                 {{user.fullName}}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
@@ -70,14 +70,14 @@
 
               <mat-option *ngFor="let user of filteredUsers | async;" [value]="user">
 
-                <img name="avatarMem" src="{{user.avatar}}">
+                <img name="avatarMem" src="{{(user.avatar) ? user.avatar : 'assets/images/no-avatar.png'}}">
                 {{user.fullName}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
         </div>
       </div>
-      <div class="row" *ngIf="isAdmin === false">
+      <div class="row" *ngIf="isAdmin === false && statusEvent === 1">
         <div class="groupButton">
           <button class="btn btn-hero-success saveButton" *ngIf='groupId == null' (click)="onSubmit($event)">Lưu
           </button>

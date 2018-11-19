@@ -34,7 +34,7 @@
             <mat-chip-list #chipListHost>
               <mat-chip>
                 <mat-icon matChipAvatar name="iconAvatar">
-                  <img src="{{userDefault.avatar}}" name="iconMem">
+                  <img src="{{(userDefault.avatar) ? userDefault.avatar : 'assets/images/no-avatar.png'}}" name="iconMem">
                 </mat-icon>
                 {{userDefault.fullName}}
               </mat-chip>
@@ -44,7 +44,7 @@
                 [removable]="removable"
                 (removed)="removeHost(user, i)">
                 <mat-icon matChipAvatar name="iconAvatar">
-                  <img src="{{user.avatar}}" name="iconMem">
+                  <img src="{{(user.avatar) ? user.avatar : 'assets/images/no-avatar.png'}}" name="iconMem">
                 </mat-icon>
                 {{user.fullName}}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
@@ -62,7 +62,7 @@
 
               <mat-option *ngFor="let user of filteredHostUsers | async;" [value]="user">
 
-                <img name="avatarMem" src="{{user.avatar}}">
+                <img name="avatarMem" src="{{(user.avatar) ? user.avatar : 'assets/images/no-avatar.png'}}">
                 {{user.fullName}}
               </mat-option>
             </mat-autocomplete>
@@ -80,7 +80,7 @@
                 [removable]="removable"
                 (removed)="removeParticipant(user, i)">
                 <mat-icon matChipAvatar name="iconAvatar">
-                  <img src="{{user.avatar}}" name="iconMem">
+                  <img src="{{(user.avatar) ? user.avatar : 'assets/images/no-avatar.png'}}" name="iconMem">
                 </mat-icon>
                 {{user.fullName}}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
@@ -98,7 +98,7 @@
 
               <mat-option *ngFor="let user of filteredHostUsers | async;" [value]="user">
 
-                <img name="avatarMem" src="{{user.avatar}}">
+                <img name="avatarMem" src="{{(user.avatar) ? user.avatar : 'assets/images/no-avatar.png'}}">
                 {{user.fullName}}
               </mat-option>
             </mat-autocomplete>
@@ -116,7 +116,7 @@
                 [removable]="removable"
                 (removed)="removeListener(user, i)">
                 <mat-icon matChipAvatar name="iconAvatar">
-                  <img src="{{user.avatar}}" name="iconMem">
+                  <img src="{{(user.avatar) ? user.avatar : 'assets/images/no-avatar.png'}}" name="iconMem">
                 </mat-icon>
                 {{user.fullName}}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
@@ -134,7 +134,7 @@
 
               <mat-option *ngFor="let user of filteredHostUsers | async;" [value]="user">
 
-                <img name="avatarMem" src="{{user.avatar}}">
+                <img name="avatarMem" src="{{(user.avatar) ? user.avatar : 'assets/images/no-avatar.png'}}">
                 {{user.fullName}}
               </mat-option>
             </mat-autocomplete>
