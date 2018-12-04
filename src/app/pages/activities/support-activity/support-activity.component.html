@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="row mt-5">
-      <div class="groupButton " *ngIf="isAdmin === false && statusEvent === 1">
+      <div class="groupButton " *ngIf="isAdmin === false &&( statusEvent === null || statusEvent === 1)">
         <button class="btn btn-hero-success saveButton" *ngIf="groupId === null" (click)="addSupportEvent()">Lưu</button>
         <button class="btn btn-hero-success saveButton" *ngIf="groupId !== null" (click)="updateSupportEvent($event)">Lưu</button>
         <button class="btn btn-hero-warning" (click)="closeModal()">Huỷ</button>
