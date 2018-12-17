@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ngx-root',
-  template: '<router-outlet></router-outlet>',
+  template: '<router-outlet></router-outlet> ' +
+    '<ng-http-loader backgroundColor="gray" spinner="sk-three-bounce"></ng-http-loader>',
 })
 export class AppComponent implements OnInit {
 
