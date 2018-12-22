@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Point} from '../../../@core/models/point.model';
+import {NormalPointModel} from '../../../@core/models/normal-point.model';
+import {GetPointService} from '../../../@core/services/get-point.service';
 
 @Component({
   selector: 'ngx-usual-point',
@@ -8,9 +10,10 @@ import {Point} from '../../../@core/models/point.model';
 })
 export class UsualPointComponent implements OnInit {
   listPoint: Array<Point> = new Array<Point>();
+  listPointTest: NormalPointModel[];
   isCollapsed: boolean = false;
 
-  constructor() {
+  constructor(private getPointService: GetPointService) {
     // fake Listpoint
     this.getListUsualPoint();
   }
@@ -49,6 +52,13 @@ export class UsualPointComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Test get list point
+    this.getPointService.getNormalPoint().subscribe(res => {
+      if (res.status_code === 200) {
+        this.listPointTest = res.data;
+        console.info(this.listPointTest);
+      }
+    });
   }
 
 }
