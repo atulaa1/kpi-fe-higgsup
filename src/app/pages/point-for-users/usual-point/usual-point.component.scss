@@ -1,0 +1,35 @@
+.tableScroll {
+  max-height: 300px;
+  overflow: auto;
+}
+
+.titleTable {
+  margin-bottom: 0px;
+}
+
+#myTable tr:hover {
+  background-color: #bee5eb;
+  cursor: pointer;
+}
+
+table td {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+[name$='title-usual-point'] {
+  display: inline;
+}
+
+.point-type {
+  width: 30%;
+}
+
+.point-quantity {
+  width: 20%;
+  text-align: center;
+}
+
+.point-detail {
+  width: 50%;
+}

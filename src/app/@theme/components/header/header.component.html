@@ -19,7 +19,7 @@
     </a>
   </nb-action>
   <nb-action class="higgigup-nb-action nav-list" name="navList" *ngIf="user.username && user.token">
-    <div class="btn-group" dropdown>
+    <div class="btn-group" role="menuitem" dropdown triggers="mouseover" [autoClose]="true" >
       <div dropdownToggle class="nav-list" aria-controls="dropdown-basic">
         <a>{{user.fullName}}</a>
       </div>
@@ -27,7 +27,7 @@
         <div style="min-height: 170px" class="row">
           <div class="col-6 col-md-6 ">
             <img style="float: left;height: 150px;margin-left: 10px"
-                 src="{{user.avatar}}"
+                 src="{{(user.avatar )? user.avatar : 'assets/images/no-avatar.png'}}"
                  class="img-fluid" alt="Responsive image">
           </div>
           <div style="margin-top: 50px" class="col-6 col-md-6 ">
@@ -48,16 +48,17 @@
 
         </div>
 
-        <ul>
-          <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0"  class="text-center font-weight-600">
+        <ul class="menuUser" style="overflow: auto;">
+          <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" class="text-center font-weight-600">
             <a title="Quản lý tài khoản"
                href="#/pages/acc-managements">
-              <i  class="fas fa-user-circle mt-2 iconStyle"></i>
+              <i class="fas fa-user-circle mt-2 iconStyle"></i>
               <span class="menu-title">Quản lý tài khoản</span>
             </a>
           </li>
 
-          <li *ngIf="user.userRole.indexOf('ROLE_EMPLOYEE')>=0 && user.userRole.length == 1" style="" class="text-center font-weight-600">
+          <li *ngIf="user.userRole.indexOf('ROLE_EMPLOYEE')>=0 && user.userRole.length == 1" style=""
+              class="text-center font-weight-600">
             <a title="Quản lý tài khoản" href="#/pages/dashboard">
               <i class="fas fa-user-circle mt-2 iconStyle"></i>
               <span class="menu-title">Thông tin tài khoản</span>
@@ -67,7 +68,7 @@
           <li *ngIf="user.userRole.indexOf('ROLE_ADMIN')>=0" class="text-center font-weight-600">
             <a title="Quản lý hoạt động"
                href="#/pages/acti-management">
-              <i  class="fas fa-users mt-2 iconStyle"></i>
+              <i class="fas fa-users mt-2 iconStyle"></i>
               <span class="menu-title">Quản lý hoạt động</span>
             </a>
           </li>
@@ -123,6 +124,15 @@
               <span class="menu-title">Điểm thưởng</span>
             </a>
           </li>
+
+          <li *ngIf="user.userRole.indexOf('ROLE_MAN')<0 && user.userRole.indexOf('ROLE_ADMIN')<0" class="text-center font-weight-600">
+            <a title="Quản lý dự án"
+               href="#/pages/point-for-user">
+              <i class="fas fa-gift mt-2 iconStyle"></i>
+              <span class="menu-title">Điểm của bạn</span>
+            </a>
+          </li>
+
           <li class="text-center font-weight-600">
             <a title="Đăng xuất" (click)="openLogoutModal()"
                href="javascript:">
@@ -136,19 +146,3 @@
     </div>
   </nb-action>
 </nb-actions>
-
-<!--<div class="header-container"-->
-<!--[class.left]="position === 'normal'"-->
-<!--[class.right]="position === 'inverse'">-->
-<!--<nb-actions size="medium">-->
-<!--<nb-action *ngIf="user" class="control-item">-->
-<!--<nb-search type="rotate-layout" (click)="startSearch()"></nb-search>-->
-<!--</nb-action>-->
-<!--<nb-action *ngIf="user" class="control-item" icon="nb-email"></nb-action>-->
-<!--<nb-action *ngIf="user" class="control-item" disabled icon="nb-notifications"></nb-action>-->
-<!--<nb-action icon="nb-gear" class="toggle-layout" (click)="toggleSettings()"></nb-action>-->
-<!--<nb-action *nbIsGranted="['view', 'user']" >-->
-<!--<nb-user [nbContextMenu]="userMenu" [name]="user?.name" [picture]="user?.picture"></nb-user>-->
-<!--</nb-action>-->
-<!--</nb-actions>-->
-<!--</div>-->

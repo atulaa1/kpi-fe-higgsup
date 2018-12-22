@@ -19,6 +19,11 @@ import {Common} from '../../../@core/glossary/common.constant';
   providers: [{provide: NgbDateParserFormatter, useClass: KpiDateFormatter}],
 })
 export class TeambuildingActivityComponent implements OnInit {
+  today: NgbDateStruct = new class implements NgbDateStruct {
+    day: number;
+    month: number;
+    year: number;
+  };
   spinners: boolean = false;
   actionDate = null;
   actionTime = null;
@@ -70,6 +75,10 @@ export class TeambuildingActivityComponent implements OnInit {
   }
 
   ngOnInit() {
+    const today = new Date();
+    this.today.day = today.getDate();
+    this.today.month = today.getMonth() + 1;
+    this.today.year = today.getFullYear();
     const users: Array<User> = [];
     this.userService.getUsers().subscribe((response: ResponseUserDTO) => {
       if (response.status_code === 200) {

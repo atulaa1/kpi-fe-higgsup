@@ -24,12 +24,12 @@
         <nb-checkbox class="support-checkbox" [(value)]="supportEvent.status"
          (change)='changeSelect(supportEvent, $event)' [ngClass]="{'onlyRead': isAdmin === true}">{{supportEvent.type}}
         </nb-checkbox>
-        <input class="support-number form-control" type="number" [(ngModel)]="supportEvent.quantity"
+        <input class="support-number form-control" type="number" [(ngModel)]="supportEvent.quantity" min="1"
                *ngIf="supportEvent.status === true" [disabled]="isAdmin === true">
       </div>
     </div>
     <div class="row mt-5">
-      <div class="groupButton " *ngIf="isAdmin === false">
+      <div class="groupButton " *ngIf="isAdmin === false &&( statusEvent === null || statusEvent === 1)">
         <button class="btn btn-hero-success saveButton" *ngIf="groupId === null" (click)="addSupportEvent()">Lưu</button>
         <button class="btn btn-hero-success saveButton" *ngIf="groupId !== null" (click)="updateSupportEvent($event)">Lưu</button>
         <button class="btn btn-hero-warning" (click)="closeModal()">Huỷ</button>

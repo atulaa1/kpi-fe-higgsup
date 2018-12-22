@@ -57,7 +57,7 @@ export class PersonalInfoComponent implements OnInit {
     this.secondaryEmail = this.currentUser.gmail;
     this.skype = this.currentUser.skype;
     this.dpStartWorkDay = this.convertDatetoNgbDateStruct(this.currentUser.dateStartWork);
-    this.avatar = this.currentUser.avatar;
+    this.avatar = (this.currentUser.avatar) ? this.currentUser.avatar : 'assets/images/no-avatar.png';
     let now = new Date();
     this.maxBirthday = {
       day: 31,
@@ -163,8 +163,12 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   isValidatedEmail(): boolean {
-    const pattern = new RegExp(/^([A-Za-z0-9_\-.+])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,})$/);
-    return pattern.test(this.secondaryEmail);
+    if (this.secondaryEmail) {
+      const pattern = new RegExp(/^([A-Za-z0-9_\-.+])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,})$/);
+      return pattern.test(this.secondaryEmail);
+    } else {
+      return true;
+    }
   }
 
   convertDatetoNgbDateStruct(date: Date): NgbDateStruct {

@@ -27,6 +27,7 @@ import {DataService} from './@core/services/data.service';
 import {AccManagementsModule} from './pages/acc-managements/acc-managements.module';
 import {PhoneNumberOnlyDirective} from './@core/directives/number.directive';
 import {DataTransferService} from './@core/services/dataTransfer.service';
+import {NgHttpLoaderModule} from 'ng-http-loader';
 
 const config: InputFileConfig = {
   sizeLimit: 100,
@@ -50,6 +51,7 @@ const config: InputFileConfig = {
     InputFileModule.forRoot(config),
     TooltipModule.forRoot(),
     AccManagementsModule,
+    NgHttpLoaderModule,
   ],
   bootstrap: [AppComponent],
   providers: [BsModalService, BsModalRef,
