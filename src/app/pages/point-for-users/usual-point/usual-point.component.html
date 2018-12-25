@@ -1,25 +1,28 @@
-<div class="container mt-3 mb-3">
-  <div class="row ml-5 mr-3">
+<div class="container mb-3">
+  <div class="row ml-5  mt-3 mr-3"
+       *ngFor="let pointEachMonth of listPoint; let i = index">
     <div class="col-md-3">
       <h5 name="title-usual-point">
 
-        <button type="button" class="btn btn-hero-success" (click)="isCollapsed = !isCollapsed"
-                [attr.aria-expanded]="!isCollapsed" aria-controls="collapsePointTable">
-          Tháng 10/2018
+        <button type="button" class="btn btn-hero-success"
+                (click)="changeCollapsed(i)">
+          Tháng {{pointEachMonth.yearMonth.yearMonth.toString().substr(4,6)}}
+           / {{pointEachMonth.yearMonth.yearMonth.toString().substr(0,4)}}
         </button>
 
       </h5>
     </div>
 
-    <div class="col-md-3 text-center"><h5 name="title-usual-point">Tổng điểm:</h5> &nbsp;
-      <h5 class="text-danger" name="title-usual-point">200</h5></div>
-    <div class="col-md-6 text-center"><h5 name="title-usual-point">Danh hiệu:</h5> &nbsp;
-      <h5 class="text-danger" name="title-usual-point">Unbreakable !!!</h5></div>
-  </div>
+    <div class="col-md-3 text-center"><h5 name="title-usual-point">Tổng
+      điểm:</h5> &nbsp;
+      <h5 class="text-danger" name="title-usual-point">
+        {{pointEachMonth.pointTotal.totalPoint}}</h5></div>
+    <div class="col-md-6 text-center"><h5 name="title-usual-point">Danh
+      hiệu:</h5> &nbsp;
+      <h5 class="text-danger" name="title-usual-point">---</h5>
+    </div>
 
-
-  <div class="row">
-    <div class="col-md-12" id="collapsePointTable" [ngbCollapse]="!isCollapsed">
+    <div class="col-md-12" *ngIf="index == i">
 
       <div class="row ml-5 mr-5 mt-5">
         <table class="table titleTable">
@@ -35,17 +38,43 @@
       <div class="row ml-5 mr-5 tableScroll">
         <table class="table table-hover" id="myTable">
           <tbody>
-          <tr *ngFor="let userPoint of listPoint">
+          <tr *ngFor="let pointDetail of pointEachMonth.pointDetailList">
             <td class="point-type">
-              <div>{{userPoint.type}}</div>
+              <div *ngIf="pointDetail.pointType == 1">{{point + ' ' + lateComing}}</div>
+              <div *ngIf="pointDetail.pointType == 2">{{point + ' ' + club}}</div>
+              <div *ngIf="pointDetail.pointType == 3">{{point + ' ' + normalSeminar}}</div>
+              <div *ngIf="pointDetail.pointType == 4">{{point + ' ' + weekendSeminar}}</div>
+              <div *ngIf="pointDetail.pointType == 5">{{point + ' ' + support}}</div>
+              <div *ngIf="pointDetail.pointType == 6">{{point + ' ' + teamBuilding}}</div>
+              <div *ngIf="pointDetail.pointType == 7">{{point + ' ' + evaluating}}</div>
             </td>
 
             <td class="point-quantity">
-              {{userPoint.point}}
+              <div>{{pointDetail.point}}</div>
             </td>
 
-            <td class="point-detail"> Hệ thống đã cộng
-              {{userPoint.point}} {{userPoint.type}}
+            <td class="point-detail">
+              <div *ngIf="pointDetail.pointType == 1">
+                {{system + added + pointDetail.point + ' ' + point + ' ' + lateComing}}
+              </div>
+              <div *ngIf="pointDetail.pointType == 2">
+                {{system + added + pointDetail.point + ' ' + point + ' ' + club}}
+              </div>
+              <div *ngIf="pointDetail.pointType == 3">
+                {{system + added + pointDetail.point + ' ' + point + ' ' + normalSeminar}}
+              </div>
+              <div *ngIf="pointDetail.pointType == 4">
+                {{system + added + pointDetail.point + ' ' + point + ' ' + weekendSeminar}}
+              </div>
+              <div *ngIf="pointDetail.pointType == 5">
+                {{system + added + pointDetail.point + ' ' + point + ' ' + support}}
+              </div>
+              <div *ngIf="pointDetail.pointType == 6">
+                {{system + added + pointDetail.point + ' ' + point + ' ' + teamBuilding}}
+              </div>
+              <div *ngIf="pointDetail.pointType == 7">
+                {{system + added + pointDetail.point + ' ' + point + ' ' + evaluating}}
+              </div>
             </td>
 
           </tr>
@@ -56,5 +85,6 @@
     </div>
 
   </div>
+
 </div>
 

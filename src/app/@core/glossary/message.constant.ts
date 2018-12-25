@@ -13,6 +13,15 @@ export class MessageConstant {
     CREATE_SUCCESS: 'Đã tạo thành công',
   };
   static MSG_NOTFINISHING: string = 'Bạn chưa hoàn thành';
+  static MSG_POINT: string = 'Điểm';
+  static MSG_LATECOMING: string = 'Đi muộn';
+  static MSG_CLUB: string = 'Câu lạc bộ';
+  static MSG_NORMALSEMINAR: string = 'Seminar thường';
+  static MSG_WEEKENDSEMINAR: string = 'Seminar cuối tuần';
+  static MSG_SUPPORT: string = 'Support';
+  static MSG_TEAMBUILDING: string = 'Teambuilding';
+  static MSG_EVALUATING: string = 'Đánh giá';
+  static MSG_SYSTEM: string = 'Hệ thống';
   constructor() {
   }
 }
